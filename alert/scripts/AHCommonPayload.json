@@ -1,0 +1,372 @@
+{
+  "com.apple.mobilesafari": [
+    {
+      "title": "",
+      "message": "^Open this page in \\\"App Store\\?\\\"$",
+      "class": "_SFDialogController",
+      "style": "alert",
+      "action": {
+        "title": "^OK$",
+        "delay": "1000"
+      },
+      "textfields": []
+    },
+    {
+      "title": "",
+      "message": "^Open .* “App Store”\\?$",
+      "class": "_SFDialogController",
+      "style": "alert",
+      "action": {
+        "title": "^Open$",
+        "delay": "1000"
+      },
+      "textfields": []
+    },
+    {
+      "title": "",
+      "message": "^Safari cannot open the page because the address is invalid\\.$",
+      "class": "_SFDialogController",
+      "style": "alert",
+      "action": {
+        "title": "^OK$",
+        "delay": "100"
+      },
+      "textfields": []
+    }
+  ],
+  "com.apple.AppStore": [
+    {
+      "title": "^Item Not Available$",
+      "message": "^The item you've requested is not currently available in the .* [s|S]tore\\.$",
+      "class": "UIAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^OK$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Item Not Available$",
+      "message": "^The item you've requested is not currently available in the .*, but it is available in the .* [s|S]tore\\. Tap Change Store to view this item\\.$",
+      "class": "UIAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Cancel$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^App Not Available$",
+      "message": "^This app is currently not available in your country or region\\.$",
+      "class": "UIAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^OK$",
+        "delay": "500"
+      },
+      "textfields": []
+    }
+  ],
+  "com.apple.springboard": [
+    {
+      "title": "^No SIM Card Installed$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^OK$",
+        "delay": "1000"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Low Battery$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Close$",
+        "delay": "1000"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^This Apple ID is only valid for purchases in the",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^OK$",
+        "delay": "1000"
+      },
+      "textfields": [],
+      "message": "^\\s*$"
+    },
+    {
+      "title": "^Your Apple ID doesn’t work with the Videos app\\. We’ll replace it with the TV app now\\.$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^OK$",
+        "delay": "1000"
+      },
+      "textfields": [],
+      "message": "^$"
+    },
+    {
+      "title": "^Apple ID Verification",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Not Now$",
+        "delay": "1000"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Turn on Automatic Downloads$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Cancel$",
+        "delay": "1000"
+      },
+      "textfields": [],
+      "message": "turn on Automatic Downloads\\.$"
+    },
+    {
+      "title": "^Item Not Available$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^OK$",
+        "delay": "1000"
+      },
+      "textfields": [],
+      "message": "^The item you've requested is not currently available in the .* [s|S]tore\\.$"
+    },
+    {
+      "title": "^.*? Would Like to Send You Notifications$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Allow$",
+        "delay": "1000"
+      },
+      "textfields": [],
+      "message": "^Notifications may include alerts"
+    },
+    {
+      "title": "^\\s*‭\\+?[0-9| ]+\\s*$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Cancel$",
+        "delay": "1000"
+      },
+      "textfields": [],
+      "message": ""
+    },
+    {
+      "title": "^Account Not In This Store$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Cancel$",
+        "delay": "1000"
+      },
+      "textfields": [],
+      "message": "^Your account is not valid for use"
+    },
+    {
+      "title": "^Sign In$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Cancel$",
+        "delay": "1000"
+      },
+      "textfields": [],
+      "message": ""
+    },
+    {
+      "title": "^This accessory may\\\\nnot be supported\\.$",
+      "message": "",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Dismiss$",
+        "delay": "1000"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Sign In to App Store$",
+      "message": "^Enter the password for Apple ID .* to confirm your purchase of .*",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "Cancel",
+        "delay": "500"
+      },
+      "textfields": [
+        {
+          "text": "DoNotBuyThat"
+        }
+      ]
+    },
+    {
+      "title": "^Item Not Available$",
+      "message": "^The item you've requested is not currently available in the .*, but it is available in the .* [s|S]tore\\. Tap Change Store to view this item\\.$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Cancel$",
+        "delay": "1000"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Allow .*? to use wireless data\\?$",
+      "message": "^Some functionality may not work when wireless data is turned off\\.$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^WLAN \\& Cellular$",
+        "delay": "1000"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Edit Home Screen$",
+      "message": "",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Dismiss$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^.*? Not Installed$",
+      "message": "^The update will try again later$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^OK$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Software Update$",
+      "message": "^iOS .*? is ready to install\\.$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Later$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Software Update$",
+      "message": "^iOS .*? can update automatically between .*? while connected to power\\.$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Remind Me Later$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Unable to Restore$",
+      "message": "^This item was purchased by a different Apple ID\\. Sign in with that Apple ID and try again\\.$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^OK$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Turn On Location Services to Allow",
+      "message": "",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Cancel$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Allow .*? to access your location",
+      "message": "^If you always allow access to your location",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Only While Using the App$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Finish Setting Up iPhone$",
+      "message": "",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Not Now$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^App Update$",
+      "message": "^.*? is about to update the app .*?\\.$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Update$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^App Update$",
+      "message": "^The app .*? could not be updated\\.$",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Dismiss$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^Allow .*? to access your location while you are",
+      "message": "",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^Allow$",
+        "delay": "500"
+      },
+      "textfields": []
+    },
+    {
+      "title": "^.*? Would Like to Access Your Contacts$",
+      "message": "",
+      "class": "_SBAlertController",
+      "style": "alert",
+      "action": {
+        "title": "^OK$",
+        "delay": "500"
+      },
+      "textfields": []
+    }
+  ]
+}

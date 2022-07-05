@@ -1,0 +1,3 @@
+[submodule "plugins/EvilScheme"]
+	path = plugins/EvilScheme
+	url = git@github.com:XXTouchNG/EvilSchemeLua.git

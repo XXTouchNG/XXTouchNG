@@ -1,0 +1,48 @@
+#!/bin/bash
+
+declare -a cydia
+cydia=($CYDIA)
+
+rm -f /usr/lib/libalerthelper.dylib > /dev/null 2>&1
+ln /usr/local/lib/libalerthelper.dylib /usr/lib/libalerthelper.dylib > /dev/null 2>&1
+
+rm -f /usr/lib/libtampermonkey.dylib > /dev/null 2>&1
+ln /usr/local/lib/libtampermonkey.dylib /usr/lib/libtampermonkey.dylib > /dev/null 2>&1
+
+launchctl unload "/Library/LaunchDaemons/ch.xxtou.webserv.plist" > /dev/null 2>&1
+launchctl remove com.xxtou.webserv > /dev/null 2>&1
+
+launchctl unload "/Library/LaunchDaemons/ch.xxtou.supervisord.plist" > /dev/null 2>&1
+launchctl remove com.xxtou.supervisord > /dev/null 2>&1
+
+launchctl unload "/Library/LaunchDaemons/ch.xxtou.procqueued.plist" > /dev/null 2>&1
+launchctl remove com.xxtou.procqueued > /dev/null 2>&1
+
+launchctl unload "/Library/LaunchDaemons/ch.xxtou.simulatetouchd.plist" > /dev/null 2>&1
+launchctl remove com.xxtou.simulatetouchd > /dev/null 2>&1
+
+launchctl unload "/Library/LaunchDaemons/ch.xxtou.tfcontainermanagerd.plist" > /dev/null 2>&1
+launchctl remove com.xxtou.tfcontainermanagerd > /dev/null 2>&1
+
+/usr/local/xxtouch/bin/ohmyjetsam > /dev/null 2>&1
+killall -9 webinspectord > /dev/null 2>&1
+
+sleep 1
+launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.tfcontainermanagerd.plist" > /dev/null 2>&1
+launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.simulatetouchd.plist" > /dev/null 2>&1
+launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.procqueued.plist" > /dev/null 2>&1
+launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.supervisord.plist" > /dev/null 2>&1
+launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.webserv.plist" > /dev/null 2>&1
+
+chmod 6777 /usr/local/xxtouch/bin/add1s
+uicache -p /Applications/XXTExplorer.app > /dev/null 2>&1
+
+rm -f "/private/var/tmp/1ferver_need_respring" > /dev/null 2>&1
+su mobile -c "touch /private/var/tmp/1ferver_need_respring" > /dev/null 2>&1
+
+if [[ ${CYDIA+@} ]]; then
+    eval "echo 'finish:restart' >&${cydia[0]}"
+fi
+
+exit 0
+

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+export PATH="/usr/local/xxtouch/bin:$PATH"
+
+export LUA_PATH=""
+export LUA_PATH="$LUA_PATH;/private/var/mobile/Media/1ferver/lua/scripts/?.lua"
+export LUA_PATH="$LUA_PATH;/private/var/mobile/Media/1ferver/lua/scripts/?.luac"
+export LUA_PATH="$LUA_PATH;/private/var/mobile/Media/1ferver/lua/scripts/?.xxt"
+
+export LUA_PATH="$LUA_PATH;/private/var/mobile/Media/1ferver/lua/scripts/?/init.lua"
+export LUA_PATH="$LUA_PATH;/private/var/mobile/Media/1ferver/lua/scripts/?/init.luac"
+export LUA_PATH="$LUA_PATH;/private/var/mobile/Media/1ferver/lua/scripts/?/init.xxt"
+
+export LUA_PATH="$LUA_PATH;/usr/local/xxtouch/lib/?.lua"
+export LUA_PATH="$LUA_PATH;/usr/local/xxtouch/lib/?.luac"
+export LUA_PATH="$LUA_PATH;/usr/local/xxtouch/lib/?.xxt"
+
+export LUA_PATH="$LUA_PATH;/usr/local/xxtouch/lib/?/init.lua"
+export LUA_PATH="$LUA_PATH;/usr/local/xxtouch/lib/?/init.luac"
+export LUA_PATH="$LUA_PATH;/usr/local/xxtouch/lib/?/init.xxt"
+
+export LUA_CPATH="/usr/local/xxtouch/lib/?.so;;"
+export LUA_INIT="@/usr/local/xxtouch/lib/xxtouch/init.lua"
+export CURL_CA_BUNDLE="/usr/local/xxtouch/lib/ssl/curl-ca-bundle.crt"
+
+/bin/bash

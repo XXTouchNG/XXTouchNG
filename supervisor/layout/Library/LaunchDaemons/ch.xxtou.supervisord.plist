@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>_AdditionalProperties</key>
+	<dict>
+		<key>RunningBoard</key>
+		<dict>
+			<key>Managed</key>
+			<false/>
+			<key>Reported</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>HighPriorityIO</key>
+	<true/>
+	<key>KeepAlive</key>
+	<true/>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/usr/local/xxtouch/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</string>
+		<key>LUA_PATH</key>
+		<string>/private/var/mobile/Media/1ferver/lua/scripts/?.lua;/private/var/mobile/Media/1ferver/lua/scripts/?.luac;/private/var/mobile/Media/1ferver/lua/scripts/?.xxt;/private/var/mobile/Media/1ferver/lua/scripts/?/init.lua;/private/var/mobile/Media/1ferver/lua/scripts/?/init.luac;/private/var/mobile/Media/1ferver/lua/scripts/?/init.xxt;/usr/local/xxtouch/lib/?.lua;/usr/local/xxtouch/lib/?.luac;/usr/local/xxtouch/lib/?.xxt;/usr/local/xxtouch/lib/?/init.lua;/usr/local/xxtouch/lib/?/init.luac;/usr/local/xxtouch/lib/?/init.xxt</string>
+		<key>LUA_CPATH</key>
+		<string>/usr/local/xxtouch/lib/?.so;;</string>
+		<key>LUA_INIT</key>
+		<string>@/usr/local/xxtouch/lib/xxtouch/init.lua</string>
+		<key>CURL_CA_BUNDLE</key>
+		<string>/usr/local/xxtouch/lib/ssl/curl-ca-bundle.crt</string>
+	</dict>
+	<key>StandardOutPath</key>
+	<string>/usr/local/xxtouch/log/ch.xxtou.supervisord.stdout.log</string>
+	<key>StandardErrorPath</key>
+	<string>/usr/local/xxtouch/log/ch.xxtou.supervisord.stderr.log</string>
+	<key>UserName</key>
+	<string>root</string>
+	<key>Label</key>
+	<string>ch.xxtou.supervisord</string>
+	<key>EnableTransactions</key>
+	<false/>
+	<key>EnablePressuredExit</key>
+	<false/>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/local/xxtouch/bin/supervisord</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>ThrottleInterval</key>
+	<integer>3</integer>
+	<key>POSIXSpawnType</key>
+	<string>Interactive</string>
+	<key>ProcessType</key>
+	<string>Interactive</string>
+</dict>
+</plist>

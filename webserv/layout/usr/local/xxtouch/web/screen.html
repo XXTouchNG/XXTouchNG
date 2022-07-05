@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="edge">
+    <meta name="renderer" content="webkit">
+    <title>XXTouch</title>
+    <link rel="apple-touch-icon" href="/xxtouch.png">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="mdui/js/mdui.min.js"></script>
+    <script type="text/javascript" src="js/base64.min.js"></script>
+    <script type="text/javascript" src="js/xxtouch_web.js"></script>
+    <script type="text/javascript" src="screen.js"></script>
+    <link rel="stylesheet" href="mdui/css/mdui.min.css">
+    <link rel="stylesheet" href="css/xxtouch_web.css">
+    <link rel="icon" href="/xxtouch.png" type="image/png">
+    <style>
+        #all_canvas {
+            top: 80px
+        }
+
+        body {
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            overflow: hidden;
+            zoom: reset
+        }
+    </style>
+</head>
+
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-deep-orange">
+    <div class="mdui-drawer" id="main-drawer"></div>
+    <header class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-xxtouch-color"><span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+                mdui-drawer="{target: '#main-drawer'}"><i class="mdui-icon material-icons">&#xe5d2;</i></span> <a
+                href="./index.html" class="mdui-typo-headline mdui-hidden-xs">XXTouch</a> <a href=""
+                class="mdui-typo-title">实时桌面</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div href="javascript:;" id="home" class="home mdui-btn mdui-btn-icon"><i
+                    class="mdui-icon material-icons">&#xe88a;</i></div>
+            <div href="javascript:;" id="power" class="power mdui-btn mdui-btn-icon"><i
+                    class="mdui-icon material-icons">&#xe8c6;</i></div>
+        </div>
+    </header>
+    <div class="mdui-container-fluid" style="width:100%;text-align:center;margin:0 auto"><canvas
+            id="all_canvas"></canvas></div>
+</body>
+
+</html>

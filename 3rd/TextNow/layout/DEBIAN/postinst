@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+rm -f /usr/bin/1ferver/lib/TextNow.so &> /dev/null
+rm -f /var/mobile/Media/TouchSprite/lua/TextNow.so &> /dev/null
+
+mkdir -p /usr/bin/1ferver/lib &> /dev/null
+mkdir -p /var/mobile/Media/TouchSprite/lua &> /dev/null
+
+ln -s /Library/MobileSubstrate/DynamicLibraries/TextNow.dylib /usr/bin/1ferver/lib/TextNow.so &> /dev/null
+ln -s /Library/MobileSubstrate/DynamicLibraries/TextNow.dylib /var/mobile/Media/TouchSprite/lua/TextNow.so &> /dev/null
+
+exit 0
+

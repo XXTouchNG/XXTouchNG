@@ -1,0 +1,56 @@
+#!/usr/bin/env lua
+
+require "compat53"
+
+local colors   = require "term.colors"
+local argparse = require "argparse"
+local cdo      = require "croissant.do"
+
+local parseArgument = function()
+    local parser = argparse()
+        :name "croissant"
+        :description "A Lua REPL and debugger"
+
+    parser:argument "input"
+        :description "A lua file to run or debug"
+        :args "?"
+
+    parser:argument "arguments"
+        :description "Arguments to pass to <input>"
+        :args "*"
+
+    parser:option "-d --debugger -b --break"
+        :description "Run croissant in debugger mode"
+        :args "*"
+
+    return parser:parse()
+end
+
+local route = function(arguments)
+    -- If breakpoint defined, enter debugger mode
+    local breakpointsStr = arguments["debugger"]
+    local breakpoints = {}
+
+    if breakpointsStr and arguments.input then
+        for _, breakpoint in ipairs(breakpointsStr) do
+            local source, line = breakpoint:match "^([^:]*):(%d+)$"
+
+            if source then
+                breakpoints[source] = breakpoints[source] or {}
+                breakpoints[source][tonumber(line)] = true
+            end
+        end
+
+        require "croissant.debugger"(arguments.input, arguments.arguments, breakpoints, true)
+    elseif breakpointsStr and not arguments.input then
+        print(colors.red("Illegal use of --debugger: missing input file"))
+        return
+    elseif not breakpointsStr and arguments.input then
+        cdo.runFile(arguments.input, arguments.arguments)
+    else
+        -- Regular REPL
+        require "croissant.repl"()
+    end
+end
+
+route(parseArgument())

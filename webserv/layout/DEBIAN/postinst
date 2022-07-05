@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# set -e
+
+launchctl unload "/Library/LaunchDaemons/ch.xxtou.webserv.plist" > /dev/null 2>&1
+launchctl remove com.xxtou.webserv > /dev/null 2>&1
+
+sleep 1
+launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.webserv.plist" > /dev/null 2>&1
+
+exit 0
+

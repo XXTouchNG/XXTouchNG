@@ -1,0 +1,18 @@
+---
+archs:           [ arm64 ]
+platform:        ios
+install-name:    /usr/local/lib/libdebugwindow.dylib
+current-version: 0.0
+compatibility-version: 0.0
+exports:         
+  - archs:           [ arm64 ]
+    symbols:         [ _XXTEToastPositionBottom, _XXTEToastPositionBottom, 
+                       _XXTEToastPositionCenter, _XXTEToastPositionCenter, 
+                       _XXTEToastPositionTop, _XXTEToastPositionTop, __sharedDebugLabel, 
+                       __sharedDebugLabel, __sharedDebugWindow, __sharedDebugWindow, 
+                       __touchesDebugWindow, __touchesDebugWindow ]
+    objc-classes:    [ _AMR_ANSIEscapeHelper, _AMR_ANSIEscapeHelper, _GeneratedTouchesDebugWindow, 
+                       _GeneratedTouchesDebugWindow, _PassWindow, _PassWindow, 
+                       _XXTEToastManager, _XXTEToastManager, _XXTEToastStyle, 
+                       _XXTEToastStyle ]
+...

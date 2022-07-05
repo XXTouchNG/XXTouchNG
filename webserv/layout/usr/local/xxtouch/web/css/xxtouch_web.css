@@ -1,0 +1,18 @@
+.dropbox {
+	width: 200px;
+	height: 200px;
+	border:10px dashed silver;
+	text-align: center;
+	font-size: 20px;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, sans-serif;
+}
+.mdui-xxtouch-color{
+	color:rgba(255,255,255,.95)!important;
+	background-color:#1AA1E6!important
+}
+.mdui-xxtouch-button{
+	color:rgba(255,255,255,.95)!important;
+	background-color:#f55e4e!important;
+}

@@ -1,0 +1,10 @@
+Package: ch.xxtou.add1s
+Name: Command Spawn Agency
+Version: 0.3
+Section: Tweaks
+Depends: firmware (>= 13.0)
+Architecture: iphoneos-arm
+Author: XXTouch Team.
+Maintainer: XXTouch Team.
+Description: Next generation XXTouch for iOS 13 and above.
+

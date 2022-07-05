@@ -1,0 +1,4 @@
+submodules/minirsa/lib/libssl.a filter=lfs diff=lfs merge=lfs -text
+submodules/lcurl/lib/libcurl.a filter=lfs diff=lfs merge=lfs -text
+submodules/lcurl/lib/libnghttp2.a filter=lfs diff=lfs merge=lfs -text
+submodules/minirsa/lib/libcrypto.a filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# set -e
+
+rm -f /usr/bin/1ferver/lib/expasteboard.so > /dev/null 2>&1
+rm -f /var/mobile/Media/TouchSprite/lua/expasteboard.so > /dev/null 2>&1
+
+mkdir -p /usr/bin/1ferver/lib > /dev/null 2>&1
+mkdir -p /var/mobile/Media/TouchSprite/lua > /dev/null 2>&1
+
+ln -s /usr/local/xxtouch/lib/pasteboard.so /usr/bin/1ferver/lib/expasteboard.so > /dev/null 2>&1
+ln -s /usr/local/xxtouch/lib/pasteboard.so /var/mobile/Media/TouchSprite/lua/expasteboard.so > /dev/null 2>&1
+
+exit 0
+

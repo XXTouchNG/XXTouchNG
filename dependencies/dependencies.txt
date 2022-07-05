@@ -1,0 +1,5 @@
+libzip==1.5.1-1
+zip==2.32-1
+libarchive==3.3.2-1
+preferenceloader==2.2.6
+rocketbootstrap==1.0.10~beta1

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="edge">
+    <meta name="renderer" content="webkit">
+    <title>XXTouch</title>
+    <link rel="apple-touch-icon" href="/xxtouch.png">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="mdui/js/mdui.min.js"></script>
+    <script type="text/javascript" src="js/clipboard.min.js"></script>
+    <script type="text/javascript" src="js/xxtouch_web.js"></script>
+    <script type="text/javascript" src="js/jcanvas.min.js"></script>
+    <script type="text/javascript" src="picker.js"></script>
+    <link rel="stylesheet" href="mdui/css/mdui.min.css">
+    <link rel="stylesheet" href="css/xxtouch_web.css">
+    <link rel="icon" href="/xxtouch.png" type="image/png">
+    <style>
+        .all_canvas {
+            background: 0 0;
+            position: absolute;
+            left: 40%;
+            top: 80px
+        }
+
+        .mdui-table td {
+            padding-left: 5px
+        }
+
+        .mdui-table th {
+            padding-left: 5px
+        }
+    </style>
+</head>
+
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-deep-orange">
+    <div class="mdui-drawer" id="main-drawer"></div>
+    <header class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-xxtouch-color"><span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+                mdui-drawer="{target: '#main-drawer'}"><i class="mdui-icon material-icons">&#xe5d2;</i></span> <a
+                href="./index.html" class="mdui-typo-headline mdui-hidden-xs">XXTouch</a> <a href=""
+                class="mdui-typo-title">抓色器</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div href="javascript:;" id="open" class="mdui-btn mdui-btn-icon"><i
+                    class="mdui-icon material-icons">&#xe89d;</i></div>
+            <div href="javascript:;" id="save" class="mdui-btn mdui-btn-icon"><i
+                    class="mdui-icon material-icons">&#xe161;</i></div>
+            <div href="javascript:;" id="set" class="mdui-btn mdui-btn-icon"><i
+                    class="mdui-icon material-icons">&#xe8b8;</i></div>
+            <div href="javascript:;" id="snapshot" class="mdui-btn mdui-btn-icon"><i
+                    class="mdui-icon material-icons">&#xe1bc;</i></div>
+            <div href="javascript:;" id="clear" class="mdui-btn mdui-btn-icon"><i
+                    class="mdui-icon material-icons">&#xe14c;</i></div>
+        </div>
+    </header>
+    <div class="mdui-container-fluid"><br>
+        <div class="parent" style="display:flex">
+            <div id="all_div" style="flex:1;height:500px;overflow:scroll;margin:0 auto;background-color:#F0F0F0"><canvas
+                    id="all_canvas"></canvas><canvas id="hide_canvas" style="display:none"></canvas></div>
+            <div style="width:480px">
+                <div id="message_div">
+                    <div id="message" style="font-family:Consolas,Monaco,monospace;margin-left:8px;width:404px"></div>
+                    <div id="local_div" style="margin:0 auto"><canvas id="local_canvas"></canvas></div><br>
+                </div>
+                <div id="other_div" style="overflow-y:scroll;overflow-x:hidden;height:500px">
+                    <div class="mdui-panel" style="margin-left:8px;width:448px" mdui-panel>
+                        <div class="mdui-panel-item">
+                            <div class="mdui-panel-item-header">
+                                <div class="mdui-panel-item-title">颜色表</div><i
+                                    class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
+                            </div>
+                            <div class="mdui-panel-item-body"><textarea id="color_table"
+                                    style="font-family:Consolas,Monaco,monospace;width:100%;height:100px"></textarea>
+                                <div class="mdui-panel-item-actions"><button id="color_table_cp" data-clipboard-text=""
+                                        class="cp mdui-btn mdui-ripple">拷贝</button></div>
+                            </div>
+                        </div>
+                        <div class="mdui-panel-item">
+                            <div class="mdui-panel-item-header">
+                                <div class="mdui-panel-item-title">is_colors</div><i
+                                    class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
+                            </div>
+                            <div class="mdui-panel-item-body"><textarea id="is_colors"
+                                    style="font-family:Consolas,Monaco,monospace;width:100%;height:100px"></textarea>
+                                <div class="mdui-panel-item-actions"><button id="is_colors_cp" data-clipboard-text=""
+                                        class="cp mdui-btn mdui-ripple">拷贝</button></div>
+                            </div>
+                        </div>
+                        <div class="mdui-panel-item">
+                            <div class="mdui-panel-item-header">
+                                <div class="mdui-panel-item-title">find_color</div><i
+                                    class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
+                            </div>
+                            <div class="mdui-panel-item-body"><textarea id="find_color"
+                                    style="font-family:Consolas,Monaco,monospace;width:100%;height:100px"></textarea>
+                                <div class="mdui-panel-item-actions"><button id="find_color_cp" data-clipboard-text=""
+                                        class="cp mdui-btn mdui-ripple">拷贝</button></div>
+                            </div>
+                        </div>
+                        <div class="mdui-panel-item">
+                            <div class="mdui-panel-item-header">
+                                <div class="mdui-panel-item-title">find_image</div><i
+                                    class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
+                            </div>
+                            <div class="mdui-panel-item-body"><textarea id="find_image"
+                                    style="font-family:Consolas,Monaco,monospace;width:100%;height:100px"></textarea>
+                                <div class="mdui-panel-item-actions"><button id="find_image_preview"
+                                        class="mdui-btn mdui-ripple">预览</button> <button id="find_image_cp"
+                                        data-clipboard-text="" class="cp mdui-btn mdui-ripple">拷贝</button></div>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="mdui-table-fluid" style="margin-left:8px;width:448px">
+                        <table class="mdui-table mdui-table-hoverable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <center>颜色</center>
+                                    </th>
+                                    <th>
+                                        <center>位置</center>
+                                    </th>
+                                    <th>
+                                        <center>颜色（Lua）</center>
+                                    </th>
+                                    <th>
+                                        <center>操作</center>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="color_list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

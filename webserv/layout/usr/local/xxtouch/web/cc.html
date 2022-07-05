@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="edge">
+    <meta name="renderer" content="webkit">
+    <title>XXTouch</title>
+    <link rel="apple-touch-icon" href="/xxtouch.png">
+    <link rel="stylesheet" href="mdui/css/mdui.min.css">
+    <link rel="stylesheet" href="css/xxtouch_web.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="mdui/js/mdui.min.js"></script>
+    <script type="text/javascript" src="js/xxtouch_web.js"></script>
+    <script type="text/javascript" src="js/base64.min.js"></script>
+    <script type="text/javascript" src="js/clipboard.min.js"></script>
+    <script type="text/javascript" src="cc.js"></script>
+    <link rel="icon" href="/xxtouch.png" type="image/png">
+    <style>
+        #deivce_list th {
+            align-self: center;
+            text-align: center;
+            padding-left: 4px !important
+        }
+
+        #deivce_list td {
+            align-self: center;
+            text-align: center;
+            padding-left: 4px !important
+        }
+    </style>
+</head>
+
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-deep-orange">
+    <div class="mdui-drawer" id="main-drawer"></div>
+    <header class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-xxtouch-color"><span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+                mdui-drawer="{target: '#main-drawer'}"><i class="mdui-icon material-icons">&#xe5d2;</i></span> <a
+                href="./index.html" class="mdui-typo-headline mdui-hidden-xs">XXTouch</a> <a href=""
+                class="mdui-typo-title">局域网集中控制</a>
+            <div class="mdui-toolbar-spacer"></div><span id="run_cc"
+                class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-tooltip="{content: '启动服务'}"><i
+                    id="button_text" class="mdui-icon material-icons">&#xe037;</i></span>
+        </div>
+    </header>
+    <div class="mdui-container-fluid"><br>
+        <div class="mdui-toolbar mdui-color-theme"><a href="javascript:;" id="search" class="mdui-btn mdui-btn-icon"
+                mdui-tooltip="{content: '扫描设备'}"><i class="mdui-icon material-icons">&#xe8b6;</i></a> <span
+                class="mdui-typo-caption-opacity">|</span> <a href="javascript:;" id="spawn"
+                class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '启动脚本'}"><i
+                    class="mdui-icon material-icons">&#xe037;</i></a> <a href="javascript:;" id="recycle"
+                class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '停止脚本'}"><i
+                    class="mdui-icon material-icons">&#xe047;</i></a> <span class="mdui-typo-caption-opacity">|</span>
+            <a href="javascript:;" id="send_file" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '传递文件'}"><i
+                    class="mdui-icon material-icons">&#xe2c6;</i></a> <span class="mdui-typo-caption-opacity">|</span>
+            <a href="javascript:;" mdui-menu="{target: '#demo-attr-cascade'}" class="mdui-btn mdui-btn-icon"><i
+                    class="mdui-icon material-icons">&#xe5d4;</i></a>
+            <ul class="mdui-menu mdui-menu-cascade" id="demo-attr-cascade">
+                <li class="mdui-menu-item"><a id="detect_auth" href="javascript:;" class="mdui-ripple"><i
+                            class="mdui-menu-item-icon mdui-icon material-icons">&#xe065;</i> 授权检测</a></li>
+                <li class="mdui-menu-item"><a id="auth" href="javascript:;" class="mdui-ripple"><i
+                            class="mdui-menu-item-icon mdui-icon material-icons">&#xe8cc;</i> 批量授权</a></li>
+                <li class="mdui-divider"></li>
+                <li class="mdui-menu-item"><a id="cp_deviceid" href="javascript:;" class="mdui-ripple cptext"><i
+                            class="mdui-menu-item-icon mdui-icon material-icons">&#xe14d;</i> 拷贝设备号</a></li>
+                <li class="mdui-menu-item"><a id="cp_devsn" href="javascript:;" class="mdui-ripple cptext"><i
+                            class="mdui-menu-item-icon mdui-icon material-icons">&#xe14d;</i> 拷贝设备序列号</a></li>
+                <li class="mdui-divider"></li>
+                <li class="mdui-menu-item"><a id="clear_log" href="javascript:;" class="mdui-ripple cptext"><i
+                            class="mdui-menu-item-icon mdui-icon material-icons">&#xe16c;</i> 清理日志</a></li>
+            </ul>
+            <div class="mdui-toolbar-spacer"></div><a id="cc_api" href="javascript:;" class="mdui-btn cptext">CC.API</a>
+        </div><br>
+        <div class="mdui-container-fluid">
+            <div class="mdui-table-fluid">
+                <table id="devices" class="mdui-table mdui-table-selectable mdui-table-hoverable mdui-text-truncate">
+                    <thead>
+                        <tr>
+                            <th type="string">设备名</th>
+                            <th type="ip">IP</th>
+                            <th type="string" style="display:none">设备号</th>
+                            <th type="string" style="display:none">设备序列号</th>
+                            <th type="string">消息</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div><br>
+        <div class="mdui-dialog" id="dialog_dropbox">
+            <div class="mdui-dialog-title">文件拖入此处</div>
+            <div class="mdui-dialog-content">
+                <div class="mdui-row">
+                    <div class="mdui-col-sm-6">
+                        <div class="mdui-valign" style="margin:0 auto;width:100%;height:100px">
+                            <div class="mdui-typo-title mdui-center" id="scriptname">当前未加载脚本</div>
+                        </div>
+                    </div>
+                    <div class="mdui-col-sm-6">
+                        <div id="dropbox" class="mdui-valign"
+                            style="margin:0 auto;width:100%;height:100px;border:2px dashed silver">
+                            <p class="mdui-center">文件拖入此处</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdui-dialog-actions"><button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确认</button></div>
+        </div>
+        <div class="mdui-dialog" id="dialog_auth">
+            <div class="mdui-dialog-title">设备授权</div>
+            <div class="mdui-dialog-content">
+                <li class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-content">
+                        <div class="mdui-list-item-title">强行充值剩余时间大于 7 天设备</div>
+                    </div><label class="mdui-switch"><input id="mustbeless" type="checkbox"> <i
+                            class="mdui-switch-icon"></i></label>
+                </li><textarea id="auth-code" style="margin:0 auto;width:100%;height:400px"></textarea>
+            </div>
+            <div class="mdui-dialog-actions"><button id="dialog_auth_submit" class="mdui-btn mdui-ripple">确认</button>
+                <button id="dialog_auth_cancel" class="mdui-btn mdui-ripple">取消</button></div>
+        </div>
+    </div>
+</body>
+
+</html>

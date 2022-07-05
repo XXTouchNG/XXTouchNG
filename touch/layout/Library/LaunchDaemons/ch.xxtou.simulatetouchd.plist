@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>_AdditionalProperties</key>
+	<dict>
+		<key>RunningBoard</key>
+		<dict>
+			<key>Managed</key>
+			<false/>
+			<key>Reported</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>HighPriorityIO</key>
+	<true/>
+	<key>KeepAlive</key>
+	<true/>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/usr/local/xxtouch/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</string>
+	</dict>
+	<key>StandardOutPath</key>
+	<string>/usr/local/xxtouch/log/ch.xxtou.simulatetouchd.stdout.log</string>
+	<key>StandardErrorPath</key>
+	<string>/usr/local/xxtouch/log/ch.xxtou.simulatetouchd.stderr.log</string>
+	<key>UserName</key>
+	<string>root</string>
+	<key>Label</key>
+	<string>ch.xxtou.simulatetouchd</string>
+	<key>EnableTransactions</key>
+	<false/>
+	<key>EnablePressuredExit</key>
+	<false/>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/local/xxtouch/bin/simulatetouchd</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>ThrottleInterval</key>
+	<integer>3</integer>
+	<key>POSIXSpawnType</key>
+	<string>Interactive</string>
+	<key>ProcessType</key>
+	<string>Interactive</string>
+</dict>
+</plist>

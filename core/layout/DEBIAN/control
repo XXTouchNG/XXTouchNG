@@ -1,0 +1,10 @@
+Package: ch.xxtou.core
+Name: Lua Core
+Version: 0.3
+Section: Tweaks
+Depends: firmware (>= 13.0)
+Architecture: iphoneos-arm
+Author: XXTouch Team.
+Maintainer: XXTouch Team.
+Description: Next generation XXTouch for iOS 13 and above.
+

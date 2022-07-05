@@ -1,0 +1,26 @@
+#if DEBUG
+#define CHDebug 1
+#endif
+
+#define XPC_MODULE_PREFIX "ch.xxtou."
+#define XPC_MODULE_NAME Supervisor
+#define LUA_MODULE_NAME supervisor
+#define LUA_MODULE_VERSION "0.3"
+#define CHAppName CHStringify(XPC_MODULE_NAME)
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    
+    #import <CaptainHook/CaptainHook.h>
+    #import "MyCHHook.h"
+
+    #define XPC_INSTANCE_NAME (XPC_MODULE_PREFIX CHStringify(XPC_MODULE_NAME))
+    #define XPC_ONEWAY_MSG_NAME "OneWayMessage"
+    #define XPC_TWOWAY_MSG_NAME "TwoWayMessage"
+#endif
+
+#if TARGET_OS_SIMULATOR
+#error Do not support the simulator, please use the real iPhone Device.
+#endif
+
+#define TFLuaBridge Supervisor_TFLuaBridge

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="edge">
+    <meta name="renderer" content="webkit">
+    <title>XXTouch</title>
+    <link rel="apple-touch-icon" href="/xxtouch.png">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/xxtouch_web.js"></script>
+    <script type="text/javascript" src="mdui/js/mdui.min.js"></script>
+    <link rel="stylesheet" href="mdui/css/mdui.min.css">
+    <script type="text/javascript" src="log.js"></script>
+    <link rel="icon" href="/xxtouch.png" type="image/png">
+    <link rel="stylesheet" href="css/xxtouch_web.css">
+</head>
+
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-pink">
+    <div class="mdui-drawer" id="main-drawer"></div>
+    <header class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-xxtouch-color"><span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+                mdui-drawer="{target: '#main-drawer'}"><i class="mdui-icon material-icons">&#xe5d2;</i></span> <a
+                href="./index.html" class="mdui-typo-headline mdui-hidden-xs">XXTouch</a> <a href=""
+                class="mdui-typo-title">设备日志</a>
+            <div class="mdui-toolbar-spacer"></div>
+        </div>
+    </header>
+    <div class="mdui-container-fluid">
+        <p id="statusLabel">日志服务尚未连接</p>
+        <p><button class="mdui-btn mdui-xxtouch-button mdui-ripple" id="pauseBtn"><i
+                    class="mdui-icon material-icons">&#xe034;</i>暂停接收</button> <button id="clearLogs"
+                class="mdui-btn mdui-xxtouch-button mdui-ripple"><i
+                    class="mdui-icon material-icons">&#xe0b8;</i>清空日志</button></p>
+        <p><textarea id="debugTextArea" class="mdui-textfield"
+                style="overflow-y:scroll!important;width:100%!important"></textarea></p><br>
+        <p class="mdui-typo-caption mdui-text-center">Copyright © xxtou.ch</p>
+    </div>
+</body>
+
+</html>

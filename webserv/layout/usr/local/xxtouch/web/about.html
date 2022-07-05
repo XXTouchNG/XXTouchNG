@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="edge">
+    <meta name="renderer" content="webkit">
+    <title>XXTouch</title>
+    <link rel="apple-touch-icon" href="/xxtouch.png">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="mdui/js/mdui.min.js"></script>
+    <script type="text/javascript" src="js/clipboard.min.js"></script>
+    <script type="text/javascript" src="js/xxtouch_web.js"></script>
+    <link rel="stylesheet" href="mdui/css/mdui.min.css">
+    <link rel="stylesheet" href="css/xxtouch_web.css">
+    <link rel="icon" href="/xxtouch.png" type="image/png">
+</head>
+
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-deep-orange">
+    <div class="mdui-drawer" id="main-drawer"></div>
+    <header class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-xxtouch-color"><span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+                mdui-drawer="{target: '#main-drawer'}"><i class="mdui-icon material-icons">&#xe5d2;</i></span> <a
+                href="./index.html" class="mdui-typo-headline mdui-hidden-xs">XXTouch</a> <a href=""
+                class="mdui-typo-title">关于 XXTouch Web 端版权声明</a>
+            <div class="mdui-toolbar-spacer"></div>
+        </div>
+    </header>
+    <div class="mdui-container-fluid"><br>
+        <div class="mdui-typo-subheading" style="font-family:Consolas,Monaco,monospace">
+            &emsp;&emsp;&nbsp;&nbsp;&nbsp;DO&nbsp;WHAT&nbsp;THE&nbsp;FUCK&nbsp;YOU&nbsp;WANT&nbsp;TO&nbsp;PUBLIC&nbsp;LICENSE<br>&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;Version&nbsp;2,&nbsp;December&nbsp;2004<br><br>Copyright&nbsp;(C)&nbsp;2004&nbsp;Sam&nbsp;Hocevar&nbsp;&#60;sam@hocevar.net&#62;<br><br>Everyone&nbsp;is&nbsp;permitted&nbsp;to&nbsp;copy&nbsp;and&nbsp;distribute&nbsp;verbatim&nbsp;or&nbsp;modified<br>copies&nbsp;of&nbsp;this&nbsp;license&nbsp;document,&nbsp;and&nbsp;changing&nbsp;it&nbsp;is&nbsp;allowed&nbsp;as&nbsp;long<br>as&nbsp;the&nbsp;name&nbsp;is&nbsp;changed.<br><br>&emsp;&emsp;&nbsp;&nbsp;&nbsp;DO&nbsp;WHAT&nbsp;THE&nbsp;FUCK&nbsp;YOU&nbsp;WANT&nbsp;TO&nbsp;PUBLIC&nbsp;LICENSE<br>&nbsp;&nbsp;TERMS&nbsp;AND&nbsp;CONDITIONS&nbsp;FOR&nbsp;COPYING,&nbsp;DISTRIBUTION&nbsp;AND&nbsp;MODIFICATION<br><br>&nbsp;0.&nbsp;You&nbsp;just&nbsp;DO&nbsp;WHAT&nbsp;THE&nbsp;FUCK&nbsp;YOU&nbsp;WANT&nbsp;TO.<br>
+        </div>
+        <ul id="l" class="mdui-list"></ul>
+    </div>
+</body>
+
+</html>
+<script>$(document).ready(function () { $("#main-drawer div[class='mdui-collapse-item']:eq(1)").addClass("mdui-collapse-item-open"), $("#main-drawer a[href='./about.html']").addClass("mdui-list-item-active"); var i = { "js-base64": { filepath: "/js/base64.min.js", attribution: "dankogai", license_con: "Copyright (c) 2014, Dan Kogai All rights reserved.", github: "https://github.com/dankogai/js-base64", license: "https://github.com/dankogai/js-base64/blob/master/LICENSE.md", website: "" }, "clipboard.js": { filepath: "/js/clipboard.min.js", attribution: "zenorocha ", license_con: "The MIT License (MIT) Copyright © 2017 Zeno Rocha <hi@zenorocha.com>", github: "https://github.com/zenorocha/clipboard.js/", license: "https://zenorocha.mit-license.org/", website: "https://clipboardjs.com/" }, jsdavclient: { filepath: "/js/davclient.js", attribution: "svogler", license_con: "No license", github: "https://github.com/svogler/jsdavclient", license: "", website: "" }, jcanvas: { filepath: "/js/jcanvas.min.js", attribution: "caleb531", license_con: "The MIT License (MIT) Copyright (c) 2016 Caleb Evans", github: "https://github.com/caleb531/jcanvas", license: "https://github.com/caleb531/jcanvas/blob/master/LICENSE.txt", website: "https://projects.calebevans.me/jcanvas/" }, jquery: { filepath: "/js/jquery.min.js", attribution: "jquery", license_con: "Copyright JS Foundation and other contributors, https://js.foundation/", github: "https://github.com/jquery/jquery", license: "https://github.com/jquery/jquery/blob/master/LICENSE.txt", website: "http://jquery.com/" }, mdui: { filepath: "/mdui/js/mdui.min.js", attribution: "zdhxiong", license_con: "The MIT License (MIT) Copyright (c) 2016 zdhxiong@gmail.com", github: "https://github.com/zdhxiong/mdui/", license: "https://github.com/zdhxiong/mdui/blob/master/LICENSE", website: "http://www.mdui.org/" }, "material-icons": { filepath: "/mdui/icons/material-icons/MaterialIcons-Regular.ttf", attribution: "google", license_con: "Apache License Version 2.0, January 2004", github: "https://github.com/google/material-design-icons", license: "https://github.com/google/material-design-icons/blob/master/LICENSE", website: "" }, mui: { filepath: "/mui/js/mui.min.js", attribution: "dcloudio", license_con: "The MIT License (MIT) Copyright (c) 2014 connors and other contributors", github: "https://github.com/dcloudio/mui", license: "https://github.com/dcloudio/mui/blob/master/LICENSE", website: "http://dev.dcloud.net.cn/mui/" }, codemirror: { filepath: "/codemirror/codemirror.js", attribution: "codemirror", license_con: "MIT License Copyright (C) 2017 by Marijn Haverbeke <marijnh@gmail.com> and others", github: "https://github.com/codemirror/CodeMirror/", license: "https://github.com/codemirror/CodeMirror/blob/master/LICENSE", website: "http://codemirror.net/" } }; $.each(i, function (t, e) { var e = i[t], o = $('<i class="mdui-list-item-avatar mdui-icon material-icons mdui-color-white">&#xe88e;</i>'), s = $('<div class="mdui-list-item-title mdui-list-item-two-line">' + t + "<br />by " + e.attribution + "</div>"), c = $('<div class="mdui-list-item-text mdui-list-item-one-line">' + e.license_con + "</div>"), n = $('<div class="mdui-list-item-content"></div>').append(s, c), a = $('<li class="mdui-list-item mdui-ripple"></li>').append(o, n); $("#l").append(a), a.on("click", function () { window.open(e.github) }) }) });</script>

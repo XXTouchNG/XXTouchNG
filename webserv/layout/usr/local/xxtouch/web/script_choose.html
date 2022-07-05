@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="edge">
+    <meta name="renderer" content="webkit">
+    <title>XXTouch</title>
+    <link rel="apple-touch-icon" href="/xxtouch.png">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="mdui/js/mdui.min.js"></script>
+    <script type="text/javascript" src="js/base64.min.js"></script>
+    <script type="text/javascript" src="js/Go.js"></script>
+    <script type="text/javascript" src="js/xxtouch_web.js"></script>
+    <script type="text/javascript" src="script_choose.js"></script>
+    <link rel="stylesheet" href="mdui/css/mdui.min.css">
+    <link rel="stylesheet" href="css/xxtouch_web.css">
+    <link rel="icon" href="/xxtouch.png" type="image/png">
+</head>
+
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-deep-orange">
+    <div class="mdui-drawer" id="main-drawer"></div>
+    <header class="mdui-appbar mdui-appbar-fixed">
+        <div id="header-list" class="mdui-toolbar mdui-xxtouch-color"><span
+                class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-drawer="{target: '#main-drawer'}"><i
+                    class="mdui-icon material-icons">&#xe5d2;</i></span> <a href="./index.html"
+                class="mdui-typo-headline mdui-hidden-xs">XXTouch</a> <a href="" class="mdui-typo-title">脚本选择</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <div href="javascript:;" class="path_new_file mdui-btn mdui-btn-icon"><i
+                    class="mdui-icon material-icons">&#xe89c;</i></div>
+            <div href="javascript:;" class="path_refurbish mdui-btn mdui-btn-icon"><i
+                    class="mdui-icon material-icons">&#xe5d5;</i></div>
+        </div>
+    </header>
+    <div class="mdui-container-fluid"><br>
+        <div class="parent" style="display:flex">
+            <div style="flex:1">
+                <div id="script-list" style="margin-left:10px;overflow-y:scroll;overflow-x:hidden"></div>
+            </div>
+            <div id="update" class="mdui-hidden-xs" style="width:300px">
+                <div id="dropbox" class="mdui-valign dropbox" style="margin:0 auto">
+                    <p class="mdui-center">文件拖入此处<br>或<br><button id="choose_file_update"
+                            class="mdui-btn mdui-xxtouch-button mdui-ripple">文件选择</button></p>
+                </div><br>
+                <div style="margin:0 auto">
+                    <ul class="mdui-list mdui-list-dense" id="update-display" style="overflow-y:auto;overflow-x:hidden">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mdui-fab-wrapper" mdui-fab="{trigger: 'hover'}" id="exampleFab"><button
+            class="mdui-fab mdui-ripple mdui-xxtouch-button"><i class="mdui-icon material-icons">&#xe145;</i> <i
+                class="mdui-icon mdui-fab-opened material-icons">&#xe325;</i></button>
+        <div class="mdui-fab-dial"><button id="launch-script-file"
+                class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink"><i
+                    class="mdui-icon material-icons">&#xe037;</i></button> <button id="recycle"
+                class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red"><i
+                    class="mdui-icon material-icons">&#xe047;</i></button></div>
+    </div><br>
+    <p class="mdui-typo-caption mdui-text-center">Copyright © xxtou.ch</p>
+</body>
+
+</html>

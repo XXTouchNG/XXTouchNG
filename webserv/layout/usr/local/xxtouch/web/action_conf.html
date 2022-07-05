@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="edge">
+    <meta name="renderer" content="webkit">
+    <title>XXTouch</title>
+    <link rel="apple-touch-icon" href="/xxtouch.png">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="mdui/js/mdui.min.js"></script>
+    <script type="text/javascript" src="js/xxtouch_web.js"></script>
+    <script type="text/javascript" src="action_conf.js"></script>
+    <link rel="stylesheet" href="mdui/css/mdui.min.css">
+    <link rel="stylesheet" href="css/xxtouch_web.css">
+    <link rel="icon" href="/xxtouch.png" type="image/png">
+</head>
+
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-deep-orange">
+    <div class="mdui-drawer" id="main-drawer"></div>
+    <header class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-xxtouch-color"><span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+                mdui-drawer="{target: '#main-drawer'}"><i class="mdui-icon material-icons">&#xe5d2;</i></span> <a
+                href="./index.html" class="mdui-typo-headline mdui-hidden-xs">XXTouch</a> <a href=""
+                class="mdui-typo-title">按键设置</a>
+            <div class="mdui-toolbar-spacer"></div>
+        </div>
+    </header>
+    <div id="conf-list" class="mdui-container-fluid">
+        <p><b>录制设置</b></p>
+        <div class="mdui-row-xs-2">
+            <div class="mdui-col">
+                <p>录制也包括（音量加）</p>
+            </div>
+            <div class="mdui-col"><button id="record_volume_up"
+                    class="mdui-btn mdui-btn-block mdui-xxtouch-button mdui-ripple">N/A</button></div>
+        </div>
+        <div class="mdui-divider"></div>
+        <div class="mdui-row-xs-2">
+            <div class="mdui-col">
+                <p>录制也包括（音量减）</p>
+            </div>
+            <div class="mdui-col"><button id="record_volume_down"
+                    class="mdui-btn mdui-btn-block mdui-xxtouch-button mdui-ripple">N/A</button></div>
+        </div>
+        <div class="mdui-divider"></div>
+        <p><b>按键效果设置</b></p>
+        <div class="mdui-row-xs-2">
+            <div class="mdui-col">
+                <p>长按（音量加）</p>
+            </div>
+            <div class="mdui-col"><button id="hold_volume_up"
+                    class="mdui-btn mdui-btn-block mdui-xxtouch-button mdui-ripple">N/A</button></div>
+        </div>
+        <div class="mdui-divider"></div>
+        <div class="mdui-row-xs-2">
+            <div class="mdui-col">
+                <p>长按（音量减）</p>
+            </div>
+            <div class="mdui-col"><button id="hold_volume_down"
+                    class="mdui-btn mdui-btn-block mdui-xxtouch-button mdui-ripple">N/A</button></div>
+        </div>
+        <div class="mdui-divider"></div>
+        <div class="mdui-row-xs-2">
+            <div class="mdui-col">
+                <p>按一下（音量加）</p>
+            </div>
+            <div class="mdui-col"><button id="click_volume_up"
+                    class="mdui-btn mdui-btn-block mdui-xxtouch-button mdui-ripple">N/A</button></div>
+        </div>
+        <div class="mdui-divider"></div>
+        <div class="mdui-row-xs-2">
+            <div class="mdui-col">
+                <p>按一下（音量减）</p>
+            </div>
+            <div class="mdui-col"><button id="click_volume_down"
+                    class="mdui-btn mdui-btn-block mdui-xxtouch-button mdui-ripple">N/A</button></div>
+        </div>
+        <div class="mdui-divider"></div><br>
+        <p class="mdui-typo-caption mdui-text-center">Copyright © xxtou.ch</p>
+    </div>
+</body>
+
+</html>

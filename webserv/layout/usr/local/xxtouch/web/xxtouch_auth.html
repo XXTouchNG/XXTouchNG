@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="edge">
+    <meta name="renderer" content="webkit">
+    <title>XXTouch</title>
+    <link rel="apple-touch-icon" href="/xxtouch.png">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="mdui/js/mdui.min.js"></script>
+    <script type="text/javascript" src="js/clipboard.min.js"></script>
+    <script type="text/javascript" src="js/xxtouch_web.js"></script>
+    <script type="text/javascript" src="xxtouch_auth.js"></script>
+    <link rel="stylesheet" href="mdui/css/mdui.min.css">
+    <link rel="stylesheet" href="css/xxtouch_web.css">
+    <link rel="icon" href="/xxtouch.png" type="image/png">
+</head>
+
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-deep-orange">
+    <div class="mdui-drawer" id="main-drawer"></div>
+    <header class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-xxtouch-color"><span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+                mdui-drawer="{target: '#main-drawer'}"><i class="mdui-icon material-icons">&#xe5d2;</i></span> <a
+                href="./index.html" class="mdui-typo-headline mdui-hidden-xs">XXTouch</a> <a href=""
+                class="mdui-typo-title">授权</a>
+            <div class="mdui-toolbar-spacer"></div>
+        </div>
+    </header>
+    <div class="mdui-container-fluid">
+        <div class="mdui-row">
+            <div class="mdui-col-xs-12 mdui-col-sm-12 mdui-col-md-6"><br>
+                <div id="display-code" class="mdui-typo-display-1"></div>
+                <div class="mdui-textfield mdui-textfield-floating-label"><label
+                        class="mdui-textfield-label">授权码</label><input id="auth-code" class="mdui-textfield-input"
+                        type="text" required>
+                    <div id="input-error" class="mdui-textfield-error">授权码长度不满限制长度</div>
+                </div>
+                <ul class="mdui-list">
+                    <li id="refresh" class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '点击刷新'}">
+                        <div class="mdui-list-item-content">
+                            <div class="mdui-list-item-title"><strong>到期时间</strong></div>
+                            <div id="time-out" class="mdui-list-item-text mdui-list-item-one-line">N/A</div>
+                        </div>
+                    </li>
+                </ul>
+                <li class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-content">
+                        <div class="mdui-list-item-title">解除过充保护</div>
+                        <div class="mdui-list-item-text mdui-list-item-one-line xxtouch-tip">强行充值剩余大于 7 天的设备</div>
+                    </div><label class="mdui-switch"><input id="check_overstep" type="checkbox"> <i
+                            class="mdui-switch-icon"></i></label>
+                </li>
+                <div class="mdui-row-xs-2">
+                    <div class="mdui-col"><button id="auth-submit"
+                            class="mdui-btn mdui-btn-block mdui-xxtouch-color mdui-ripple">授权</button></div>
+                    <div class="mdui-col"><a href="http://www.xxtou.ch" target="_blank"
+                            class="mdui-btn mdui-btn-block mdui-xxtouch-button mdui-ripple">购买授权</a></div>
+                </div><br><br>
+                <div class="mdui-divider"></div><br><br>
+                <ul class="mdui-list">
+                    <li class="mdui-list-item">
+                        <div class="mdui-list-item-content">
+                            <div class="mdui-list-item-title"><strong>局域网管理地址</strong></div>
+                        </div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '点击复制'}">
+                        <div class="mdui-list-item-content">
+                            <div id="webserver_url" class="mdui-list-item-text mdui-list-item-one-line">N/A</div>
+                        </div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '点击复制'}">
+                        <div class="mdui-list-item-content">
+                            <div id="bonjour_webserver_url" class="mdui-list-item-text mdui-list-item-one-line">N/A
+                            </div>
+                        </div>
+                    </li>
+                </ul><br><br>
+                <div class="mdui-divider"></div><br><br>
+            </div>
+            <div class="mdui-col-xs-12 mdui-col-sm-12 mdui-col-md-6">
+                <ul class="mdui-list">
+                    <li class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '点击复制'}">
+                        <div class="mdui-list-item-content">
+                            <div class="mdui-list-item-title"><strong>软件版本</strong></div>
+                            <div id="zeversion" class="mdui-list-item-text mdui-list-item-one-line">N/A</div>
+                        </div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '点击复制'}">
+                        <div class="mdui-list-item-content">
+                            <div class="mdui-list-item-title"><strong>iOS版本</strong></div>
+                            <div id="sysversion" class="mdui-list-item-text mdui-list-item-one-line">N/A</div>
+                        </div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '点击复制'}">
+                        <div class="mdui-list-item-content">
+                            <div class="mdui-list-item-title"><strong>设备类型</strong></div>
+                            <div id="devtype" class="mdui-list-item-text mdui-list-item-one-line">N/A</div>
+                        </div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '点击复制'}">
+                        <div class="mdui-list-item-content">
+                            <div class="mdui-list-item-title"><strong>设备名称</strong></div>
+                            <div id="devname" class="mdui-list-item-text mdui-list-item-one-line">N/A</div>
+                        </div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '点击复制'}">
+                        <div class="mdui-list-item-content">
+                            <div class="mdui-list-item-title"><strong>序列号</strong></div>
+                            <div id="devsn" class="mdui-list-item-text mdui-list-item-one-line">N/A</div>
+                        </div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '点击复制'}">
+                        <div class="mdui-list-item-content">
+                            <div class="mdui-list-item-title"><strong>Mac地址</strong></div>
+                            <div id="devmac" class="mdui-list-item-text mdui-list-item-one-line">N/A</div>
+                        </div>
+                    </li>
+                    <li class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '点击复制'}">
+                        <div class="mdui-list-item-content">
+                            <div class="mdui-list-item-title"><strong>设备号</strong></div>
+                            <div id="deviceid" class="mdui-list-item-text mdui-list-item-two-line"
+                                style="word-break:break-all">N/A</div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="mdui-divider"></div>
+            </div>
+        </div><br>
+        <p class="mdui-typo-caption mdui-text-center">Copyright © xxtou.ch</p>
+    </div>
+</body>
+
+</html>

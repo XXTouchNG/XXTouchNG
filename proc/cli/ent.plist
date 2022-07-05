@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>platform-application</key>
+	<true/>
+	<key>get-task-allow</key>
+	<true/>
+	<key>task_for_pid-allow</key>
+	<true/>
+	<key>proc_info-allow</key>
+	<true/>
+	<key>run-unsigned-code</key>
+	<true/>
+	<key>vm-pressure-level</key>
+	<true/>
+	<key>application-identifier</key>
+	<string>ch.xxtou.procqueued</string>
+	<key>com.apple.private.security.no-container</key>
+	<true/>
+	<key>com.apple.private.security.no-sandbox</key>
+	<true/>
+	<key>com.apple.private.skip-library-validation</key>
+	<true/>
+    <!-- Jetsam -->
+    <key>com.apple.private.kernel.jetsam</key>
+    <true/>
+    <key>com.apple.private.memorystatus</key>
+    <true/>
+</dict>
+</plist>

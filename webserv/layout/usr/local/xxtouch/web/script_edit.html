@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="edge">
+    <meta name="renderer" content="webkit">
+    <title>XXTouch</title>
+    <link rel="apple-touch-icon" href="/xxtouch.png">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="mdui/js/mdui.min.js"></script>
+    <script type="text/javascript" src="js/base64.min.js"></script>
+    <script type="text/javascript" src="js/xxtouch_web.js"></script>
+    <script type="text/javascript" src="js/Go.js"></script>
+    <script type="text/javascript" src="script_edit.js"></script>
+    <link rel="stylesheet" href="mdui/css/mdui.min.css">
+    <link rel="stylesheet" href="css/xxtouch_web.css">
+    <link rel="stylesheet" href="codemirror/codemirror.css">
+    <link rel="stylesheet" href="codemirror/theme/base16-dark.css">
+    <script type="text/javascript" src="codemirror/codemirror.js"></script>
+    <script type="text/javascript" src="codemirror/mode/lua.js"></script>
+    <script type="text/javascript" src="codemirror/addon/scroll/annotatescrollbar.js"></script>
+    <script type="text/javascript" src="codemirror/addon/search/matchesonscrollbar.js"></script>
+    <script type="text/javascript" src="codemirror/addon/search/match-highlighter.js"></script>
+    <script type="text/javascript" src="codemirror/addon/search/searchcursor.js"></script>
+    <script type="text/javascript" src="codemirror/addon/selection/active-line.js"></script>
+    <link rel="stylesheet" href="codemirror/addon/scroll/simplescrollbars.css">
+    <script type="text/javascript" src="codemirror/addon/scroll/simplescrollbars.js"></script>
+    <style>
+        #fixedLayer {
+            position: fixed;
+            width: 100px;
+            line-height: 30px;
+            background: #FFF;
+            border: 1px solid #F90;
+            z-index: 9999;
+            height: 50px;
+            display: none
+        }
+
+        .cm-matchhighlight {
+            box-shadow: 0 0 0 2px #555
+        }
+
+        .CodeMirror-selection-highlight-scrollbar {
+            background-color: #aaa
+        }
+    </style>
+</head>
+
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-blue mdui-theme-accent-deep-orange">
+    <div class="mdui-drawer" id="main-drawer"></div>
+    <header class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-xxtouch-color"><span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+                mdui-drawer="{target: '#main-drawer'}"><i class="mdui-icon material-icons">&#xe5d2;</i></span> <a
+                href="./index.html" class="mdui-typo-headline mdui-hidden-xs">XXTouch</a> <a id="path-file" href=""
+                class="mdui-typo-title">脚本编辑</a>
+            <div class="mdui-toolbar-spacer"></div><span id="path-file-undo"
+                class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"><i
+                    class="mdui-icon material-icons">&#xe166;</i></span> <span id="path-file-redo"
+                class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"><i
+                    class="mdui-icon material-icons">&#xe15a;</i></span> <span id="path-file-save"
+                class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"><i
+                    class="mdui-icon material-icons">&#xe161;</i></span>
+        </div>
+    </header>
+    <div class="mdui-container-fluid">
+        <div id="fixedLayer"></div><textarea id="file_textarea"></textarea>
+        <div class="mdui-fab-wrapper" mdui-fab="{trigger: 'hover'}" id="exampleFab"><button
+                class="mdui-fab mdui-ripple mdui-xxtouch-button"><i class="mdui-icon material-icons">&#xe145;</i> <i
+                    class="mdui-icon mdui-fab-opened material-icons">&#xe325;</i></button>
+            <div class="mdui-fab-dial"><button id="launch-script-file"
+                    class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink"><i
+                        class="mdui-icon material-icons">&#xe037;</i></button> <button id="recycle"
+                    class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red"><i
+                        class="mdui-icon material-icons">&#xe047;</i></button></div>
+        </div><br><textarea id="debug_textArea"></textarea>
+    </div>
+</body>
+
+</html>

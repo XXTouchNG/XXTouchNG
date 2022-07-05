@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>entry</key>
+	<dict>
+		<key>cell</key>
+		<string>PSSwitchCell</string>
+		<key>defaults</key>
+		<string>ch.xxtou.DebugWindow</string>
+		<key>label</key>
+		<string>XXTouch Debug Window</string>
+		<key>key</key>
+		<string>enabled</string>
+		<key>default</key>
+		<true/>
+		<key>icon</key>
+		<string>/Applications/Preferences.app/icon-table@2x.png</string>
+		<key>PostNotification</key>
+		<string>ch.xxtou.notification.debugwindow.defaults-changed</string>
+	</dict>
+</dict>
+</plist>

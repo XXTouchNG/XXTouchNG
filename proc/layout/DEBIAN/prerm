@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# set -e
+
+launchctl unload "/Library/LaunchDaemons/ch.xxtou.procqueued.plist" > /dev/null 2>&1
+launchctl remove com.xxtou.procqueued > /dev/null 2>&1
+
+exit 0
+

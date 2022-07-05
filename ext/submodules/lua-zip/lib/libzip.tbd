@@ -1,0 +1,47 @@
+---
+archs:           [ arm64 ]
+platform:        ios
+install-name:    /usr/lib/libzip.5.dylib
+current-version: 5.0
+compatibility-version: 5.0
+exports:         
+  - archs:           [ arm64 ]
+    symbols:         [ _zip_add, _zip_add_dir, _zip_close, _zip_delete, 
+                       _zip_dir_add, _zip_discard, _zip_error_clear, _zip_error_code_system, 
+                       _zip_error_code_zip, _zip_error_fini, _zip_error_get, 
+                       _zip_error_get_sys_type, _zip_error_init, _zip_error_init_with_code, 
+                       _zip_error_set, _zip_error_strerror, _zip_error_system_type, 
+                       _zip_error_to_data, _zip_error_to_str, _zip_fclose, 
+                       _zip_fdopen, _zip_file_add, _zip_file_error_clear, 
+                       _zip_file_error_get, _zip_file_extra_field_delete, 
+                       _zip_file_extra_field_delete_by_id, _zip_file_extra_field_get, 
+                       _zip_file_extra_field_get_by_id, _zip_file_extra_field_set, 
+                       _zip_file_extra_fields_count, _zip_file_extra_fields_count_by_id, 
+                       _zip_file_get_comment, _zip_file_get_error, _zip_file_get_external_attributes, 
+                       _zip_file_rename, _zip_file_replace, _zip_file_set_comment, 
+                       _zip_file_set_encryption, _zip_file_set_external_attributes, 
+                       _zip_file_set_mtime, _zip_file_strerror, _zip_fopen, 
+                       _zip_fopen_encrypted, _zip_fopen_index, _zip_fopen_index_encrypted, 
+                       _zip_fread, _zip_fseek, _zip_ftell, _zip_get_archive_comment, 
+                       _zip_get_archive_flag, _zip_get_error, _zip_get_file_comment, 
+                       _zip_get_name, _zip_get_num_entries, _zip_get_num_files, 
+                       _zip_libzip_version, _zip_name_locate, _zip_open, 
+                       _zip_open_from_source, _zip_random, _zip_register_progress_callback, 
+                       _zip_register_progress_callback_with_state, _zip_rename, 
+                       _zip_replace, _zip_set_archive_comment, _zip_set_archive_flag, 
+                       _zip_set_default_password, _zip_set_file_comment, 
+                       _zip_set_file_compression, _zip_source_begin_write, 
+                       _zip_source_begin_write_cloning, _zip_source_buffer, 
+                       _zip_source_buffer_create, _zip_source_buffer_fragment, 
+                       _zip_source_buffer_fragment_create, _zip_source_close, 
+                       _zip_source_commit_write, _zip_source_error, _zip_source_file, 
+                       _zip_source_file_create, _zip_source_filep, _zip_source_filep_create, 
+                       _zip_source_free, _zip_source_function, _zip_source_function_create, 
+                       _zip_source_is_deleted, _zip_source_keep, _zip_source_make_command_bitmap, 
+                       _zip_source_open, _zip_source_read, _zip_source_rollback_write, 
+                       _zip_source_seek, _zip_source_seek_compute_offset, 
+                       _zip_source_seek_write, _zip_source_stat, _zip_source_tell, 
+                       _zip_source_tell_write, _zip_source_write, _zip_source_zip, 
+                       _zip_stat, _zip_stat_index, _zip_stat_init, _zip_strerror, 
+                       _zip_unchange, _zip_unchange_all, _zip_unchange_archive ]
+...

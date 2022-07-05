@@ -1,0 +1,11 @@
+Package: com.darwindev.dingtone
+Name: Dingtone Helper
+Version: 0.3-1
+Section: Tweaks
+Depends: firmware (>= 13.0), mobilesubstrate (>= 0.9.7000), com.rpetrich.rocketbootstrap (>= 1.0.9)
+Replaces: com.darwindev.dingtone
+Architecture: iphoneos-arm
+Author: XXTouch Team.
+Maintainer: XXTouch Team.
+Description: A Dingtone helper with RocketBootstrap XPC support and Lua bridge.
+
