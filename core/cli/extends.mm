@@ -264,7 +264,7 @@ static int l_os_tmpname(lua_State *L)
 {
     @autoreleasepool {
         NSString *identifier    = [[NSProcessInfo processInfo] globallyUniqueString];
-        NSString *tmpNameString = [NSString stringWithFormat:@"lua_%@", identifier];
+        NSString *tmpNameString = [NSString stringWithFormat:@"NSIRD_%@", identifier];
         NSString *tmpPathString = [NSTemporaryDirectory() stringByAppendingPathComponent:tmpNameString];
         lua_pushstring(L, [tmpPathString UTF8String]);
         return 1;

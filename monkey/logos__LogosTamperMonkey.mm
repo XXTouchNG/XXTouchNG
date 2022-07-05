@@ -55,7 +55,7 @@ pthread_mutex_t __xpcRemoteControlLock;
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class WKDateTimeInputControl; @class UIWebView; @class WKMultipleSelectPicker; @class _UILayerHostView; @class WKSelectSinglePicker; @class WKFormColorControl; @class SFSafariView; @class SFBrowserServiceViewController; @class WKDateTimePicker; @class BrowserController; @class WKFormSelectControl; @class BrowserWindowController; @class TabController; 
+@class WKSelectSinglePicker; @class BrowserWindowController; @class _UILayerHostView; @class WKFormSelectControl; @class TabController; @class WKDateTimeInputControl; @class SFSafariView; @class BrowserController; @class UIWebView; @class WKFormColorControl; @class SFBrowserServiceViewController; @class WKMultipleSelectPicker; @class WKDateTimePicker; 
 
 
 #line 36 "LogosTamperMonkey.xm"

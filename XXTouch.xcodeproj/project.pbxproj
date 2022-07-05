@@ -387,6 +387,8 @@
 		CCCDD26B2844868F0098849F /* JSTPixelImage+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = CCCDD26A2844867C0098849F /* JSTPixelImage+Private.h */; };
 		CCD1F44827B39A7100A9EB78 /* TMScriptNetworkingProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1F44727B39A7100A9EB78 /* TMScriptNetworkingProxy.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		CCD1F44B27B39E2F00A9EB78 /* TMWeakObjectWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1F44927B39E2F00A9EB78 /* TMWeakObjectWrapper.m */; };
+		CCE047DD2874785100FB63C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6F57919251C6179009CC6A3 /* Foundation.framework */; };
+		CCE047E22874786900FB63C2 /* ohmyjetsam.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCE047D82874784B00FB63C2 /* ohmyjetsam.mm */; };
 		CCE4B02327B136010076B1D4 /* TMWeakUserContentControllerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE4B02227B136010076B1D4 /* TMWeakUserContentControllerWrapper.m */; };
 		CCE4B02627B24E580076B1D4 /* TMScriptMessageProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE4B02427B24E580076B1D4 /* TMScriptMessageProxy.m */; };
 		CCE5C15128361D87002233DB /* ContainerManagerLuaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCE5C15028361D87002233DB /* ContainerManagerLuaBridge.mm */; };
@@ -1110,6 +1112,8 @@
 		CCD1F44727B39A7100A9EB78 /* TMScriptNetworkingProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMScriptNetworkingProxy.m; sourceTree = "<group>"; };
 		CCD1F44927B39E2F00A9EB78 /* TMWeakObjectWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMWeakObjectWrapper.m; sourceTree = "<group>"; };
 		CCD1F44A27B39E2F00A9EB78 /* TMWeakObjectWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMWeakObjectWrapper.h; sourceTree = "<group>"; };
+		CCE047D82874784B00FB63C2 /* ohmyjetsam.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ohmyjetsam.mm; sourceTree = "<group>"; };
+		CCE047E12874785100FB63C2 /* ohmyjetsam */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ohmyjetsam; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE4B02127B136010076B1D4 /* TMWeakUserContentControllerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMWeakUserContentControllerWrapper.h; sourceTree = "<group>"; };
 		CCE4B02227B136010076B1D4 /* TMWeakUserContentControllerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMWeakUserContentControllerWrapper.m; sourceTree = "<group>"; };
 		CCE4B02427B24E580076B1D4 /* TMScriptMessageProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMScriptMessageProxy.m; sourceTree = "<group>"; };
@@ -1456,6 +1460,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CCE047DC2874785100FB63C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCE047DD2874785100FB63C2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CCF1B056279BC37D00F9EA50 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1690,6 +1702,7 @@
 				CC161A8B286999CB00CA26AD /* Menes */,
 				CC161A86286999CB00CA26AD /* entitlements.plist */,
 				CC161A96286999CB00CA26AD /* add1s.mm */,
+				CCE047D82874784B00FB63C2 /* ohmyjetsam.mm */,
 			);
 			path = add1s;
 			sourceTree = "<group>";
@@ -2378,6 +2391,7 @@
 				CC161A7B2869999D00CA26AD /* add1s */,
 				CC161AD728699FF200CA26AD /* libsupervisor.dylib */,
 				CC161AE82869A08800CA26AD /* supervisord */,
+				CCE047E12874785100FB63C2 /* ohmyjetsam */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3064,6 +3078,22 @@
 			productReference = CC9CA2ED2843C4DB008E1D5F /* screencaptureclient */;
 			productType = "com.apple.product-type.tool";
 		};
+		CCE047D92874785100FB63C2 /* ohmyjetsam */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CCE047DE2874785100FB63C2 /* Build configuration list for PBXNativeTarget "ohmyjetsam" */;
+			buildPhases = (
+				CCE047DA2874785100FB63C2 /* Sources */,
+				CCE047DC2874785100FB63C2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ohmyjetsam;
+			productName = simulatetouchd;
+			productReference = CCE047E12874785100FB63C2 /* ohmyjetsam */;
+			productType = "com.apple.product-type.tool";
+		};
 		CCF1B04E279BC37D00F9EA50 /* monkey */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCF1B068279BC37D00F9EA50 /* Build configuration list for PBXNativeTarget "monkey" */;
@@ -3174,6 +3204,7 @@
 				CC39700C28657EC00079097A /* hid */,
 				CC3970462867247E0079097A /* hidrecorder */,
 				CC161A6A2869999D00CA26AD /* add1s */,
+				CCE047D92874785100FB63C2 /* ohmyjetsam */,
 				D6B89C9A251DC738006B4B56 /* lua-dynamic */,
 				CC114D90283D31E4002E91D8 /* lua-static */,
 			);
@@ -3480,6 +3511,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC9CA2F02843C522008E1D5F /* screencaptureclient.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCE047DA2874785100FB63C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCE047E22874786900FB63C2 /* ohmyjetsam.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4771,6 +4810,40 @@
 			};
 			name = Debug;
 		};
+		CCE047DF2874785100FB63C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = add1s/entitlements.plist;
+				GCC_PREFIX_HEADER = "";
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"$(TARGET_NAME)\\\"\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.xxtou.$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SYSTEM_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CCE047E02874785100FB63C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = add1s/entitlements.plist;
+				GCC_PREFIX_HEADER = "";
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"$(TARGET_NAME)\\\"\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.xxtou.$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SYSTEM_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		CCF1B069279BC37D00F9EA50 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5386,6 +5459,15 @@
 			buildConfigurations = (
 				CC9CA2EB2843C4DB008E1D5F /* Release */,
 				CC9CA2EC2843C4DB008E1D5F /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CCE047DE2874785100FB63C2 /* Build configuration list for PBXNativeTarget "ohmyjetsam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCE047DF2874785100FB63C2 /* Release */,
+				CCE047E02874785100FB63C2 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
