@@ -70,25 +70,23 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
     static NSDateFormatter *isoDateFormatter = nil;
     static NSFileHandle *proxyLogHandle = nil;
     static dispatch_once_t onceToken;
-
+    
     dispatch_once(&onceToken, ^{
         
         isoDateFormatter = [[NSDateFormatter alloc] init];
         isoDateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
         isoDateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'+00:00'";
         isoDateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-
+        
         NSString *cachesDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
         NSString *logPath = [cachesDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.log", kLuaBridgeInstanceName]];
         [[NSFileManager defaultManager] createFileAtPath:logPath contents:nil attributes:nil];
         
         proxyLogHandle = [[NSFileHandle fileHandleForWritingAtPath:logPath] copy];
         
-#if DEBUG
-        NSLog(@"[%@][Client #2] message log file handle %@ created at %@", kLuaBridgeInstanceName, proxyLogHandle, logPath);
-#endif
+        CHDebugLog(@"[%@][Client #2] message log file handle %@ created at %@", kLuaBridgeInstanceName, proxyLogHandle, logPath);
     });
-
+    
     if (proxyLogHandle) {
         
         dispatch_sync(_messageQueue, ^{
@@ -103,7 +101,7 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
                         @"body": object,
                     }];
                 }
-
+                
                 NSData *logData = nil;
                 if ([object isKindOfClass:[NSArray class]] || [object isKindOfClass:[NSDictionary class]]) {
                     NSError *jsonErr = nil;
@@ -111,7 +109,7 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
                 } else {  // NSString, NSNumber, NSDate or NSNull
                     logData = [[NSString stringWithFormat:@"%@", object] dataUsingEncoding:NSUTF8StringEncoding];
                 }
-
+                
                 if (logData) {
                     [handle seekToEndOfFile];
                     NSString *tagString = [NSString stringWithFormat:@"[%@] ", [isoDateFormatter stringFromDate:[NSDate date]]];
@@ -119,10 +117,8 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
                     [handle writeData:logData];
                     [handle writeData:[NSData dataWithBytes:"\r\n" length:2]];
                 }
-
-#if DEBUG
-                NSLog(@"[%@][Client #2] message received %@ from %@ has been written to %@", kLuaBridgeInstanceName, message, userContentController, handle);
-#endif
+                
+                CHDebugLog(@"[%@][Client #2] message received %@ from %@ has been written to %@", kLuaBridgeInstanceName, message, userContentController, handle);
             }
         });
         
@@ -133,34 +129,25 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
     @autoreleasepool {
         id messageBody = message.body;
         if (![messageBody isKindOfClass:[NSDictionary class]]) {
-            
-#if DEBUG
-        NSLog(@"[%@][Client #2] message %@ parsed body %@", kLuaBridgeInstanceName, message, messageBody);
-#endif
-            return messageBody;
-        }
-
-        NSDictionary *messageBodyDict = (NSDictionary *)messageBody;
-        if (![messageBodyDict[@"name"] isKindOfClass:[NSString class]] || ![messageBodyDict[@"stack"] isKindOfClass:[NSString class]]) {
-            
-#if DEBUG
-        NSLog(@"[%@][Client #2] message %@ parsed body %@", kLuaBridgeInstanceName, message, messageBody);
-#endif
+            CHDebugLog(@"[%@][Client #2] message %@ parsed body %@", kLuaBridgeInstanceName, message, messageBody);
             return messageBody;
         }
         
-#if DEBUG
+        NSDictionary *messageBodyDict = (NSDictionary *)messageBody;
+        if (![messageBodyDict[@"name"] isKindOfClass:[NSString class]] || ![messageBodyDict[@"stack"] isKindOfClass:[NSString class]]) {
+            CHDebugLog(@"[%@][Client #2] message %@ parsed body %@", kLuaBridgeInstanceName, message, messageBody);
+            return messageBody;
+        }
+        
         NSString *messageName = (NSString *)messageBodyDict[@"name"];
-        NSLog(@"[%@][Client #2] message %@ parsed name %@ body %@", kLuaBridgeInstanceName, message, messageName, messageBody);
-#endif
+        CHDebugLog(@"[%@][Client #2] message %@ parsed name %@ body %@", kLuaBridgeInstanceName, message, messageName, messageBody);
+        
         return messageBody;
     }
 }
 
 - (void)dealloc {
-#if DEBUG
-    NSLog(@"[%@][Client #2] <%@ dealloc>", kLuaBridgeInstanceName, NSStringFromClass([self class]));
-#endif
+    CHDebugLog(@"[%@][Client #2] <%@ dealloc>", kLuaBridgeInstanceName, NSStringFromClass([self class]));
 }
 
 @end

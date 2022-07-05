@@ -43,9 +43,7 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
         urlRequest.allHTTPHeaderFields = reqHeaders;
         urlRequest.HTTPBody = [reqData dataUsingEncoding:NSUTF8StringEncoding];
         
-#if DEBUG
-        NSLog(@"[%@][Client #2] xmlHttpRequest initialized %@ url %@ method %@ headers %@ body %@", kLuaBridgeInstanceName, urlRequest, reqURL, reqMethod, reqHeaders, reqData);
-#endif
+        CHDebugLog(@"[%@][Client #2] xmlHttpRequest initialized %@ url %@ method %@ headers %@ body %@", kLuaBridgeInstanceName, urlRequest, reqURL, reqMethod, reqHeaders, reqData);
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
             @autoreleasepool {
@@ -71,13 +69,9 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
                         NSString *respCallbackStr = [NSString stringWithFormat:@"window.$_TM_WKHandlerOnMessageReceive({ id: '%@', data: '%@', error: null });", messageHandle, respStr];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             @autoreleasepool {
-#if DEBUG
-                                NSLog(@"[%@][Client #2] xmlHttpRequest %@ finished %@ url %@ resp code %ld headers %@ body %@", kLuaBridgeInstanceName, wkWebView, urlRequest, reqURL, response.statusCode, response.allHeaderFields, respCallbackStr);
-#endif
+                                CHDebugLog(@"[%@][Client #2] xmlHttpRequest %@ finished %@ url %@ resp code %ld headers %@ body %@", kLuaBridgeInstanceName, wkWebView, urlRequest, reqURL, response.statusCode, response.allHeaderFields, respCallbackStr);
                                 [wkWebView evaluateJavaScript:respCallbackStr completionHandler:^(id _Nullable ret, NSError * _Nullable error1) {
-#if DEBUG
-                                    NSLog(@"[%@][Client #2] xmlHttpRequest %@ finished %@ url %@ callback %@ error %@", kLuaBridgeInstanceName, wkWebView, urlRequest, reqURL, ret, error1);
-#endif
+                                    CHDebugLog(@"[%@][Client #2] xmlHttpRequest %@ finished %@ url %@ callback %@ error %@", kLuaBridgeInstanceName, wkWebView, urlRequest, reqURL, ret, error1);
                                 }];
                             }
                         });
@@ -92,13 +86,9 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
                     NSString *errCallbackStr = [NSString stringWithFormat:@"window.$_TM_WKHandlerOnMessageReceive({ id: '%@', data: null, error: '%@' });", messageHandle, errStr];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         @autoreleasepool {
-#if DEBUG
-                            NSLog(@"[%@][Client #2] xmlHttpRequest %@ failed %@ url %@ error %@", kLuaBridgeInstanceName, wkWebView, urlRequest, reqURL, errCallbackStr);
-#endif
+                            CHDebugLog(@"[%@][Client #2] xmlHttpRequest %@ failed %@ url %@ error %@", kLuaBridgeInstanceName, wkWebView, urlRequest, reqURL, errCallbackStr);
                             [wkWebView evaluateJavaScript:errCallbackStr completionHandler:^(id _Nullable ret, NSError * _Nullable error) {
-#if DEBUG
-                                NSLog(@"[%@][Client #2] xmlHttpRequest %@ failed %@ url %@ callback %@ error %@", kLuaBridgeInstanceName, wkWebView, urlRequest, reqURL, ret, error);
-#endif
+                                CHDebugLog(@"[%@][Client #2] xmlHttpRequest %@ failed %@ url %@ callback %@ error %@", kLuaBridgeInstanceName, wkWebView, urlRequest, reqURL, ret, error);
                             }];
                         }
                     });
@@ -111,9 +101,7 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
 }
 
 - (void)dealloc {
-#if DEBUG
-    NSLog(@"[%@][Client #2] <%@ dealloc>", kLuaBridgeInstanceName, NSStringFromClass([self class]));
-#endif
+    CHDebugLog(@"[%@][Client #2] <%@ dealloc>", kLuaBridgeInstanceName, NSStringFromClass([self class]));
 }
 
 @end

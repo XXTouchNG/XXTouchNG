@@ -49,7 +49,7 @@ static inline void _PSWebSocketLog(id self, NSString *format, ...) {
     
     va_end(arg_list);
     
-    NSLog(@"[%@]: %@", self, formattedString);
+    CHLog(@"[%@]: %@", self, formattedString);
 }
 #define PSWebSocketLog(...) _PSWebSocketLog(self, __VA_ARGS__)
 

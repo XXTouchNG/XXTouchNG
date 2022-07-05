@@ -759,9 +759,7 @@ NS_INLINE void JSTFreePixelImage(JST_IMAGE *pixelImage) {
 - (void)dealloc {
     JSTFreePixelImage(_pixelImage);
     CGColorSpaceRelease(_colorSpace);
-#if DEBUG
-    NSLog(@"- [JSTPixelImage dealloc]");
-#endif
+    CHDebugLog(@"- [JSTPixelImage dealloc]");
 }
 
 - (id)copyWithZone:(NSZone *)zone {

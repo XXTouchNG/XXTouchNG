@@ -497,7 +497,7 @@
 
 - (NSString *)XMLPlistStringWithIndent:(__unused NSString *)indent
 {
-    NSLog(@"%@ is not a supported property list type.", self.classForCoder);
+    CHDebugLog(@"%@ is not a supported property list type.", self.classForCoder);
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
@@ -636,7 +636,7 @@
 
 - (void)failWithError:(NSString *)error
 {
-    NSLog(@"OrderedDictionary XML parsing error: %@", error);
+    CHDebugLog(@"OrderedDictionary XML parsing error: %@", error);
     _failed = YES;
     _root = nil;
 }

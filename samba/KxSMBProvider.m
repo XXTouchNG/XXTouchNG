@@ -1944,24 +1944,24 @@ static KxSMBProvider *gSmbProvider;
 #if 0
 + (void) dumpSmbcOptions:(SMBCCTX *)smbContext
 {
-    NSLog(@"Debug: %d", smbc_getDebug(smbContext));
-    NSLog(@"NetbiosName: %s", smbc_getNetbiosName(smbContext));
-    NSLog(@"Workgroup: %s", smbc_getWorkgroup(smbContext));
-    NSLog(@"User: %s", smbc_getUser(smbContext));
-    NSLog(@"Timeout: %d", smbc_getTimeout(smbContext));
-    NSLog(@"DebugToStderr: %d", smbc_getOptionDebugToStderr(smbContext));
-    NSLog(@"FullTimeNames: %d", smbc_getOptionFullTimeNames(smbContext));
-    NSLog(@"OpenShareMode: %d", smbc_getOptionOpenShareMode(smbContext));
-    NSLog(@"EncryptionLevel: %d", smbc_getOptionSmbEncryptionLevel(smbContext));
-    NSLog(@"CaseSensitive: %d", smbc_getOptionCaseSensitive(smbContext));
-    NSLog(@"BrowseMaxLmbCount: %d", smbc_getOptionBrowseMaxLmbCount(smbContext));
-    NSLog(@"UrlEncodeReaddirEntries: %d", smbc_getOptionUrlEncodeReaddirEntries(smbContext));
-    NSLog(@"OneSharePerServer: %d", smbc_getOptionOneSharePerServer(smbContext));
-    NSLog(@"UseKerberos: %d", smbc_getOptionUseKerberos(smbContext));
-    NSLog(@"FallbackAfterKerberos: %d", smbc_getOptionFallbackAfterKerberos(smbContext));
-    NSLog(@"NoAutoAnonymousLogin: %d", smbc_getOptionNoAutoAnonymousLogin(smbContext));
-    NSLog(@"UseCCache: %d", smbc_getOptionUseCCache(smbContext));
-    NSLog(@"UseNTHash: %d", smbc_getOptionUseNTHash(smbContext));
+    CHDebugLog(@"Debug: %d", smbc_getDebug(smbContext));
+    CHDebugLog(@"NetbiosName: %s", smbc_getNetbiosName(smbContext));
+    CHDebugLog(@"Workgroup: %s", smbc_getWorkgroup(smbContext));
+    CHDebugLog(@"User: %s", smbc_getUser(smbContext));
+    CHDebugLog(@"Timeout: %d", smbc_getTimeout(smbContext));
+    CHDebugLog(@"DebugToStderr: %d", smbc_getOptionDebugToStderr(smbContext));
+    CHDebugLog(@"FullTimeNames: %d", smbc_getOptionFullTimeNames(smbContext));
+    CHDebugLog(@"OpenShareMode: %d", smbc_getOptionOpenShareMode(smbContext));
+    CHDebugLog(@"EncryptionLevel: %d", smbc_getOptionSmbEncryptionLevel(smbContext));
+    CHDebugLog(@"CaseSensitive: %d", smbc_getOptionCaseSensitive(smbContext));
+    CHDebugLog(@"BrowseMaxLmbCount: %d", smbc_getOptionBrowseMaxLmbCount(smbContext));
+    CHDebugLog(@"UrlEncodeReaddirEntries: %d", smbc_getOptionUrlEncodeReaddirEntries(smbContext));
+    CHDebugLog(@"OneSharePerServer: %d", smbc_getOptionOneSharePerServer(smbContext));
+    CHDebugLog(@"UseKerberos: %d", smbc_getOptionUseKerberos(smbContext));
+    CHDebugLog(@"FallbackAfterKerberos: %d", smbc_getOptionFallbackAfterKerberos(smbContext));
+    CHDebugLog(@"NoAutoAnonymousLogin: %d", smbc_getOptionNoAutoAnonymousLogin(smbContext));
+    CHDebugLog(@"UseCCache: %d", smbc_getOptionUseCCache(smbContext));
+    CHDebugLog(@"UseNTHash: %d", smbc_getOptionUseNTHash(smbContext));
 }
 #endif
 
@@ -2468,7 +2468,7 @@ static void my_smbc_get_auth_data_fn(const char *srv,
         }
     }
     
-    // NSLog(@"smb get auth for %s/%s -> %s/%s:%s", srv, shr, workgroup, username, password);
+    // CHDebugLog(@"smb get auth for %s/%s -> %s/%s:%s", srv, shr, workgroup, username, password);
 }
 
 static void my_smbc_get_auth_data_with_context_fn(SMBCCTX *c,

@@ -9,10 +9,10 @@ do
             require 'log.writer.console.color'.new(),  -- * console color
             require 'log.writer.toolbar.color'.new(),  -- * toolbar color
             require 'log.writer.file.roll'.new(        -- * roll files
-            '/usr/local/xxtouch/log',                  --   log dir
-            'sys.log',                              --   current log name
-            10,                                        --   count files
-            10*1024*1024                               --   max file size in bytes
+                '/usr/local/xxtouch/log',              --   log dir
+                'sys.log',                             --   current log name
+                10,                                    --   count files
+                10*1024*1024                           --   max file size in bytes
             )
         ),
         

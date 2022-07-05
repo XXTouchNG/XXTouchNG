@@ -1853,9 +1853,7 @@ static void RegisterWKWebViewConfiguration(WKWebView *webView, WKWebViewConfigur
             
             payloadsToAttach = [filteredUserScripts copy];
             
-    #if DEBUG
-            NSLog(@"[%@][Client #2] payloads prepared %@", @XPC_INSTANCE_NAME, payloadsToAttach);
-    #endif
+            CHDebugLog(@"[%@][Client #2] payloads prepared %@", @XPC_INSTANCE_NAME, payloadsToAttach);
         });
         
         pthread_rwlock_wrlock(&__localRegisteredWrappersLock);
@@ -1992,9 +1990,7 @@ void SetupTamperMonkey() {
             (IMP *)&original_WKWebView_initWithFrame_configuration_
         );
         
-#if DEBUG
-        NSLog(@"[%@][Client #2] Objective-C message hooks initialized for WKWebView", @XPC_INSTANCE_NAME);
-#endif
+        CHDebugLog(@"[%@][Client #2] Objective-C message hooks initialized for WKWebView", @XPC_INSTANCE_NAME);
     }
 }
 

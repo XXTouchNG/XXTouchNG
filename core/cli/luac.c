@@ -66,7 +66,7 @@ static void usage(const char *message)
             "  -s       strip debug information\n"
             "  -v       show version information\n"
             "  --       stop handling options\n"
-            "  -        stop handling options and process stdin\n"
+            "  -        stop handling options and process stdin\r\n"
             , progname, Output);
     exit(EXIT_FAILURE);
 }

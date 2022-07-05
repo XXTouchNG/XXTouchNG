@@ -1977,9 +1977,7 @@ void SetupAlertHelper() {
             (IMP *)&original_UIAlertController_viewDidDisappear_
             );
 
-#if DEBUG
-        NSLog(@"[%@][Client #2] Objective-C message hooks initialized for UIAlertController", @XPC_INSTANCE_NAME);
-#endif
+        CHDebugLog(@"[%@][Client #2] Objective-C message hooks initialized for UIAlertController", @XPC_INSTANCE_NAME);
 
         if (_cc(_SFWebView)) {
 #pragma clang diagnostic push
@@ -1992,9 +1990,7 @@ void SetupAlertHelper() {
                 );
 #pragma clang diagnostic pop
 
-#if DEBUG
-            NSLog(@"[%@][Client #2] Objective-C message hooks initialized for _SFWebView", @XPC_INSTANCE_NAME);
-#endif
+            CHDebugLog(@"[%@][Client #2] Objective-C message hooks initialized for _SFWebView", @XPC_INSTANCE_NAME);
         }
 
         {

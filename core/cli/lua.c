@@ -146,7 +146,7 @@ static void print_usage (const char *badoption) {
         "  -v       show version information\n"
         "  -E       ignore environment variables\n"
         "  --       stop handling options\n"
-        "  -        stop handling options and execute stdin\n"
+        "  -        stop handling options and execute stdin\r\n"
         ,
         progname);
 }
@@ -158,7 +158,7 @@ static void print_usage (const char *badoption) {
 */
 static void l_message (const char *pname, const char *msg) {
     if (pname) lua_writestringerror("%s: ", pname);
-    lua_writestringerror("%s\n", msg);
+    lua_writestringerror("%s\r\n", msg);
 }
 
 
