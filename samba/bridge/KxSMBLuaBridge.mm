@@ -12,6 +12,7 @@
 #pragma mark -
 
 XXTouchF_CAPI int luaopen_samba(lua_State *);
+static dispatch_queue_t _eventQueue = NULL;
 
 #define SMBERR_EXPECT_SAMBA_CONFIG \
     "samba_config expected"
@@ -360,6 +361,7 @@ static int SambaConfig_ListDirectory(lua_State *L)
         }
         
         [[KxSMBProvider sharedSmbProvider] setConfig:copyConfigFromSambaConfig(smbConfig)];
+        [[KxSMBProvider sharedSmbProvider] setCompletionQueue:_eventQueue];
         
         id items = [[KxSMBProvider sharedSmbProvider] fetchAtPath:[NSString stringWithUTF8String:smbPath]
                                                                             expandDir:YES
@@ -401,6 +403,7 @@ static int SambaConfig_CreateDirectory(lua_State *L)
         }
         
         [[KxSMBProvider sharedSmbProvider] setConfig:copyConfigFromSambaConfig(smbConfig)];
+        [[KxSMBProvider sharedSmbProvider] setCompletionQueue:_eventQueue];
         
         id item = [[KxSMBProvider sharedSmbProvider] createFolderAtPath:[NSString stringWithUTF8String:smbPath]
                                                                    auth:copyAuthFromSambaConfig(smbConfig)];
@@ -418,7 +421,7 @@ static int SambaConfig_CreateDirectory(lua_State *L)
     }
 }
 
-static int SambaConfig_RemoveDirectory(lua_State *L)
+static int SambaConfig_RemoveItem(lua_State *L)
 {
     @autoreleasepool {
         SambaConfig *smbConfig = checkSambaConfig(L, 1);
@@ -430,11 +433,9 @@ static int SambaConfig_RemoveDirectory(lua_State *L)
         }
         
         [[KxSMBProvider sharedSmbProvider] setConfig:copyConfigFromSambaConfig(smbConfig)];
+        [[KxSMBProvider sharedSmbProvider] setCompletionQueue:_eventQueue];
         
-        __block id item = nil;
-        [[KxSMBProvider sharedSmbProvider] removeFolderAtPath:[NSString stringWithUTF8String:smbPath]
-                                                         auth:copyAuthFromSambaConfig(smbConfig)
-                                                        block:^(id  _Nullable result) { item = result; }];
+        id item = [[KxSMBProvider sharedSmbProvider] removeAtPath:[NSString stringWithUTF8String:smbPath] auth:copyAuthFromSambaConfig(smbConfig)];
         
         if ([item isKindOfClass:[NSError class]])
         {
@@ -449,7 +450,7 @@ static int SambaConfig_RemoveDirectory(lua_State *L)
     }
 }
 
-static int SambaConfig_RemoveItem(lua_State *L)
+static int SambaConfig_RemoveDirectory(lua_State *L)
 {
     @autoreleasepool {
         SambaConfig *smbConfig = checkSambaConfig(L, 1);
@@ -461,8 +462,17 @@ static int SambaConfig_RemoveItem(lua_State *L)
         }
         
         [[KxSMBProvider sharedSmbProvider] setConfig:copyConfigFromSambaConfig(smbConfig)];
+        [[KxSMBProvider sharedSmbProvider] setCompletionQueue:_eventQueue];
         
-        id item = [[KxSMBProvider sharedSmbProvider] removeAtPath:[NSString stringWithUTF8String:smbPath] auth:copyAuthFromSambaConfig(smbConfig)];
+        __block id item = nil;
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        [[KxSMBProvider sharedSmbProvider] removeFolderAtPath:[NSString stringWithUTF8String:smbPath]
+                                                         auth:copyAuthFromSambaConfig(smbConfig)
+                                                        block:^(id  _Nullable result) {
+            item = result;
+            dispatch_semaphore_signal(sema);
+        }];
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
         
         if ([item isKindOfClass:[NSError class]])
         {
@@ -495,12 +505,18 @@ static int SambaConfig_RenameItem(lua_State *L)
         }
         
         [[KxSMBProvider sharedSmbProvider] setConfig:copyConfigFromSambaConfig(smbConfig)];
+        [[KxSMBProvider sharedSmbProvider] setCompletionQueue:_eventQueue];
         
         __block id item = nil;
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
         [[KxSMBProvider sharedSmbProvider] renameAtPath:[NSString stringWithUTF8String:smbPathFrom]
                                                 newPath:[NSString stringWithUTF8String:smbPathTo]
                                                    auth:copyAuthFromSambaConfig(smbConfig)
-                                                  block:^(id  _Nullable result) { item = result; }];
+                                                  block:^(id  _Nullable result) {
+            item = result;
+            dispatch_semaphore_signal(sema);
+        }];
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
         
         if ([item isKindOfClass:[NSError class]])
         {
@@ -527,6 +543,7 @@ static int SambaConfig_TouchFile(lua_State *L)
         }
         
         [[KxSMBProvider sharedSmbProvider] setConfig:copyConfigFromSambaConfig(smbConfig)];
+        [[KxSMBProvider sharedSmbProvider] setCompletionQueue:_eventQueue];
         
         id item = [[KxSMBProvider sharedSmbProvider] createFileAtPath:[NSString stringWithUTF8String:smbPath]
                                                             overwrite:YES
@@ -571,8 +588,10 @@ static int SambaConfig_DownloadItem(lua_State *L)
         }
         
         [[KxSMBProvider sharedSmbProvider] setConfig:copyConfigFromSambaConfig(smbConfig)];
+        [[KxSMBProvider sharedSmbProvider] setCompletionQueue:_eventQueue];
         
         __block id item = nil;
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
         [[KxSMBProvider sharedSmbProvider] copySMBPath:[NSString stringWithUTF8String:smbPath]
                                              localPath:[NSString stringWithUTF8String:localPath]
                                              overwrite:YES
@@ -597,7 +616,9 @@ static int SambaConfig_DownloadItem(lua_State *L)
             }
         } block:^(id  _Nullable result) {
             item = result;
+            dispatch_semaphore_signal(sema);
         }];
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
         
         if (argc > 3)
         {
@@ -643,8 +664,10 @@ static int SambaConfig_UploadItem(lua_State *L)
         }
         
         [[KxSMBProvider sharedSmbProvider] setConfig:copyConfigFromSambaConfig(smbConfig)];
+        [[KxSMBProvider sharedSmbProvider] setCompletionQueue:_eventQueue];
         
         __block id item = nil;
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
         [[KxSMBProvider sharedSmbProvider] copyLocalPath:[NSString stringWithUTF8String:localPath]
                                                  smbPath:[NSString stringWithUTF8String:smbPath]
                                                overwrite:YES
@@ -670,7 +693,9 @@ static int SambaConfig_UploadItem(lua_State *L)
             }
         } block:^(id  _Nullable result) {
             item = result;
+            dispatch_semaphore_signal(sema);
         }];
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
         
         if (argc > 3)
         {
@@ -738,6 +763,8 @@ XXTouchF_CAPI int luaopen_samba(lua_State *L)
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        _eventQueue = dispatch_queue_create("ch.xxtou.queue.samba", DISPATCH_QUEUE_SERIAL_WITH_AUTORELEASE_POOL);
+        
         luaL_newmetatable(L, L_TYPE_SAMBA_CONFIG);
         lua_pushstring(L, "__index");
         lua_pushvalue(L, -2);
