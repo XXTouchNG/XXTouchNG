@@ -50,8 +50,16 @@ int main(int argc, char *argv[]) {
                 @"ExecuteAllowed": @(YES),
                 @"EnablePressuredExit": @(NO),
                 @"JetsamPriority": @(14),
-                @"ActiveSoftMemoryLimit": @(300),
-                @"InactiveHardMemoryLimit": @(36),
+                @"ActiveSoftMemoryLimit": @(36),
+                @"InactiveHardMemoryLimit": @(12),
+                @"ThreadLimit": @(32),
+            },
+            @"ch.xxtou.elfclient": @{
+                @"ExecuteAllowed": @(YES),
+                @"EnablePressuredExit": @(NO),
+                @"JetsamPriority": @(14),
+                @"ActiveSoftMemoryLimit": @(36),
+                @"InactiveHardMemoryLimit": @(12),
                 @"ThreadLimit": @(32),
             },
         };

@@ -2349,16 +2349,35 @@ static void register_touchelf_handlers(GCDWebServer *webServer)
                     {
                         [cloudConf addEntriesFromDictionary:cloudDict];
                     }
+                    
                     [[ProcQueue sharedInstance] setObject:cloudConf forKey:@"ch.xxtou.defaults.cloud"];
+                    
+                    if ([cloudDict[@"enabled"] isKindOfClass:[NSNumber class]] ||
+                        [cloudDict[@"enable"] isKindOfClass:[NSNumber class]])
+                    {
+                        BOOL isEnabled = NO;
+                        if ([cloudDict[@"enabled"] isKindOfClass:[NSNumber class]])
+                        {
+                            isEnabled = [cloudDict[@"enabled"] boolValue];
+                        }
+                        else
+                        {
+                            isEnabled = [cloudDict[@"enable"] boolValue];
+                        }
+                        
+                        ios_system("/bin/launchctl kickstart -p -k system/ch.xxtou.elfclient");
+                    }
                 }
                 
-                BOOL notifyStop = [request.jsonObject[@"notify_stop"] boolValue];
-                NSMutableDictionary *userConf = [[[ProcQueue sharedInstance] objectForKey:@"ch.xxtou.defaults.user"] mutableCopy];
-                if (![userConf isKindOfClass:[NSDictionary class]]) {
-                    userConf = [NSMutableDictionary dictionary];
+                {
+                    BOOL notifyStop = [request.jsonObject[@"notify_stop"] boolValue];
+                    NSMutableDictionary *userConf = [[[ProcQueue sharedInstance] objectForKey:@"ch.xxtou.defaults.user"] mutableCopy];
+                    if (![userConf isKindOfClass:[NSDictionary class]]) {
+                        userConf = [NSMutableDictionary dictionary];
+                    }
+                    [userConf setObject:@(notifyStop) forKey:@"script_end_hint"];
+                    [[ProcQueue sharedInstance] setObject:[userConf copy] forKey:@"ch.xxtou.defaults.user"];
                 }
-                [userConf setObject:@(notifyStop) forKey:@"script_end_hint"];
-                [[ProcQueue sharedInstance] setObject:[userConf copy] forKey:@"ch.xxtou.defaults.user"];
                 
                 completionBlock(resp_v1_ok_204());
             }
@@ -4244,9 +4263,22 @@ static void register_udp_logging_handlers(WSUdpLoggingServer *loggingServer)
             BOOL isBusy = [[Supervisor sharedInstance] isBusy];
             NSString *scriptName = [[ProcQueue sharedInstance] objectForKey:@"ch.xxtou.defaults.selected-script"];
             [respDict setObject:@{
-                @"select": scriptName ?: @"",
+                @"select": [scriptName isKindOfClass:[NSString class]] ? scriptName : @"",
                 @"running": @(isBusy),
             } forKey:@"script"];
+            
+            NSDictionary <NSString *, id> *cloudConf = [[ProcQueue sharedInstance] objectForKey:@"ch.xxtou.defaults.cloud"];
+            if ([cloudConf isKindOfClass:[NSDictionary class]])
+            {
+                [respDict setObject:cloudConf forKey:@"cloud"];
+            }
+            else
+            {
+                [respDict setObject:@{
+                    @"enabled": @(NO),
+                    @"address": @"",
+                } forKey:@"cloud"];
+            }
             
             CFPropertyListRef plistObj = MGCopyMultipleAnswers((__bridge CFArrayRef)@[
                 (__bridge NSString *)kMGUserAssignedDeviceName,
@@ -5112,6 +5144,11 @@ int __elf_cloud_client_main(int argc, const char *argv[], const char *envp[])
                     {
                         wsString = cloudConf[@"address"];
                     }
+                }
+                else
+                {
+                    fprintf(stderr, "elfclient: disabled\n");
+                    return EXIT_SUCCESS;
                 }
             }
         }

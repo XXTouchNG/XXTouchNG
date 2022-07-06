@@ -963,6 +963,10 @@ CHConstructor {
                     @"use_classic_control_alert": @(YES),
                     @"no_nosim_statusbar": @(NO),
                 },
+                @"ch.xxtou.defaults.cloud": @{
+                    @"enabled": @(NO),
+                    @"address": @"",
+                },
                 @"ch.xxtou.defaults.env": @{
                     @"XXT_ENTRYPOINT": @"",
                     @"XXT_ENTRYTYPE": @"unknown",

@@ -375,10 +375,10 @@ pthread_mutex_t __xpcRemoteControlLock;
 #pragma mark -
 
 typedef CFStringRef (sec_task_copy_id_t)(void *task, CFErrorRef _Nullable *error);
-sec_task_copy_id_t *_SecTaskCopySigningIdentifier = NULL;
+static sec_task_copy_id_t *_SecTaskCopySigningIdentifier = NULL;
 
-CFTypeRef (*original_SecTaskCopyValueForEntitlement)(void *task, CFStringRef entitlement, CFErrorRef _Nullable *error);
-CFTypeRef replaced_SecTaskCopyValueForEntitlement(void *task, CFStringRef entitlement, CFErrorRef _Nullable *error)
+static CFTypeRef (*original_SecTaskCopyValueForEntitlement)(void *task, CFStringRef entitlement, CFErrorRef _Nullable *error);
+static CFTypeRef replaced_SecTaskCopyValueForEntitlement(void *task, CFStringRef entitlement, CFErrorRef _Nullable *error)
 {
     NSArray <NSString *> *expectedNames = @[
         @"get-task-allow",

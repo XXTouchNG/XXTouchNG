@@ -33,6 +33,8 @@
 	<string>/usr/local/xxtouch/log/ch.xxtou.webserv.stdout.log</string>
 	<key>StandardErrorPath</key>
 	<string>/usr/local/xxtouch/log/ch.xxtou.webserv.stderr.log</string>
+	<key>WorkingDirectory</key>
+	<string>/usr/local/xxtouch</string>
 	<key>UserName</key>
 	<string>root</string>
 	<key>Label</key>

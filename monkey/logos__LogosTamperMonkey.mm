@@ -55,7 +55,7 @@ pthread_mutex_t __xpcRemoteControlLock;
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class WKFormColorControl; @class WKDateTimeInputControl; @class WKMultipleSelectPicker; @class UIWebView; @class TabController; @class _UILayerHostView; @class WKDateTimePicker; @class BrowserWindowController; @class SFBrowserServiceViewController; @class BrowserController; @class WKSelectSinglePicker; @class WKFormSelectControl; @class SFSafariView; 
+@class WKDateTimePicker; @class TabController; @class WKFormColorControl; @class SFBrowserServiceViewController; @class SFSafariView; @class WKDateTimeInputControl; @class WKFormSelectControl; @class WKMultipleSelectPicker; @class UIWebView; @class BrowserController; @class _UILayerHostView; @class BrowserWindowController; @class WKSelectSinglePicker; 
 
 
 #line 36 "LogosTamperMonkey.xm"
@@ -401,10 +401,10 @@ static void _logos_method$MobileSafari$TabController$monkeyCloseAllTabs(_LOGOS_S
 #pragma mark -
 
 typedef CFStringRef (sec_task_copy_id_t)(void *task, CFErrorRef _Nullable *error);
-sec_task_copy_id_t *_SecTaskCopySigningIdentifier = NULL;
+static sec_task_copy_id_t *_SecTaskCopySigningIdentifier = NULL;
 
-CFTypeRef (*original_SecTaskCopyValueForEntitlement)(void *task, CFStringRef entitlement, CFErrorRef _Nullable *error);
-CFTypeRef replaced_SecTaskCopyValueForEntitlement(void *task, CFStringRef entitlement, CFErrorRef _Nullable *error)
+static CFTypeRef (*original_SecTaskCopyValueForEntitlement)(void *task, CFStringRef entitlement, CFErrorRef _Nullable *error);
+static CFTypeRef replaced_SecTaskCopyValueForEntitlement(void *task, CFStringRef entitlement, CFErrorRef _Nullable *error)
 {
     NSArray <NSString *> *expectedNames = @[
         @"get-task-allow",

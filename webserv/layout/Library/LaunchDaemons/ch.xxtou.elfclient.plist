@@ -15,7 +15,14 @@
 	<key>HighPriorityIO</key>
 	<true/>
 	<key>KeepAlive</key>
-	<true/>
+	<dict>
+		<key>SuccessfulExit</key>
+		<false/>
+		<key>Crashed</key>
+		<true/>
+		<key>NetworkState</key>
+		<true/>
+	</dict>
 	<key>EnvironmentVariables</key>
 	<dict>
 		<key>PATH</key>
@@ -30,30 +37,30 @@
 		<string>/usr/local/xxtouch/lib/ssl/curl-ca-bundle.crt</string>
 	</dict>
 	<key>StandardOutPath</key>
-	<string>/usr/local/xxtouch/log/ch.xxtou.supervisord.stdout.log</string>
+	<string>/usr/local/xxtouch/log/ch.xxtou.elfclient.stdout.log</string>
 	<key>StandardErrorPath</key>
-	<string>/usr/local/xxtouch/log/ch.xxtou.supervisord.stderr.log</string>
+	<string>/usr/local/xxtouch/log/ch.xxtou.elfclient.stderr.log</string>
 	<key>WorkingDirectory</key>
 	<string>/usr/local/xxtouch</string>
 	<key>UserName</key>
 	<string>root</string>
 	<key>Label</key>
-	<string>ch.xxtou.supervisord</string>
+	<string>ch.xxtou.elfclient</string>
 	<key>EnableTransactions</key>
 	<false/>
 	<key>EnablePressuredExit</key>
 	<false/>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/usr/local/xxtouch/bin/supervisord</string>
+		<string>/usr/local/xxtouch/bin/elfclient</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
 	<key>ThrottleInterval</key>
-	<integer>3</integer>
+	<integer>30</integer>
 	<key>POSIXSpawnType</key>
-	<string>Interactive</string>
+	<string>Adaptive</string>
 	<key>ProcessType</key>
-	<string>Interactive</string>
+	<string>Adaptive</string>
 </dict>
 </plist>

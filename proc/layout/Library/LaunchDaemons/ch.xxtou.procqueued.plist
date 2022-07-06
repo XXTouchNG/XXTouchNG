@@ -25,6 +25,8 @@
 	<string>/usr/local/xxtouch/log/ch.xxtou.procqueued.stdout.log</string>
 	<key>StandardErrorPath</key>
 	<string>/usr/local/xxtouch/log/ch.xxtou.procqueued.stderr.log</string>
+	<key>WorkingDirectory</key>
+	<string>/usr/local/xxtouch</string>
 	<key>UserName</key>
 	<string>root</string>
 	<key>Label</key>

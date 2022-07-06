@@ -9,6 +9,9 @@ ln /usr/local/lib/libalerthelper.dylib /usr/lib/libalerthelper.dylib > /dev/null
 rm -f /usr/lib/libtampermonkey.dylib > /dev/null 2>&1
 ln /usr/local/lib/libtampermonkey.dylib /usr/lib/libtampermonkey.dylib > /dev/null 2>&1
 
+launchctl unload "/Library/LaunchDaemons/ch.xxtou.elfclient.plist" > /dev/null 2>&1
+launchctl remove com.xxtou.elfclient > /dev/null 2>&1
+
 launchctl unload "/Library/LaunchDaemons/ch.xxtou.webserv.plist" > /dev/null 2>&1
 launchctl remove com.xxtou.webserv > /dev/null 2>&1
 
@@ -33,6 +36,7 @@ launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.simulatetouchd.plist" > /d
 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.procqueued.plist" > /dev/null 2>&1
 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.supervisord.plist" > /dev/null 2>&1
 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.webserv.plist" > /dev/null 2>&1
+launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.elfclient.plist" > /dev/null 2>&1
 
 chmod 6777 /usr/local/xxtouch/bin/add1s
 uicache -p /Applications/XXTExplorer.app > /dev/null 2>&1
