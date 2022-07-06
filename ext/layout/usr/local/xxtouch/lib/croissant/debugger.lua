@@ -337,6 +337,11 @@ return function(script, arguments, breakpoints, fromCli)
 
         return count
     end
+    
+    local function lpad(str, len, char)
+        if char == nil then char = ' ' end
+        return string.rep(char, len - #str) .. str
+    end
 
     local function doREPL(detached)
         local rframe, fenv, env, rawenv, multiline
@@ -953,8 +958,8 @@ return function(script, arguments, breakpoints, fromCli)
                 if info then
                     trace = trace ..
                         (i - 5 == currentFrame
-                            and colors.bright(colors.green("    ❱ " .. (i - 5) .. " │ "))
-                            or  colors.bright(colors.black("      " .. (i - 5) .. " │ ")))
+                            and colors.bright(colors.green("    ❱ " .. lpad(tostring(i - 4), 2) .. " │ "))
+                            or  colors.bright(colors.black("      " .. lpad(tostring(i - 4), 2) .. " │ ")))
                         .. colors.green(info.short_src) .. ":"
                         .. (info.currentline > 0 and colors.yellow(info.currentline) .. ":" or "")
                         .. " in " .. colors.magenta(info.namewhat)
@@ -1001,6 +1006,7 @@ return function(script, arguments, breakpoints, fromCli)
 
             local minLine = math.max(1, info.currentline - toShow)
             local maxLine = math.min(#lines, info.currentline + toShow)
+            local maxWidth = tostring(maxLine):len()
 
             local w = ""
             for count, line in ipairs(lines) do
@@ -1008,8 +1014,8 @@ return function(script, arguments, breakpoints, fromCli)
                     and count <= maxLine then
                     w = w ..
                         (count == info.currentline
-                            and colors.bright(colors.green("    ❱ " .. count .. " │ ")) .. line
-                            or  colors.bright(colors.black("      " .. count .. " │ ")) .. line)
+                            and colors.bright(colors.green("    ❱ " .. lpad(tostring(count), maxWidth) .. " │ ")) .. line
+                            or  colors.bright(colors.black("      " .. lpad(tostring(count), maxWidth) .. " │ ")) .. line)
                         .. "\n"
                 end
             end

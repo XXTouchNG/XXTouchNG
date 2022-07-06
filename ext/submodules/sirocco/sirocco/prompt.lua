@@ -352,18 +352,16 @@ function Prompt:update()
     self.height = self:getHeight()
 
     -- Scroll up if at the terminal's bottom
-    if self.startingPosition.y ~= nil then
-        local heightDelta = (self.startingPosition.y + self.height) - self.terminalHeight - 1
-        if heightDelta > 0 then
-            -- Scroll up
-            self.output:write(tparm(Prompt.escapeCodes.parm_index, heightDelta))
+    local heightDelta = (self.startingPosition.y + self.height) - self.terminalHeight - 1
+    if heightDelta > 0 then
+        -- Scroll up
+        self.output:write(tparm(Prompt.escapeCodes.parm_index, heightDelta))
 
-            -- Shift everything up
-            self.startingPosition.y = self.startingPosition.y - heightDelta
-            self.promptPosition.y   = self.promptPosition.y
-                and (self.promptPosition.y - heightDelta)
-                or self.promptPosition.y
-        end
+        -- Shift everything up
+        self.startingPosition.y = self.startingPosition.y - heightDelta
+        self.promptPosition.y   = self.promptPosition.y
+            and (self.promptPosition.y - heightDelta)
+            or self.promptPosition.y
     end
 end
 
@@ -407,13 +405,16 @@ function Prompt:before()
     end
 
     -- Get current position
-    self.output:write(Prompt.escapeCodes.user7)
+    -- self.output:write(Prompt.escapeCodes.user7)
 
-    self.startingPosition.x,
-        self.startingPosition.y = self:getCursor()
+    -- Cursor position is not ready
+    -- self.startingPosition.x,
+    --     self.startingPosition.y = self:getCursor()
 
     -- Wrap prompt if needed
     self.terminalWidth, self.terminalHeight = winsize()
+    self.startingPosition.x, self.startingPosition.y = 1, self.terminalHeight
+
     self.height = self:getHeight()
 end
 

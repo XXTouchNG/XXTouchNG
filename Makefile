@@ -17,6 +17,7 @@ SUBPROJECTS += memory        # arm64              # lua
 SUBPROJECTS += monkey        # arm64, arm64e      # lua, substrate, rocketbootstrap
 SUBPROJECTS += pasteboard    # arm64              # lua
 SUBPROJECTS += touch         # arm64              # lua, debug, rocketbootstrap
+SUBPROJECTS += samba         # arm64              # lua
 SUBPROJECTS += screen        # arm64, arm64e      # lua, substrate, rocketbootstrap
 SUBPROJECTS += device        # arm64, arm64e      # lua, debug, ext, substrate, rocketbootstrap
 SUBPROJECTS += proc          # arm64, arm64e      # lua, ext, rocketbootstrap

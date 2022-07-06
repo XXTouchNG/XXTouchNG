@@ -593,7 +593,7 @@ static KxSMBProvider *gSmbProvider;
                             NSLocalizedString(@"Unable init SMB context (errno:%d)", nil), err);
     }
 
-    id result;    
+    id result = nil;    
     
     int r = smbc_getFunctionUnlink(smbContext)(smbContext, path.UTF8String);
     if (r < 0) {

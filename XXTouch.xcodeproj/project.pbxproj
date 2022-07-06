@@ -389,6 +389,7 @@
 		CCD1F44B27B39E2F00A9EB78 /* TMWeakObjectWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1F44927B39E2F00A9EB78 /* TMWeakObjectWrapper.m */; };
 		CCE047DD2874785100FB63C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6F57919251C6179009CC6A3 /* Foundation.framework */; };
 		CCE047E22874786900FB63C2 /* ohmyjetsam.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCE047D82874784B00FB63C2 /* ohmyjetsam.mm */; };
+		CCE047E428759B0700FB63C2 /* KxSMBLuaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCE047E328759B0700FB63C2 /* KxSMBLuaBridge.mm */; };
 		CCE4B02327B136010076B1D4 /* TMWeakUserContentControllerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE4B02227B136010076B1D4 /* TMWeakUserContentControllerWrapper.m */; };
 		CCE4B02627B24E580076B1D4 /* TMScriptMessageProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE4B02427B24E580076B1D4 /* TMScriptMessageProxy.m */; };
 		CCE5C15128361D87002233DB /* ContainerManagerLuaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCE5C15028361D87002233DB /* ContainerManagerLuaBridge.mm */; };
@@ -1114,6 +1115,7 @@
 		CCD1F44A27B39E2F00A9EB78 /* TMWeakObjectWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMWeakObjectWrapper.h; sourceTree = "<group>"; };
 		CCE047D82874784B00FB63C2 /* ohmyjetsam.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ohmyjetsam.mm; sourceTree = "<group>"; };
 		CCE047E12874785100FB63C2 /* ohmyjetsam */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ohmyjetsam; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCE047E328759B0700FB63C2 /* KxSMBLuaBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = KxSMBLuaBridge.mm; sourceTree = "<group>"; };
 		CCE4B02127B136010076B1D4 /* TMWeakUserContentControllerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMWeakUserContentControllerWrapper.h; sourceTree = "<group>"; };
 		CCE4B02227B136010076B1D4 /* TMWeakUserContentControllerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMWeakUserContentControllerWrapper.m; sourceTree = "<group>"; };
 		CCE4B02427B24E580076B1D4 /* TMScriptMessageProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMScriptMessageProxy.m; sourceTree = "<group>"; };
@@ -1580,6 +1582,7 @@
 		CC0D6CFA285B8D17002F1096 /* bridge */ = {
 			isa = PBXGroup;
 			children = (
+				CCE047E328759B0700FB63C2 /* KxSMBLuaBridge.mm */,
 			);
 			path = bridge;
 			sourceTree = "<group>";
@@ -3247,6 +3250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC0D6D14285B908C002F1096 /* KxSMBProvider.m in Sources */,
+				CCE047E428759B0700FB63C2 /* KxSMBLuaBridge.mm in Sources */,
 				CC0D6D09285B9058002F1096 /* luae.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

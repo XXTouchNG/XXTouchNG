@@ -29,7 +29,7 @@ local function fd_to_getter(fd, filter)
 		readahead = readahead:sub(chars+1)
 		return r
 	end
-	return function()
+	return function ()
 		local a, err, errno = take(filter(peek) or 1)
 		if a and a == "\27" then
 			-- if result is a 'loose' escape, then tie it to the next sequence

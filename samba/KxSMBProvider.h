@@ -86,7 +86,7 @@ typedef void (^KxSMBBlockProgress)(KxSMBItem * _Nonnull item, long transferred, 
 
 @interface KxSMBItem : NSObject
 @property (readonly, nonatomic) KxSMBItemType type;
-@property (readonly, nonatomic, strong, nonnull) NSString *path;
+@property (readonly, nonatomic, copy, nonnull) NSString *path;
 @property (readonly, nonatomic, strong, nonnull) KxSMBItemStat *stat;
 @property (readonly, nonatomic, strong, nullable) KxSMBAuth *auth;
 @end
@@ -141,9 +141,9 @@ typedef void (^KxSMBBlockProgress)(KxSMBItem * _Nonnull item, long transferred, 
 @end
 
 @interface KxSMBAuth : NSObject
-@property (readwrite, nonatomic, strong, nullable) NSString *workgroup;
-@property (readwrite, nonatomic, strong, nullable) NSString *username;
-@property (readwrite, nonatomic, strong, nullable) NSString *password;
+@property (readwrite, nonatomic, copy, nullable) NSString *workgroup;
+@property (readwrite, nonatomic, copy, nullable) NSString *username;
+@property (readwrite, nonatomic, copy, nullable) NSString *password;
 
 + (nullable instancetype) smbAuthWorkgroup:(nullable NSString *)workgroup
                                   username:(nullable NSString *)username
@@ -194,9 +194,9 @@ typedef NS_ENUM(NSUInteger, KxSMBConfigEncryptLevel) {
 @property (readwrite, nonatomic) BOOL noAutoAnonymousLogin;
 @property (readwrite, nonatomic) BOOL useCCache;
 @property (readwrite, nonatomic) BOOL useNTHash;
-@property (readwrite, nonatomic, strong, nullable) NSString *netbiosName;
-@property (readwrite, nonatomic, strong, nullable) NSString *workgroup;
-@property (readwrite, nonatomic, strong, nullable) NSString *username;
+@property (readwrite, nonatomic, copy, nullable) NSString *netbiosName;
+@property (readwrite, nonatomic, copy, nullable) NSString *workgroup;
+@property (readwrite, nonatomic, copy, nullable) NSString *username;
 @end
 
 @interface KxSMBProvider : NSObject

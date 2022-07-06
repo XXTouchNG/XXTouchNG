@@ -7,13 +7,14 @@ do
     accelerometer = require("accelerometer")
     app = require("app")
     file = require("file")
-    ftp = require("ftp")
-    http = require("http")
+    ftp = require("ftp")  -- not yieldable
+    http = require("http")  -- not yieldable
     memory = require("memory")
     monkey = require("monkey")
     pasteboard = require("pasteboard")
     touch = require("touch")
     key = require("key")
+    samba = require("samba")  -- not yieldable
     screen = require("screen")
     image = require("image")
     device = require("device")
@@ -30,6 +31,7 @@ do
     require("xxtouch.scheduler")
 
     if os.getenv("XXT_DEBUG_IP") then
-        require("LuaPanda").start(os.getenv("XXT_DEBUG_IP") or "127.0.0.1", os.getenv("XXT_DEBUG_PORT") or 8818);  -- start LuaPanda debugger
+        -- start debugger
+        require("LuaPanda").start(os.getenv("XXT_DEBUG_IP") or "127.0.0.1", os.getenv("XXT_DEBUG_PORT") or 8818);
     end
 end
