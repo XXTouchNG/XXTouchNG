@@ -135,8 +135,15 @@ NS_INLINE NSString *stringFromItemType(KxSMBItemType type)
     }
 }
 
-NS_INLINE NSDictionary *dictionaryFromItem(KxSMBItem *item)
+NS_INLINE NSDictionary *dictionaryFromItem(KxSMBItem *item, BOOL withStat)
 {
+    if (!withStat) {
+        return @{
+            @"path": item.path,
+            @"name": item.path.lastPathComponent ?: @"",
+            @"type": stringFromItemType(item.type),
+        };
+    }
     return @{
         @"path": item.path,
         @"name": item.path.lastPathComponent ?: @"",
@@ -382,7 +389,7 @@ static int SambaConfig_ListDirectory(lua_State *L)
         
         NSMutableArray <NSDictionary *> *itemList = [NSMutableArray arrayWithCapacity:((NSArray <KxSMBItem *> *)items).count];
         for (KxSMBItem *item in (NSArray <KxSMBItem *> *)items) {
-            [itemList addObject:dictionaryFromItem(item)];
+            [itemList addObject:dictionaryFromItem(item, YES)];
         }
         
         lua_pushNSArray(L, itemList);
@@ -415,7 +422,7 @@ static int SambaConfig_CreateDirectory(lua_State *L)
             return 2;
         }
         
-        lua_pushNSDictionary(L, dictionaryFromItem((KxSMBItemTree *)item));
+        lua_pushNSDictionary(L, dictionaryFromItem((KxSMBItemTree *)item, YES));
         lua_pushnil(L);
         return 2;
     }
@@ -583,8 +590,6 @@ static int SambaConfig_DownloadItem(lua_State *L)
             {
                 return luaL_argerror(L, 4, "callback function expected");
             }
-            
-            lua_pushvalue(L, 4);
         }
         
         [[KxSMBProvider sharedSmbProvider] setConfig:copyConfigFromSambaConfig(smbConfig)];
@@ -598,7 +603,8 @@ static int SambaConfig_DownloadItem(lua_State *L)
                                                   auth:copyAuthFromSambaConfig(smbConfig) progress:^(KxSMBItem * _Nonnull item, long transferred, BOOL * _Nonnull stop) {
             if (argc > 3)
             {
-                lua_pushNSDictionary(L, dictionaryFromItem(item));
+                lua_pushvalue(L, 4);
+                lua_pushNSDictionary(L, dictionaryFromItem(item, NO));
                 lua_pushinteger(L, transferred);
                 
                 int ret = lua_pcall(L, 2, 1, 0);
@@ -609,6 +615,8 @@ static int SambaConfig_DownloadItem(lua_State *L)
                 }
                 
                 int shouldStop = lua_isboolean(L, -1) ? lua_toboolean(L, -1) : false;
+                lua_pop(L, 1);
+                
                 if (shouldStop)
                 {
                     *stop = YES;
@@ -619,11 +627,6 @@ static int SambaConfig_DownloadItem(lua_State *L)
             dispatch_semaphore_signal(sema);
         }];
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        
-        if (argc > 3)
-        {
-            lua_pop(L, 1);
-        }
         
         if ([item isKindOfClass:[NSError class]])
         {
@@ -659,8 +662,6 @@ static int SambaConfig_UploadItem(lua_State *L)
             {
                 return luaL_argerror(L, 4, "callback function expected");
             }
-            
-            lua_pushvalue(L, 4);
         }
         
         [[KxSMBProvider sharedSmbProvider] setConfig:copyConfigFromSambaConfig(smbConfig)];
@@ -675,7 +676,8 @@ static int SambaConfig_UploadItem(lua_State *L)
                                                 progress:^(KxSMBItem * _Nonnull item, long transferred, BOOL * _Nonnull stop) {
             if (argc > 3)
             {
-                lua_pushNSDictionary(L, dictionaryFromItem(item));
+                lua_pushvalue(L, 4);
+                lua_pushNSDictionary(L, dictionaryFromItem(item, NO));
                 lua_pushinteger(L, transferred);
                 
                 int ret = lua_pcall(L, 2, 1, 0);
@@ -686,6 +688,8 @@ static int SambaConfig_UploadItem(lua_State *L)
                 }
                 
                 int shouldStop = lua_isboolean(L, -1) ? lua_toboolean(L, -1) : false;
+                lua_pop(L, 1);
+                
                 if (shouldStop)
                 {
                     *stop = YES;
@@ -696,11 +700,6 @@ static int SambaConfig_UploadItem(lua_State *L)
             dispatch_semaphore_signal(sema);
         }];
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        
-        if (argc > 3)
-        {
-            lua_pop(L, 1);
-        }
         
         if ([item isKindOfClass:[NSError class]])
         {
