@@ -183,7 +183,7 @@ void register_tamper_monkey_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/monkey/enter_text_id", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/monkey/input_id", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;
@@ -219,7 +219,7 @@ void register_tamper_monkey_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/monkey/enter_text", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/monkey/input", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;
@@ -482,7 +482,7 @@ void register_tamper_monkey_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/monkey/remove_all_userscripts", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/monkey/clear_userscripts", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;

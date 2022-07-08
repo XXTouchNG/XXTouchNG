@@ -183,7 +183,23 @@ static int Samba_IsClient(lua_State *L)
 static int Samba_NewClient(lua_State *L)
 {
     @autoreleasepool {
-        NSDictionary <NSString *, id> *args = lua_toNSDictionary(L, 1);
+        NSDictionary <NSString *, id> *args = nil;
+        if (lua_type(L, 1) == LUA_TTABLE) {
+            args = lua_toNSDictionary(L, 1);
+        }
+        else
+        {
+            const char *cWorkgroup = luaL_checkstring(L, 1);
+            const char *cUsername = luaL_checkstring(L, 2);
+            const char *cPassword = luaL_checkstring(L, 3);
+            
+            args = @{
+                @"workgroup": [NSString stringWithUTF8String:cWorkgroup],
+                @"username": [NSString stringWithUTF8String:cUsername],
+                @"password": [NSString stringWithUTF8String:cPassword],
+            };
+        }
+        
         SambaConfig *bar = pushSambaConfig(L);
         
         do {

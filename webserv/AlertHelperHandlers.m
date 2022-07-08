@@ -66,7 +66,7 @@ void register_alert_helper_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/alert/enable_auto_bypass", ^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/alert/enable_autopass", ^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;
@@ -85,7 +85,7 @@ void register_alert_helper_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/alert/disable_auto_bypass", ^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/alert/disable_autopass", ^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;
@@ -104,7 +104,7 @@ void register_alert_helper_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/alert/set_auto_bypass_delay", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/alert/set_autopass_delay", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;
@@ -132,7 +132,7 @@ void register_alert_helper_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/alert/get_local_dialog_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/alert/get_local_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;
@@ -159,7 +159,7 @@ void register_alert_helper_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/alert/set_local_dialog_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/alert/set_local_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;
@@ -192,7 +192,7 @@ void register_alert_helper_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/alert/clear_local_dialog_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/alert/clear_local_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;
@@ -241,7 +241,7 @@ void register_alert_helper_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/alert/get_global_dialog_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/alert/get_global_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;
@@ -261,7 +261,7 @@ void register_alert_helper_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/alert/set_global_dialog_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/alert/set_global_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;
@@ -287,7 +287,7 @@ void register_alert_helper_handlers(GCDWebServer *webServer)
         });
     });
     
-    register_path_handler_async(webServer, @[@"POST"], @"/alert/clear_global_dialog_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"POST"], @"/alert/clear_global_rules", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_remote_access_forbidden());
             return;

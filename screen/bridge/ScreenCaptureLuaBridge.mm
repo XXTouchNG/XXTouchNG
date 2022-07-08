@@ -374,7 +374,7 @@ static int ScreenCapture_RotateXY(lua_State *L)
     return 2;
 }
 
-static int ScreenCapture_GetColor_Internal(lua_State *L, int begin, JSTPixelImage *inputImage)
+static int ScreenCapture_GetColor_Internal(lua_State *L, int begin, JSTPixelImage *inputImage, BOOL withAlpha)
 {
     @autoreleasepool {
         /// Argument #1, #2: point (x, y) to get color
@@ -407,14 +407,24 @@ static int ScreenCapture_GetColor_Internal(lua_State *L, int begin, JSTPixelImag
         /// Get color from cached pixel image
         JSTPixelImage *targetImage = inputImage ?: [[ScreenCapture sharedCapture] pixelImage];
         uint32_t color = [targetImage getColorOfPoint:cPoint];
-        lua_pushinteger(L, color & 0xFFFFFF);
-        return 1;
+        
+        if (!withAlpha)
+        {
+            lua_pushinteger(L, color & 0xFFFFFF);
+            return 1;
+        }
+        else
+        {
+            lua_pushinteger(L, color & 0xFFFFFF);
+            lua_pushinteger(L, (color & 0xFF000000) >> 24);
+            return 2;
+        }
     }
 }
 
 static int ScreenCapture_GetColor(lua_State *L)
 {
-    return ScreenCapture_GetColor_Internal(L, 0, nil);
+    return ScreenCapture_GetColor_Internal(L, 0, nil, NO);
 }
 
 static int ScreenCapture_GetColorRGB_Internal(lua_State *L, int begin, JSTPixelImage *inputImage)
@@ -1338,7 +1348,7 @@ static int ScreenCapture_OcrText(lua_State *L)
     return ScreenCapture_OcrText_Internal(L, 0, nil);
 }
 
-static int ScreenCapture_DetectBarcodes_Internal(lua_State *L, int begin, JSTPixelImage *inputImage)
+static int ScreenCapture_DetectBarcodes_Internal(lua_State *L, int begin, JSTPixelImage *inputImage, BOOL firstResultOnly)
 {
     @autoreleasepool {
         
@@ -1460,16 +1470,33 @@ static int ScreenCapture_DetectBarcodes_Internal(lua_State *L, int begin, JSTPix
             return 2;
         }
         
-        if (remoteProxyResult[@"texts"]) {
-            lua_pushNSArray(L, remoteProxyResult[@"texts"]);
-        } else {
-            lua_pushnil(L);
+        if (firstResultOnly)
+        {
+            if (remoteProxyResult[@"texts"] && [[remoteProxyResult[@"texts"] firstObject] isKindOfClass:[NSString class]]) {
+                lua_pushstring(L, [[remoteProxyResult[@"texts"] firstObject] UTF8String]);
+            } else {
+                lua_pushnil(L);
+            }
+            
+            if (remoteProxyResult[@"details"] && [[remoteProxyResult[@"details"] firstObject] isKindOfClass:[NSDictionary class]]) {
+                lua_pushNSDictionary(L, [remoteProxyResult[@"details"] firstObject]);
+            } else {
+                lua_pushnil(L);
+            }
         }
-        
-        if (remoteProxyResult[@"details"]) {
-            lua_pushNSArray(L, remoteProxyResult[@"details"]);
-        } else {
-            lua_pushnil(L);
+        else
+        {
+            if (remoteProxyResult[@"texts"]) {
+                lua_pushNSArray(L, remoteProxyResult[@"texts"]);
+            } else {
+                lua_pushnil(L);
+            }
+            
+            if (remoteProxyResult[@"details"]) {
+                lua_pushNSArray(L, remoteProxyResult[@"details"]);
+            } else {
+                lua_pushnil(L);
+            }
         }
         
 #if DEBUG
@@ -1484,7 +1511,7 @@ static int ScreenCapture_DetectBarcodes_Internal(lua_State *L, int begin, JSTPix
 
 static int ScreenCapture_DetectBarcodes(lua_State *L)
 {
-    return ScreenCapture_DetectBarcodes_Internal(L, 0, nil);
+    return ScreenCapture_DetectBarcodes_Internal(L, 0, nil, NO);
 }
 
 #pragma mark -
@@ -2233,7 +2260,7 @@ static int ScreenCapture_Image_GetColor(lua_State *L)
     if (!buf->image) {
         return luaL_argerror(L, 1, SCERR_DESTROYED_IMAGE_BUFFER);
     }
-    return ScreenCapture_GetColor_Internal(L, 1, buf->image);
+    return ScreenCapture_GetColor_Internal(L, 1, buf->image, YES);
 }
 
 static int ScreenCapture_Image_GetColorRGB(lua_State *L)
@@ -2287,7 +2314,16 @@ static int ScreenCapture_Image_DetectBarcodes(lua_State *L)
     if (!buf->image) {
         return luaL_argerror(L, 1, SCERR_DESTROYED_IMAGE_BUFFER);
     }
-    return ScreenCapture_DetectBarcodes_Internal(L, 1, buf->image);
+    return ScreenCapture_DetectBarcodes_Internal(L, 1, buf->image, NO);
+}
+
+static int ScreenCapture_Image_QRDecode(lua_State *L)
+{
+    ImageBuffer *buf = checkImageBuffer(L, 1);
+    if (!buf->image) {
+        return luaL_argerror(L, 1, SCERR_DESTROYED_IMAGE_BUFFER);
+    }
+    return ScreenCapture_DetectBarcodes_Internal(L, 1, buf->image, YES);
 }
 
 static int ScreenCapture_Image_CVFindImage(lua_State *L)
@@ -2443,6 +2479,7 @@ static const luaL_Reg ScreenCapture_Image_MetaLib[] = {
     
     /* Proxy APIs */
     {"ocr_text", ScreenCapture_Image_OcrText},
+    {"qr_decode", ScreenCapture_Image_QRDecode},
     {"detect_barcodes", ScreenCapture_Image_DetectBarcodes},
     
     /* OpenCV APIs */

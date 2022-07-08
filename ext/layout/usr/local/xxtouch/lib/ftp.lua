@@ -351,12 +351,12 @@ local function download(req_url, output_path, req_timeout, should_resume, info_c
     assert(type(req_url) == "string", "ftp.download: Argument #1 req_url must be a string")
     assert(type(output_path) == "string", "ftp.download: Argument #2 output_path must be a string")
     assert(req_timeout == nil or type(req_timeout) == 'number', 'ftp.download: Argument #3 req_timeout must be a number')
-    FTP.TIMEOUT = req_timeout or 30
+    FTP.TIMEOUT = req_timeout or 10
     assert(should_resume == nil or type(should_resume) == 'boolean', 'ftp.download: Argument #4 should_resume must be a boolean')
     should_resume = should_resume or false
     assert(info_callback == nil or type(info_callback) == 'function', 'ftp.download: Argument #5 info_callback must be a function')  -- vscode: end
     assert(block_size == nil or type(block_size) == 'number', 'ftp.download: Argument #6 block_size must be a number')
-    socket.BLOCKSIZE = block_size or 2048
+    socket.BLOCKSIZE = block_size or 8192
 
     local open_flags
     if should_resume then
@@ -432,7 +432,7 @@ local function download(req_url, output_path, req_timeout, should_resume, info_c
         end
     end
 
-    socket.BLOCKSIZE = 2048  -- restore default
+    socket.BLOCKSIZE = 8192  -- restore default
 
     local end_at = socket.gettime()
     local size_download = tonumber(resource_size) - tonumber(real_begin)
@@ -451,12 +451,12 @@ local function upload(upload_path, dest_url, req_timeout, should_resume, info_ca
     assert(type(upload_path) == "string", "ftp.upload: Argument #1 upload_path must be a string")
     assert(type(dest_url) == "string", "ftp.upload: Argument #2 dest_url must be a string")
     assert(req_timeout == nil or type(req_timeout) == 'number', 'ftp.upload: Argument #3 req_timeout must be a number')
-    FTP.TIMEOUT = req_timeout or 30
+    FTP.TIMEOUT = req_timeout or 10
     assert(should_resume == nil or type(should_resume) == 'boolean', 'ftp.upload: Argument #4 should_resume must be a boolean')
     should_resume = should_resume or false
     assert(info_callback == nil or type(info_callback) == 'function', 'ftp.upload: Argument #5 info_callback must be a function')  -- vscode: end
     assert(block_size == nil or type(block_size) == 'number', 'ftp.upload: Argument #6 block_size must be a number')
-    socket.BLOCKSIZE = block_size or 2048
+    socket.BLOCKSIZE = block_size or 8192
 
     local upload_file = io.open(upload_path, "rb")
     assert(upload_file, "Could not open " .. upload_path .. " for reading")
@@ -511,7 +511,7 @@ local function upload(upload_path, dest_url, req_timeout, should_resume, info_ca
         cmd
     )
 
-    socket.BLOCKSIZE = 2048  -- restore default
+    socket.BLOCKSIZE = 8192  -- restore default
 
     local end_at = socket.gettime()
     local size_upload = tonumber(entire_size) - tonumber(begin_offset)

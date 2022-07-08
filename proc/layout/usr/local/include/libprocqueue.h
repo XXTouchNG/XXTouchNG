@@ -52,10 +52,10 @@ typedef NS_ENUM(NSUInteger, ProcQueueRole) {
 - (NSString *)procPutObject:(nullable NSString *)object forKey:(nonnull NSString *)key;
 
 /* Proc Queue Dictionary */
-- (NSUInteger)procQueuePushObject:(nonnull NSString *)object forKey:(nonnull NSString *)key;
-- (NSUInteger)procQueuePushFrontObject:(nonnull NSString *)object forKey:(NSString *)key;
-- (NSString *)procQueuePopObjectForKey:(nonnull NSString *)key;
-- (NSString *)procQueuePopBackObjectForKey:(nonnull NSString *)key;
+- (NSUInteger)procQueuePushTailObject:(nonnull NSString *)object forKey:(nonnull NSString *)key;
+- (NSUInteger)procQueueUnshiftObject:(nonnull NSString *)object forKey:(NSString *)key;
+- (NSString *)procQueuePopTailObjectForKey:(nonnull NSString *)key;
+- (NSString *)procQueueShiftObjectForKey:(nonnull NSString *)key;
 - (NSArray <NSString *> *)procQueueClearObjectsForKey:(nonnull NSString *)key;
 - (NSUInteger)procQueueSizeForKey:(nonnull NSString *)key;
 

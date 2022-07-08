@@ -649,23 +649,23 @@
 
 #pragma mark -
 
-- (NSUInteger)procQueuePushObject:(nonnull NSString *)object forKey:(NSString *)key
+- (NSUInteger)procQueuePushTailObject:(nonnull NSString *)object forKey:(NSString *)key
 {
     @autoreleasepool {
         NSAssert([object isKindOfClass:[NSString class]] && object.length > 0, @"invalid object");
         NSAssert([key isKindOfClass:[NSString class]], @"invalid key");
-        NSNumber *retObj = (NSNumber *)[self _procQueuePushObject:object forKey:key][@"reply"];
+        NSNumber *retObj = (NSNumber *)[self _procQueuePushTailObject:object forKey:key][@"reply"];
         NSAssert([retObj isKindOfClass:[NSNumber class]], @"invalid return value");
         return [retObj unsignedIntegerValue];
     }
 }
 
-- (NSDictionary *)_procQueuePushObject:(nonnull NSString *)object forKey:(NSString *)key
+- (NSDictionary *)_procQueuePushTailObject:(nonnull NSString *)object forKey:(NSString *)key
 {
     if (_role == ProcQueueRoleClient) {
         @autoreleasepool {
             NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
-                @"selector": NSStringFromSelector(@selector(_procQueuePushObject:forKey:)),
+                @"selector": NSStringFromSelector(@selector(_procQueuePushTailObject:forKey:)),
                 @"arguments": [NSArray arrayWithObjects:object, key, nil],
             }];
             
@@ -696,22 +696,22 @@
     }
 }
 
-- (NSString *)procQueuePopObjectForKey:(nonnull NSString *)key
+- (NSString *)procQueueShiftObjectForKey:(nonnull NSString *)key
 {
     @autoreleasepool {
         NSAssert([key isKindOfClass:[NSString class]], @"invalid key");
-        NSString *retObj = (NSString *)[self _procQueuePopObjectForKey:key][@"reply"];
+        NSString *retObj = (NSString *)[self _procQueueShiftObjectForKey:key][@"reply"];
         NSAssert([retObj isKindOfClass:[NSString class]], @"invalid return value");
         return retObj;
     }
 }
 
-- (NSDictionary *)_procQueuePopObjectForKey:(NSString *)key
+- (NSDictionary *)_procQueueShiftObjectForKey:(NSString *)key
 {
     if (_role == ProcQueueRoleClient) {
         @autoreleasepool {
             NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
-                @"selector": NSStringFromSelector(@selector(_procQueuePopObjectForKey:)),
+                @"selector": NSStringFromSelector(@selector(_procQueueShiftObjectForKey:)),
                 @"arguments": [NSArray arrayWithObjects:key, nil],
             }];
             
@@ -820,23 +820,23 @@
     }
 }
 
-- (NSUInteger)procQueuePushFrontObject:(nonnull NSString *)object forKey:(NSString *)key
+- (NSUInteger)procQueueUnshiftObject:(nonnull NSString *)object forKey:(NSString *)key
 {
     @autoreleasepool {
         NSAssert([object isKindOfClass:[NSString class]] && object.length > 0, @"invalid object");
         NSAssert([key isKindOfClass:[NSString class]], @"invalid key");
-        NSNumber *retObj = (NSNumber *)[self _procQueuePushFrontObject:object forKey:key][@"reply"];
+        NSNumber *retObj = (NSNumber *)[self _procQueueUnshiftObject:object forKey:key][@"reply"];
         NSAssert([retObj isKindOfClass:[NSNumber class]], @"invalid return value");
         return [retObj unsignedIntegerValue];
     }
 }
 
-- (NSDictionary *)_procQueuePushFrontObject:(nonnull NSString *)object forKey:(NSString *)key
+- (NSDictionary *)_procQueueUnshiftObject:(nonnull NSString *)object forKey:(NSString *)key
 {
     if (_role == ProcQueueRoleClient) {
         @autoreleasepool {
             NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
-                @"selector": NSStringFromSelector(@selector(_procQueuePushFrontObject:forKey:)),
+                @"selector": NSStringFromSelector(@selector(_procQueueUnshiftObject:forKey:)),
                 @"arguments": [NSArray arrayWithObjects:object, key, nil],
             }];
             
@@ -867,22 +867,22 @@
     }
 }
 
-- (NSString *)procQueuePopBackObjectForKey:(nonnull NSString *)key
+- (NSString *)procQueuePopTailObjectForKey:(nonnull NSString *)key
 {
     @autoreleasepool {
         NSAssert([key isKindOfClass:[NSString class]], @"invalid key");
-        NSString *retObj = (NSString *)[self _procQueuePopBackObjectForKey:key][@"reply"];
+        NSString *retObj = (NSString *)[self _procQueuePopTailObjectForKey:key][@"reply"];
         NSAssert([retObj isKindOfClass:[NSString class]], @"invalid return value");
         return retObj;
     }
 }
 
-- (NSDictionary *)_procQueuePopBackObjectForKey:(NSString *)key
+- (NSDictionary *)_procQueuePopTailObjectForKey:(NSString *)key
 {
     if (_role == ProcQueueRoleClient) {
         @autoreleasepool {
             NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
-                @"selector": NSStringFromSelector(@selector(_procQueuePopBackObjectForKey:)),
+                @"selector": NSStringFromSelector(@selector(_procQueuePopTailObjectForKey:)),
                 @"arguments": [NSArray arrayWithObjects:key, nil],
             }];
             

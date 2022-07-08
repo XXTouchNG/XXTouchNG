@@ -16,7 +16,7 @@ local _M = require("socket.http")
 _M.head = function (req_url, req_timeout, req_headers)
     assert(type(req_url) == 'string', 'http.head: Argument #1 req_url must be a string')
     assert(req_timeout == nil or type(req_timeout) == 'number', 'http.head: Argument #2 req_timeout must be a number')
-    _M.TIMEOUT = req_timeout or 30
+    _M.TIMEOUT = req_timeout or 10
     assert(req_headers == nil or type(req_headers) == 'table', 'http.head: Argument #3 req_headers must be a table')
     req_headers = req_headers or {}
     local _, resp_code, resp_headers = _M.request {
@@ -35,7 +35,7 @@ end
 _M.get = function (req_url, req_timeout, req_headers)
     assert(type(req_url) == 'string', 'http.get: Argument #1 req_url must be a string')
     assert(req_timeout == nil or type(req_timeout) == 'number', 'http.get: Argument #2 req_timeout must be a number')
-    _M.TIMEOUT = req_timeout or 30
+    _M.TIMEOUT = req_timeout or 10
     assert(req_headers == nil or type(req_headers) == 'table', 'http.get: Argument #3 req_headers must be a table')
     req_headers = req_headers or {}
     local t = {}
@@ -55,7 +55,7 @@ end
 _M.delete = function (req_url, req_timeout, req_headers)
     assert(type(req_url) == 'string', 'http.delete: Argument #1 req_url must be a string')
     assert(req_timeout == nil or type(req_timeout) == 'number', 'http.delete: Argument #2 req_timeout must be a number')
-    _M.TIMEOUT = req_timeout or 30
+    _M.TIMEOUT = req_timeout or 10
     assert(req_headers == nil or type(req_headers) == 'table', 'http.delete: Argument #3 req_headers must be a table')
     req_headers = req_headers or {}
     local t = {}
@@ -75,7 +75,7 @@ end
 _M.post = function (req_url, req_timeout, req_headers, req_body)
     assert(type(req_url) == 'string', 'http.post: Argument #1 req_url must be a string')
     assert(req_timeout == nil or type(req_timeout) == 'number', 'http.post: Argument #2 req_timeout must be a number')
-    _M.TIMEOUT = req_timeout or 30
+    _M.TIMEOUT = req_timeout or 10
     assert(req_headers == nil or type(req_headers) == 'table' or type(req_headers) == 'string', 'http.post: Argument #3 req_headers must be a table')
     req_headers = req_headers or {}
     if type(req_headers) == 'string' then
@@ -105,7 +105,7 @@ end
 _M.put = function (req_url, req_timeout, req_headers, req_body)
     assert(type(req_url) == 'string', 'http.put: Argument #1 req_url must be a string')
     assert(req_timeout == nil or type(req_timeout) == 'number', 'http.put: Argument #2 req_timeout must be a number')
-    _M.TIMEOUT = req_timeout or 30
+    _M.TIMEOUT = req_timeout or 10
     assert(req_headers == nil or type(req_headers) == 'table', 'http.put: Argument #3 req_headers must be a table')
     req_headers = req_headers or {}
     assert(req_body == nil or type(req_body) == 'string', 'http.put: Argument #4 req_body must be a string')
@@ -252,12 +252,12 @@ _M.download = function (req_url, output_path, req_timeout, should_resume, info_c
     assert(type(req_url) == 'string', 'http.download: Argument #1 req_url must be a string')
     assert(type(output_path) == 'string', 'http.download: Argument #2 output_path must be a string')
     assert(req_timeout == nil or type(req_timeout) == 'number', 'http.download: Argument #3 req_timeout must be a number')
-    _M.TIMEOUT = req_timeout or 30
+    _M.TIMEOUT = req_timeout or 10
     assert(should_resume == nil or type(should_resume) == 'boolean', 'http.download: Argument #4 should_resume must be a boolean')
     should_resume = should_resume or false
     assert(info_callback == nil or type(info_callback) == 'function', 'http.download: Argument #5 info_callback must be a function')  -- vscode: end
     assert(block_size == nil or type(block_size) == 'number', 'http.download: Argument #6 block_size must be a number')
-    socket.BLOCKSIZE = block_size or 2048
+    socket.BLOCKSIZE = block_size or 8192
     
     local open_flags
     if should_resume then
@@ -329,7 +329,7 @@ _M.download = function (req_url, output_path, req_timeout, should_resume, info_c
     end
 
     resp_headers = resp_headers or {}
-    socket.BLOCKSIZE = 2048  -- restore default
+    socket.BLOCKSIZE = 8192  -- restore default
 
     local end_at = socket.gettime()
     local size_download = tonumber(resp_headers["content-length"]) or 0

@@ -67,7 +67,7 @@ static int ProcQueue_Proc_Get(lua_State *L)
     }
 }
 
-static int ProcQueue_Queue_Push(lua_State *L)
+static int ProcQueue_Queue_PushBack(lua_State *L)
 {
     @autoreleasepool {
         const char *cKey = luaL_checkstring(L, 1);
@@ -79,7 +79,7 @@ static int ProcQueue_Queue_Push(lua_State *L)
         }
         NSString *val = [NSString stringWithUTF8String:cVal];
         
-        NSUInteger queueSize = [[ProcQueue sharedInstance] procQueuePushObject:val forKey:key];
+        NSUInteger queueSize = [[ProcQueue sharedInstance] procQueuePushTailObject:val forKey:key];
         lua_pushinteger(L, (lua_Integer)queueSize);
         return 1;
     }
@@ -97,13 +97,13 @@ static int ProcQueue_Queue_PushFront(lua_State *L)
         }
         NSString *val = [NSString stringWithUTF8String:cVal];
         
-        NSUInteger queueSize = [[ProcQueue sharedInstance] procQueuePushFrontObject:val forKey:key];
+        NSUInteger queueSize = [[ProcQueue sharedInstance] procQueueUnshiftObject:val forKey:key];
         lua_pushinteger(L, (lua_Integer)queueSize);
         return 1;
     }
 }
 
-static int ProcQueue_Queue_Pop(lua_State *L)
+static int ProcQueue_Queue_PopFront(lua_State *L)
 {
     @autoreleasepool {
         const char *cKey = luaL_checkstring(L, 1);
@@ -111,7 +111,7 @@ static int ProcQueue_Queue_Pop(lua_State *L)
         if ([key hasPrefix:@"ch.xxtou."]) {
             return luaL_argerror(L, 1, "restricted key");
         }
-        NSString *val = [[ProcQueue sharedInstance] procQueuePopObjectForKey:key];
+        NSString *val = [[ProcQueue sharedInstance] procQueueShiftObjectForKey:key];
         lua_pushstring(L, [val UTF8String]);
         return 1;
     }
@@ -125,7 +125,7 @@ static int ProcQueue_Queue_PopBack(lua_State *L)
         if ([key hasPrefix:@"ch.xxtou."]) {
             return luaL_argerror(L, 1, "restricted key");
         }
-        NSString *val = [[ProcQueue sharedInstance] procQueuePopBackObjectForKey:key];
+        NSString *val = [[ProcQueue sharedInstance] procQueuePopTailObjectForKey:key];
         lua_pushstring(L, [val UTF8String]);
         return 1;
     }
@@ -169,12 +169,14 @@ static const luaL_Reg ProcQueue_AuxLib[] = {
     {"get", ProcQueue_Proc_Get},
     
     /* Proc Queue Dictionary */
-    {"queue_push", ProcQueue_Queue_Push},
-    {"queue_push_back", ProcQueue_Queue_Push},
+    {"queue_push", ProcQueue_Queue_PushBack},
+    {"queue_push_back", ProcQueue_Queue_PushBack},
     {"queue_push_front", ProcQueue_Queue_PushFront},
-    {"queue_pop", ProcQueue_Queue_Pop},
-    {"queue_pop_front", ProcQueue_Queue_Pop},
+    {"queue_pop", ProcQueue_Queue_PopBack},
     {"queue_pop_back", ProcQueue_Queue_PopBack},
+    {"queue_pop_front", ProcQueue_Queue_PopFront},
+    {"queue_unshift", ProcQueue_Queue_PushFront},
+    {"queue_shift", ProcQueue_Queue_PopFront},
     {"queue_clear", ProcQueue_Queue_Clear},
     {"queue_size", ProcQueue_Queue_Size},
     

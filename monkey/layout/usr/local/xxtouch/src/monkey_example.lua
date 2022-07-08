@@ -8,7 +8,7 @@ function monkey_test()
     
     
     nLog("#1-2 移除所有预设用户脚本")
-    monkey.remove_all_userscripts()
+    monkey.clear_userscripts()
     
     
     nLog("#1-3 添加预设用户脚本")
@@ -259,7 +259,7 @@ function monkey_test()
     -- 3. 此 API 不会完全模拟字符键入的过程, 会直接将内容输入焦点文本框, 但是比 JavaScript 注入更安全
     -- 4. 如果要更真实的, 逐个字符按键并带有随机延迟的模拟输入, 参见 `SimulateTouch` 模块
     nLog("#12-1 测试向焦点文本框输入内容")
-    nLog(monkey.enter_text(
+    nLog(monkey.input(
         { ["host"] = "www.bing.com" },  -- 匹配表
         "Hello"  -- 待输入的内容
     ))

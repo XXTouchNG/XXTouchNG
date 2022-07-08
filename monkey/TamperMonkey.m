@@ -1447,7 +1447,7 @@ IMP_LUA_HANDLER(eval_id) {
     }
 }
 
-IMP_LUA_HANDLER(enter_text_id) {
+IMP_LUA_HANDLER(input_id) {
     @autoreleasepool {
         const char *objectId = luaL_checkstring(L, 1);
         const char *cContent = luaL_checkstring(L, 2);
@@ -1497,7 +1497,7 @@ IMP_LUA_HANDLER(eval) {
     }
 }
 
-IMP_LUA_HANDLER(enter_text) {
+IMP_LUA_HANDLER(input) {
     @autoreleasepool {
         luaL_checktype(L, 1, LUA_TTABLE);
         
@@ -1566,7 +1566,7 @@ IMP_LUA_HANDLER(add_userscript) {
     }
 }
 
-IMP_LUA_HANDLER(remove_all_userscripts) {
+IMP_LUA_HANDLER(clear_userscripts) {
     @autoreleasepool {
         NSError *error = nil;
         BOOL retVal = [[TFLuaBridge sharedInstance] addEnteriesToDefaults:@{ @"userScripts": @[] } withError:&error];
@@ -1789,12 +1789,12 @@ IMP_LUA_HANDLER_MAP[] = {
     DECLARE_LUA_HANDLER(get_webview),
     DECLARE_LUA_HANDLER(eval_id),
     DECLARE_LUA_HANDLER(eval),
-    DECLARE_LUA_HANDLER(enter_text_id),
-    DECLARE_LUA_HANDLER(enter_text),
+    DECLARE_LUA_HANDLER(input_id),
+    DECLARE_LUA_HANDLER(input),
     
     /* user scripts */
     DECLARE_LUA_HANDLER(add_userscript),
-    DECLARE_LUA_HANDLER(remove_all_userscripts),
+    DECLARE_LUA_HANDLER(clear_userscripts),
     DECLARE_LUA_HANDLER(list_userscripts),
     
     /* user script messages */

@@ -1449,7 +1449,7 @@ IMP_LUA_HANDLER(disable_logging) {
     }
 }
 
-IMP_LUA_HANDLER(enable_auto_bypass) {
+IMP_LUA_HANDLER(enable_autopass) {
     @autoreleasepool {
         NSError *error = nil;
         BOOL retVal = [[TFLuaBridge sharedInstance] addEnteriesToDefaults:@{ @"autoBypassEnabled": @(YES) } withError:&error];
@@ -1461,7 +1461,7 @@ IMP_LUA_HANDLER(enable_auto_bypass) {
     }
 }
 
-IMP_LUA_HANDLER(disable_auto_bypass) {
+IMP_LUA_HANDLER(disable_autopass) {
     @autoreleasepool {
         NSError *error = nil;
         BOOL retVal = [[TFLuaBridge sharedInstance] addEnteriesToDefaults:@{ @"autoBypassEnabled": @(NO) } withError:&error];
@@ -1473,7 +1473,7 @@ IMP_LUA_HANDLER(disable_auto_bypass) {
     }
 }
 
-IMP_LUA_HANDLER(set_auto_bypass_delay) {
+IMP_LUA_HANDLER(set_autopass_delay) {
     @autoreleasepool {
         lua_Number cDelay = luaL_checknumber(L, 1);
         
@@ -1487,7 +1487,7 @@ IMP_LUA_HANDLER(set_auto_bypass_delay) {
     }
 }
 
-IMP_LUA_HANDLER(get_local_dialog_rules) {
+IMP_LUA_HANDLER(get_local_rules) {
     @autoreleasepool {
         const char *objectId = luaL_checkstring(L, 1);
         NSString *bundleIdentifier = [NSString stringWithUTF8String:objectId];
@@ -1504,7 +1504,7 @@ IMP_LUA_HANDLER(get_local_dialog_rules) {
     }
 }
 
-IMP_LUA_HANDLER(set_local_dialog_rules) {
+IMP_LUA_HANDLER(set_local_rules) {
     @autoreleasepool {
         const char *objectId = luaL_checkstring(L, 1);
         NSString *bundleIdentifier = [NSString stringWithUTF8String:objectId];
@@ -1531,7 +1531,7 @@ IMP_LUA_HANDLER(set_local_dialog_rules) {
     }
 }
 
-IMP_LUA_HANDLER(clear_local_dialog_rules) {
+IMP_LUA_HANDLER(clear_local_rules) {
     @autoreleasepool {
         const char *objectId = luaL_checkstring(L, 1);
         NSString *bundleIdentifier = [NSString stringWithUTF8String:objectId];
@@ -1565,7 +1565,7 @@ IMP_LUA_HANDLER(clear_local_dialog_rules) {
     }
 }
 
-IMP_LUA_HANDLER(get_global_dialog_rules) {
+IMP_LUA_HANDLER(get_global_rules) {
     @autoreleasepool {
         NSError *error = nil;
         NSDictionary *userDefaults = [[TFLuaBridge sharedInstance] readDefaultsWithError:&error];
@@ -1579,7 +1579,7 @@ IMP_LUA_HANDLER(get_global_dialog_rules) {
     }
 }
 
-IMP_LUA_HANDLER(set_global_dialog_rules) {
+IMP_LUA_HANDLER(set_global_rules) {
     @autoreleasepool {
         NSArray <NSDictionary *> *dialogRules = lua_toNSValuex(L, 1, 0);
         if (
@@ -1603,7 +1603,7 @@ IMP_LUA_HANDLER(set_global_dialog_rules) {
     }
 }
 
-IMP_LUA_HANDLER(clear_global_dialog_rules) {
+IMP_LUA_HANDLER(clear_global_rules) {
     @autoreleasepool {
         NSError *error = nil;
         BOOL retVal = [[TFLuaBridge sharedInstance] addEnteriesToDefaults:@{ @"__GLOBAL__": @[] } withError:&error];
@@ -1771,7 +1771,7 @@ IMP_LUA_HANDLER(hide_prompt) {
 }
 #endif
 
-IMP_LUA_HANDLER(get_top_most_dialog) {
+IMP_LUA_HANDLER(get_topmost) {
     @autoreleasepool {
         NSError *error = nil;
         NSDictionary *ret = [TFLuaBridge ClientGetTopMostDialog:@{} error:&error];
@@ -1790,7 +1790,7 @@ IMP_LUA_HANDLER(get_top_most_dialog) {
     }
 }
 
-IMP_LUA_HANDLER(dismiss_top_most_dialog) {
+IMP_LUA_HANDLER(dismiss_topmost) {
     @autoreleasepool {
         NSDictionary *dictValue = nil;
 
@@ -1877,19 +1877,19 @@ IMP_LUA_HANDLER_MAP[] = {
     DECLARE_LUA_HANDLER(disable_logging),
 
     /* auto bypass */
-    DECLARE_LUA_HANDLER(enable_auto_bypass),
-    DECLARE_LUA_HANDLER(disable_auto_bypass),
-    DECLARE_LUA_HANDLER(set_auto_bypass_delay),
+    DECLARE_LUA_HANDLER(enable_autopass),
+    DECLARE_LUA_HANDLER(disable_autopass),
+    DECLARE_LUA_HANDLER(set_autopass_delay),
 
     /* local dialog rules */
-    DECLARE_LUA_HANDLER(get_local_dialog_rules),
-    DECLARE_LUA_HANDLER(set_local_dialog_rules),
-    DECLARE_LUA_HANDLER(clear_local_dialog_rules),
+    DECLARE_LUA_HANDLER(get_local_rules),
+    DECLARE_LUA_HANDLER(set_local_rules),
+    DECLARE_LUA_HANDLER(clear_local_rules),
 
     /* global dialog rules */
-    DECLARE_LUA_HANDLER(get_global_dialog_rules),
-    DECLARE_LUA_HANDLER(set_global_dialog_rules),
-    DECLARE_LUA_HANDLER(clear_global_dialog_rules),
+    DECLARE_LUA_HANDLER(get_global_rules),
+    DECLARE_LUA_HANDLER(set_global_rules),
+    DECLARE_LUA_HANDLER(clear_global_rules),
 
     /* app.input_text */
     DECLARE_LUA_HANDLER(input_text),
@@ -1904,8 +1904,8 @@ IMP_LUA_HANDLER_MAP[] = {
     DECLARE_LUA_HANDLER(suspend),
 
     /* real-time handler */
-    DECLARE_LUA_HANDLER(get_top_most_dialog),
-    DECLARE_LUA_HANDLER(dismiss_top_most_dialog),
+    DECLARE_LUA_HANDLER(get_topmost),
+    DECLARE_LUA_HANDLER(dismiss_topmost),
 
 #if DEBUG
     /* global prompt */

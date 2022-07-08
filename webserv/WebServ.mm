@@ -1188,7 +1188,7 @@ static void register_proc_queue_handlers(GCDWebServer *webServer)
                     return;
                 }
                 
-                NSUInteger queueSize = [[ProcQueue sharedInstance] procQueuePushObject:procVal forKey:procKey];
+                NSUInteger queueSize = [[ProcQueue sharedInstance] procQueuePushTailObject:procVal forKey:procKey];
                 completionBlock(resp_operation_succeed_flat(@{ @"key": procKey, @"value": procVal, @"size": @(queueSize) }));
             }
         });
@@ -1207,7 +1207,9 @@ static void register_proc_queue_handlers(GCDWebServer *webServer)
                     return;
                 }
                 
-                NSString *procVal = [[ProcQueue sharedInstance] procQueuePopObjectForKey:procKey];
+                // HINT: soze actually made an error: "pop" is always at the tail of a queue,
+                //       we should use "shift" to describe this behavior.
+                NSString *procVal = [[ProcQueue sharedInstance] procQueueShiftObjectForKey:procKey];
                 completionBlock(resp_operation_succeed_flat(@{ @"key": procKey, @"value": procVal }));
             }
         });

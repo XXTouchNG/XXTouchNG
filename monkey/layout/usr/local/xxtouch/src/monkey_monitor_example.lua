@@ -5,7 +5,7 @@ local monkey = require("monkey")  -- 引入 monkey 模块
 -- 从而避免频繁注入 JS 脚本，从而提高程序通信性能。
 function monkey_monitor_test()
     
-    monkey.remove_all_userscripts()  -- 移除其他用户脚本
+    monkey.clear_userscripts()  -- 移除其他用户脚本
     monkey.add_userscript(
         { ["host"] = "www.bing.com" },  -- 精确匹配，匹配表
         [[
