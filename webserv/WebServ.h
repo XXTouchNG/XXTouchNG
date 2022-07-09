@@ -36,8 +36,6 @@ extern "C" {
 #define WEBSERV_LOGGING_UDP_RECV_PORT 46956
 #define WEBSERV_LOGGING_SERVER_PORT 46957
 
-#define WEBSERV_BONJOUR_NAME @"XXTouch OpenAPI"
-
 
 OBJC_EXTERN BOOL _remoteAccessEnabled;
 OBJC_EXTERN dispatch_queue_t _serviceQueue;

@@ -13,13 +13,13 @@ webserv_FILES += $(wildcard GCDWebDAVServer/*.m)
 webserv_FILES += $(wildcard PocketSocket/*.m)
 webserv_FILES += ../shared/TFShell.mm
 PocketSocket/PSWebSocket.m_CFLAGS = -Wno-deprecated-declarations
-PocketSocket/PSWebSocketServer.m_CFLAGS = -Wno-deprecated-declarations
+PocketSocket/PSWebSocketServer.m_CFLAGS = -Wno-deprecated-declarations # -Wno-unused-but-set-variable
 webserv_CFLAGS = -fobjc-arc -fobjc-arc-exceptions
 webserv_CFLAGS += -DXXT_VERSION=\"$(XXT_VERSION)\"
 webserv_CFLAGS += -IGCDWebServer/Core -IGCDWebServer/Requests -IGCDWebServer/Responses
 webserv_CFLAGS += -IGCDWebDAVServer/
 webserv_CFLAGS += -IPocketSocket/
-webserv_CFLAGS += -Wno-unused-function
+webserv_CFLAGS += -Wno-unused-function # -Wno-unused-but-set-variable
 webserv_CFLAGS += -I../alert/
 webserv_CFLAGS += -I../app/
 webserv_CFLAGS += -I../debug/          # debug

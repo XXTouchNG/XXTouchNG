@@ -5296,7 +5296,10 @@ int main(int argc, const char *argv[], const char *envp[])
         /* -------------- */
         /* OpenAPI Server */
         BOOL started;
-        started = [webServer startWithPort:WEBSERV_PORT bonjourName:[NSString stringWithFormat:@"%@ (%@)", WEBSERV_BONJOUR_NAME, [[NSUUID UUID] UUIDString]]];
+        NSString *deviceName = CFBridgingRelease(MGCopyAnswer(kMGUserAssignedDeviceName, nil));
+        NSString *deviceUDID = CFBridgingRelease(MGCopyAnswer(kMGUniqueDeviceID, nil));
+        started = [webServer startWithPort:WEBSERV_PORT
+                               bonjourName:[NSString stringWithFormat:@"%@ (%@)", deviceName, deviceUDID]];
         if (!started) {
             return EXIT_FAILURE;
         }
