@@ -1,0 +1,6 @@
+{
+    group = "XXTouch";
+    title = "Record";
+    description = "Begin a new system event recording session.";
+    "compatible-modes" = ("springboard", "lockscreen", "application");
+}

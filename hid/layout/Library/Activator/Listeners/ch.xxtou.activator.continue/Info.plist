@@ -1,0 +1,6 @@
+{
+    group = "XXTouch";
+    title = "Continue";
+    description = "Continue playing the current running script.";
+    "compatible-modes" = ("springboard", "lockscreen", "application");
+}

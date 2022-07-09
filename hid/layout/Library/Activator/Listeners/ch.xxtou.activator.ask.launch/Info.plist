@@ -1,0 +1,6 @@
+{
+    group = "XXTouch";
+    title = "Pop-up Menu (Play)";
+    description = "Ask you for a choice whether to play.";
+    "compatible-modes" = ("springboard", "lockscreen", "application");
+}

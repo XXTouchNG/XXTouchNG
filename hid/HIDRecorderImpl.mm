@@ -11,18 +11,10 @@
 #import <notify.h>
 #import <rocketbootstrap/rocketbootstrap.h>
 
+#import "HIDRecorderEnums.h"
+
 
 #pragma mark - Types
-
-typedef NS_ENUM(NSUInteger, HIDRecorderOperation) {
-    HIDRecorderOperationNone = 0,
-    HIDRecorderOperationPlay,
-    HIDRecorderOperationPlayWithAlert,
-    HIDRecorderOperationRecord,
-    HIDRecorderOperationRecordWithAlert,
-    HIDRecorderOperationBoth,
-    HIDRecorderOperationBothWithAlert,
-};
 
 static HIDRecorderOperation _recorderClickVolumeUpOperation = HIDRecorderOperationNone;
 static HIDRecorderOperation _recorderClickVolumeDownOperation = HIDRecorderOperationNone;
@@ -30,18 +22,9 @@ static HIDRecorderOperation _recorderHoldVolumeUpOperation = HIDRecorderOperatio
 static HIDRecorderOperation _recorderHoldVolumeDownOperation = HIDRecorderOperationNone;
 static BOOL __HIDRecorderIsPresentingAlert = NO;
 
-typedef NS_ENUM(NSUInteger, HIDRecorderAction) {
-    HIDRecorderActionNone = 0,
-    HIDRecorderActionLaunch,
-    HIDRecorderActionPause,
-    HIDRecorderActionContinue,
-    HIDRecorderActionRecord,
-    HIDRecorderActionStop,
-};
-
-
 static BOOL _recorderStartupScriptEnabled = NO;
 static NSString *_recorderStartupScriptName = nil;
+static __weak UIWindow *_recorderPresentingWindow = nil;
 
 OBJC_EXTERN BOOL _recorderInsomniaModeEnabled = NO;
 
@@ -64,7 +47,10 @@ OBJC_EXTERN
 void __HIDRecorderDisplayErrorMessage(NSString *alertTitle, NSString *alertContent);
 
 OBJC_EXTERN
-void __HIDRecorderDismissAlertConfirm(UIWindow *presentWindow, SupervisorState runningState);
+void __HIDRecorderDismissAlertConfirm(void);
+
+static
+void __HIDRecorderDismissAlertConfirmInternal(UIWindow *presentWindow, SupervisorState runningState);
 
 OBJC_EXTERN
 BOOL HIDRecorderHandleHIDEvent(IOHIDEventRef event);
@@ -333,25 +319,27 @@ void __HIDRecorderPerformAlertConfirm(HIDRecorderOperation afterOperation, Super
                 [presentWindow setWindowLevel:UIWindowLevelStatusBar + 1];
                 [presentWindow setHidden:NO];
                 
+                _recorderPresentingWindow = presentWindow;
+                
                 UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:@"XXTouch"
                                                                                    message:alertMessage
                                                                             preferredStyle:UIAlertControllerStyleAlert];
                 
                 [alertCtrl addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                     CHDebugLogSource(@"Operation cancelled");
-                    __HIDRecorderDismissAlertConfirm(presentWindow, runningState);
+                    __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                 }]];
                 
                 if (runningState == SupervisorStateIdle) {
                     if (afterOperation == HIDRecorderOperationBoth) {
                         [alertCtrl addAction:[UIAlertAction actionWithTitle:@"▶️ Launch" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                             __HIDRecorderPerformAction(HIDRecorderActionLaunch);
-                            __HIDRecorderDismissAlertConfirm(presentWindow, runningState);
+                            __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                         }]];
                         
                         [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏺ Record" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                             __HIDRecorderPerformAction(HIDRecorderActionRecord);
-                            __HIDRecorderDismissAlertConfirm(presentWindow, runningState);
+                            __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                         }]];
                     } else {
                         [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏯ Continue" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -362,31 +350,31 @@ void __HIDRecorderPerformAlertConfirm(HIDRecorderOperation afterOperation, Super
                                 __HIDRecorderPerformAction(HIDRecorderActionRecord);
                             }
                             
-                            __HIDRecorderDismissAlertConfirm(presentWindow, runningState);
+                            __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                         }]];
                     }
                 } else {
                     if (runningState == SupervisorStateRecording) {
                         [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏹ Stop" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                             __HIDRecorderPerformAction(HIDRecorderActionStop);
-                            __HIDRecorderDismissAlertConfirm(presentWindow, runningState);
+                            __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                         }]];
                     } else {
                         if (runningState == SupervisorStateRunning) {
                             [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏸ Pause" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                                 __HIDRecorderPerformAction(HIDRecorderActionPause);
-                                __HIDRecorderDismissAlertConfirm(presentWindow, runningState);
+                                __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                             }]];
                         } else if (runningState == SupervisorStateSuspend) {
                             [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏯ Continue" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                                 __HIDRecorderPerformAction(HIDRecorderActionContinue);
-                                __HIDRecorderDismissAlertConfirm(presentWindow, runningState);
+                                __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                             }]];
                         }
                         
                         [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏹ Stop" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                             __HIDRecorderPerformAction(HIDRecorderActionStop);
-                            __HIDRecorderDismissAlertConfirm(presentWindow, runningState);
+                            __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                         }]];
                     }
                 }
@@ -424,18 +412,20 @@ void __HIDRecorderDisplayAlertMessage(NSString *alertMessage, SupervisorState ru
                 [presentWindow setWindowLevel:UIWindowLevelStatusBar + 1];
                 [presentWindow setHidden:NO];
                 
+                _recorderPresentingWindow = presentWindow;
+                
                 UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:@"XXTouch"
                                                                                    message:alertMessage
                                                                             preferredStyle:UIAlertControllerStyleAlert];
                 
                 [alertCtrl addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    __HIDRecorderDismissAlertConfirm(presentWindow, runningState);
+                    __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                 }]];
                 
                 if (runningState != SupervisorStateIdle) {
                     [alertCtrl addAction:[UIAlertAction actionWithTitle:@"Show in X.X.T." style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"xxt://"] options:@{} completionHandler:^(BOOL success) {
-                            __HIDRecorderDismissAlertConfirm(presentWindow, runningState);
+                            __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                         }];
                     }]];
                 }
@@ -474,12 +464,14 @@ void __HIDRecorderDisplayErrorMessage(NSString *alertTitle, NSString *alertConte
                 [presentWindow setWindowLevel:UIWindowLevelStatusBar + 1];
                 [presentWindow setHidden:NO];
                 
+                _recorderPresentingWindow = presentWindow;
+                
                 UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@", alertTitle]
                                                                                    message:[NSString stringWithFormat:@"%@", alertContent]
                                                                             preferredStyle:UIAlertControllerStyleAlert];
                 
                 [alertCtrl addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    __HIDRecorderDismissAlertConfirm(presentWindow, SupervisorStateIdle);
+                    __HIDRecorderDismissAlertConfirmInternal(presentWindow, SupervisorStateIdle);
                 }]];
                 
                 __HIDRecorderIsPresentingAlert = YES;
@@ -489,8 +481,24 @@ void __HIDRecorderDisplayErrorMessage(NSString *alertTitle, NSString *alertConte
     }
 }
 
-void __HIDRecorderDismissAlertConfirm(UIWindow *presentWindow, SupervisorState runningState)
+void __HIDRecorderDismissAlertConfirm(void)
 {
+    NSCAssert([NSThread isMainThread], @"not main thread");
+    @autoreleasepool {
+        [[[_recorderPresentingWindow rootViewController] view] removeFromSuperview];
+        [_recorderPresentingWindow setRootViewController:nil];
+        [_recorderPresentingWindow setHidden:YES];
+        [_recorderPresentingWindow setWindowScene:nil];
+        
+        __HIDRecorderIsPresentingAlert = NO;
+        if ([[Supervisor sharedInstance] globalState] == SupervisorStateRecording)
+            [[Supervisor sharedInstance] sendSignalToGlobalProcess:SIGUSR2];
+    }
+}
+
+void __HIDRecorderDismissAlertConfirmInternal(UIWindow *presentWindow, SupervisorState runningState)
+{
+    NSCAssert([NSThread isMainThread], @"not main thread");
     @autoreleasepool {
         [[[presentWindow rootViewController] view] removeFromSuperview];
         [presentWindow setRootViewController:nil];

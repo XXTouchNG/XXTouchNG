@@ -1,0 +1,6 @@
+{
+    group = "XXTouch";
+    title = "Launch";
+    description = "Launch selected script.";
+    "compatible-modes" = ("springboard", "lockscreen", "application");
+}

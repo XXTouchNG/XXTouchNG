@@ -1,0 +1,6 @@
+{
+    group = "XXTouch";
+    title = "Stop";
+    description = "Stop the current playing or recording.";
+    "compatible-modes" = ("springboard", "lockscreen", "application");
+}

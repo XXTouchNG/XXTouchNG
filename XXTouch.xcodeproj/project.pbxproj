@@ -249,6 +249,8 @@
 		CC4D74B82860A20B001CFAF3 /* TFLuaBridge+IMP+MiddleMan.m in Sources */ = {isa = PBXBuildFile; fileRef = D6196FFE2536E954006747A2 /* TFLuaBridge+IMP+MiddleMan.m */; };
 		CC4D74B92860A20B001CFAF3 /* TFLuaBridge+Logging.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF1B08A279CE97300F9EA50 /* TFLuaBridge+Logging.m */; };
 		CC4D74BA2860A20B001CFAF3 /* TFLuaBridge+Reveal.m in Sources */ = {isa = PBXBuildFile; fileRef = D61970042536EC92006747A2 /* TFLuaBridge+Reveal.m */; };
+		CC500DA42879606000D896CC /* HIDRecorderActivator.m in Sources */ = {isa = PBXBuildFile; fileRef = CC500DA32879606000D896CC /* HIDRecorderActivator.m */; };
+		CC500DA62879607500D896CC /* libactivator.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC500DA52879607500D896CC /* libactivator.tbd */; };
 		CC547FBB2835084D00E8490E /* MemoryHackerHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC547FBA2835084D00E8490E /* MemoryHackerHelper.mm */; };
 		CC547FC32835199500E8490E /* touch-prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = CC547FC22835199500E8490E /* touch-prefix.pch */; };
 		CC547FCE28351B8C00E8490E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6F57919251C6179009CC6A3 /* Foundation.framework */; };
@@ -966,6 +968,9 @@
 		CC4D74A72860586F001CFAF3 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		CC4D74B228606135001CFAF3 /* GCDWebDAVServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebDAVServer.h; sourceTree = "<group>"; };
 		CC4D74B328606135001CFAF3 /* GCDWebDAVServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebDAVServer.m; sourceTree = "<group>"; };
+		CC500DA32879606000D896CC /* HIDRecorderActivator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIDRecorderActivator.m; sourceTree = "<group>"; };
+		CC500DA52879607500D896CC /* libactivator.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = libactivator.tbd; sourceTree = "<group>"; };
+		CC500DAA287960E900D896CC /* HIDRecorderEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HIDRecorderEnums.h; sourceTree = "<group>"; };
 		CC547FBA2835084D00E8490E /* MemoryHackerHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MemoryHackerHelper.mm; sourceTree = "<group>"; };
 		CC547FBF28350F5700E8490E /* simulatetouchd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = simulatetouchd.m; sourceTree = "<group>"; };
 		CC547FC028350F5700E8490E /* ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ent.plist; sourceTree = "<group>"; };
@@ -1316,6 +1321,7 @@
 				CC397026286581890079097A /* libprocqueue.dylib in Frameworks */,
 				CC39701428657EC00079097A /* AppSupport.tbd in Frameworks */,
 				CC39701528657EC00079097A /* UIKit.framework in Frameworks */,
+				CC500DA62879607500D896CC /* libactivator.tbd in Frameworks */,
 				CC39701628657EC00079097A /* CorePhoneNumbers.tbd in Frameworks */,
 				CC39705E286724BA0079097A /* IOMobileFramebuffer.tbd in Frameworks */,
 				CC39705C286724BA0079097A /* IOKit.tbd in Frameworks */,
@@ -1816,8 +1822,10 @@
 				CC39700B28657EBA0079097A /* layout */,
 				CC397058286724B90079097A /* lib */,
 				CC39703E286722350079097A /* cli */,
+				CC500DAA287960E900D896CC /* HIDRecorderEnums.h */,
 				CC396FD728657E970079097A /* HIDRecorder.x */,
 				CC396FF928657E970079097A /* HIDRecorderImpl.mm */,
+				CC500DA32879606000D896CC /* HIDRecorderActivator.m */,
 				CC39700328657E970079097A /* hid-prefix.pch */,
 				CC39700428657E970079097A /* logos__HIDRecorder.m */,
 			);
@@ -1836,6 +1844,7 @@
 		CC397058286724B90079097A /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				CC500DA52879607500D896CC /* libactivator.tbd */,
 				CC397059286724B90079097A /* IOSurface.tbd */,
 				CC39705A286724B90079097A /* IOKit.tbd */,
 				CC39705B286724BA0079097A /* IOMobileFramebuffer.tbd */,
@@ -3368,6 +3377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC39702528657EED0079097A /* logos__HIDRecorder.m in Sources */,
+				CC500DA42879606000D896CC /* HIDRecorderActivator.m in Sources */,
 				CC39702428657EED0079097A /* HIDRecorderImpl.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

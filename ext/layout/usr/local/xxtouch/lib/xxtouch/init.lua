@@ -25,6 +25,7 @@ do
 
     require("xxtouch.exapp")
     require("xxtouch.exlog")
+    require("xxtouch.exmonkey")
     require("xxtouch.exproc")
     require("xxtouch.exscreen")
     require("xxtouch.exsys")

@@ -6,7 +6,7 @@ include $(THEOS)/makefiles/common.mk
 
 LIBRARY_NAME = libhidrecorder
 
-libhidrecorder_FILES = HIDRecorder.x HIDRecorderImpl.mm
+libhidrecorder_FILES = HIDRecorder.x HIDRecorderImpl.mm HIDRecorderActivator.m
 libhidrecorder_CFLAGS = -fobjc-arc -fobjc-arc-exceptions
 libhidrecorder_CFLAGS += -DXXT_VERSION=\"$(XXT_VERSION)\"
 libhidrecorder_CFLAGS += -Wno-unused-variable
@@ -21,6 +21,7 @@ libhidrecorder_CCFLAGS = -std=gnu++14
 libhidrecorder_LDFLAGS = -L$(THEOS_OBJ_DIR)
 libhidrecorder_PRIVATE_FRAMEWORKS = AppSupport IOKit SpringBoardServices
 libhidrecorder_LIBRARIES = procqueue supervisor substrate rocketbootstrap
+libhidrecorder_WEAK_LIBRARIES = lib/libactivator
 libhidrecorder_INSTALL_PATH = /usr/local/lib
 libhidrecorder_LIBRARY_EXTENSION = .dylib
 include $(THEOS_MAKE_PATH)/library.mk

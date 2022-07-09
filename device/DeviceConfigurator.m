@@ -661,7 +661,7 @@ OBJC_EXTERN dispatch_queue_t _sharedBBServerQueue;
         @autoreleasepool {
             [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
                 @"selector": NSStringFromSelector(@selector(popBannerWithSectionID:messageTitle:messageSubtitle:messageContent:)),
-                 @"arguments": [NSArray arrayWithObjects:sectionID, messageTitle, messageSubtitle, messageContent, nil],
+                @"arguments": [NSArray arrayWithObjects:sectionID, messageTitle, messageSubtitle, messageContent, nil],
             }];
         }
         return;
@@ -693,7 +693,14 @@ OBJC_EXTERN dispatch_queue_t _sharedBBServerQueue;
         [bulletinRequest setDefaultAction:[objc_getClass("BBAction") actionWithLaunchBundleID:sectionID callblock:nil]];
         
         dispatch_async(_sharedBBServerQueue, ^{
-            [_sharedBBServer publishBulletinRequest:bulletinRequest destinations:270];
+            if (@available(iOS 14.0, *))
+            {
+                [_sharedBBServer publishBulletinRequest:bulletinRequest destinations:270];  // 0b10001110
+            }
+            else
+            {
+                [_sharedBBServer publishBulletinRequest:bulletinRequest destinations:14];   // 0b00001110
+            }
         });
     }
 }

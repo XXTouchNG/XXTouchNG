@@ -1,0 +1,6 @@
+{
+    group = "XXTouch";
+    title = "Enable Remote Control";
+    description = "Enable OpenAPI to be accessed from outside.";
+    "compatible-modes" = ("springboard", "lockscreen", "application");
+}

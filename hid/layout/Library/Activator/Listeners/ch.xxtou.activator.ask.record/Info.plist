@@ -1,0 +1,6 @@
+{
+    group = "XXTouch";
+    title = "Pop-up Menu (Record)";
+    description = "Ask you for a choice whether to record.";
+    "compatible-modes" = ("springboard", "lockscreen", "application");
+}
