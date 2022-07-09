@@ -27,3 +27,7 @@ SUBPROJECTS += webserv       # arm64              # lua, debug, rocketbootstrap,
 SUBPROJECTS += add1s         # arm64
 
 include $(THEOS_MAKE_PATH)/aggregate.mk
+
+
+before-all::
+	touch layout/Applications/XXTExplorer.app/XXTExplorer
