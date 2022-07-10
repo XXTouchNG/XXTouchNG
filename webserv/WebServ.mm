@@ -3609,7 +3609,7 @@ static void register_remote_access_handlers(GCDWebServer *webServer)
 
 static void ensure_base_structure(void)
 {
-    dispatch_async(_serviceQueue, ^{
+    dispatch_sync(_serviceQueue, ^{
         @autoreleasepool {
             BOOL exists = NO;
             BOOL isDirectory = NO;
@@ -3641,7 +3641,7 @@ static void ensure_base_structure(void)
             }
             
             {
-                exists = [_serviceFileManager fileExistsAtPath:@MEDIA_BIN_DIR];
+                exists = [_serviceFileManager attributesOfItemAtPath:@MEDIA_BIN_DIR error:nil] != nil;
                 if (!exists) {
                     succeed = [_serviceFileManager createSymbolicLinkAtPath:@MEDIA_BIN_DIR withDestinationPath:@"/usr/local/xxtouch/bin" error:&error];
                     NSCAssert1(succeed, @"%@", error);
@@ -3649,7 +3649,7 @@ static void ensure_base_structure(void)
             }
             
             {
-                exists = [_serviceFileManager fileExistsAtPath:@MEDIA_LIB_DIR];
+                exists = [_serviceFileManager attributesOfItemAtPath:@MEDIA_LIB_DIR error:nil] != nil;
                 if (!exists) {
                     succeed = [_serviceFileManager createSymbolicLinkAtPath:@MEDIA_LIB_DIR withDestinationPath:@"/usr/local/xxtouch/lib" error:&error];
                     NSCAssert1(succeed, @"%@", error);
@@ -3657,7 +3657,7 @@ static void ensure_base_structure(void)
             }
             
             {
-                exists = [_serviceFileManager fileExistsAtPath:@MEDIA_LOG_DIR];
+                exists = [_serviceFileManager attributesOfItemAtPath:@MEDIA_LOG_DIR error:nil] != nil;
                 if (!exists) {
                     succeed = [_serviceFileManager createSymbolicLinkAtPath:@MEDIA_LOG_DIR withDestinationPath:@"/usr/local/xxtouch/log" error:&error];
                     NSCAssert1(succeed, @"%@", error);
@@ -3711,7 +3711,7 @@ static void ensure_base_structure(void)
             }
             
             {
-                exists = [_serviceFileManager fileExistsAtPath:@MEDIA_CONF_DIR];
+                exists = [_serviceFileManager attributesOfItemAtPath:@MEDIA_CONF_DIR error:nil] != nil;
                 if (!exists) {
                     succeed = [_serviceFileManager createSymbolicLinkAtPath:@MEDIA_CONF_DIR withDestinationPath:@"/usr/local/xxtouch/etc" error:&error];
                     NSCAssert1(succeed, @"%@", error);
@@ -3719,10 +3719,104 @@ static void ensure_base_structure(void)
             }
             
             {
-                exists = [_serviceFileManager fileExistsAtPath:@MEDIA_WEB_DIR];
+                exists = [_serviceFileManager attributesOfItemAtPath:@MEDIA_WEB_DIR error:nil] != nil;
                 if (!exists) {
                     succeed = [_serviceFileManager createSymbolicLinkAtPath:@MEDIA_WEB_DIR withDestinationPath:@"/usr/local/xxtouch/web" error:&error];
                     NSCAssert1(succeed, @"%@", error);
+                }
+            }
+            
+            {   // mobile client-side configurations
+                NSString *linkPath;
+                {
+                    linkPath = [@MEDIA_CONF_DIR stringByAppendingPathComponent:[@CONF_EXPLORER lastPathComponent]];
+                    exists = [_serviceFileManager attributesOfItemAtPath:linkPath error:nil] != nil;
+                    if (!exists)
+                    {
+                        succeed = [_serviceFileManager createSymbolicLinkAtPath:linkPath
+                                                            withDestinationPath:@CONF_EXPLORER
+                                                                          error:&error];
+                        NSCAssert1(succeed, @"%@", error);
+                    }
+                }
+                {
+                    linkPath = [@MEDIA_CONF_DIR stringByAppendingPathComponent:[@CONF_ALERT_HELPER lastPathComponent]];
+                    exists = [_serviceFileManager attributesOfItemAtPath:linkPath error:nil] != nil;
+                    if (!exists)
+                    {
+                        succeed = [_serviceFileManager createSymbolicLinkAtPath:linkPath
+                                                            withDestinationPath:@CONF_ALERT_HELPER
+                                                                          error:&error];
+                        NSCAssert1(succeed, @"%@", error);
+                    }
+                }
+                {
+                    linkPath = [@MEDIA_CONF_DIR stringByAppendingPathComponent:[@CONF_DEBUG_WINDOW lastPathComponent]];
+                    exists = [_serviceFileManager attributesOfItemAtPath:linkPath error:nil] != nil;
+                    if (!exists)
+                    {
+                        succeed = [_serviceFileManager createSymbolicLinkAtPath:linkPath
+                                                            withDestinationPath:@CONF_DEBUG_WINDOW
+                                                                          error:&error];
+                        NSCAssert1(succeed, @"%@", error);
+                    }
+                }
+                {
+                    linkPath = [@MEDIA_CONF_DIR stringByAppendingPathComponent:[@CONF_TAMPER_MONKEY lastPathComponent]];
+                    exists = [_serviceFileManager attributesOfItemAtPath:linkPath error:nil] != nil;
+                    if (!exists)
+                    {
+                        succeed = [_serviceFileManager createSymbolicLinkAtPath:linkPath
+                                                            withDestinationPath:@CONF_TAMPER_MONKEY
+                                                                          error:&error];
+                        NSCAssert1(succeed, @"%@", error);
+                    }
+                }
+            }
+            
+            {   // mobile client-side logs
+                NSString *linkDirPath;
+                {
+                    linkDirPath = [@MEDIA_LOG_DIR stringByAppendingPathComponent:[@LOG_ALERT_HELPER_DIR lastPathComponent]];
+                    exists = [_serviceFileManager attributesOfItemAtPath:linkDirPath error:nil] != nil;
+                    if (!exists)
+                    {
+                        exists = [_serviceFileManager fileExistsAtPath:@LOG_ALERT_HELPER_DIR];
+                        if (!exists)
+                        {
+                            succeed = [_serviceFileManager createDirectoryAtPath:@LOG_ALERT_HELPER_DIR
+                                                     withIntermediateDirectories:YES
+                                                                      attributes:@{ NSFileOwnerAccountID: @(501), NSFileGroupOwnerAccountID: @(501) }
+                                                                           error:&error];
+                            NSCAssert1(succeed, @"%@", error);
+                        }
+                        
+                        succeed = [_serviceFileManager createSymbolicLinkAtPath:linkDirPath
+                                                            withDestinationPath:@LOG_ALERT_HELPER_DIR
+                                                                          error:&error];
+                        NSCAssert1(succeed, @"%@", error);
+                    }
+                }
+                {
+                    linkDirPath = [@MEDIA_LOG_DIR stringByAppendingPathComponent:[@LOG_TAMPER_MONKEY_DIR lastPathComponent]];
+                    exists = [_serviceFileManager attributesOfItemAtPath:linkDirPath error:nil] != nil;
+                    if (!exists)
+                    {
+                        exists = [_serviceFileManager fileExistsAtPath:@LOG_TAMPER_MONKEY_DIR];
+                        if (!exists)
+                        {
+                            succeed = [_serviceFileManager createDirectoryAtPath:@LOG_TAMPER_MONKEY_DIR
+                                                     withIntermediateDirectories:YES
+                                                                      attributes:@{ NSFileOwnerAccountID: @(501), NSFileGroupOwnerAccountID: @(501) }
+                                                                           error:&error];
+                            NSCAssert1(succeed, @"%@", error);
+                        }
+                        
+                        succeed = [_serviceFileManager createSymbolicLinkAtPath:linkDirPath
+                                                            withDestinationPath:@LOG_TAMPER_MONKEY_DIR
+                                                                          error:&error];
+                        NSCAssert1(succeed, @"%@", error);
+                    }
                 }
             }
             
@@ -3763,6 +3857,22 @@ static void ensure_base_structure(void)
                 if (!exists) {
                     succeed = [_serviceFileManager createDirectoryAtPath:@MEDIA_TESSDATA_DIR withIntermediateDirectories:YES attributes:@{ NSFileOwnerAccountID: @(501), NSFileGroupOwnerAccountID: @(501) } error:&error];
                     NSCAssert1(succeed, @"%@", error);
+                }
+            }
+            
+            {
+                exists = [[_serviceFileManager attributesOfItemAtPath:@CONF_LEGACY error:nil][NSFileSize] unsignedLongLongValue] > 0;
+                if (!exists)
+                {
+                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:@{
+                        @"port": @(46952),
+                    } options:(NSJSONWritingPrettyPrinted | NSJSONWritingSortedKeys) error:&error];
+                    NSCAssert1(jsonData, @"%@", error);
+                    
+                    succeed = [_serviceFileManager createFileAtPath:@CONF_LEGACY
+                                                           contents:jsonData
+                                                         attributes:@{ NSFileOwnerAccountID: @(0), NSFileGroupOwnerAccountID: @(0) }];
+                    NSCAssert(succeed, @"failed to create legacy configuration");
                 }
             }
             

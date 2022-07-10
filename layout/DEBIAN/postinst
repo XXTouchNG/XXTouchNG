@@ -4,6 +4,7 @@ declare -a cydia
 cydia=($CYDIA)
 
 ln -s /usr/local/xxtouch/bin/activate /usr/local/bin/xxtouch > /dev/null 2>&1
+ln -s cURL /usr/local/xxtouch/lib/curl > /dev/null 2>&1
 
 rm -f /usr/lib/libalerthelper.dylib > /dev/null 2>&1
 ln /usr/local/lib/libalerthelper.dylib /usr/lib/libalerthelper.dylib > /dev/null 2>&1
@@ -51,4 +52,3 @@ if [[ ${CYDIA+@} ]]; then
 fi
 
 exit 0
-

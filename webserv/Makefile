@@ -1,4 +1,4 @@
-TARGET := iphone:clang:latest:13.0
+TARGET := iphone:clang:14.5:13.0
 ARCHS = arm64
 INSTALL_TARGET_PROCESSES = elfclient webserv
 

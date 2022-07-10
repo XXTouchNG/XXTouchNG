@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ln -s cURL /usr/local/xxtouch/lib/curl > /dev/null 2>&1
+
+exit 0

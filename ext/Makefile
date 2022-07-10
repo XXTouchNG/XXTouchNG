@@ -1,4 +1,4 @@
-TARGET := iphone:clang:latest:13.0
+TARGET := iphone:clang:14.5:13.0
 ARCHS = arm64  # these modules will be loaded to lua core only, arm64 is enough
 # DEBUG = 0
 # GO_EASY_ON_ME = 1

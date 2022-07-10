@@ -102,9 +102,18 @@ static BOOL MyHookClassMessage(Class cls, SEL sel, IMP repl_imp, IMP *orig_imp_e
 #define BIN_COMPILER            "/usr/local/xxtouch/bin/luac"
 #define BIN_RECORDER            "/usr/local/xxtouch/bin/hidrecorder"
 
+#define CONF_LEGACY             "/var/mobile/Media/1ferver/1ferver.conf"
+#define CONF_EXPLORER           "/var/mobile/Library/Preferences/ch.xxtou.XXTExplorer.plist"
+#define CONF_DEBUG_WINDOW       "/var/mobile/Library/Preferences/ch.xxtou.DebugWindow.plist"
+#define CONF_ALERT_HELPER       "/var/mobile/Library/Preferences/ch.xxtou.AlertHelper.plist"
+#define CONF_TAMPER_MONKEY      "/var/mobile/Library/Preferences/ch.xxtou.TamperMonkey.plist"
+
 #define LOG_SYS                 "/usr/local/xxtouch/log/sys.log"
 #define LOG_LAUNCHER_OUTPUT     "/usr/local/xxtouch/log/script_output.log"
 #define LOG_LAUNCHER_ERROR      "/usr/local/xxtouch/log/script_error.log"
+
+#define LOG_ALERT_HELPER_DIR    "/var/mobile/Library/Caches/ch.xxtou.AlertHelper"
+#define LOG_TAMPER_MONKEY_DIR   "/var/mobile/Library/Caches/ch.xxtou.TamperMonkey"
 
 
 #pragma mark - Services

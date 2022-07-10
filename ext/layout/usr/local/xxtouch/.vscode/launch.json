@@ -7,7 +7,7 @@
             "tag": "normal",
             "name": "LuaPanda",
             "description": "通用模式",
-            "cwd": "${workspaceFolder}/ext/layout/usr/local/xxtouch",
+            "cwd": "${workspaceFolder}",
             "luaFileExtension": "lua",
             "connectionPort": 8818,
             "stopOnEntry": false,

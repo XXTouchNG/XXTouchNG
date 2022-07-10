@@ -48,9 +48,22 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSString *cachesDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
-        NSString *logPath = [cachesDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.log", kLuaBridgeInstanceName]];
-        [[NSFileManager defaultManager] createFileAtPath:logPath contents:nil attributes:nil];
-        _sharedLoggingHandle = [NSFileHandle fileHandleForUpdatingAtPath:logPath];
+        NSString *logPath = [cachesDirectory stringByAppendingPathComponent:kLuaBridgeInstanceName];
+        
+        [[NSFileManager defaultManager] createDirectoryAtPath:logPath
+                                  withIntermediateDirectories:YES
+                                                   attributes:@{ NSFileOwnerAccountID: @(501), NSFileGroupOwnerAccountID: @(501) }
+                                                        error:nil];
+        
+        NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+        
+        logPath = [[logPath stringByAppendingPathComponent:bundleIdentifier] stringByAppendingPathExtension:@"log"];
+        
+        [[NSFileManager defaultManager] createFileAtPath:logPath
+                                                contents:[NSData data]
+                                              attributes:@{ NSFileOwnerAccountID: @(501), NSFileGroupOwnerAccountID: @(501) }];
+        
+        _sharedLoggingHandle = [NSFileHandle fileHandleForWritingAtPath:logPath];
 
         CHDebugLog(@"[%@] logging handle %@ located at %@", kLuaBridgeInstanceName, _sharedLoggingHandle, logPath);
     });

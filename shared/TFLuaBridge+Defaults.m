@@ -159,7 +159,8 @@ OBJC_EXTERN NSString *const kMessageNameServerWriteDefaults;
 
 - (NSDictionary *)clientReadDefaults:(NSString *)messageName userInfo:(NSDictionary *)userInfo {
     @autoreleasepool {
-        NSString *defaultsPath = [[[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:kLuaBridgeInstanceName] stringByAppendingPathExtension:@"plist"];
+        NSString *preferencesPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"Preferences"];
+        NSString *defaultsPath = [[preferencesPath stringByAppendingPathComponent:kLuaBridgeInstanceName] stringByAppendingPathExtension:@"plist"];
         
         CHDebugLog(@"[%@][%@] Client #2 try read defaults", kLuaBridgeInstanceName, self.instanceRoleName);
         __block NSDictionary *result = nil;
@@ -174,7 +175,8 @@ OBJC_EXTERN NSString *const kMessageNameServerWriteDefaults;
 
 - (NSDictionary *)serverWriteDefaults:(NSString *)messageName userInfo:(NSDictionary *)userInfo {
     @autoreleasepool {
-        NSString *defaultsPath = [[[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:kLuaBridgeInstanceName] stringByAppendingPathExtension:@"plist"];
+        NSString *preferencesPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"Preferences"];
+        NSString *defaultsPath = [[preferencesPath stringByAppendingPathComponent:kLuaBridgeInstanceName] stringByAppendingPathExtension:@"plist"];
         BOOL isOverwrite = [[userInfo objectForKey:@"__OVERWRITE__"] boolValue];
         
         CHDebugLog(@"[%@][%@] Client #1 try %@ defaults %@", kLuaBridgeInstanceName, self.instanceRoleName, isOverwrite ? @"overwrite" : @"write", userInfo);

@@ -971,6 +971,14 @@
 		CC500DA32879606000D896CC /* HIDRecorderActivator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIDRecorderActivator.m; sourceTree = "<group>"; };
 		CC500DA52879607500D896CC /* libactivator.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = libactivator.tbd; sourceTree = "<group>"; };
 		CC500DAA287960E900D896CC /* HIDRecorderEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HIDRecorderEnums.h; sourceTree = "<group>"; };
+		CC500DC22879A01B00D896CC /* xxt32.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xxt32.c; sourceTree = "<group>"; };
+		CC500DC32879A01B00D896CC /* crc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crc.h; sourceTree = "<group>"; };
+		CC500DC42879A01B00D896CC /* mine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mine.hpp; sourceTree = "<group>"; };
+		CC500DC52879A01B00D896CC /* xxtea.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xxtea.c; sourceTree = "<group>"; };
+		CC500DC62879A01B00D896CC /* mine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mine.cpp; sourceTree = "<group>"; };
+		CC500DC72879A01B00D896CC /* xxt32.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xxt32.h; sourceTree = "<group>"; };
+		CC500DC82879A01B00D896CC /* crc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = crc.c; sourceTree = "<group>"; };
+		CC500DC92879A01B00D896CC /* xxtea.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xxtea.h; sourceTree = "<group>"; };
 		CC547FBA2835084D00E8490E /* MemoryHackerHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MemoryHackerHelper.mm; sourceTree = "<group>"; };
 		CC547FBF28350F5700E8490E /* simulatetouchd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = simulatetouchd.m; sourceTree = "<group>"; };
 		CC547FC028350F5700E8490E /* ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ent.plist; sourceTree = "<group>"; };
@@ -1688,6 +1696,7 @@
 				CC114D7C283D3043002E91D8 /* layout */,
 				CC4776F32871883200BFB1B2 /* include */,
 				CC114D71283D3025002E91D8 /* cli */,
+				CC500DC12879A01B00D896CC /* enc */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1919,6 +1928,21 @@
 				CC4D74B328606135001CFAF3 /* GCDWebDAVServer.m */,
 			);
 			path = GCDWebDAVServer;
+			sourceTree = "<group>";
+		};
+		CC500DC12879A01B00D896CC /* enc */ = {
+			isa = PBXGroup;
+			children = (
+				CC500DC82879A01B00D896CC /* crc.c */,
+				CC500DC32879A01B00D896CC /* crc.h */,
+				CC500DC62879A01B00D896CC /* mine.cpp */,
+				CC500DC42879A01B00D896CC /* mine.hpp */,
+				CC500DC22879A01B00D896CC /* xxt32.c */,
+				CC500DC72879A01B00D896CC /* xxt32.h */,
+				CC500DC52879A01B00D896CC /* xxtea.c */,
+				CC500DC92879A01B00D896CC /* xxtea.h */,
+			);
+			path = enc;
 			sourceTree = "<group>";
 		};
 		CC547FBE28350F5700E8490E /* cli */ = {
