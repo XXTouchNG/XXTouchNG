@@ -62,7 +62,7 @@ _EFUNC(StringByTrimmingBothBounds) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -76,7 +76,7 @@ _EFUNC(StringByTrimmingLeftSpaces) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -90,7 +90,7 @@ _EFUNC(StringByTrimmingRightSpaces) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -105,7 +105,7 @@ _EFUNC(CapitalizedString) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -119,7 +119,7 @@ _EFUNC(CountOfLines) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -133,7 +133,7 @@ _EFUNC(IsAlphabet) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -147,7 +147,7 @@ _EFUNC(IsNumeric) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -161,7 +161,7 @@ _EFUNC(IsDigit) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -175,7 +175,7 @@ _EFUNC(IsEmail) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -189,7 +189,7 @@ _EFUNC(IsLink) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -203,7 +203,7 @@ _EFUNC(IsChineseFirst) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -217,7 +217,7 @@ _EFUNC(IsUppercasedAlphabet) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -231,7 +231,7 @@ _EFUNC(IsLowercasedAlphabet) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -252,7 +252,7 @@ _EFUNC(StringByRemovingLineAtIndex) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -266,7 +266,7 @@ _EFUNC(StringByRemovingEmptyLines) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -280,7 +280,7 @@ _EFUNC(StringByTrimmingAll) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -294,7 +294,7 @@ _EFUNC(StringByF2H) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -308,7 +308,7 @@ _EFUNC(StringByH2F) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -335,7 +335,7 @@ _EFUNC(CompareToString) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -356,7 +356,7 @@ _EFUNC(ComponentsSeparatedByString) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -377,7 +377,7 @@ _EFUNC(LineAtIndex) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -399,7 +399,7 @@ _EFUNC(LineIndexOfSubstring) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -414,7 +414,7 @@ _EFUNC(PinyinString) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -428,7 +428,7 @@ _EFUNC(Characters) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -444,7 +444,7 @@ _EFUNC(StringByRemovingRepeatedComponents) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -465,7 +465,7 @@ _EFUNC(CountOfIdenticalLines) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -487,7 +487,7 @@ _EFUNC(IndexSetOfIdenticalLines)
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -514,7 +514,7 @@ _EFUNC(StringByPaddingRight) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -541,7 +541,7 @@ _EFUNC(StringByPaddingLeft) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -564,7 +564,7 @@ _EFUNC(ReplaceLineAtIndex) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -587,7 +587,7 @@ _EFUNC(InsertStringAtIndex) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -610,7 +610,7 @@ _EFUNC(InsertLineAtIndex) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -633,7 +633,7 @@ _EFUNC(InsertBeforeLineAtIndex) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -656,7 +656,7 @@ _EFUNC(InsertAfterLineAtIndex) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(InsertBeforeSubstring) {
@@ -683,7 +683,7 @@ _EFUNC(InsertBeforeSubstring) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(InsertAfterSubstring) {
@@ -710,7 +710,7 @@ _EFUNC(InsertAfterSubstring) {
             return 1;
         };
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(ToHex) {
@@ -730,7 +730,7 @@ _EFUNC(ToHex) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(FromHex) {
@@ -750,7 +750,7 @@ _EFUNC(FromHex) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(FromGBK) {
@@ -772,7 +772,7 @@ _EFUNC(FromGBK) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(Base64Encode) {
@@ -793,7 +793,7 @@ _EFUNC(Base64Encode) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(Base64Decode) {
@@ -813,7 +813,7 @@ _EFUNC(Base64Decode) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(MD5) {
@@ -833,7 +833,7 @@ _EFUNC(MD5) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(SHA1) {
@@ -853,7 +853,7 @@ _EFUNC(SHA1) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(SHA256) {
@@ -873,7 +873,7 @@ _EFUNC(SHA256) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(SHA512) {
@@ -893,7 +893,7 @@ _EFUNC(SHA512) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(AES128_ECB_Encrypt) {
@@ -921,7 +921,7 @@ _EFUNC(AES128_ECB_Encrypt) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(AES128_ECB_Decrypt) {
@@ -949,7 +949,7 @@ _EFUNC(AES128_ECB_Decrypt) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(Strip_UTF8_BOM) {
@@ -977,7 +977,7 @@ _EFUNC(Strip_UTF8_BOM) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(Random) {
@@ -998,7 +998,7 @@ _EFUNC(Random) {
             return 1;
         };
     }
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 _EFUNC(CompareVersion) {
@@ -1018,7 +1018,7 @@ _EFUNC(CompareVersion) {
         }
         return 1;
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -1028,7 +1028,7 @@ _EFUNC(_GetVersion) {
         lua_pushstring(L, "0.4");
         return 1;
     };
-    _EEND
+    _EEND(xxtouch_exstring)
 }
 
 
@@ -1108,7 +1108,7 @@ _ELIB_API(xxtouch_exstring) {
     
     {
         lua_getglobal(L, "string");
-        luaE_setelib(L, LUAE_LIB_FUNCS);
+        luaE_setelib(L, LUAE_LIB_FUNCS_xxtouch_exstring);
         lua_pop(L, 1);
     }
     

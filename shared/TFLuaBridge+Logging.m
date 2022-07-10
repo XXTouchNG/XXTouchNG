@@ -36,9 +36,9 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedLoggingDateFormatter = [[NSDateFormatter alloc] init];
-        _sharedLoggingDateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-        _sharedLoggingDateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'+00:00'";
-        _sharedLoggingDateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+        _sharedLoggingDateFormatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        _sharedLoggingDateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+        _sharedLoggingDateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
     });
     return _sharedLoggingDateFormatter;
 }

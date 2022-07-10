@@ -1695,6 +1695,7 @@ static void register_debug_window_handlers(GCDWebServer *webServer)
 
 OBJC_EXTERN void register_alert_helper_handlers(GCDWebServer *webServer);
 OBJC_EXTERN void register_tamper_monkey_handlers(GCDWebServer *webServer);
+OBJC_EXTERN void register_cookies_manager_handlers(GCDWebServer *webServer);
 
 static void register_command_spawn_handler(GCDWebServer *webServer)
 {
@@ -4359,10 +4360,9 @@ static void register_udp_logging_handlers(WSUdpLoggingServer *loggingServer)
             static dispatch_once_t onceToken;
             dispatch_once(&onceToken, ^{
                 dateFormatter = [[NSDateFormatter alloc] init];
-                
-                NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-                [dateFormatter setLocale:enUSPOSIXLocale];
+                [dateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
                 [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+                [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
                 [dateFormatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
             });
             
@@ -5389,6 +5389,7 @@ int main(int argc, const char *argv[], const char *envp[])
             register_debug_window_handlers(webServer);
             register_alert_helper_handlers(webServer);
             register_tamper_monkey_handlers(webServer);
+            register_cookies_manager_handlers(webServer);
             register_remote_access_handlers(webServer);
             register_file_manager_handlers(webServer);
             register_device_configurator_handlers(webServer);

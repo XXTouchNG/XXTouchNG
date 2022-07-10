@@ -1,10 +1,3 @@
-//
-//  AlertHelperHandlers.m
-//  webserv
-//
-//  Created by Lessica on 2022/6/22.
-//
-
 #import <Foundation/Foundation.h>
 #import "AlertHelper.h"
 #import "TFLuaBridge.h"

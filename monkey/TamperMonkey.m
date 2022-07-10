@@ -257,8 +257,8 @@ static pthread_rwlock_t __localRegisteredWrappersLock;
     dispatch_once(&onceToken, ^{
         _formControlDateFormatter = [[NSDateFormatter alloc] init];
         _formControlDateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-        _formControlDateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'+00:00'";
         _formControlDateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+        _formControlDateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'+00:00'";
     });
     return _formControlDateFormatter;
 }
@@ -269,8 +269,8 @@ static pthread_rwlock_t __localRegisteredWrappersLock;
     dispatch_once(&onceToken, ^{
         _formControlDateFormatter = [[NSDateFormatter alloc] init];
         _formControlDateFormatter.timeZone = [NSTimeZone systemTimeZone];
-        _formControlDateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
         _formControlDateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+        _formControlDateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
     });
     return _formControlDateFormatter;
 }

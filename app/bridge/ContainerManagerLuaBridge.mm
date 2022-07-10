@@ -7,21 +7,18 @@
 #import "TFContainerManager.h"
 
 
-/* MARK: ----------------------------------------------------------------------- */
-
+#pragma mark -
 
 _ELIB_DECL(app);
 
 
-/* MARK: ----------------------------------------------------------------------- */
-
+#pragma mark -
 
 #define luaE_optboolean(L, IDX, DEF) \
 (BOOL)(lua_isboolean((L), (IDX)) ? lua_toboolean(L, (IDX)) : (DEF))
 
 
-/* MARK: ----------------------------------------------------------------------- */
-
+#pragma mark -
 
 _EFUNC(CMGetBundlePath) {
     _EBEGIN
@@ -45,7 +42,7 @@ _EFUNC(CMGetBundlePath) {
         lua_pushstring(L, [[appItem bundleContainer] UTF8String]);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -71,7 +68,7 @@ _EFUNC(CMGetDataContainerPath) {
         lua_pushstring(L, [[appItem dataContainer] UTF8String]);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -95,7 +92,7 @@ _EFUNC(CMGetGroupContainerPaths) {
         lua_pushNSArray(L, sortedPaths);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -116,7 +113,7 @@ _EFUNC(CMGetGroupContainerMappings) {
         lua_pushNSDictionary(L, appItem.groupContainers);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -137,7 +134,7 @@ _EFUNC(CMRunApplication) {
         lua_pushinteger(L, EXIT_SUCCESS);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -167,7 +164,7 @@ _EFUNC(CMTerminateApplication) {
         lua_pushinteger(L, EXIT_SUCCESS);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -181,7 +178,7 @@ _EFUNC(CMIsRunningApplication) {
         lua_pushboolean(L, processIdentifier > 0);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -202,7 +199,7 @@ _EFUNC(CMGetLocalizedName) {
         lua_pushstring(L, [appItem.name UTF8String]);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -224,7 +221,7 @@ _EFUNC(CMGetIconData) {
         lua_pushlstring(L, (const char *)iconData.bytes, iconData.length);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -239,7 +236,7 @@ _EFUNC(CMGetProcessIdentifier) {
         lua_pushinteger(L, processIdentifier);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -257,7 +254,7 @@ _EFUNC(CMGetFrontmostBundleIdentifier) {
         lua_pushstring(L, [bundleIdentifier UTF8String]);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -276,7 +273,7 @@ _EFUNC(CMGetFrontmostProcessIdentifier) {
         lua_pushinteger(L, processIdentifier);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -292,7 +289,7 @@ _EFUNC(CMOpenSensitiveURL) {
         lua_pushboolean(L, opened);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -309,7 +306,7 @@ _EFUNC(CMGetAllBundleIdentifiers) {
         lua_pushNSArray(L, bundleIdentifiers);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -330,7 +327,7 @@ _EFUNC(CMGetRunningProcs) {
         lua_pushNSDictionary(L, retProcs);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -351,7 +348,7 @@ _EFUNC(CMInstall) {
         }
         return 2;
     }
-    _EEND
+    _EEND(app)
 }
 
 
@@ -372,7 +369,7 @@ _EFUNC(CMUninstall) {
         }
         return 2;
     }
-    _EEND
+    _EEND(app)
 }
 
 _EFUNC(CMUsedMemory) {
@@ -419,18 +416,11 @@ _EFUNC(CMUsedMemory) {
         lua_pushnumber(L, taskInfo.resident_size / 1024.0 / 1024.0);
         return 1;
     }
-    _EEND
+    _EEND(app)
 }
 
 
-_EFUNC(CMGetVersion) {
-    _EBEGIN
-    _EPOOL {
-        lua_pushstring(L, "0.3-2");
-        return 1;
-    };
-    _EEND
-}
+#pragma mark -
 
 _ELIB(app) = {
     _EREG(LuaE_CMGetBundlePath,                  "bundle_path"       ),  // bundle_path
@@ -451,19 +441,21 @@ _ELIB(app) = {
     _EREG(LuaE_CMGetRunningProcs,                "all_procs"         ),  // all_procs
     _EREG(LuaE_CMInstall,                        "install"           ),  // install
     _EREG(LuaE_CMUninstall,                      "uninstall"         ),  // uninstall
-    _EREG(LuaE_CMGetVersion,                     "get_version"       ),
     _EREG(LuaE_CMUsedMemory,                     "used_memory"       ),  // used_memory
     {NULL, NULL}
 };
 
+
+#pragma mark -
+
 _ELIB_API(app);
 _ELIB_API(app) {
-    luaE_newelib(L, LUAE_LIB_FUNCS);
+    luaE_newelib(L, LUAE_LIB_FUNCS_app);
     return 1;
 }
 
 _ELIB_API(exapp);
 _ELIB_API(exapp) {
-    luaE_newelib(L, LUAE_LIB_FUNCS);
+    luaE_newelib(L, LUAE_LIB_FUNCS_app);
     return 1;
 }

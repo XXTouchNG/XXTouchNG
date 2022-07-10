@@ -14,6 +14,10 @@ libtfcontainermanager_FILES += bridge/ContainerManagerLuaBridge.mm
 libtfcontainermanager_FILES += $(wildcard ../shared/TFLuaBridge+*.m)
 libtfcontainermanager_FILES += ../shared/TFShell.mm
 libtfcontainermanager_FILES += ../shared/luae/luae.mm
+libtfcontainermanager_FILES += $(wildcard CookiesTool/BinaryCodable/BinaryDataCoders/*.swift)
+libtfcontainermanager_FILES += $(wildcard CookiesTool/BinaryCodable/*.swift)
+libtfcontainermanager_FILES += $(filter-out CookiesTool/main.swift, $(wildcard CookiesTool/*.swift))
+libtfcontainermanager_FILES += TFCookiesManager.m
 libtfcontainermanager_CFLAGS = -fobjc-arc -fobjc-arc-exceptions
 libtfcontainermanager_CFLAGS += -DXXT_VERSION=\"$(XXT_VERSION)\"
 libtfcontainermanager_CFLAGS += -Wno-unused-variable
@@ -30,6 +34,7 @@ libtfcontainermanager_LIBRARIES = rocketbootstrap
 libtfcontainermanager_WEAK_LIBRARIES = lib/libapplist
 libtfcontainermanager_INSTALL_PATH = /usr/local/lib
 libtfcontainermanager_LIBRARY_EXTENSION = .dylib
+libtfcontainermanager_SWIFT_BRIDGING_HEADER = CookiesTool/CookiesTool-Bridging-Header.h
 include $(THEOS_MAKE_PATH)/library.mk
 
 TOOL_NAME = tfcontainermanagerd
@@ -48,3 +53,4 @@ include $(THEOS_MAKE_PATH)/tool.mk
 
 before-all::
 	cp TFContainerManager.h layout/usr/local/include/libtfcontainermanager.h
+	cp TFCookiesManager.h layout/usr/local/include/libtfcookiesmanager.h

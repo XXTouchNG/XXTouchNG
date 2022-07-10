@@ -191,7 +191,7 @@ _EFUNC(MHRead) {
             return 2;
         };
     };
-    _EEND
+    _EEND(memory)
 }
 
 
@@ -238,7 +238,7 @@ _EFUNC(MHWrite) {
             return 2;
         };
     };
-    _EEND
+    _EEND(memory)
 }
 
 
@@ -273,7 +273,7 @@ _EFUNC(MHGetBaseAddress) {
             return 2;
         };
     };
-    _EEND
+    _EEND(memory)
 }
 
 
@@ -292,7 +292,7 @@ _EFUNC(MHSearchSetMode) {
             return 0;
         }
     };
-    _EEND
+    _EEND(memory)
 }
 
 
@@ -310,7 +310,7 @@ _EFUNC(MHSearchReset) {
         }
         return 0;
     }
-    _EEND
+    _EEND(memory)
 }
 
 
@@ -456,7 +456,7 @@ _EFUNC(MHSearch) {
             return 2;
         }
     };
-    _EEND
+    _EEND(memory)
 }
 
 
@@ -474,7 +474,7 @@ _EFUNC(MHGetProcessID) {
         lua_pushinteger(L, pid);
         return 2;
     };
-    _EEND
+    _EEND(memory)
 }
 
 
@@ -484,7 +484,7 @@ _EFUNC(MHGetVersion) {
         lua_pushstring(L, "0.3");
         return 1;
     };
-    _EEND
+    _EEND(memory)
 }
 
 
@@ -512,7 +512,7 @@ _ELIB(memory) = {
 
 _ELIB_API(memory);
 _ELIB_API(memory) {
-    luaE_newelib(L, LUAE_LIB_FUNCS);
+    luaE_newelib(L, LUAE_LIB_FUNCS_memory);
     return 1;
 }
 

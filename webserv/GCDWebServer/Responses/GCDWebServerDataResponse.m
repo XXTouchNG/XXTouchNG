@@ -125,7 +125,7 @@
 }
 
 - (instancetype)initWithJSONObject:(id)object contentType:(NSString*)type {
-  NSData* data = [NSJSONSerialization dataWithJSONObject:object options:0 error:NULL];
+  NSData* data = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingSortedKeys error:NULL];
   if (data == nil) {
     GWS_DNOT_REACHED();
     return nil;

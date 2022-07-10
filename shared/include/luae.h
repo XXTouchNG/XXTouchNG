@@ -13,22 +13,22 @@ typedef struct luaE_Reg {
     lua_CFunction func;
 } luaE_Reg;
 
-#define luaE_arg_error(pos, fmt, arg...) \
-luaL_error(L, "[%s] Invalid argument #%d: " fmt, luaE_func2name(__func__, LUAE_LIB_FUNCS), pos, ##arg)
+#define luaE_arg_error(N, pos, fmt, arg...) \
+luaL_error(L, "[%s] Invalid argument #%d: " fmt, luaE_func2name(__func__, LUAE_LIB_FUNCS_## N), pos, ##arg)
 
-#define luaE_nsarg_error(pos, msg) \
-luaL_error(L, "[%s] Invalid argument #%d: %s", luaE_func2name(__func__, LUAE_LIB_FUNCS), pos, [msg UTF8String])
+#define luaE_nsarg_error(N, pos, msg) \
+luaL_error(L, "[%s] Invalid argument #%d: %s", luaE_func2name(__func__, LUAE_LIB_FUNCS_## N), pos, [msg UTF8String])
 
 #ifdef  __cplusplus
 #define _ELIB_DECL(N) \
-extern "C" const luaE_Reg LUAE_LIB_FUNCS[]
+extern "C" const luaE_Reg LUAE_LIB_FUNCS_## N []
 #else
 #define _ELIB_DECL(N) \
-extern const luaE_Reg LUAE_LIB_FUNCS[]
+extern const luaE_Reg LUAE_LIB_FUNCS_## N []
 #endif
 
 #define _ELIB(N) \
-const luaE_Reg LUAE_LIB_FUNCS[]
+const luaE_Reg LUAE_LIB_FUNCS_## N []
 
 #ifdef  __cplusplus
 #define _ELIB_API(N) \
@@ -49,9 +49,9 @@ if (L_ECODE == -1)
 #define _EARG(C, M) \
 L_ECODE = C; L_EMSG = (M);
 
-#define _EEND \
+#define _EEND(N) \
 if (L_ECODE != -1) { \
-    luaE_nsarg_error(L_ECODE, L_EMSG); \
+    luaE_nsarg_error(N, L_ECODE, L_EMSG); \
 } \
 return 0;
 

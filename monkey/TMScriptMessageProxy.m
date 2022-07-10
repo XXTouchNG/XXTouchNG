@@ -74,9 +74,9 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
     dispatch_once(&onceToken, ^{
         
         isoDateFormatter = [[NSDateFormatter alloc] init];
-        isoDateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-        isoDateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'+00:00'";
+        isoDateFormatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
         isoDateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+        isoDateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
         
         NSString *cachesDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
         NSString *logPath = [cachesDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.log", kLuaBridgeInstanceName]];

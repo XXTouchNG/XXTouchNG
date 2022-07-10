@@ -8,6 +8,7 @@ TOOL_NAME = webserv
 
 webserv_FILES = WebServ.mm
 webserv_FILES += AlertHelperHandlers.m TamperMonkeyHandlers.m
+webserv_FILES += CookiesManagerHandlers.m
 webserv_FILES += $(wildcard GCDWebServer/*/*.m)
 webserv_FILES += $(wildcard GCDWebDAVServer/*.m)
 webserv_FILES += $(wildcard PocketSocket/*.m)
