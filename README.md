@@ -36,18 +36,35 @@ XXTouch is a system wide touch event simulation and automation library.
 - [ ] xpp, xui
 
 
-#### App & Services
+#### Lua Modules
+
+- [x] alert
+- [x] monkey
+- [x] cookies
+- [x] samba
+
+
+#### App Features
 
 - [x] **Full Featured Recording**
 - [x] [Full Featured App](https://github.com/XXTouchNG/XXTExplorer)
 - [x] [OpenAPI](https://www.zybuluo.com/xxtouch/note/386268)
 - [x] Startup Script
 - [x] Daemon Mode
-- [x] Alert Helper
-- [x] WKWebView Helper
 - [x] OCR Support (Provided by Apple’s Vision.framework)
 - [x] Template Matching (Provided by OpenCV)
-- [ ] Activator Support
+- [x] Activator Support
+
+
+#### XPC Services
+
+```bash
+$ ls /usr/local/include/lib*
+libdeviceconfigurator.h  libsupervisor.h
+libprocqueue.h           libtfcontainermanager.h
+libscreencapture.h       libtfcookiesmanager.h
+libsimulatetouch.h
+```
 
 
 #### OpenAPI Protocols
