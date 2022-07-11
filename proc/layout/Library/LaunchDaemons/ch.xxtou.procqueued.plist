@@ -44,8 +44,8 @@
 	<key>ThrottleInterval</key>
 	<integer>5</integer>
 	<key>POSIXSpawnType</key>
-	<string>Adaptive</string>
+	<string>Interactive</string>
 	<key>ProcessType</key>
-	<string>Adaptive</string>
+	<string>Interactive</string>
 </dict>
 </plist>

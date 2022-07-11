@@ -1037,28 +1037,47 @@ static int DeviceConfigurator_Device_Type(lua_State *L)
 
 static int DeviceConfigurator_Device_Name(lua_State *L)
 {
-    id answer = CFBridgingRelease(MGCopyAnswer(kMGUserAssignedDeviceName, NULL));
-    lua_pushNSValue(L, answer);
-    return 1;
+    @autoreleasepool {
+        NSString *userAssignedDeviceName = [[DeviceConfigurator sharedConfigurator] userAssignedDeviceName];
+        if (!userAssignedDeviceName.length)
+        {
+            id answer = CFBridgingRelease(MGCopyAnswer(kMGUserAssignedDeviceName, NULL));
+            lua_pushNSValue(L, answer);
+            return 1;
+        }
+        
+        lua_pushstring(L, [userAssignedDeviceName UTF8String]);
+        return 1;
+    }
 }
 
 static int DeviceConfigurator_Device_SetName(lua_State *L)
 {
-    size_t cNameLen;
-    const char *cName = luaL_checklstring(L, 1, &cNameLen);
-    if (sethostname(cName, (int)cNameLen)) {
-        perror("sethostname");
+    @autoreleasepool {
+        size_t cNameLen;
+        const char *cName = luaL_checklstring(L, 1, &cNameLen);
+        if (sethostname(cName, (int)cNameLen)) {
+            perror("sethostname");
+            
+            lua_pushboolean(L, false);
+            return 1;
+        }
         
-        lua_pushboolean(L, false);
+        CFStringRef name = CFStringCreateWithBytesNoCopy(kCFAllocatorDefault, (const unsigned char *)cName, cNameLen, kCFStringEncodingUTF8, false, kCFAllocatorNull);
+        int mgRet = MGSetAnswer(kMGUserAssignedDeviceName, name);
+        CFRelease(name);
+        
+        if (!mgRet)
+        {
+            lua_pushboolean(L, mgRet);
+            return 1;
+        }
+        
+        [[DeviceConfigurator sharedConfigurator] setUserAssignedDeviceName:[NSString stringWithUTF8String:cName]];
+        
+        lua_pushboolean(L, true);
         return 1;
     }
-    
-    CFStringRef name = CFStringCreateWithBytesNoCopy(kCFAllocatorDefault, (const unsigned char *)cName, cNameLen, kCFStringEncodingUTF8, false, kCFAllocatorNull);
-    int mgRet = MGSetAnswer(kMGUserAssignedDeviceName, name);
-    CFRelease(name);
-    
-    lua_pushboolean(L, mgRet);
-    return 1;
 }
 
 static int DeviceConfigurator_Device_UDID(lua_State *L)

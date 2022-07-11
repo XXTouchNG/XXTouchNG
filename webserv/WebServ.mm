@@ -768,6 +768,7 @@ static void register_device_configurator_handlers(GCDWebServer *webServer)
                     return;
                 }
                 
+                [[DeviceConfigurator sharedConfigurator] setUserAssignedDeviceName:deviceName];
                 completionBlock(resp_operation_succeed(nil));
             }
         });
@@ -3117,7 +3118,11 @@ static void register_openapi_v1_handlers(GCDWebServer *webServer)
             @autoreleasepool {
                 if ([[[request method] uppercaseString] isEqualToString:@"GET"])
                 {
-                    NSString *deviceName = CFBridgingRelease(MGCopyAnswer(kMGUserAssignedDeviceName, nil));
+                    NSString *deviceName = [[DeviceConfigurator sharedConfigurator] userAssignedDeviceName];
+                    if (!deviceName.length)
+                    {
+                        deviceName = CFBridgingRelease(MGCopyAnswer(kMGUserAssignedDeviceName, nil));
+                    }
                     completionBlock([GCDWebServerDataResponse responseWithText:deviceName]);
                 }
                 else
@@ -3135,6 +3140,7 @@ static void register_openapi_v1_handlers(GCDWebServer *webServer)
                         return;
                     }
                     
+                    [[DeviceConfigurator sharedConfigurator] setUserAssignedDeviceName:deviceName];
                     completionBlock(resp_v1_ok());
                 }
             }

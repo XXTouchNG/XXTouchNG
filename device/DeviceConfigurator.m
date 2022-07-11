@@ -254,6 +254,11 @@ static ALCity *(*PSCityForTimeZone)(CFTimeZoneRef timeZone);
 + (void)setTimeZone:(NSString *)arg1;
 @end
 
+@interface PSGAboutController : NSObject
+- (void)setDeviceName:(NSString *)arg1 specifier:(id)arg2 ;
+- (NSString *)deviceName:(id)arg1 ;
+@end
+
 NS_INLINE
 NSString *InternationalSettingsExtractLanguageCode(NSString *languageCode) {
     languageCode = [languageCode stringByReplacingOccurrencesOfString:@"_" withString:@"-"];
@@ -2483,6 +2488,60 @@ OBJC_EXTERN void reinitializeHooks(void);
                 }
             }
         });
+    }
+}
+
+- (NSString *)userAssignedDeviceName
+{
+    return [self _userAssignedName][@"reply"];
+}
+
+- (NSDictionary *)_userAssignedName
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_userAssignedName)),
+                @"arguments": [NSArray array],
+            }];
+            
+            CHDebugLog(@"_userAssignedName -> %@", replyObject);
+            
+            NSNumber *replyState = replyObject[@"reply"];
+#if DEBUG
+            NSAssert([replyState isKindOfClass:[NSString class]], @"invalid xpc response");
+#endif
+            
+            return replyObject;
+        }
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        [DeviceConfigurator loadGeneralSettingsUIFramework];
+        NSString *deviceName = [[objc_getClass("PSGAboutController") new] deviceName:nil];
+        return @{ @"reply": deviceName ?: @"" };
+    }
+}
+
+- (void)setUserAssignedDeviceName:(NSString *)userAssignedDeviceName
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(setUserAssignedDeviceName:)),
+                @"arguments": [NSArray arrayWithObjects:userAssignedDeviceName, nil],
+            }];
+        }
+        return;
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        [DeviceConfigurator loadGeneralSettingsUIFramework];
+        [[objc_getClass("PSGAboutController") new] setDeviceName:userAssignedDeviceName specifier:nil];
     }
 }
 

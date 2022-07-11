@@ -153,6 +153,10 @@ typedef NS_ENUM(NSUInteger, DeviceConfiguratorRole) {
 - (NSString *)currentTimeZone;
 - (void)setTimeZone:(NSString *)timeZoneName;
 
+/* User Assigned Device Name */
+- (NSString *)userAssignedDeviceName;
+- (void)setUserAssignedDeviceName:(NSString *)userAssignedDeviceName;
+
 @end
 
 NS_ASSUME_NONNULL_END
