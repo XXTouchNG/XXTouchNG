@@ -2654,7 +2654,7 @@ OBJC_EXTERN void reinitializeHooks(void);
     @autoreleasepool {
         NSAssert([NSThread isMainThread], @"not main thread");
         
-        [[DeviceConfigurator sharedDBSSettingsController] _updateDeviceAppearanceToNewInterfaceStyle:[interfaceStyle integerValue]];
+        [[DeviceConfigurator sharedDBSSettingsController] _updateDeviceAppearanceToNewInterfaceStyle:MIN(MAX([interfaceStyle integerValue], 0), 2)];
     }
 }
 
@@ -2782,7 +2782,7 @@ OBJC_EXTERN void reinitializeHooks(void);
         
         DBSLargeTextSliderListController *ctrl = [DeviceConfigurator sharedDBSLargeTextSliderListController];
         PSSpecifier *spec = [[ctrl specifiers] firstObject];
-        [ctrl setDynamicTypeValue:@([dynamicTypeValue integerValue]) forSpecifier:spec];
+        [ctrl setDynamicTypeValue:@(MIN(MAX([dynamicTypeValue integerValue], 0), 11)) forSpecifier:spec];
     }
 }
 
