@@ -167,6 +167,10 @@ typedef NS_ENUM(NSUInteger, DeviceConfiguratorRole) {
 - (BOOL)isZoomedMode;
 - (void)setZoomedMode:(BOOL)zoomedMode;
 
+/* AirDrop */
+- (NSInteger)airDropMode;
+- (void)setAirDropMode:(NSInteger)airDropMode;
+
 @end
 
 NS_ASSUME_NONNULL_END

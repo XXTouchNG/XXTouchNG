@@ -1467,6 +1467,23 @@ static int DeviceConfigurator_Device_IsAirplaneEnabled(lua_State *L)
     }
 }
 
+static int DeviceConfigurator_Device_GetAirDropMode(lua_State *L)
+{
+    @autoreleasepool {
+        lua_pushinteger(L, (lua_Integer)[[DeviceConfigurator sharedConfigurator] airDropMode]);
+        return 1;
+    }
+}
+
+static int DeviceConfigurator_Device_SetAirDropMode(lua_State *L)
+{
+    @autoreleasepool {
+        lua_Integer cMode = luaL_checkinteger(L, 1);
+        [[DeviceConfigurator sharedConfigurator] setAirDropMode:(NSInteger)cMode];
+        return 0;
+    }
+}
+
 static int DeviceConfigurator_Device_TurnOnVPN(lua_State *L)
 {
     @autoreleasepool {
@@ -1795,6 +1812,10 @@ static const luaL_Reg DeviceConfigurator_Device_AuxLib[] = {
     {"turn_on_airplane", DeviceConfigurator_Device_TurnOnAirplane},
     {"turn_off_airplane", DeviceConfigurator_Device_TurnOffAirplane},
     {"is_airplane_on", DeviceConfigurator_Device_IsAirplaneEnabled},
+    
+    /* AirDrop */
+    {"airdrop_mode", DeviceConfigurator_Device_GetAirDropMode},
+    {"set_airdrop_mode", DeviceConfigurator_Device_SetAirDropMode},
     
     /* VPN */
     {"turn_on_vpn", DeviceConfigurator_Device_TurnOnVPN},

@@ -287,6 +287,11 @@ static ALCity *(*PSCityForTimeZone)(CFTimeZoneRef timeZone);
 - (NSString *)deviceName:(id)arg1 ;
 @end
 
+@interface SFAirDropDiscoveryController : NSObject
+- (NSInteger)discoverableMode;  // 0 Receving Off 1 Contacts Only 2 Everyone
+- (void)setDiscoverableMode:(NSInteger)arg1 ;
+@end
+
 NS_INLINE
 NSString *InternationalSettingsExtractLanguageCode(NSString *languageCode) {
     languageCode = [languageCode stringByReplacingOccurrencesOfString:@"_" withString:@"-"];
@@ -2864,6 +2869,81 @@ OBJC_EXTERN void reinitializeHooks(void);
         {
             [ctrl setDisplayZoomMode:zoomMode withRelaunchURL:[NSURL URLWithString:@"prefs:root=DISPLAY&path=MAGNIFY"]];
         }
+    }
+}
+
++ (void)loadSharingUIFramework
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [[NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/SharingUI.framework"] load];
+    });
+}
+
++ (SFAirDropDiscoveryController *)sharedSFAirDropDiscoveryController
+{
+    static SFAirDropDiscoveryController *addCtrl = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self loadSharingUIFramework];
+        addCtrl = [[objc_getClass("SFAirDropDiscoveryController") alloc] init];
+    });
+    return addCtrl;
+}
+
+- (NSInteger)airDropMode
+{
+    return [[self _airDropMode][@"reply"] integerValue];
+}
+
+- (NSDictionary *)_airDropMode
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_airDropMode)),
+                @"arguments": [NSArray array],
+            }];
+            
+            CHDebugLog(@"_airDropMode -> %@", replyObject);
+            
+            NSNumber *replyState = replyObject[@"reply"];
+#if DEBUG
+            NSAssert([replyState isKindOfClass:[NSNumber class]], @"invalid xpc response");
+#endif
+            
+            return replyObject;
+        }
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        return @{ @"reply": @([[DeviceConfigurator sharedSFAirDropDiscoveryController] discoverableMode]) };
+    }
+}
+
+- (void)setAirDropMode:(NSInteger)airDropMode
+{
+    [self _setAirDropMode:@(airDropMode)];
+}
+
+- (void)_setAirDropMode:(NSNumber /* NSInteger */ *)airDropMode
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_setAirDropMode:)),
+                @"arguments": [NSArray arrayWithObjects:airDropMode, nil],
+            }];
+        }
+        return;
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        [[DeviceConfigurator sharedSFAirDropDiscoveryController] setDiscoverableMode:[airDropMode integerValue]];
     }
 }
 
