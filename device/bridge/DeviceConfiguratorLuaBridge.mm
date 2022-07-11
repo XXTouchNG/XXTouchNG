@@ -837,6 +837,81 @@ static int DeviceConfigurator_System_AppSuspend(lua_State *L)
     }
 }
 
+static int DeviceConfigurator_System_GetLanguage(lua_State *L)
+{
+    @autoreleasepool {
+        NSString *currentLanguage = [[DeviceConfigurator sharedConfigurator] currentLanguage];
+        if (!currentLanguage)
+        {
+            lua_pushnil(L);
+            return 1;
+        }
+        
+        lua_pushstring(L, [currentLanguage UTF8String]);
+        return 1;
+    }
+}
+
+static int DeviceConfigurator_System_SetLanguage(lua_State *L)
+{
+    @autoreleasepool {
+        const char *cLanguage = luaL_checkstring(L, 1);
+        NSString *language = [NSString stringWithUTF8String:cLanguage];
+        [[DeviceConfigurator sharedConfigurator] setLanguage:language];
+        return 0;
+    }
+}
+
+static int DeviceConfigurator_System_GetLocale(lua_State *L)
+{
+    @autoreleasepool {
+        NSString *currentLocale = [[DeviceConfigurator sharedConfigurator] currentLocale];
+        if (!currentLocale)
+        {
+            lua_pushnil(L);
+            return 1;
+        }
+        
+        lua_pushstring(L, [currentLocale UTF8String]);
+        return 1;
+    }
+}
+
+static int DeviceConfigurator_System_SetLocale(lua_State *L)
+{
+    @autoreleasepool {
+        const char *cLocale = luaL_checkstring(L, 1);
+        NSString *locale = [NSString stringWithUTF8String:cLocale];
+        [[DeviceConfigurator sharedConfigurator] setLocale:locale];
+        return 0;
+    }
+}
+
+static int DeviceConfigurator_System_GetTimeZone(lua_State *L)
+{
+    @autoreleasepool {
+        NSString *currentTimeZone = [[DeviceConfigurator sharedConfigurator] currentTimeZone];
+        if (!currentTimeZone)
+        {
+            lua_pushnil(L);
+            return 1;
+        }
+        
+        lua_pushstring(L, [currentTimeZone UTF8String]);
+        return 1;
+    }
+}
+
+static int DeviceConfigurator_System_SetTimeZone(lua_State *L)
+{
+    @autoreleasepool {
+        const char *cTimeZone = luaL_checkstring(L, 1);
+        NSString *timeZone = [NSString stringWithUTF8String:cTimeZone];
+        [[DeviceConfigurator sharedConfigurator] setTimeZone:timeZone];
+        return 0;
+    }
+}
+
 
 #pragma mark -
 
@@ -1535,6 +1610,14 @@ static const luaL_Reg DeviceConfigurator_System_AuxLib[] = {
     
     /* App Switcher */
     {"suspend", DeviceConfigurator_System_AppSuspend},
+    
+    /* Language & Region */
+    {"language", DeviceConfigurator_System_GetLanguage},
+    {"set_language", DeviceConfigurator_System_SetLanguage},
+    {"locale", DeviceConfigurator_System_GetLocale},
+    {"set_locale", DeviceConfigurator_System_SetLocale},
+    {"timezone", DeviceConfigurator_System_GetTimeZone},
+    {"set_timezone", DeviceConfigurator_System_SetTimeZone},
     
     {NULL, NULL},
 };

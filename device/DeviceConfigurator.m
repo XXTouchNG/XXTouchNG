@@ -11,6 +11,7 @@
 #endif
 
 #import <notify.h>
+#import "pac_helper.h"
 #import "DeviceConfigurator.h"
 #import <rocketbootstrap/rocketbootstrap.h>
 #import <Foundation/NSUserDefaults+Private.h>
@@ -223,6 +224,130 @@
 - (void)_deleteAppLayoutsMatchingBundleIdentifier:(NSString *)arg1;  // iOS 14
 - (void)_deleteAppLayout:(SBAppLayout *)arg1 forReason:(long long)arg2;  // iOS 13
 @end
+
+@interface InternationalSettingsController : NSObject
++ (void)setPreferredLanguages:(NSArray <NSString *> *)arg1;
++ (void)setLanguage:(NSString *)arg1;
+- (void)setLocaleOnly:(NSString *)arg1;
++ (void)syncPreferencesAndPostNotificationForLanguageChange;
+@end
+
+@interface ALCity : NSObject
+@end
+
+static ALCity *(*PSCityForTimeZone)(CFTimeZoneRef timeZone);
+
+@interface PSSpecifier : NSObject
+- (NSString *)identifier;
+- (void)performSetterWithValue:(id)value;
+@end
+
+@interface PSGDateTimeController : NSObject
+- (NSArray <PSSpecifier *> *)specifiers;
+- (void)reloadTimezone;
+- (PSSpecifier *)timeZoneSpecifier;
+- (void)setUseAutomaticTime:(NSNumber *)arg1 specifier:(id)arg2;
+- (void)setTimeZoneValue:(ALCity *)arg1 specifier:(id)arg2;
+@end
+
+@interface PSTimeZoneController : UITableViewController
++ (void)setTimeZone:(NSString *)arg1;
+@end
+
+NS_INLINE
+NSString *InternationalSettingsExtractLanguageCode(NSString *languageCode) {
+    languageCode = [languageCode stringByReplacingOccurrencesOfString:@"_" withString:@"-"];
+    if ([languageCode hasPrefix:@"zh"]) {
+        if ([languageCode hasPrefix:@"zh-Hans"] || [languageCode hasPrefix:@"zh-CN"])
+            return @"zh-Hans";
+        else if ([languageCode isEqualToString:@"zh-Hant-HK"] || [languageCode hasPrefix:@"zh-HK"])
+            return @"zh-Hant-HK";
+        else
+            return @"zh-Hant";
+    } else if ([languageCode hasPrefix:@"en"]) {
+        if ([languageCode isEqualToString:@"en-US"])
+            return @"en-US";
+        else if ([languageCode isEqualToString:@"en-GB"])
+            return @"en-GB";
+        else if ([languageCode isEqualToString:@"en-AU"])
+            return @"en-AU";
+        else if ([languageCode isEqualToString:@"en-IN"])
+            return @"en-IN";
+        else
+            return @"en";
+    } else if ([languageCode hasPrefix:@"es"]) {
+        if ([languageCode isEqualToString:@"es-MX"])
+            return @"es-MX";
+        else if ([languageCode isEqualToString:@"es-US"])
+            return @"es-US";
+        else if ([languageCode isEqualToString:@"es-419"])
+            return @"es-419";
+        else
+            return @"es";
+    } else if ([languageCode hasPrefix:@"fr"]) {
+        if ([languageCode isEqualToString:@"fr-CA"])
+            return @"fr-CA";
+        else
+            return @"fr";
+    } else if ([languageCode hasPrefix:@"ja"]) {
+        return @"ja";
+    } else if ([languageCode hasPrefix:@"de"]) {
+        return @"de";
+    } else if ([languageCode hasPrefix:@"ru"]) {
+        return @"ru";
+    } else if ([languageCode hasPrefix:@"pt"]) {
+        if ([languageCode isEqualToString:@"pt-BR"])
+            return @"pr-BR";
+        else
+            return @"pt-PT";
+    } else if ([languageCode hasPrefix:@"it"]) {
+        return @"it";
+    } else if ([languageCode hasPrefix:@"ko"]) {
+        return @"ko";
+    } else if ([languageCode hasPrefix:@"tr"]) {
+        return @"tr";
+    } else if ([languageCode hasPrefix:@"nl"]) {
+        return @"nl";
+    } else if ([languageCode hasPrefix:@"ar"]) {
+        return @"ar";
+    } else if ([languageCode hasPrefix:@"th"]) {
+        return @"th";
+    } else if ([languageCode hasPrefix:@"sv"]) {
+        return @"sv";
+    } else if ([languageCode hasPrefix:@"da"]) {
+        return @"da";
+    } else if ([languageCode hasPrefix:@"vi"]) {
+        return @"vi";
+    } else if ([languageCode hasPrefix:@"pl"]) {
+        return @"pl";
+    } else if ([languageCode hasPrefix:@"fi"]) {
+        return @"fi";
+    } else if ([languageCode hasPrefix:@"id"]) {
+        return @"id";
+    } else if ([languageCode hasPrefix:@"he"]) {
+        return @"he";
+    } else if ([languageCode hasPrefix:@"el"]) {
+        return @"el";
+    } else if ([languageCode hasPrefix:@"ro"]) {
+        return @"ro";
+    } else if ([languageCode hasPrefix:@"hu"]) {
+        return @"hu";
+    } else if ([languageCode hasPrefix:@"cs"]) {
+        return @"cs";
+    } else if ([languageCode hasPrefix:@"sk"]) {
+        return @"sk";
+    } else if ([languageCode hasPrefix:@"uk"]) {
+        return @"uk";
+    } else if ([languageCode hasPrefix:@"hr"]) {
+        return @"hr";
+    } else if ([languageCode hasPrefix:@"ms"]) {
+        return @"ms";
+    }
+    return @"en";
+}
+
+
+#pragma mark -
 
 static int _sharedDCAlertDismissalToken;
 @interface DCAlertController : UIAlertController
@@ -1613,7 +1738,7 @@ OBJC_EXTERN void reinitializeHooks(void);
     }
 }
 
-+ (void)loadDisplayAndBrightnessSettingsBundle
++ (void)loadDisplayAndBrightnessSettingsFramework
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -1626,7 +1751,7 @@ OBJC_EXTERN void reinitializeHooks(void);
     static DBSSettingsController *dbsCtrl = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [self loadDisplayAndBrightnessSettingsBundle];
+        [self loadDisplayAndBrightnessSettingsFramework];
         dbsCtrl = [[objc_getClass("DBSSettingsController") alloc] init];
     });
     return dbsCtrl;
@@ -2127,6 +2252,237 @@ OBJC_EXTERN void reinitializeHooks(void);
         NSAssert([NSThread isMainThread], @"not main thread");
         
         [(SpringBoard *)[objc_getClass("SpringBoard") sharedApplication] suspend];
+    }
+}
+
++ (void)loadInternationalSettingsBundle
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [[NSBundle bundleWithPath:@"/System/Library/PreferenceBundles/InternationalSettings.bundle"] load];
+    });
+}
+
+- (NSString *)currentLanguage
+{
+    return [self _currentLanguage][@"reply"];
+}
+
+- (NSDictionary *)_currentLanguage
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_currentLanguage)),
+                @"arguments": [NSArray array],
+            }];
+            
+            CHDebugLog(@"_currentLanguage -> %@", replyObject);
+            
+            NSNumber *replyState = replyObject[@"reply"];
+#if DEBUG
+            NSAssert([replyState isKindOfClass:[NSString class]], @"invalid xpc response");
+#endif
+            
+            return replyObject;
+        }
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        return @{ @"reply": [[NSLocale preferredLanguages] firstObject] };
+    }
+}
+
+- (void)setLanguage:(NSString *)language
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(setLanguage:)),
+                @"arguments": [NSArray arrayWithObjects:language, nil],
+            }];
+        }
+        return;
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            @autoreleasepool {
+                [DeviceConfigurator loadInternationalSettingsBundle];
+                
+                NSString *languageCode = InternationalSettingsExtractLanguageCode(language);
+                [objc_getClass("InternationalSettingsController") setPreferredLanguages:@[languageCode]];
+                [objc_getClass("InternationalSettingsController") setLanguage:languageCode];
+            }
+        });
+    }
+}
+
+- (NSString *)currentLocale
+{
+    return [self _currentLocale][@"reply"];
+}
+
+- (NSDictionary *)_currentLocale
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_currentLocale)),
+                @"arguments": [NSArray array],
+            }];
+            
+            CHDebugLog(@"_currentLocale -> %@", replyObject);
+            
+            NSNumber *replyState = replyObject[@"reply"];
+#if DEBUG
+            NSAssert([replyState isKindOfClass:[NSString class]], @"invalid xpc response");
+#endif
+            
+            return replyObject;
+        }
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        return @{ @"reply": [[NSLocale currentLocale] localeIdentifier] };
+    }
+}
+
+- (void)setLocale:(NSString *)locale
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(setLocale:)),
+                @"arguments": [NSArray arrayWithObjects:locale, nil],
+            }];
+        }
+        return;
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            @autoreleasepool {
+                [DeviceConfigurator loadInternationalSettingsBundle];
+                
+                [[objc_getClass("InternationalSettingsController") new] setLocaleOnly:locale];
+                [objc_getClass("InternationalSettingsController") syncPreferencesAndPostNotificationForLanguageChange];
+            }
+        });
+    }
+}
+
++ (void)loadGeneralSettingsUIFramework
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [[NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/Settings/GeneralSettingsUI.framework"] load];
+    });
+}
+
+- (NSString *)currentTimeZone
+{
+    return [self _currentTimeZone][@"reply"];
+}
+
+- (NSDictionary *)_currentTimeZone
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_currentTimeZone)),
+                @"arguments": [NSArray array],
+            }];
+            
+            CHDebugLog(@"_currentTimeZone -> %@", replyObject);
+            
+            NSNumber *replyState = replyObject[@"reply"];
+#if DEBUG
+            NSAssert([replyState isKindOfClass:[NSString class]], @"invalid xpc response");
+#endif
+            
+            return replyObject;
+        }
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        return @{ @"reply": [[NSTimeZone systemTimeZone] name] };
+    }
+}
+
+- (void)setTimeZone:(NSString *)timeZoneName
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(setTimeZone:)),
+                @"arguments": [NSArray arrayWithObjects:timeZoneName, nil],
+            }];
+        }
+        return;
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            @autoreleasepool {
+                [DeviceConfigurator loadGeneralSettingsUIFramework];
+                
+                MSImageRef PreferencesBinary = MSGetImageByName("/System/Library/PrivateFrameworks/Preferences.framework/Preferences");
+                if (PreferencesBinary)
+                {
+                    PSCityForTimeZone = make_sym_callable(MSFindSymbol(PreferencesBinary, "_PSCityForTimeZone"));
+                }
+                
+                if (PSCityForTimeZone)
+                {
+                    CFTimeZoneRef timeZone = CFTimeZoneCreateWithName(kCFAllocatorDefault, (__bridge CFStringRef)timeZoneName, true);
+                    
+                    if (timeZone)
+                    {
+                        ALCity *cityObject = PSCityForTimeZone(timeZone);
+                        if (cityObject)
+                        {
+                            PSGDateTimeController *dateTimeCtrl = [objc_getClass("PSGDateTimeController") new];
+                            [dateTimeCtrl reloadTimezone];
+                            
+                            PSSpecifier *autoTimeZoneSpecifierObject = nil;
+                            for (PSSpecifier *specifierObject in [dateTimeCtrl specifiers]) {
+                                if ([[specifierObject identifier] isEqualToString:@"SET_AUTOMATICALLY"])
+                                {
+                                    autoTimeZoneSpecifierObject = specifierObject;
+                                    break;
+                                }
+                            }
+                            
+                            if (autoTimeZoneSpecifierObject)
+                            {
+                                [autoTimeZoneSpecifierObject performSetterWithValue:@(NO)];
+                            }
+                            
+                            PSSpecifier *timeZoneSpecifierObject = [dateTimeCtrl timeZoneSpecifier];
+                            if (timeZoneSpecifierObject)
+                            {
+                                [timeZoneSpecifierObject performSetterWithValue:cityObject];
+                            }
+                            
+                            // this is where changes actually happen
+                            [objc_getClass("PSTimeZoneController") setTimeZone:timeZoneName];
+                        }
+                        
+                        CFRelease(timeZone);
+                    }
+                }
+            }
+        });
     }
 }
 

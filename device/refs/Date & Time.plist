@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>label</key>
+			<string>24-Hour Time</string>
+			<key>get</key>
+			<string>is24HourTime:</string>
+			<key>set</key>
+			<string>set24HourTime:specifier:</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>label</key>
+			<string>SHOW_AMPM_IN_STATUS_BAR</string>
+			<key>get</key>
+			<string>isShowingAMPMInStatusBar:</string>
+			<key>set</key>
+			<string>setShowAMPMInStatusBar:specifier:</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>label</key>
+			<string>SHOW_DATE_IN_STATUS_BAR</string>
+			<key>get</key>
+			<string>isShowingDateInStatusBar:</string>
+			<key>set</key>
+			<string>setShowDateInStatusBar:specifier:</string>
+		</dict>
+		<dict>
+			<key>id</key>
+			<string>AUTOMATIC_GROUP</string>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>label</key>
+			<string>SET_AUTOMATICALLY</string>
+			<key>get</key>
+			<string>useAutomaticTime:</string>
+			<key>set</key>
+			<string>setUseAutomaticTime:specifier:</string>
+		</dict>
+		<dict>
+			<key>set</key>
+			<string>setTimeZoneValue:specifier:</string>
+			<key>get</key>
+			<string>timeZoneValue:</string>
+			<key>defaults</key>
+			<string>com.apple.preferences.datetime</string>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>loadAction</key>
+			<string>loadTimeZoneController:</string>
+			<key>key</key>
+			<string>timezone</string>
+			<key>label</key>
+			<string>TIME_ZONE</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>DATE_TIME_TITLE</string>
+</dict>
+</plist>

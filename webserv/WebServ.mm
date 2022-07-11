@@ -3088,28 +3088,139 @@ NS_INLINE NSURL *baseurl_openapi_v1(NSString *uploadRoot)
 static void register_openapi_v1_handlers(GCDWebServer *webServer)
 {
     /* TouchSprite Compatible OpenAPI */
-    register_path_handler_async(webServer, @[@"GET", @"POST"], @"/deviceid", ^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"GET", @"POST"], @"/deviceid", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_v1_unauthorized());
             return;
         }
         dispatch_async(_serviceQueue, ^{
             @autoreleasepool {
-                NSString *deviceID = CFBridgingRelease(MGCopyAnswer(kMGUniqueDeviceID, nil));
-                completionBlock([GCDWebServerDataResponse responseWithText:deviceID]);
+                if ([[[request method] uppercaseString] isEqualToString:@"GET"])
+                {
+                    NSString *deviceID = CFBridgingRelease(MGCopyAnswer(kMGUniqueDeviceID, nil));
+                    completionBlock([GCDWebServerDataResponse responseWithText:deviceID]);
+                }
+                else
+                {
+                    completionBlock(resp_v1_bad_request());
+                }
             }
         });
     });
     
-    register_path_handler_async(webServer, @[@"GET", @"POST"], @"/devicename", ^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    register_path_handler_async(webServer, @[@"GET", @"POST"], @"/devicename", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         if (!is_accessible(request)) {
             completionBlock(resp_v1_unauthorized());
             return;
         }
         dispatch_async(_serviceQueue, ^{
             @autoreleasepool {
-                NSString *deviceName = CFBridgingRelease(MGCopyAnswer(kMGUserAssignedDeviceName, nil));
-                completionBlock([GCDWebServerDataResponse responseWithText:deviceName]);
+                if ([[[request method] uppercaseString] isEqualToString:@"GET"])
+                {
+                    NSString *deviceName = CFBridgingRelease(MGCopyAnswer(kMGUserAssignedDeviceName, nil));
+                    completionBlock([GCDWebServerDataResponse responseWithText:deviceName]);
+                }
+                else
+                {
+                    NSString *deviceName = request.text;
+                    if (!deviceName.length)
+                    {
+                        completionBlock(resp_v1_bad_request());
+                        return;
+                    }
+                    
+                    int mgRet = MGSetAnswer(kMGUserAssignedDeviceName, (__bridge CFStringRef)deviceName);
+                    if (!mgRet) {
+                        completionBlock(resp_v1_fail());
+                        return;
+                    }
+                    
+                    completionBlock(resp_v1_ok());
+                }
+            }
+        });
+    });
+    
+    register_path_handler_async(webServer, @[@"GET", @"POST"], @"/language", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+        if (!is_accessible(request)) {
+            completionBlock(resp_v1_unauthorized());
+            return;
+        }
+        dispatch_async(_serviceQueue, ^{
+            @autoreleasepool {
+                if ([[[request method] uppercaseString] isEqualToString:@"GET"])
+                {
+                    NSString *currentLanguage = [[DeviceConfigurator sharedConfigurator] currentLanguage];
+                    completionBlock([GCDWebServerDataResponse responseWithText:currentLanguage]);
+                }
+                else
+                {
+                    NSString *language = request.text;
+                    if (!language.length)
+                    {
+                        completionBlock(resp_v1_bad_request());
+                        return;
+                    }
+                    
+                    [[DeviceConfigurator sharedConfigurator] setLanguage:language];
+                    completionBlock(resp_v1_ok());
+                }
+            }
+        });
+    });
+    
+    register_path_handler_async(webServer, @[@"GET", @"POST"], @"/locale", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+        if (!is_accessible(request)) {
+            completionBlock(resp_v1_unauthorized());
+            return;
+        }
+        dispatch_async(_serviceQueue, ^{
+            @autoreleasepool {
+                if ([[[request method] uppercaseString] isEqualToString:@"GET"])
+                {
+                    NSString *currentLocale = [[DeviceConfigurator sharedConfigurator] currentLocale];
+                    completionBlock([GCDWebServerDataResponse responseWithText:currentLocale]);
+                }
+                else
+                {
+                    NSString *locale = request.text;
+                    if (!locale.length)
+                    {
+                        completionBlock(resp_v1_bad_request());
+                        return;
+                    }
+                    
+                    [[DeviceConfigurator sharedConfigurator] setLocale:locale];
+                    completionBlock(resp_v1_ok());
+                }
+            }
+        });
+    });
+    
+    register_path_handler_async(webServer, @[@"GET", @"POST"], @"/timezone", ^(__kindof GCDWebServerDataRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+        if (!is_accessible(request)) {
+            completionBlock(resp_v1_unauthorized());
+            return;
+        }
+        dispatch_async(_serviceQueue, ^{
+            @autoreleasepool {
+                if ([[[request method] uppercaseString] isEqualToString:@"GET"])
+                {
+                    NSString *currentTimeZone = [[DeviceConfigurator sharedConfigurator] currentTimeZone];
+                    completionBlock([GCDWebServerDataResponse responseWithText:currentTimeZone]);
+                }
+                else
+                {
+                    NSString *timeZone = request.text;
+                    if (!timeZone.length)
+                    {
+                        completionBlock(resp_v1_bad_request());
+                        return;
+                    }
+                    
+                    [[DeviceConfigurator sharedConfigurator] setTimeZone:timeZone];
+                    completionBlock(resp_v1_ok());
+                }
             }
         });
     });

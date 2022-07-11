@@ -145,6 +145,14 @@ typedef NS_ENUM(NSUInteger, DeviceConfiguratorRole) {
 - (void)reboot;
 - (void)suspend;
 
+/* Language & Region */
+- (NSString *)currentLanguage;
+- (void)setLanguage:(NSString *)language;  // async
+- (NSString *)currentLocale;
+- (void)setLocale:(NSString *)locale;  // async
+- (NSString *)currentTimeZone;
+- (void)setTimeZone:(NSString *)timeZoneName;
+
 @end
 
 NS_ASSUME_NONNULL_END
