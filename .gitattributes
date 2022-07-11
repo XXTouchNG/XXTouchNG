@@ -16,3 +16,15 @@ dependencies/libarchive_3.3.2-1_iphoneos-arm.deb filter=lfs diff=lfs merge=lfs -
 dependencies/libzip_1.5.1-1_iphoneos-arm.deb filter=lfs diff=lfs merge=lfs -text
 dependencies/unc0ver_Release_6.1.2.ipa filter=lfs diff=lfs merge=lfs -text
 dependencies/unc0ver_Release_8.0.2.ipa filter=lfs diff=lfs merge=lfs -text
+dependencies/recommendations/moe.misty.surge4-advanced_0.0.3_iphoneos-arm.deb filter=lfs diff=lfs merge=lfs -text
+dependencies/recommendations/netskao.antiprofilesrevoke_1.1-1_iphoneos-arm.deb filter=lfs diff=lfs merge=lfs -text
+dependencies/dependencies.txt filter=lfs diff=lfs merge=lfs -text
+dependencies/jailbreaks filter=lfs diff=lfs merge=lfs -text
+dependencies/jailbreaks/unc0ver_Release_6.1.2.ipa filter=lfs diff=lfs merge=lfs -text
+dependencies/recommendations/com.byteage.xcoderootdebug_0.0.1_iphoneos-arm.deb filter=lfs diff=lfs merge=lfs -text
+dependencies/recommendations/libactivator_1.9.13_iphoneos-arm.deb filter=lfs diff=lfs merge=lfs -text
+dependencies/jailbreaks/unc0ver_Release_8.0.2.ipa filter=lfs diff=lfs merge=lfs -text
+dependencies/preferenceloader_2.2.6.deb filter=lfs diff=lfs merge=lfs -text
+dependencies/recommendations filter=lfs diff=lfs merge=lfs -text
+dependencies/recommendations/com.a3tweaks.flipswitch_1.0.16_iphoneos-arm.deb filter=lfs diff=lfs merge=lfs -text
+dependencies/zip_2.32-1_iphoneos-arm.deb filter=lfs diff=lfs merge=lfs -text
