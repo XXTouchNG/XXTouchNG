@@ -29,7 +29,7 @@ dispatch_queue_t _sharedBBServerQueue = nil;
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class SBRingerControl; @class BBServer; @class SBDisplayBrightnessController; @class AXMotionController; 
+@class SBDisplayBrightnessController; @class SBRingerControl; @class AXMotionController; @class BBServer; 
 
 
 #line 10 "LogosDeviceConfigurator.xm"

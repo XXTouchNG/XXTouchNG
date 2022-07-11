@@ -3168,7 +3168,7 @@ static void register_openapi_v1_handlers(GCDWebServer *webServer)
                         return;
                     }
                     
-                    [[DeviceConfigurator sharedConfigurator] setLanguage:language];
+                    [[DeviceConfigurator sharedConfigurator] setCurrentLanguage:language];
                     completionBlock(resp_v1_ok());
                 }
             }
@@ -3196,7 +3196,7 @@ static void register_openapi_v1_handlers(GCDWebServer *webServer)
                         return;
                     }
                     
-                    [[DeviceConfigurator sharedConfigurator] setLocale:locale];
+                    [[DeviceConfigurator sharedConfigurator] setCurrentLocale:locale];
                     completionBlock(resp_v1_ok());
                 }
             }
@@ -3224,7 +3224,7 @@ static void register_openapi_v1_handlers(GCDWebServer *webServer)
                         return;
                     }
                     
-                    [[DeviceConfigurator sharedConfigurator] setTimeZone:timeZone];
+                    [[DeviceConfigurator sharedConfigurator] setCurrentTimeZone:timeZone];
                     completionBlock(resp_v1_ok());
                 }
             }

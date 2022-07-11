@@ -147,15 +147,25 @@ typedef NS_ENUM(NSUInteger, DeviceConfiguratorRole) {
 
 /* Language & Region */
 - (NSString *)currentLanguage;
-- (void)setLanguage:(NSString *)language;  // async
+- (void)setCurrentLanguage:(NSString *)language;  // async
 - (NSString *)currentLocale;
-- (void)setLocale:(NSString *)locale;  // async
+- (void)setCurrentLocale:(NSString *)locale;  // async
 - (NSString *)currentTimeZone;
-- (void)setTimeZone:(NSString *)timeZoneName;
+- (void)setCurrentTimeZone:(NSString *)timeZoneName;
 
 /* User Assigned Device Name */
 - (NSString *)userAssignedDeviceName;
 - (void)setUserAssignedDeviceName:(NSString *)userAssignedDeviceName;
+
+/* Appearance (Not Available in OpenAPI) */
+- (UIUserInterfaceStyle)currentInterfaceStyle;
+- (void)setCurrentInterfaceStyle:(UIUserInterfaceStyle)interfaceStyle;
+- (BOOL)boldTextEnabled;
+- (void)setBoldTextEnabled:(BOOL)boldTextEnabled;
+- (NSInteger)dynamicTypeValue;
+- (void)setDynamicTypeValue:(NSInteger)dynamicTypeValue;
+- (BOOL)isZoomedMode;
+- (void)setZoomedMode:(BOOL)zoomedMode;
 
 @end
 

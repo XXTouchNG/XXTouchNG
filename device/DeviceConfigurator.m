@@ -190,9 +190,42 @@
 - (NSNumber *)isJavaScriptEnabled:(id)arg1;
 @end
 
+@interface UISUserInterfaceStyleMode : NSObject
+@property (nonatomic, assign) UIUserInterfaceStyle modeValue;
+@end
+
+@interface PSSpecifier : NSObject
+- (NSString *)identifier;
+- (void)performSetterWithValue:(id)value;
+@end
+
 @interface DBSSettingsController : NSObject
 - (NSNumber *)screenLock:(id)arg1;
 - (void)setScreenLock:(NSNumber *)arg1 specifier:(id)arg2;
+- (NSNumber *)getAutomaticAppearanceEnabledForSpecifier:(id)arg1;
+- (void)setAutomaticAppearanceEnabled:(NSNumber *)arg1 forSpecifier:(id)arg2;
+- (UISUserInterfaceStyleMode *)_styleMode;
+- (void)_updateDeviceAppearanceToNewInterfaceStyle:(UIUserInterfaceStyle)arg1;  // 1 light 2 dark
+- (NSNumber *)boldTextEnabledForSpecifier:(id)arg1 ;
+- (void)setBoldTextEnabled:(NSNumber *)arg1 specifier:(id)arg2 ;
+@end
+
+@interface DBSLargeTextSliderListController : NSObject
+- (void)loadView;
+- (NSArray <PSSpecifier *> *)specifiers;
+- (void)setDynamicTypeValue:(NSNumber *)arg1 forSpecifier:(PSSpecifier *)arg2;
+- (NSNumber *)getDynamicTypeValueForSpecifier:(PSSpecifier *)arg1;
+@end
+
+@interface DBSDisplayZoomMode : NSObject
+- (NSUInteger)displayZoomOption;  // 0 Standard 1 Zoomed
+@end
+
+@interface DBSDisplayZoomConfigurationController : NSObject
++ (instancetype)defaultController;
+- (DBSDisplayZoomMode *)currentDisplayZoomMode;
+- (NSDictionary <NSString *, DBSDisplayZoomMode *> *)displayZoomModes;  // Standard, Zoomed
+- (void)setDisplayZoomMode:(DBSDisplayZoomMode *)arg1 withRelaunchURL:(NSURL *)arg2;
 @end
 
 @interface SBRestartManager : NSObject
@@ -236,11 +269,6 @@
 @end
 
 static ALCity *(*PSCityForTimeZone)(CFTimeZoneRef timeZone);
-
-@interface PSSpecifier : NSObject
-- (NSString *)identifier;
-- (void)performSetterWithValue:(id)value;
-@end
 
 @interface PSGDateTimeController : NSObject
 - (NSArray <PSSpecifier *> *)specifiers;
@@ -2300,12 +2328,12 @@ OBJC_EXTERN void reinitializeHooks(void);
     }
 }
 
-- (void)setLanguage:(NSString *)language
+- (void)setCurrentLanguage:(NSString *)language
 {
     if (_role == DeviceConfiguratorRoleClient) {
         @autoreleasepool {
             [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
-                @"selector": NSStringFromSelector(@selector(setLanguage:)),
+                @"selector": NSStringFromSelector(@selector(setCurrentLanguage:)),
                 @"arguments": [NSArray arrayWithObjects:language, nil],
             }];
         }
@@ -2320,7 +2348,7 @@ OBJC_EXTERN void reinitializeHooks(void);
                 
                 NSString *languageCode = InternationalSettingsExtractLanguageCode(language);
                 [objc_getClass("InternationalSettingsController") setPreferredLanguages:@[languageCode]];
-                [objc_getClass("InternationalSettingsController") setLanguage:languageCode];
+                [objc_getClass("InternationalSettingsController") setCurrentLanguage:languageCode];
             }
         });
     }
@@ -2358,12 +2386,23 @@ OBJC_EXTERN void reinitializeHooks(void);
     }
 }
 
-- (void)setLocale:(NSString *)locale
++ (InternationalSettingsController *)sharedInternationalSettingsController
+{
+    static InternationalSettingsController *isCtrl = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self loadInternationalSettingsBundle];
+        isCtrl = [[objc_getClass("InternationalSettingsController") alloc] init];
+    });
+    return isCtrl;
+}
+
+- (void)setCurrentLocale:(NSString *)locale
 {
     if (_role == DeviceConfiguratorRoleClient) {
         @autoreleasepool {
             [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
-                @"selector": NSStringFromSelector(@selector(setLocale:)),
+                @"selector": NSStringFromSelector(@selector(setCurrentLocale:)),
                 @"arguments": [NSArray arrayWithObjects:locale, nil],
             }];
         }
@@ -2374,9 +2413,7 @@ OBJC_EXTERN void reinitializeHooks(void);
         NSAssert([NSThread isMainThread], @"not main thread");
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             @autoreleasepool {
-                [DeviceConfigurator loadInternationalSettingsBundle];
-                
-                [[objc_getClass("InternationalSettingsController") new] setLocaleOnly:locale];
+                [[DeviceConfigurator sharedInternationalSettingsController] setLocaleOnly:locale];
                 [objc_getClass("InternationalSettingsController") syncPreferencesAndPostNotificationForLanguageChange];
             }
         });
@@ -2423,12 +2460,23 @@ OBJC_EXTERN void reinitializeHooks(void);
     }
 }
 
-- (void)setTimeZone:(NSString *)timeZoneName
++ (PSGDateTimeController *)sharedPSGDateTimeController
+{
+    static PSGDateTimeController *dtCtrl = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self loadGeneralSettingsUIFramework];
+        dtCtrl = [[objc_getClass("PSGDateTimeController") alloc] init];
+    });
+    return dtCtrl;
+}
+
+- (void)setCurrentTimeZone:(NSString *)timeZoneName
 {
     if (_role == DeviceConfiguratorRoleClient) {
         @autoreleasepool {
             [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
-                @"selector": NSStringFromSelector(@selector(setTimeZone:)),
+                @"selector": NSStringFromSelector(@selector(setCurrentTimeZone:)),
                 @"arguments": [NSArray arrayWithObjects:timeZoneName, nil],
             }];
         }
@@ -2456,7 +2504,7 @@ OBJC_EXTERN void reinitializeHooks(void);
                         ALCity *cityObject = PSCityForTimeZone(timeZone);
                         if (cityObject)
                         {
-                            PSGDateTimeController *dateTimeCtrl = [objc_getClass("PSGDateTimeController") new];
+                            PSGDateTimeController *dateTimeCtrl = [DeviceConfigurator sharedPSGDateTimeController];
                             [dateTimeCtrl reloadTimezone];
                             
                             PSSpecifier *autoTimeZoneSpecifierObject = nil;
@@ -2480,7 +2528,7 @@ OBJC_EXTERN void reinitializeHooks(void);
                             }
                             
                             // this is where changes actually happen
-                            [objc_getClass("PSTimeZoneController") setTimeZone:timeZoneName];
+                            [objc_getClass("PSTimeZoneController") setCurrentTimeZone:timeZoneName];
                         }
                         
                         CFRelease(timeZone);
@@ -2494,6 +2542,17 @@ OBJC_EXTERN void reinitializeHooks(void);
 - (NSString *)userAssignedDeviceName
 {
     return [self _userAssignedName][@"reply"];
+}
+
++ (PSGAboutController *)sharedPSGAboutController
+{
+    static PSGAboutController *aboutCtrl = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self loadGeneralSettingsUIFramework];
+        aboutCtrl = [[objc_getClass("PSGAboutController") alloc] init];
+    });
+    return aboutCtrl;
 }
 
 - (NSDictionary *)_userAssignedName
@@ -2519,8 +2578,7 @@ OBJC_EXTERN void reinitializeHooks(void);
     @autoreleasepool {
         NSAssert([NSThread isMainThread], @"not main thread");
         
-        [DeviceConfigurator loadGeneralSettingsUIFramework];
-        NSString *deviceName = [[objc_getClass("PSGAboutController") new] deviceName:nil];
+        NSString *deviceName = [[DeviceConfigurator sharedPSGAboutController] deviceName:nil];
         return @{ @"reply": deviceName ?: @"" };
     }
 }
@@ -2540,8 +2598,272 @@ OBJC_EXTERN void reinitializeHooks(void);
     @autoreleasepool {
         NSAssert([NSThread isMainThread], @"not main thread");
         
-        [DeviceConfigurator loadGeneralSettingsUIFramework];
-        [[objc_getClass("PSGAboutController") new] setDeviceName:userAssignedDeviceName specifier:nil];
+        [[DeviceConfigurator sharedPSGAboutController] setDeviceName:userAssignedDeviceName specifier:nil];
+    }
+}
+
+- (UIUserInterfaceStyle)currentInterfaceStyle
+{
+    return [[self _currentInterfaceStyle][@"reply"] integerValue];
+}
+
+- (NSDictionary *)_currentInterfaceStyle
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_currentInterfaceStyle)),
+                @"arguments": [NSArray array],
+            }];
+            
+            CHDebugLog(@"_currentInterfaceStyle -> %@", replyObject);
+            
+            NSNumber *replyState = replyObject[@"reply"];
+#if DEBUG
+            NSAssert([replyState isKindOfClass:[NSNumber class]], @"invalid xpc response");
+#endif
+            
+            return replyObject;
+        }
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        return @{ @"reply": @([[[DeviceConfigurator sharedDBSSettingsController] _styleMode] modeValue]) };
+    }
+}
+
+- (void)setCurrentInterfaceStyle:(UIUserInterfaceStyle)interfaceStyle
+{
+    [self _setCurrentInterfaceStyle:@(interfaceStyle)];
+}
+
+- (void)_setCurrentInterfaceStyle:(NSNumber /* NSInteger */ *)interfaceStyle
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_setCurrentInterfaceStyle:)),
+                @"arguments": [NSArray arrayWithObjects:interfaceStyle, nil],
+            }];
+        }
+        return;
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        [[DeviceConfigurator sharedDBSSettingsController] _updateDeviceAppearanceToNewInterfaceStyle:[interfaceStyle integerValue]];
+    }
+}
+
+- (BOOL)boldTextEnabled
+{
+    return [[self _boldTextEnabled][@"reply"] boolValue];
+}
+
+- (NSDictionary *)_boldTextEnabled
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_boldTextEnabled)),
+                @"arguments": [NSArray array],
+            }];
+            
+            CHDebugLog(@"_boldTextEnabled -> %@", replyObject);
+            
+            NSNumber *replyState = replyObject[@"reply"];
+#if DEBUG
+            NSAssert([replyState isKindOfClass:[NSNumber class]], @"invalid xpc response");
+#endif
+            
+            return replyObject;
+        }
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        return @{ @"reply": @([[[DeviceConfigurator sharedDBSSettingsController] boldTextEnabledForSpecifier:nil] boolValue]) };
+    }
+}
+
+- (void)setBoldTextEnabled:(BOOL)boldTextEnabled
+{
+    [self _setBoldTextEnabled:@(boldTextEnabled)];
+}
+
+- (void)_setBoldTextEnabled:(NSNumber /* BOOL */ *)boldTextEnabled
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_setBoldTextEnabled:)),
+                @"arguments": [NSArray arrayWithObjects:boldTextEnabled, nil],
+            }];
+        }
+        return;
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        [[DeviceConfigurator sharedDBSSettingsController] setBoldTextEnabled:@([boldTextEnabled boolValue]) specifier:nil];
+    }
+}
+
++ (DBSLargeTextSliderListController *)sharedDBSLargeTextSliderListController
+{
+    static DBSLargeTextSliderListController *dbsCtrl = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self loadDisplayAndBrightnessSettingsFramework];
+        dbsCtrl = [[objc_getClass("DBSLargeTextSliderListController") alloc] init];
+        [dbsCtrl loadView];
+    });
+    return dbsCtrl;
+}
+
+- (NSInteger)dynamicTypeValue
+{
+    return [[self _dynamicTypeValue][@"reply"] integerValue];
+}
+
+- (NSDictionary *)_dynamicTypeValue
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_dynamicTypeValue)),
+                @"arguments": [NSArray array],
+            }];
+            
+            CHDebugLog(@"_dynamicTypeValue -> %@", replyObject);
+            
+            NSNumber *replyState = replyObject[@"reply"];
+#if DEBUG
+            NSAssert([replyState isKindOfClass:[NSNumber class]], @"invalid xpc response");
+#endif
+            
+            return replyObject;
+        }
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        DBSLargeTextSliderListController *ctrl = [DeviceConfigurator sharedDBSLargeTextSliderListController];
+        PSSpecifier *spec = [[ctrl specifiers] firstObject];
+        return @{ @"reply": @([[ctrl getDynamicTypeValueForSpecifier:spec] integerValue]) };
+    }
+}
+
+- (void)setDynamicTypeValue:(NSInteger)dynamicTypeValue
+{
+    [self _setDynamicTypeValue:@(dynamicTypeValue)];
+}
+
+- (void)_setDynamicTypeValue:(NSNumber /* NSInteger */ *)dynamicTypeValue
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_setDynamicTypeValue:)),
+                @"arguments": [NSArray arrayWithObjects:dynamicTypeValue, nil],
+            }];
+        }
+        return;
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        DBSLargeTextSliderListController *ctrl = [DeviceConfigurator sharedDBSLargeTextSliderListController];
+        PSSpecifier *spec = [[ctrl specifiers] firstObject];
+        [ctrl setDynamicTypeValue:@([dynamicTypeValue integerValue]) forSpecifier:spec];
+    }
+}
+
++ (DBSDisplayZoomConfigurationController *)sharedDBSDisplayZoomConfigurationController
+{
+    static DBSDisplayZoomConfigurationController *dbsCtrl = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self loadDisplayAndBrightnessSettingsFramework];
+        dbsCtrl = [objc_getClass("DBSDisplayZoomConfigurationController") defaultController];
+    });
+    return dbsCtrl;
+}
+
+- (BOOL)isZoomedMode
+{
+    return [[self _isZoomedMode][@"reply"] boolValue];
+}
+
+- (NSDictionary *)_isZoomedMode
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_isZoomedMode)),
+                @"arguments": [NSArray array],
+            }];
+            
+            CHDebugLog(@"_isZoomedMode -> %@", replyObject);
+            
+            NSNumber *replyState = replyObject[@"reply"];
+#if DEBUG
+            NSAssert([replyState isKindOfClass:[NSNumber class]], @"invalid xpc response");
+#endif
+            
+            return replyObject;
+        }
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        return @{ @"reply": @([[[DeviceConfigurator sharedDBSDisplayZoomConfigurationController] currentDisplayZoomMode] displayZoomOption]) };
+    }
+}
+
+- (void)setZoomedMode:(BOOL)zoomedMode
+{
+    [self _setZoomedMode:@(zoomedMode)];
+}
+
+- (void)_setZoomedMode:(NSNumber /* BOOL */ *)zoomedMode
+{
+    if (_role == DeviceConfiguratorRoleClient) {
+        @autoreleasepool {
+            [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_setZoomedMode:)),
+                @"arguments": [NSArray arrayWithObjects:zoomedMode, nil],
+            }];
+        }
+        return;
+    }
+    
+    @autoreleasepool {
+        NSAssert([NSThread isMainThread], @"not main thread");
+        
+        DBSDisplayZoomConfigurationController *ctrl = [DeviceConfigurator sharedDBSDisplayZoomConfigurationController];
+        DBSDisplayZoomMode *zoomMode = nil;
+        if ([zoomedMode boolValue])
+        {
+            zoomMode = [ctrl displayZoomModes][@"Zoomed"];
+        }
+        else
+        {
+            zoomMode = [ctrl displayZoomModes][@"Standard"];
+        }
+        
+        if (zoomMode && [ctrl.currentDisplayZoomMode displayZoomOption] != [zoomMode displayZoomOption])
+        {
+            [ctrl setDisplayZoomMode:zoomMode withRelaunchURL:[NSURL URLWithString:@"prefs:root=DISPLAY&path=MAGNIFY"]];
+        }
     }
 }
 

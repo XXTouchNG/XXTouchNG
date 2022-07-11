@@ -857,7 +857,7 @@ static int DeviceConfigurator_System_SetLanguage(lua_State *L)
     @autoreleasepool {
         const char *cLanguage = luaL_checkstring(L, 1);
         NSString *language = [NSString stringWithUTF8String:cLanguage];
-        [[DeviceConfigurator sharedConfigurator] setLanguage:language];
+        [[DeviceConfigurator sharedConfigurator] setCurrentLanguage:language];
         return 0;
     }
 }
@@ -882,7 +882,7 @@ static int DeviceConfigurator_System_SetLocale(lua_State *L)
     @autoreleasepool {
         const char *cLocale = luaL_checkstring(L, 1);
         NSString *locale = [NSString stringWithUTF8String:cLocale];
-        [[DeviceConfigurator sharedConfigurator] setLocale:locale];
+        [[DeviceConfigurator sharedConfigurator] setCurrentLocale:locale];
         return 0;
     }
 }
@@ -907,7 +907,89 @@ static int DeviceConfigurator_System_SetTimeZone(lua_State *L)
     @autoreleasepool {
         const char *cTimeZone = luaL_checkstring(L, 1);
         NSString *timeZone = [NSString stringWithUTF8String:cTimeZone];
-        [[DeviceConfigurator sharedConfigurator] setTimeZone:timeZone];
+        [[DeviceConfigurator sharedConfigurator] setCurrentTimeZone:timeZone];
+        return 0;
+    }
+}
+
+static int DeviceConfigurator_System_GetAppearance(lua_State *L)
+{
+    @autoreleasepool {
+        lua_pushinteger(L, [[DeviceConfigurator sharedConfigurator] currentInterfaceStyle]);
+        return 1;
+    }
+}
+
+static int DeviceConfigurator_System_SetAppearance(lua_State *L)
+{
+    @autoreleasepool {
+        lua_Integer cStyle = luaL_checkinteger(L, 1);
+        [[DeviceConfigurator sharedConfigurator] setCurrentInterfaceStyle:(UIUserInterfaceStyle)cStyle];
+        return 0;
+    }
+}
+
+static int DeviceConfigurator_System_IsBoldTextOn(lua_State *L)
+{
+    @autoreleasepool {
+        lua_pushboolean(L, [[DeviceConfigurator sharedConfigurator] boldTextEnabled]);
+        return 1;
+    }
+}
+
+static int DeviceConfigurator_System_SetBoldTextOn(lua_State *L)
+{
+    @autoreleasepool {
+        [[DeviceConfigurator sharedConfigurator] setBoldTextEnabled:YES];
+        return 0;
+    }
+}
+
+static int DeviceConfigurator_System_SetBoldTextOff(lua_State *L)
+{
+    @autoreleasepool {
+        [[DeviceConfigurator sharedConfigurator] setBoldTextEnabled:NO];
+        return 0;
+    }
+}
+
+static int DeviceConfigurator_System_IsZoomOn(lua_State *L)
+{
+    @autoreleasepool {
+        lua_pushboolean(L, [[DeviceConfigurator sharedConfigurator] isZoomedMode]);
+        return 1;
+    }
+}
+
+static int DeviceConfigurator_System_SetZoomOn(lua_State *L)
+{
+    @autoreleasepool {
+        [[DeviceConfigurator sharedConfigurator] setZoomedMode:YES];
+        return 0;
+    }
+}
+
+static int DeviceConfigurator_System_SetZoomOff(lua_State *L)
+{
+    @autoreleasepool {
+        [[DeviceConfigurator sharedConfigurator] setZoomedMode:NO];
+        return 0;
+    }
+}
+
+static int DeviceConfigurator_System_GetTextSize(lua_State *L)
+{
+    @autoreleasepool {
+        lua_pushinteger(L, [[DeviceConfigurator sharedConfigurator] dynamicTypeValue]);
+        return 1;
+    }
+}
+
+static int DeviceConfigurator_System_SetTextSize(lua_State *L)
+{
+    @autoreleasepool {
+        lua_Integer cSizeLevel = luaL_checkinteger(L, 1);
+        [[DeviceConfigurator sharedConfigurator] setDynamicTypeValue:(NSInteger)cSizeLevel];
         return 0;
     }
 }
@@ -1637,6 +1719,18 @@ static const luaL_Reg DeviceConfigurator_System_AuxLib[] = {
     {"set_locale", DeviceConfigurator_System_SetLocale},
     {"timezone", DeviceConfigurator_System_GetTimeZone},
     {"set_timezone", DeviceConfigurator_System_SetTimeZone},
+    
+    /* Appearance */
+    {"appearance", DeviceConfigurator_System_GetAppearance},
+    {"set_appearance", DeviceConfigurator_System_SetAppearance},
+    {"textsize", DeviceConfigurator_System_GetTextSize},
+    {"set_textsize", DeviceConfigurator_System_SetTextSize},
+    {"is_boldtext_on", DeviceConfigurator_System_IsBoldTextOn},
+    {"boldtext_on", DeviceConfigurator_System_SetBoldTextOn},
+    {"boldtext_off", DeviceConfigurator_System_SetBoldTextOff},
+    {"is_zoom_on", DeviceConfigurator_System_IsZoomOn},
+    {"zoom_on", DeviceConfigurator_System_SetZoomOn},
+    {"zoom_off", DeviceConfigurator_System_SetZoomOff},
     
     {NULL, NULL},
 };
