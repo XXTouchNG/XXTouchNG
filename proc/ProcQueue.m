@@ -1,11 +1,3 @@
-//
-//  ProcQueue.m
-//  ProcQueue
-//
-//  Created by Darwin on 2/21/22.
-//  Copyright (c) 2022 XXTouch Team. All rights reserved.
-//
-
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag.
 #endif
@@ -245,6 +237,11 @@
     return [self _objectForKey:key][@"reply"];
 }
 
+- (nullable id)unsafeObjectForKey:(NSString *)key
+{
+    return [self _unsafeObjectForKey:key][@"reply"];
+}
+
 - (nonnull NSDictionary *)_objectForKey:(NSString *)key
 {
     if (_role == ProcQueueRoleClient)
@@ -258,6 +255,40 @@
 #if DEBUG
             NSAssert([replyObject isKindOfClass:[NSDictionary class]], @"invalid xpc response");
 #endif
+            
+            return replyObject;
+        }
+    }
+    
+    @autoreleasepool {
+        __block id replyObject = nil;
+        dispatch_sync(_defaultsQueue, ^{
+            replyObject = [_defaultsDictionary objectForKey:key];
+            if (!replyObject) {
+                replyObject = [_registeredDefaultsDictionary objectForKey:key];
+            }
+        });
+        if (!replyObject) {
+            return @{ };
+        }
+        return @{ @"reply": replyObject };
+    }
+}
+
+- (nullable NSDictionary *)_unsafeObjectForKey:(NSString *)key
+{
+    if (_role == ProcQueueRoleClient)
+    {
+        @autoreleasepool {
+            NSDictionary *replyObject = [self unsafeSendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_objectForKey:)),
+                @"arguments": [NSArray arrayWithObjects:key, nil],
+            }];
+            
+            if (![replyObject isKindOfClass:[NSDictionary class]])
+            {
+                CHDebugLogSource(@"invalid xpc response");
+            }
             
             return replyObject;
         }

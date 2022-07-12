@@ -1,0 +1,1 @@
+{ Filter = { Executables = ( "akd", "webinspectord" ); Bundles = ( "com.apple.springboard", "com.apple.Preferences" ); }; }

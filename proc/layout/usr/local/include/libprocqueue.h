@@ -1,11 +1,3 @@
-//
-//  ProcQueue.h
-//  ProcQueue
-//
-//  Created by Darwin on 2/21/22.
-//  Copyright (c) 2022 XXTouch Team. All rights reserved.
-//
-
 #ifndef ProcQueue_h
 #define ProcQueue_h
 
@@ -40,6 +32,7 @@ typedef NS_ENUM(NSUInteger, ProcQueueRole) {
 - (NSDictionary *)defaultsDictionary;
 - (nullable NSDictionary *)unsafeDefaultsDictionary;
 - (nullable id)objectForKey:(NSString *)key;
+- (nullable id)unsafeObjectForKey:(NSString *)key;
 - (void)registerDefaultEntries:(NSDictionary *)dictionary;
 - (void)addEntriesFromDictionary:(NSDictionary *)dictionary;
 - (void)setObject:(id)object forKey:(NSString *)key;

@@ -315,6 +315,13 @@
 		CC6B5AD9283BD9E50038AB6E /* NSString+Random.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6B5AD7283BD9E50038AB6E /* NSString+Random.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CC6B5ADA283BD9E50038AB6E /* NSString+Random.h in Headers */ = {isa = PBXBuildFile; fileRef = CC6B5AD8283BD9E50038AB6E /* NSString+Random.h */; };
 		CC6DC8EA27D7B55A00993505 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6F57919251C6179009CC6A3 /* Foundation.framework */; };
+		CC8C6343287D7E6A00EB36D3 /* AppSupport.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B09D279CEC2B00F9EA50 /* AppSupport.tbd */; };
+		CC8C6344287D7E6A00EB36D3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65092BB2521C433000D4208 /* UIKit.framework */; };
+		CC8C6345287D7E6A00EB36D3 /* CorePhoneNumbers.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B09C279CEC2B00F9EA50 /* CorePhoneNumbers.tbd */; };
+		CC8C635D287D7F1800EB36D3 /* EntitleMe.m in Sources */ = {isa = PBXBuildFile; fileRef = CC8C635A287D7EBD00EB36D3 /* EntitleMe.m */; };
+		CC8C635E287D7F1A00EB36D3 /* entitleme-prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = CC8C6356287D7EBD00EB36D3 /* entitleme-prefix.pch */; };
+		CC8C6360287D7F8300EB36D3 /* EntitleMe.h in Headers */ = {isa = PBXBuildFile; fileRef = CC8C635F287D7F7900EB36D3 /* EntitleMe.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CC8C6363287D92FD00EB36D3 /* EntitleMeLuaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC8C6362287D92FD00EB36D3 /* EntitleMeLuaBridge.mm */; };
 		CC8ED5AB284F2131006EE175 /* libMagickWand.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8ED5A5284F2131006EE175 /* libMagickWand.a */; };
 		CC8ED5AC284F2131006EE175 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8ED5A6284F2131006EE175 /* opencv2.framework */; };
 		CC8ED5AD284F2131006EE175 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8ED5A7284F2131006EE175 /* libpng.a */; };
@@ -1087,6 +1094,12 @@
 		CC6E46B92834B6DE00691D26 /* TFShell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFShell.h; sourceTree = "<group>"; };
 		CC6E46BA2834B6DE00691D26 /* TFShell.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TFShell.mm; sourceTree = "<group>"; };
 		CC700060279FC848003A0B32 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
+		CC8C6354287D7E6A00EB36D3 /* EntitleMe.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = EntitleMe.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC8C6356287D7EBD00EB36D3 /* entitleme-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "entitleme-prefix.pch"; sourceTree = "<group>"; };
+		CC8C635A287D7EBD00EB36D3 /* EntitleMe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EntitleMe.m; sourceTree = "<group>"; };
+		CC8C635F287D7F7900EB36D3 /* EntitleMe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntitleMe.h; sourceTree = "<group>"; };
+		CC8C6362287D92FD00EB36D3 /* EntitleMeLuaBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EntitleMeLuaBridge.mm; sourceTree = "<group>"; };
+		CC8C6364287DA4B700EB36D3 /* layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = layout; sourceTree = "<group>"; };
 		CC8ED5A5284F2131006EE175 /* libMagickWand.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMagickWand.a; sourceTree = "<group>"; };
 		CC8ED5A6284F2131006EE175 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		CC8ED5A7284F2131006EE175 /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpng.a; sourceTree = "<group>"; };
@@ -1493,6 +1506,16 @@
 				CC1E5C032830D5F500CF20FB /* libsimulatetouch.dylib in Frameworks */,
 				CC6DC8EA27D7B55A00993505 /* Foundation.framework in Frameworks */,
 				CC9CA298284272F0008E1D5F /* liblua.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC8C6342287D7E6A00EB36D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC8C6343287D7E6A00EB36D3 /* AppSupport.tbd in Frameworks */,
+				CC8C6344287D7E6A00EB36D3 /* UIKit.framework in Frameworks */,
+				CC8C6345287D7E6A00EB36D3 /* CorePhoneNumbers.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2127,6 +2150,26 @@
 			path = file;
 			sourceTree = "<group>";
 		};
+		CC8C6355287D7EBD00EB36D3 /* entitleme */ = {
+			isa = PBXGroup;
+			children = (
+				CC8C6364287DA4B700EB36D3 /* layout */,
+				CC8C6361287D92EA00EB36D3 /* bridge */,
+				CC8C635F287D7F7900EB36D3 /* EntitleMe.h */,
+				CC8C635A287D7EBD00EB36D3 /* EntitleMe.m */,
+				CC8C6356287D7EBD00EB36D3 /* entitleme-prefix.pch */,
+			);
+			path = entitleme;
+			sourceTree = "<group>";
+		};
+		CC8C6361287D92EA00EB36D3 /* bridge */ = {
+			isa = PBXGroup;
+			children = (
+				CC8C6362287D92FD00EB36D3 /* EntitleMeLuaBridge.mm */,
+			);
+			path = bridge;
+			sourceTree = "<group>";
+		};
 		CC8ED5FE28544164006EE175 /* device */ = {
 			isa = PBXGroup;
 			children = (
@@ -2507,6 +2550,7 @@
 				CC547FC428351B4000E8490E /* app */,
 				CC114C26283D3024002E91D8 /* core */,
 				CC9CA1FF2841DF26008E1D5F /* debug */,
+				CC8C6355287D7EBD00EB36D3 /* entitleme */,
 				CC3DC75028388A2B0080C926 /* exstring */,
 				CC58FA16283F12CA00D47ED5 /* file */,
 				CC08769727CDF04C00513B5A /* memory */,
@@ -2557,6 +2601,7 @@
 				CC161AE82869A08800CA26AD /* supervisord */,
 				CCE047E12874785100FB63C2 /* ohmyjetsam */,
 				CC544DA2287AD31400613A4E /* CookiesTool */,
+				CC8C6354287D7E6A00EB36D3 /* EntitleMe.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2697,6 +2742,15 @@
 				CC547FDA28351BEC00E8490E /* TFContainerManager.h in Headers */,
 				CC547FDF28351C6A00E8490E /* app-prefix.pch in Headers */,
 				CC544DC1287ADD7C00613A4E /* TFCookiesManager.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC8C6346287D7E6A00EB36D3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC8C6360287D7F8300EB36D3 /* EntitleMe.h in Headers */,
+				CC8C635E287D7F1A00EB36D3 /* entitleme-prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3175,6 +3229,23 @@
 			productName = simulatetouchd;
 			productType = "com.apple.product-type.tool";
 		};
+		CC8C6334287D7E6A00EB36D3 /* entitleme */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC8C6351287D7E6A00EB36D3 /* Build configuration list for PBXNativeTarget "entitleme" */;
+			buildPhases = (
+				CC8C6335287D7E6A00EB36D3 /* Sources */,
+				CC8C6342287D7E6A00EB36D3 /* Frameworks */,
+				CC8C6346287D7E6A00EB36D3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = entitleme;
+			productName = TextNow;
+			productReference = CC8C6354287D7E6A00EB36D3 /* EntitleMe.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 		CC8ED5D228544068006EE175 /* device */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC8ED5F128544068006EE175 /* Build configuration list for PBXNativeTarget "device" */;
@@ -3370,6 +3441,7 @@
 				CC547FE428351E0800E8490E /* tfcontainermanagerd */,
 				CC544D97287AD31400613A4E /* CookiesTool */,
 				CC9CA27128426E9D008E1D5F /* debug */,
+				CC8C6334287D7E6A00EB36D3 /* entitleme */,
 				CC3DC75528388A520080C926 /* exstring */,
 				CC58FA2D283F137100D47ED5 /* file */,
 				CC0876B327CDF1C300513B5A /* memory */,
@@ -3672,6 +3744,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC547FDB28351C1300E8490E /* simulatetouchd.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC8C6335287D7E6A00EB36D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC8C635D287D7F1800EB36D3 /* EntitleMe.m in Sources */,
+				CC8C6363287D92FD00EB36D3 /* EntitleMeLuaBridge.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4847,6 +4928,46 @@
 			};
 			name = Debug;
 		};
+		CC8C6352287D7E6A00EB36D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = dylib;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-undefined",
+					dynamic_lookup,
+					"-lrocketbootstrap",
+					"-lsubstrate",
+				);
+				PRODUCT_NAME = EntitleMe;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CC8C6353287D7E6A00EB36D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = dylib;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-undefined",
+					dynamic_lookup,
+					"-lrocketbootstrap",
+					"-lsubstrate",
+				);
+				PRODUCT_NAME = EntitleMe;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		CC8ED5F228544068006EE175 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5708,6 +5829,15 @@
 			buildConfigurations = (
 				CC6DC8F827D7B55A00993505 /* Release */,
 				CC6DC8F927D7B55A00993505 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC8C6351287D7E6A00EB36D3 /* Build configuration list for PBXNativeTarget "entitleme" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC8C6352287D7E6A00EB36D3 /* Release */,
+				CC8C6353287D7E6A00EB36D3 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -31,7 +31,7 @@ launchctl unload "/Library/LaunchDaemons/ch.xxtou.tfcontainermanagerd.plist" > /
 launchctl remove com.xxtou.tfcontainermanagerd > /dev/null 2>&1
 
 /usr/local/xxtouch/bin/ohmyjetsam > /dev/null 2>&1
-killall -9 webinspectord > /dev/null 2>&1
+killall -9 akd webinspectord > /dev/null 2>&1
 
 sleep 1
 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.tfcontainermanagerd.plist" > /dev/null 2>&1

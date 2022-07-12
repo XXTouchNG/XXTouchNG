@@ -14,23 +14,6 @@
 XXTouchF_CAPI int luaopen_proc(lua_State *);
 XXTouchF_CAPI int luaopen_exproc(lua_State *);
 
-@interface ProcQueueLuaBridge : NSObject
-+ (instancetype)sharedBridge;
-@end
-
-@implementation ProcQueueLuaBridge
-
-+ (instancetype)sharedBridge {
-    static ProcQueueLuaBridge *_sharedBridge = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedBridge = [[ProcQueueLuaBridge alloc] init];
-    });
-    return _sharedBridge;
-}
-
-@end
-
 
 #pragma mark -
 

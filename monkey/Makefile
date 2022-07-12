@@ -1,6 +1,6 @@
 TARGET := iphone:clang:14.5:13.0
 ARCHS = arm64 arm64e
-INSTALL_TARGET_PROCESSES = MobileSafari SpringBoard backboardd webinspectord
+INSTALL_TARGET_PROCESSES = MobileSafari SpringBoard backboardd
 
 include $(THEOS)/makefiles/common.mk
 
