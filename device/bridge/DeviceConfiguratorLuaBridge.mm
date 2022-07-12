@@ -1470,7 +1470,7 @@ static int DeviceConfigurator_Device_IsAirplaneEnabled(lua_State *L)
 static int DeviceConfigurator_Device_GetAirDropMode(lua_State *L)
 {
     @autoreleasepool {
-        lua_pushinteger(L, (lua_Integer)[[DeviceConfigurator sharedConfigurator] airDropMode]);
+        lua_pushinteger(L, (lua_Integer)[[DeviceConfigurator sharedConfigurator] airDropDiscoveryMode]);
         return 1;
     }
 }
@@ -1479,7 +1479,7 @@ static int DeviceConfigurator_Device_SetAirDropMode(lua_State *L)
 {
     @autoreleasepool {
         lua_Integer cMode = luaL_checkinteger(L, 1);
-        [[DeviceConfigurator sharedConfigurator] setAirDropMode:(NSInteger)cMode];
+        [[DeviceConfigurator sharedConfigurator] setAirDropDiscoveryMode:(NSInteger)cMode];
         return 0;
     }
 }

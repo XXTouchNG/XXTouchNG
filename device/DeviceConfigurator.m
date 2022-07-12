@@ -2544,11 +2544,6 @@ OBJC_EXTERN void reinitializeHooks(void);
     }
 }
 
-- (NSString *)userAssignedDeviceName
-{
-    return [self _userAssignedName][@"reply"];
-}
-
 + (PSGAboutController *)sharedPSGAboutController
 {
     static PSGAboutController *aboutCtrl = nil;
@@ -2560,16 +2555,21 @@ OBJC_EXTERN void reinitializeHooks(void);
     return aboutCtrl;
 }
 
-- (NSDictionary *)_userAssignedName
+- (NSString *)userAssignedDeviceName
+{
+    return [self _userAssignedDeviceName][@"reply"];
+}
+
+- (NSDictionary *)_userAssignedDeviceName
 {
     if (_role == DeviceConfiguratorRoleClient) {
         @autoreleasepool {
             NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
-                @"selector": NSStringFromSelector(@selector(_userAssignedName)),
+                @"selector": NSStringFromSelector(@selector(_userAssignedDeviceName)),
                 @"arguments": [NSArray array],
             }];
             
-            CHDebugLog(@"_userAssignedName -> %@", replyObject);
+            CHDebugLog(@"_userAssignedDeviceName -> %@", replyObject);
             
             NSNumber *replyState = replyObject[@"reply"];
 #if DEBUG
@@ -2891,21 +2891,21 @@ OBJC_EXTERN void reinitializeHooks(void);
     return addCtrl;
 }
 
-- (NSInteger)airDropMode
+- (NSInteger)airDropDiscoveryMode
 {
-    return [[self _airDropMode][@"reply"] integerValue];
+    return [[self _airDropDiscoveryMode][@"reply"] integerValue];
 }
 
-- (NSDictionary *)_airDropMode
+- (NSDictionary *)_airDropDiscoveryMode
 {
     if (_role == DeviceConfiguratorRoleClient) {
         @autoreleasepool {
             NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
-                @"selector": NSStringFromSelector(@selector(_airDropMode)),
+                @"selector": NSStringFromSelector(@selector(_airDropDiscoveryMode)),
                 @"arguments": [NSArray array],
             }];
             
-            CHDebugLog(@"_airDropMode -> %@", replyObject);
+            CHDebugLog(@"_airDropDiscoveryMode -> %@", replyObject);
             
             NSNumber *replyState = replyObject[@"reply"];
 #if DEBUG
@@ -2923,18 +2923,18 @@ OBJC_EXTERN void reinitializeHooks(void);
     }
 }
 
-- (void)setAirDropMode:(NSInteger)airDropMode
+- (void)setAirDropDiscoveryMode:(NSInteger)discoveryMode
 {
-    [self _setAirDropMode:@(airDropMode)];
+    [self _setAirDropDiscoveryMode:@(discoveryMode)];
 }
 
-- (void)_setAirDropMode:(NSNumber /* NSInteger */ *)airDropMode
+- (void)_setAirDropDiscoveryMode:(NSNumber /* NSInteger */ *)discoveryMode
 {
     if (_role == DeviceConfiguratorRoleClient) {
         @autoreleasepool {
             [self sendMessageName:@XPC_ONEWAY_MSG_NAME userInfo:@{
-                @"selector": NSStringFromSelector(@selector(_setAirDropMode:)),
-                @"arguments": [NSArray arrayWithObjects:airDropMode, nil],
+                @"selector": NSStringFromSelector(@selector(_setAirDropDiscoveryMode:)),
+                @"arguments": [NSArray arrayWithObjects:discoveryMode, nil],
             }];
         }
         return;
@@ -2943,7 +2943,7 @@ OBJC_EXTERN void reinitializeHooks(void);
     @autoreleasepool {
         NSAssert([NSThread isMainThread], @"not main thread");
         
-        [[DeviceConfigurator sharedSFAirDropDiscoveryController] setDiscoverableMode:[airDropMode integerValue]];
+        [[DeviceConfigurator sharedSFAirDropDiscoveryController] setDiscoverableMode:[discoveryMode integerValue]];
     }
 }
 

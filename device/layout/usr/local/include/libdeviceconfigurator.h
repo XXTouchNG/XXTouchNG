@@ -13,6 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define DeviceConfiguratorErrorDomain   "ch.xxtou.error.configurator"
+
 typedef NS_ENUM(NSUInteger, DeviceConfiguratorRole) {
     DeviceConfiguratorRoleClient = 0,
     DeviceConfiguratorRoleServer,
@@ -157,7 +159,7 @@ typedef NS_ENUM(NSUInteger, DeviceConfiguratorRole) {
 - (NSString *)userAssignedDeviceName;
 - (void)setUserAssignedDeviceName:(NSString *)userAssignedDeviceName;
 
-/* Appearance (Not Available in OpenAPI) */
+/* Appearance */
 - (UIUserInterfaceStyle)currentInterfaceStyle;
 - (void)setCurrentInterfaceStyle:(UIUserInterfaceStyle)interfaceStyle;
 - (BOOL)boldTextEnabled;
@@ -168,8 +170,8 @@ typedef NS_ENUM(NSUInteger, DeviceConfiguratorRole) {
 - (void)setZoomedMode:(BOOL)zoomedMode;
 
 /* AirDrop */
-- (NSInteger)airDropMode;
-- (void)setAirDropMode:(NSInteger)airDropMode;
+- (NSInteger)airDropDiscoveryMode;
+- (void)setAirDropDiscoveryMode:(NSInteger)discoveryMode;
 
 @end
 

@@ -1272,16 +1272,16 @@ NS_INLINE void _DTXTypeParagraph(NSString *paragraph, NSTimeInterval maxInterval
         }
     } else if ([actionName isEqualToString:@"ClientInputText"]) {
         @autoreleasepool {
-            UIWindow *foundWindow = nil;
+            UIWindow *foundKeyWindow = nil;
             NSArray <UIWindow *> *windows = [[UIApplication sharedApplication] windows];
             for (UIWindow *window in windows) {
                 if (window.isKeyWindow) {
-                    foundWindow = window;
+                    foundKeyWindow = window;
                     break;
                 }
             }
             
-            id firstResponder = foundWindow.firstResponder;
+            id firstResponder = foundKeyWindow.firstResponder;
             if (![firstResponder conformsToProtocol:@protocol(UITextInput)])
             {
                 return @{

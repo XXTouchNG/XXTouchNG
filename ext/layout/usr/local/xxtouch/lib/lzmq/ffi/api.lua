@@ -43,13 +43,20 @@ local zlibs if IS_WINDOWS then
 else
   zlibs = {
     "zmq",      "libzmq",
+    "zmq.5.dylib", "libzmq.5.dylib",
+    "zmq.4.dylib", "libzmq.4.dylib",
+    "zmq.3.dylib", "libzmq.3.dylib",
+    "/usr/lib/libzmq.dylib",
+    "/usr/lib/libzmq.5.dylib",
+    "/usr/lib/libzmq.4.dylib",
+    "/usr/lib/libzmq.3.dylib",
     "zmq.so.5", "libzmq.so.5",
     "zmq.so.4", "libzmq.so.4",
     "zmq.so.3", "libzmq.so.3",
-    "/usr/local/lib/libzmq.so",
-    "/usr/local/lib/libzmq.so.5",
-    "/usr/local/lib/libzmq.so.4",
-    "/usr/local/lib/libzmq.so.3",
+    "/usr/lib/libzmq.so",
+    "/usr/lib/libzmq.so.5",
+    "/usr/lib/libzmq.so.4",
+    "/usr/lib/libzmq.so.3",
   }
 end
 
