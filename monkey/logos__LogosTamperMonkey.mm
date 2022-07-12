@@ -4,7 +4,6 @@
 #endif
 
 #import <pthread.h>
-#import "pac_helper.h"
 #import "TMWeakViewWrapper.h"
 #import "TMWeakObjectWrapper.h"
 
@@ -55,10 +54,10 @@ pthread_mutex_t __xpcRemoteControlLock;
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class WKDateTimeInputControl; @class BrowserController; @class UIWebView; @class _UILayerHostView; @class BrowserWindowController; @class WKDateTimePicker; @class WKMultipleSelectPicker; @class WKSelectSinglePicker; @class SFBrowserServiceViewController; @class SFSafariView; @class WKFormSelectControl; @class TabController; @class WKFormColorControl; 
+@class _UILayerHostView; @class WKDateTimeInputControl; @class WKFormColorControl; @class WKMultipleSelectPicker; @class WKFormSelectControl; @class TabController; @class WKSelectSinglePicker; @class UIWebView; @class BrowserWindowController; @class BrowserController; @class SFSafariView; @class SFBrowserServiceViewController; @class WKDateTimePicker; 
 
 
-#line 36 "LogosTamperMonkey.xm"
+#line 35 "LogosTamperMonkey.xm"
 static void (*_logos_orig$SafariXPC$SFBrowserServiceViewController$_dismiss)(_LOGOS_SELF_TYPE_NORMAL SFBrowserServiceViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$SafariXPC$SFBrowserServiceViewController$_dismiss(_LOGOS_SELF_TYPE_NORMAL SFBrowserServiceViewController* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$SafariXPC$SFBrowserServiceViewController$_hostApplicationDidEnterBackground)(_LOGOS_SELF_TYPE_NORMAL SFBrowserServiceViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$SafariXPC$SFBrowserServiceViewController$_hostApplicationDidEnterBackground(_LOGOS_SELF_TYPE_NORMAL SFBrowserServiceViewController* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$SafariXPC$SFBrowserServiceViewController$_hostApplicationWillEnterForeground)(_LOGOS_SELF_TYPE_NORMAL SFBrowserServiceViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$SafariXPC$SFBrowserServiceViewController$_hostApplicationWillEnterForeground(_LOGOS_SELF_TYPE_NORMAL SFBrowserServiceViewController* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$SafariXPC$SFBrowserServiceViewController$_didLoadWebView)(_LOGOS_SELF_TYPE_NORMAL SFBrowserServiceViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$SafariXPC$SFBrowserServiceViewController$_didLoadWebView(_LOGOS_SELF_TYPE_NORMAL SFBrowserServiceViewController* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$SafariXPC$SFSafariView$willMoveToWindow$)(_LOGOS_SELF_TYPE_NORMAL SFSafariView* _LOGOS_SELF_CONST, SEL, UIWindow *); static void _logos_method$SafariXPC$SFSafariView$willMoveToWindow$(_LOGOS_SELF_TYPE_NORMAL SFSafariView* _LOGOS_SELF_CONST, SEL, UIWindow *); static _UILayerHostView* (*_logos_orig$SafariXPC$_UILayerHostView$initWithFrame$pid$contextID$)(_LOGOS_SELF_TYPE_INIT _UILayerHostView*, SEL, CGRect, int, unsigned) _LOGOS_RETURN_RETAINED; static _UILayerHostView* _logos_method$SafariXPC$_UILayerHostView$initWithFrame$pid$contextID$(_LOGOS_SELF_TYPE_INIT _UILayerHostView*, SEL, CGRect, int, unsigned) _LOGOS_RETURN_RETAINED; static NSString * _logos_method$SafariXPC$UIWebView$_sf_stringByEvaluatingJavaScriptFromString$error$(_LOGOS_SELF_TYPE_NORMAL UIWebView* _LOGOS_SELF_CONST, SEL, NSString *, NSError * __autoreleasing *); 
 
 
@@ -400,38 +399,10 @@ static void _logos_method$MobileSafari$TabController$monkeyCloseAllTabs(_LOGOS_S
 
 #pragma mark -
 
-typedef CFStringRef (sec_task_copy_id_t)(void *task, CFErrorRef _Nullable *error);
-static sec_task_copy_id_t *_SecTaskCopySigningIdentifier = NULL;
-
-static CFTypeRef (*original_SecTaskCopyValueForEntitlement)(void *task, CFStringRef entitlement, CFErrorRef _Nullable *error);
-static CFTypeRef replaced_SecTaskCopyValueForEntitlement(void *task, CFStringRef entitlement, CFErrorRef _Nullable *error)
-{
-    NSArray <NSString *> *expectedNames = @[
-        @"get-task-allow",
-        @"com.apple.security.get-task-allow",
-        @"com.apple.webinspector.allow",
-        @"com.apple.private.webinspector.allow-remote-inspection",
-        @"com.apple.private.webinspector.allow-carrier-remote-inspection",
-    ];
-    NSString *castedEntitlementName = (__bridge NSString *)entitlement;
-    if (_SecTaskCopySigningIdentifier) {
-        NSString *identifier = (__bridge NSString *)_SecTaskCopySigningIdentifier(task, NULL);
-        CHDebugLogSource(@"check entitlement: %@ for %@", castedEntitlementName, identifier);
-    }
-    if ([expectedNames containsObject:castedEntitlementName]) {
-        return kCFBooleanTrue;
-    }
-    return original_SecTaskCopyValueForEntitlement(task, entitlement, error);
-}
-
-
-
-
-
 #pragma GCC diagnostic warning "-Wdeprecated-declarations"
 
 
-static __attribute__((constructor)) void _logosLocalCtor_b88ac9a2(int __unused argc, char __unused **argv, char __unused **envp) {
+static __attribute__((constructor)) void _logosLocalCtor_c2a53aed(int __unused argc, char __unused **argv, char __unused **envp) {
     @autoreleasepool {
         __xpcPauseFlag = NO;
         pthread_mutex_init(&__xpcRemoteViewLock, NULL);
@@ -445,23 +416,7 @@ static __attribute__((constructor)) void _logosLocalCtor_b88ac9a2(int __unused a
         {Class _logos_class$WKTesting$WKFormSelectControl = objc_getClass("WKFormSelectControl"); { MSHookMessageEx(_logos_class$WKTesting$WKFormSelectControl, @selector(initWithView:), (IMP)&_logos_method$WKTesting$WKFormSelectControl$initWithView$, (IMP*)&_logos_orig$WKTesting$WKFormSelectControl$initWithView$);}Class _logos_class$WKTesting$WKFormColorControl = objc_getClass("WKFormColorControl"); { MSHookMessageEx(_logos_class$WKTesting$WKFormColorControl, @selector(initWithView:), (IMP)&_logos_method$WKTesting$WKFormColorControl$initWithView$, (IMP*)&_logos_orig$WKTesting$WKFormColorControl$initWithView$);}Class _logos_class$WKTesting$WKDateTimePicker = objc_getClass("WKDateTimePicker"); { char _typeEncoding[1024]; unsigned int i = 0; memcpy(_typeEncoding + i, @encode(NSDate *), strlen(@encode(NSDate *))); i += strlen(@encode(NSDate *)); _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$WKTesting$WKDateTimePicker, @selector(date), (IMP)&_logos_method$WKTesting$WKDateTimePicker$date, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(NSDate *), strlen(@encode(NSDate *))); i += strlen(@encode(NSDate *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$WKTesting$WKDateTimePicker, @selector(setDate:), (IMP)&_logos_method$WKTesting$WKDateTimePicker$setDate$, _typeEncoding); }Class _logos_class$WKTesting$WKDateTimeInputControl = objc_getClass("WKDateTimeInputControl"); { MSHookMessageEx(_logos_class$WKTesting$WKDateTimeInputControl, @selector(initWithView:), (IMP)&_logos_method$WKTesting$WKDateTimeInputControl$initWithView$, (IMP*)&_logos_orig$WKTesting$WKDateTimeInputControl$initWithView$);}{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(NSDate *), strlen(@encode(NSDate *))); i += strlen(@encode(NSDate *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$WKTesting$WKDateTimeInputControl, @selector(setTimePickerDate:), (IMP)&_logos_method$WKTesting$WKDateTimeInputControl$setTimePickerDate$, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; memcpy(_typeEncoding + i, @encode(NSDate *), strlen(@encode(NSDate *))); i += strlen(@encode(NSDate *)); _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$WKTesting$WKDateTimeInputControl, @selector(timePickerValueDate), (IMP)&_logos_method$WKTesting$WKDateTimeInputControl$timePickerValueDate, _typeEncoding); }Class _logos_class$WKTesting$WKSelectSinglePicker = objc_getClass("WKSelectSinglePicker"); { MSHookMessageEx(_logos_class$WKTesting$WKSelectSinglePicker, @selector(selectRow:inComponent:extendingSelection:), (IMP)&_logos_method$WKTesting$WKSelectSinglePicker$selectRow$inComponent$extendingSelection$, (IMP*)&_logos_orig$WKTesting$WKSelectSinglePicker$selectRow$inComponent$extendingSelection$);}Class _logos_class$WKTesting$WKMultipleSelectPicker = objc_getClass("WKMultipleSelectPicker"); { MSHookMessageEx(_logos_class$WKTesting$WKMultipleSelectPicker, @selector(selectRow:inComponent:extendingSelection:), (IMP)&_logos_method$WKTesting$WKMultipleSelectPicker$selectRow$inComponent$extendingSelection$, (IMP*)&_logos_orig$WKTesting$WKMultipleSelectPicker$selectRow$inComponent$extendingSelection$);}{ MSHookMessageEx(_logos_class$WKTesting$WKMultipleSelectPicker, @selector(selectFormAccessoryHasCheckedItemAtRow:), (IMP)&_logos_method$WKTesting$WKMultipleSelectPicker$selectFormAccessoryHasCheckedItemAtRow$, (IMP*)&_logos_orig$WKTesting$WKMultipleSelectPicker$selectFormAccessoryHasCheckedItemAtRow$);}}
         
         NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-        NSString *processName = [[NSProcessInfo processInfo] processName];
-        if ([processName isEqualToString:@"webinspectord"] || [processName hasSuffix:@"/webinspectord"])
-        {
-            MSImageRef _SecurityLibrary = MSGetImageByName("/System/Library/Frameworks/Security.framework/Security");
-            if (_SecurityLibrary)
-            {
-                _SecTaskCopySigningIdentifier = (sec_task_copy_id_t *)make_sym_callable(MSFindSymbol(_SecurityLibrary, "_SecTaskCopySigningIdentifier"));
-                MSHookFunction(
-                    make_sym_callable(MSFindSymbol(_SecurityLibrary, "_SecTaskCopyValueForEntitlement")),
-                    (void *)replaced_SecTaskCopyValueForEntitlement,
-                    (void **)&original_SecTaskCopyValueForEntitlement
-                );
-                
-                CHDebugLogSource(@"webinspectord hacked");
-            }
-        }
-        else if ([bundleIdentifier hasPrefix:@"com.apple."])
+        if ([bundleIdentifier hasPrefix:@"com.apple."])
         {
             {Class _logos_class$SafariXPC$SFBrowserServiceViewController = objc_getClass("SFBrowserServiceViewController"); { MSHookMessageEx(_logos_class$SafariXPC$SFBrowserServiceViewController, @selector(_dismiss), (IMP)&_logos_method$SafariXPC$SFBrowserServiceViewController$_dismiss, (IMP*)&_logos_orig$SafariXPC$SFBrowserServiceViewController$_dismiss);}{ MSHookMessageEx(_logos_class$SafariXPC$SFBrowserServiceViewController, @selector(_hostApplicationDidEnterBackground), (IMP)&_logos_method$SafariXPC$SFBrowserServiceViewController$_hostApplicationDidEnterBackground, (IMP*)&_logos_orig$SafariXPC$SFBrowserServiceViewController$_hostApplicationDidEnterBackground);}{ MSHookMessageEx(_logos_class$SafariXPC$SFBrowserServiceViewController, @selector(_hostApplicationWillEnterForeground), (IMP)&_logos_method$SafariXPC$SFBrowserServiceViewController$_hostApplicationWillEnterForeground, (IMP*)&_logos_orig$SafariXPC$SFBrowserServiceViewController$_hostApplicationWillEnterForeground);}{ MSHookMessageEx(_logos_class$SafariXPC$SFBrowserServiceViewController, @selector(_didLoadWebView), (IMP)&_logos_method$SafariXPC$SFBrowserServiceViewController$_didLoadWebView, (IMP*)&_logos_orig$SafariXPC$SFBrowserServiceViewController$_didLoadWebView);}Class _logos_class$SafariXPC$SFSafariView = objc_getClass("SFSafariView"); { MSHookMessageEx(_logos_class$SafariXPC$SFSafariView, @selector(willMoveToWindow:), (IMP)&_logos_method$SafariXPC$SFSafariView$willMoveToWindow$, (IMP*)&_logos_orig$SafariXPC$SFSafariView$willMoveToWindow$);}Class _logos_class$SafariXPC$_UILayerHostView = objc_getClass("_UILayerHostView"); { MSHookMessageEx(_logos_class$SafariXPC$_UILayerHostView, @selector(initWithFrame:pid:contextID:), (IMP)&_logos_method$SafariXPC$_UILayerHostView$initWithFrame$pid$contextID$, (IMP*)&_logos_orig$SafariXPC$_UILayerHostView$initWithFrame$pid$contextID$);}Class _logos_class$SafariXPC$UIWebView = objc_getClass("UIWebView"); { char _typeEncoding[1024]; unsigned int i = 0; memcpy(_typeEncoding + i, @encode(NSString *), strlen(@encode(NSString *))); i += strlen(@encode(NSString *)); _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(NSString *), strlen(@encode(NSString *))); i += strlen(@encode(NSString *)); memcpy(_typeEncoding + i, @encode(NSError * __autoreleasing *), strlen(@encode(NSError * __autoreleasing *))); i += strlen(@encode(NSError * __autoreleasing *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$SafariXPC$UIWebView, @selector(_sf_stringByEvaluatingJavaScriptFromString:error:), (IMP)&_logos_method$SafariXPC$UIWebView$_sf_stringByEvaluatingJavaScriptFromString$error$, _typeEncoding); }}
             {Class _logos_class$MobileSafari$BrowserWindowController = objc_getClass("BrowserWindowController"); { char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$MobileSafari$BrowserWindowController, @selector(monkeyCloseAllTabs), (IMP)&_logos_method$MobileSafari$BrowserWindowController$monkeyCloseAllTabs, _typeEncoding); }Class _logos_class$MobileSafari$BrowserController = objc_getClass("BrowserController"); { char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$MobileSafari$BrowserController, @selector(monkeyCloseAllTabs), (IMP)&_logos_method$MobileSafari$BrowserController$monkeyCloseAllTabs, _typeEncoding); }Class _logos_class$MobileSafari$TabController = objc_getClass("TabController"); { char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$MobileSafari$TabController, @selector(monkeyCloseAllTabs), (IMP)&_logos_method$MobileSafari$TabController$monkeyCloseAllTabs, _typeEncoding); }}
@@ -469,7 +424,4 @@ static __attribute__((constructor)) void _logosLocalCtor_b88ac9a2(int __unused a
 #pragma clang diagnostic pop
     }
 }
-
-
-
 

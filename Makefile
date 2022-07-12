@@ -25,6 +25,7 @@ SUBPROJECTS += supervisor    # arm64, arm64e      # lua, core, proc, rocketboots
 SUBPROJECTS += hid           # arm64, arm64e      # proc, supervisor, substrate, rocketbootstrap
 SUBPROJECTS += webserv       # arm64              # lua, debug, rocketbootstrap, alert, device, proc, screen, supervisor, monkey, app
 SUBPROJECTS += add1s         # arm64
+SUBPROJECTS += entitleme     # arm64, arm64e
 
 include $(THEOS_MAKE_PATH)/aggregate.mk
 
