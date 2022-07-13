@@ -39,6 +39,8 @@ LIBRARY_NAME += ev
 LIBRARY_NAME += lterm
 LIBRARY_NAME += sirocco
 LIBRARY_NAME += libpdebug
+LIBRARY_NAME += lluv
+LIBRARY_NAME += parser
 
 
 libzmq_CFLAGS = -DTARGET_OS_IPHONE=1 -DNDEBUG -DLUA_COMPAT_5_1 -DLUA_COMPAT_5_2
@@ -340,6 +342,27 @@ libpdebug_FILES = submodules/luapanda/src/libpdebug.cpp
 libpdebug_INSTALL_PATH = /usr/local/xxtouch/lib
 
 
+lluv_CFLAGS = -DTARGET_OS_IPHONE=1 -DNDEBUG -DLUA_COMPAT_5_1 -DLUA_COMPAT_5_2
+lluv_CFLAGS += -fno-common
+lluv_CFLAGS += -Wno-unused-const-variable -Wno-unused-variable -Wno-pointer-sign -Wno-switch -Wno-void-pointer-to-int-cast
+lluv_CFLAGS += -Isubmodules/lua-lluv/src/
+lluv_CFLAGS += -I../liblua/
+lluv_CFLAGS += -Isubmodules/libuv/include/
+lluv_LDFLAGS = -Lsubmodules/libuv/lib/
+lluv_LDFLAGS += $(LUA_MOD_LDFLAGS)
+lluv_LIBRARIES = uv
+lluv_FILES = $(wildcard submodules/lua-lluv/src/*.c)
+lluv_INSTALL_PATH = /usr/local/xxtouch/lib
+
+
+parser_CFLAGS = -DTARGET_OS_IPHONE=1 -DNDEBUG -DLUA_COMPAT_5_1 -DLUA_COMPAT_5_2
+parser_CFLAGS += -I../liblua/
+parser_CFLAGS += -Isubmodules/lua-http-parser/src/
+parser_LDFLAGS = $(LUA_MOD_LDFLAGS)
+parser_FILES = $(wildcard submodules/lua-http-parser/src/*.c)
+parser_INSTALL_PATH = /usr/local/xxtouch/lib/http
+
+
 include $(THEOS_MAKE_PATH)/library.mk
 
 
@@ -379,3 +402,6 @@ after-all::
 	cp -r submodules/croissant/bin/* layout/usr/local/xxtouch/bin/
 	cp -r submodules/neturl/lua/* layout/usr/local/xxtouch/lib/
 	cp -r submodules/luapanda/lua/* layout/usr/local/xxtouch/lib/
+	cp -r submodules/lua-lluv/lua/* layout/usr/local/xxtouch/lib/
+	cp -r submodules/lua-pop3/lua/* layout/usr/local/xxtouch/lib/
+	cp -r submodules/lua-lluv-*/lua/* layout/usr/local/xxtouch/lib/
