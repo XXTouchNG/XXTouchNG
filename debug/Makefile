@@ -18,7 +18,7 @@ GeneratedTouchesDebugWindow.mm_CFLAGS = -fno-objc-arc -DXXT_VERSION=\"$(XXT_VERS
 libdebugwindow_CFLAGS += -I../shared/include/
 libdebugwindow_CFLAGS += -Iinclude
 libdebugwindow_CFLAGS += -include debug-prefix.pch
-libdebugwindow_CCFLAGS = -std=gnu++14
+libdebugwindow_CCFLAGS = -std=c++14
 libdebugwindow_PRIVATE_FRAMEWORKS = AppSupport
 libdebugwindow_LIBRARIES = substrate rocketbootstrap
 libdebugwindow_INSTALL_PATH = /usr/local/lib

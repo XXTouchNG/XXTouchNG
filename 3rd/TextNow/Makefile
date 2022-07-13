@@ -19,7 +19,7 @@ TextNow_CFLAGS += -I../../shared/
 TextNow_CFLAGS += -I../../liblua/
 TextNow_CFLAGS += -include TextNow-Prefix.pch
 TextNow_CFLAGS += -DTF_MIDDLE_MAN
-TextNow_CCFLAGS = -std=gnu++14
+TextNow_CCFLAGS = -std=c++14
 TextNow_LDFLAGS = $(LUA_MOD_LDFLAGS)
 TextNow_LIBRARIES = substrate rocketbootstrap
 TextNow_FRAMEWORKS = UIKit

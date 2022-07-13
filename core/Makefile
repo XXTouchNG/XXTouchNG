@@ -18,7 +18,7 @@ lua_CFLAGS += -I../shared/include/
 lua_CFLAGS += -I../liblua/
 lua_CFLAGS += -Iinclude
 # lua_CFLAGS += -Ienc
-lua_CCFLAGS += -std=c++11
+lua_CCFLAGS += -std=gnu++14
 lua_LDFLAGS = -L../liblua
 lua_LIBRARIES = readline lua
 lua_CODESIGN_FLAGS = -Scli/lua.plist
@@ -33,7 +33,7 @@ luac_CFLAGS += -I../shared/include/
 luac_CFLAGS += -I../liblua/
 luac_CFLAGS += -Iinclude
 # luac_CFLAGS += -Ienc
-luac_CCFLAGS += -std=c++11
+luac_CCFLAGS += -std=gnu++14
 luac_LDFLAGS = -L../liblua
 luac_LIBRARIES = readline lua
 luac_CODESIGN_FLAGS = -Scli/luac.plist

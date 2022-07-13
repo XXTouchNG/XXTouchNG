@@ -1,6 +1,6 @@
 #import "TFCookiesManager.h"
 #import "TFContainerManager.h"
-#import "libtfcontainermanager-Swift.h"
+#import "libtfcookiesmanager-Swift.h"
 
 
 @implementation TFCookiesManager {
@@ -24,6 +24,7 @@
                                                                             error:&err];
     if (!appItem)
     {
+        CHDebugLogSource(@"%@", err);
         return nil;
     }
     
@@ -44,6 +45,7 @@
                                                                             error:&err];
     if (!appItem)
     {
+        CHDebugLogSource(@"%@", err);
         return nil;
     }
     
@@ -64,6 +66,7 @@
                                                                             error:&err];
     if (!appItem)
     {
+        CHDebugLogSource(@"%@", err);
         return nil;
     }
     
@@ -73,6 +76,42 @@
         return nil;
     }
     
+    return [[self alloc] initWithBinaryCookiesPath:appItemPath];
+}
+
++ (nullable instancetype)managerWithAnyIdentifier:(NSString *)anyIdentifier
+{
+    NSError *err = nil;
+    NSArray <TFAppItem *> *appItems = [[TFContainerManager sharedManager] appItemsWithOptions:TFContainerManagerFetchWithSystemApplications error:&err];
+    if (!appItems)
+    {
+        CHDebugLogSource(@"%@", err);
+        return nil;
+    }
+    
+    NSString *appItemPath = nil;
+    for (TFAppItem *appItem in appItems) {
+        if ([appItem.identifier isEqualToString:anyIdentifier])
+        {
+            appItemPath = [appItem.dataContainer stringByAppendingPathComponent:@"Library/Cookies/Cookies.binarycookies"];
+            break;
+        }
+        if (appItem.groupContainers[anyIdentifier])
+        {
+            appItemPath = [appItem.groupContainers[anyIdentifier] stringByAppendingPathComponent:@"Library/Cookies/Cookies.binarycookies"];
+            break;
+        }
+        if (appItem.pluginDataContainers[anyIdentifier])
+        {
+            appItemPath = [appItem.pluginDataContainers[anyIdentifier] stringByAppendingPathComponent:@"Library/Cookies/Cookies.binarycookies"];
+            break;
+        }
+    }
+    
+    if (!appItemPath)
+    {
+        return nil;
+    }
     return [[self alloc] initWithBinaryCookiesPath:appItemPath];
 }
 
@@ -133,12 +172,15 @@
     NSMutableArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *cookies = [NSMutableArray arrayWithCapacity:allCookies.count];
     for (NSDictionary <NSHTTPCookiePropertyKey, id> *cookie in allCookies)
     {
-        if (![cookie[NSHTTPCookieDomain] hasSuffix:domainSuffix])
+        if (domainSuffix.length)
         {
-            continue;
+            if (![cookie[NSHTTPCookieDomain] hasSuffix:domainSuffix])
+            {
+                continue;
+            }
         }
         
-        if (pathPrefix)
+        if (pathPrefix.length)
         {
             if (![cookie[NSHTTPCookiePath] hasPrefix:pathPrefix])
             {
@@ -184,8 +226,16 @@
     NSMutableArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *mCookiesToDelete = [NSMutableArray arrayWithCapacity:mCookies.count];
     for (NSDictionary <NSHTTPCookiePropertyKey, id> *mCookie in mCookies)
     {
+        if (![mCookie isKindOfClass:[NSDictionary class]])
+        {
+            continue;
+        }
         for (NSDictionary <NSHTTPCookiePropertyKey, id> *cookie in cookies)
         {
+            if (![cookie isKindOfClass:[NSDictionary class]])
+            {
+                continue;
+            }
             if (
                 cookie[NSHTTPCookieDomain] &&
                 mCookie[NSHTTPCookieDomain] &&
@@ -214,6 +264,10 @@
 {
     NSMutableArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *mCookies = [NSMutableArray arrayWithCapacity:cookies.count];
     for (NSDictionary <NSHTTPCookiePropertyKey, id> *cookie in cookies) {
+        if (![cookie isKindOfClass:[NSDictionary class]])
+        {
+            continue;
+        }
         NSMutableDictionary <NSHTTPCookiePropertyKey, id> *mCookie = [cookie mutableCopy];
         if (![mCookie[NSHTTPCookieExpires] isKindOfClass:[NSDate class]])
         {

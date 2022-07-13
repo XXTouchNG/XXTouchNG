@@ -21,7 +21,7 @@ libalerthelper_CFLAGS += -I../liblua/
 libalerthelper_CFLAGS += -Iscripts -Iinclude
 libalerthelper_CFLAGS += -include alert-prefix.pch
 libalerthelper_CFLAGS += -DTF_MIDDLE_MAN
-libalerthelper_CCFLAGS = -std=gnu++14
+libalerthelper_CCFLAGS = -std=c++14
 libalerthelper_LDFLAGS = -L../liblua
 libalerthelper_LDFLAGS += $(LUA_MOD_LDFLAGS)
 libalerthelper_LIBRARIES = substrate rocketbootstrap lua

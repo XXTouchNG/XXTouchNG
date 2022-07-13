@@ -17,7 +17,7 @@ libhidrecorder_CFLAGS += -I../device/
 libhidrecorder_CFLAGS += -I../proc/
 libhidrecorder_CFLAGS += -I.
 libhidrecorder_CFLAGS += -include hid-prefix.pch
-libhidrecorder_CCFLAGS = -std=gnu++14
+libhidrecorder_CCFLAGS = -std=c++14
 libhidrecorder_LDFLAGS = -L$(THEOS_OBJ_DIR)
 libhidrecorder_PRIVATE_FRAMEWORKS = AppSupport IOKit SpringBoardServices
 libhidrecorder_LIBRARIES = procqueue supervisor substrate rocketbootstrap

@@ -15,29 +15,32 @@
 			dependencies = (
 				CC9CA25A28426DCD008E1D5F /* PBXTargetDependency */,
 				CC9CA25C28426DD0008E1D5F /* PBXTargetDependency */,
-				CC9CA25E28426DD5008E1D5F /* PBXTargetDependency */,
-				CC544DB3287AD46A00613A4E /* PBXTargetDependency */,
+				CCE52923287E8BA0002774B5 /* PBXTargetDependency */,
 				CC9CA28B28426FA3008E1D5F /* PBXTargetDependency */,
+				CC8ED75128587ABF006EE175 /* PBXTargetDependency */,
+				CCE52925287E8BD4002774B5 /* PBXTargetDependency */,
 				CC9CA26028426DDA008E1D5F /* PBXTargetDependency */,
 				CC9CA26228426DE1008E1D5F /* PBXTargetDependency */,
+				CC3970692867253C0079097A /* PBXTargetDependency */,
 				CC9CA26428426DE6008E1D5F /* PBXTargetDependency */,
+				CCE5293B287E8CCB002774B5 /* PBXTargetDependency */,
 				CC9CA26628426DEC008E1D5F /* PBXTargetDependency */,
-				CC9CA26828426DF2008E1D5F /* PBXTargetDependency */,
-				CC9CA26A28426DF8008E1D5F /* PBXTargetDependency */,
-				CC8ED75328587ACA006EE175 /* PBXTargetDependency */,
-				CC8ED75528587AD1006EE175 /* PBXTargetDependency */,
-				CC8ED75128587ABF006EE175 /* PBXTargetDependency */,
 				CC8ED75728587ADA006EE175 /* PBXTargetDependency */,
+				CC9CA26828426DF2008E1D5F /* PBXTargetDependency */,
 				CC4D74A928605D91001CFAF3 /* PBXTargetDependency */,
+				CC8ED75328587ACA006EE175 /* PBXTargetDependency */,
+				CC4C8008286C20DA0016EAFC /* PBXTargetDependency */,
+				CC161A7D286999AB00CA26AD /* PBXTargetDependency */,
+				CC544DB3287AD46A00613A4E /* PBXTargetDependency */,
+				CC39706B286725440079097A /* PBXTargetDependency */,
 				CC9CA26C28426DFD008E1D5F /* PBXTargetDependency */,
 				CC9CA26E28426E02008E1D5F /* PBXTargetDependency */,
-				CC4C8008286C20DA0016EAFC /* PBXTargetDependency */,
-				CC4C800A286C20E50016EAFC /* PBXTargetDependency */,
-				CC4D74AB28605D99001CFAF3 /* PBXTargetDependency */,
-				CC3970692867253C0079097A /* PBXTargetDependency */,
-				CC39706B286725440079097A /* PBXTargetDependency */,
-				CC161A7D286999AB00CA26AD /* PBXTargetDependency */,
 				CC544DB5287AD48A00613A4E /* PBXTargetDependency */,
+				CC8ED75528587AD1006EE175 /* PBXTargetDependency */,
+				CC9CA26A28426DF8008E1D5F /* PBXTargetDependency */,
+				CC4C800A286C20E50016EAFC /* PBXTargetDependency */,
+				CC9CA25E28426DD5008E1D5F /* PBXTargetDependency */,
+				CC4D74AB28605D99001CFAF3 /* PBXTargetDependency */,
 				CC9CA27028426E69008E1D5F /* PBXTargetDependency */,
 			);
 			name = ALL;
@@ -177,6 +180,8 @@
 		CC161AEB2869A0D800CA26AD /* supervisord.m in Sources */ = {isa = PBXBuildFile; fileRef = CC161AC028699E7F00CA26AD /* supervisord.m */; };
 		CC161AEC2869A0DE00CA26AD /* libsupervisor.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC161AD728699FF200CA26AD /* libsupervisor.dylib */; };
 		CC1E5C032830D5F500CF20FB /* libsimulatetouch.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0CAE4127C377B900F87FCD /* libsimulatetouch.dylib */; };
+		CC30C2D6287E8D8500ACE93B /* libtfcontainermanager.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC547FD928351B8C00E8490E /* libtfcontainermanager.dylib */; };
+		CC30C2D9287E8EAE00ACE93B /* libtfcookiesmanager.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE52921287E8ACF002774B5 /* libtfcookiesmanager.dylib */; };
 		CC32989E283F8CE700EBE92E /* FileHash.m in Sources */ = {isa = PBXBuildFile; fileRef = CC32989C283F8CE700EBE92E /* FileHash.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		CC396F9C2861F5B90079097A /* PSWebSocketInflater.m in Sources */ = {isa = PBXBuildFile; fileRef = CC396F892861F5B90079097A /* PSWebSocketInflater.m */; };
 		CC396F9D2861F5B90079097A /* PSWebSocketDeflater.m in Sources */ = {isa = PBXBuildFile; fileRef = CC396F8A2861F5B90079097A /* PSWebSocketDeflater.m */; };
@@ -200,8 +205,8 @@
 		CC396FB02861F5ED0079097A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC396FAF2861F5ED0079097A /* Security.framework */; };
 		CC396FB42862C2360079097A /* AlertHelperHandlers.m in Sources */ = {isa = PBXBuildFile; fileRef = CC396FB32862C2360079097A /* AlertHelperHandlers.m */; };
 		CC396FB62862C2760079097A /* TamperMonkeyHandlers.m in Sources */ = {isa = PBXBuildFile; fileRef = CC396FB52862C2760079097A /* TamperMonkeyHandlers.m */; };
-		CC396FBC2862C2FD0079097A /* alert.so in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF51E5A27BB9BB800865BA9 /* alert.so */; };
-		CC396FC12862C3060079097A /* monkey.so in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B06B279BC37D00F9EA50 /* monkey.so */; };
+		CC396FBC2862C2FD0079097A /* libalerthelper.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF51E5A27BB9BB800865BA9 /* libalerthelper.dylib */; };
+		CC396FC12862C3060079097A /* libtampermonkey.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B06B279BC37D00F9EA50 /* libtampermonkey.dylib */; };
 		CC39701428657EC00079097A /* AppSupport.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B09D279CEC2B00F9EA50 /* AppSupport.tbd */; };
 		CC39701528657EC00079097A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65092BB2521C433000D4208 /* UIKit.framework */; };
 		CC39701628657EC00079097A /* CorePhoneNumbers.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B09C279CEC2B00F9EA50 /* CorePhoneNumbers.tbd */; };
@@ -227,8 +232,8 @@
 		CC3DC77528388A810080C926 /* NSString+EasyText.h in Headers */ = {isa = PBXBuildFile; fileRef = CC3DC75328388A3D0080C926 /* NSString+EasyText.h */; };
 		CC3DC77728388AAB0080C926 /* exstring-prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = CC3DC77628388AAB0080C926 /* exstring-prefix.pch */; };
 		CC3DC77828388C210080C926 /* luae.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC0876F427CDF5FC00513B5A /* luae.mm */; };
-		CC4C7FFA2869D99D0016EAFC /* libhidrecorder.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC39702228657EC00079097A /* libhidrecorder.dylib */; platformFilter = ios; };
-		CC4C7FFF2869D9A90016EAFC /* libsupervisor.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC161AD728699FF200CA26AD /* libsupervisor.dylib */; platformFilter = ios; };
+		CC4C7FFA2869D99D0016EAFC /* libhidrecorder.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC39702228657EC00079097A /* libhidrecorder.dylib */; };
+		CC4C7FFF2869D9A90016EAFC /* libsupervisor.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CC161AD728699FF200CA26AD /* libsupervisor.dylib */; };
 		CC4C80002869D9AA0016EAFC /* libsupervisor.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = CC161AD728699FF200CA26AD /* libsupervisor.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CC4C8004286B3CFE0016EAFC /* TFShell.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC6E46BA2834B6DE00691D26 /* TFShell.mm */; };
 		CC4C8006286C01710016EAFC /* NSTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CC4C8005286C01710016EAFC /* NSTask.h */; };
@@ -253,41 +258,7 @@
 		CC4D74BA2860A20B001CFAF3 /* TFLuaBridge+Reveal.m in Sources */ = {isa = PBXBuildFile; fileRef = D61970042536EC92006747A2 /* TFLuaBridge+Reveal.m */; };
 		CC500DA42879606000D896CC /* HIDRecorderActivator.m in Sources */ = {isa = PBXBuildFile; fileRef = CC500DA32879606000D896CC /* HIDRecorderActivator.m */; };
 		CC500DA62879607500D896CC /* libactivator.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC500DA52879607500D896CC /* libactivator.tbd */; };
-		CC544D7F287AD0ED00613A4E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D78287AD0ED00613A4E /* Extensions.swift */; };
-		CC544D80287AD0ED00613A4E /* EditThisCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D79287AD0ED00613A4E /* EditThisCookie.swift */; };
-		CC544D81287AD0ED00613A4E /* BinaryCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D7A287AD0ED00613A4E /* BinaryCookieJar.swift */; };
-		CC544D82287AD0ED00613A4E /* HTTPCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D7B287AD0ED00613A4E /* HTTPCookieJar.swift */; };
-		CC544D83287AD0ED00613A4E /* LWPCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D7C287AD0ED00613A4E /* LWPCookieJar.swift */; };
-		CC544D84287AD0ED00613A4E /* NetscapeCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D7D287AD0ED00613A4E /* NetscapeCookieJar.swift */; };
-		CC544D85287AD0ED00613A4E /* MiddleCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D7E287AD0ED00613A4E /* MiddleCookieJar.swift */; };
-		CC544D90287AD1BA00613A4E /* BinaryDataEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D89287AD1BA00613A4E /* BinaryDataEncoder.swift */; };
-		CC544D91287AD1BA00613A4E /* ByteRepresentations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8A287AD1BA00613A4E /* ByteRepresentations.swift */; };
-		CC544D92287AD1BA00613A4E /* BinaryDataDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8B287AD1BA00613A4E /* BinaryDataDecoder.swift */; };
-		CC544D93287AD1BA00613A4E /* BufferedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8C287AD1BA00613A4E /* BufferedData.swift */; };
-		CC544D94287AD1BA00613A4E /* BinaryEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8D287AD1BA00613A4E /* BinaryEncodable.swift */; };
-		CC544D95287AD1BA00613A4E /* BinaryCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8E287AD1BA00613A4E /* BinaryCodable.swift */; };
-		CC544D96287AD1BA00613A4E /* BinaryDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8F287AD1BA00613A4E /* BinaryDecodable.swift */; };
 		CC544D9D287AD31400613A4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6F57919251C6179009CC6A3 /* Foundation.framework */; };
-		CC544D9E287AD31400613A4E /* liblua.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9CA295284272B5008E1D5F /* liblua.tbd */; };
-		CC544DA3287AD34700613A4E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D86287AD10D00613A4E /* main.swift */; };
-		CC544DA4287AD42400613A4E /* EditThisCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D79287AD0ED00613A4E /* EditThisCookie.swift */; };
-		CC544DA5287AD42400613A4E /* NetscapeCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D7D287AD0ED00613A4E /* NetscapeCookieJar.swift */; };
-		CC544DA6287AD42400613A4E /* LWPCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D7C287AD0ED00613A4E /* LWPCookieJar.swift */; };
-		CC544DA7287AD42400613A4E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D78287AD0ED00613A4E /* Extensions.swift */; };
-		CC544DA8287AD42400613A4E /* BinaryCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D7A287AD0ED00613A4E /* BinaryCookieJar.swift */; };
-		CC544DA9287AD42400613A4E /* HTTPCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D7B287AD0ED00613A4E /* HTTPCookieJar.swift */; };
-		CC544DAA287AD42400613A4E /* MiddleCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D7E287AD0ED00613A4E /* MiddleCookieJar.swift */; };
-		CC544DAB287AD42900613A4E /* BinaryDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8F287AD1BA00613A4E /* BinaryDecodable.swift */; };
-		CC544DAC287AD42900613A4E /* BinaryEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8D287AD1BA00613A4E /* BinaryEncodable.swift */; };
-		CC544DAD287AD42900613A4E /* BinaryCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8E287AD1BA00613A4E /* BinaryCodable.swift */; };
-		CC544DAE287AD42D00613A4E /* BufferedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8C287AD1BA00613A4E /* BufferedData.swift */; };
-		CC544DAF287AD42D00613A4E /* BinaryDataEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D89287AD1BA00613A4E /* BinaryDataEncoder.swift */; };
-		CC544DB0287AD42D00613A4E /* BinaryDataDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8B287AD1BA00613A4E /* BinaryDataDecoder.swift */; };
-		CC544DB1287AD42D00613A4E /* ByteRepresentations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544D8A287AD1BA00613A4E /* ByteRepresentations.swift */; };
-		CC544DBE287ADB1000613A4E /* CookiesToolObjectiveCBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC544DBD287ADB1000613A4E /* CookiesToolObjectiveCBridge.swift */; };
-		CC544DC1287ADD7C00613A4E /* TFCookiesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CC544DBF287ADD7C00613A4E /* TFCookiesManager.h */; };
-		CC544DC2287ADD7C00613A4E /* TFCookiesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC544DC0287ADD7C00613A4E /* TFCookiesManager.m */; };
-		CC544DC4287AE26B00613A4E /* CookiesManagerLuaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC544DC3287AE26B00613A4E /* CookiesManagerLuaBridge.mm */; };
 		CC544DC6287B025600613A4E /* CookiesManagerHandlers.m in Sources */ = {isa = PBXBuildFile; fileRef = CC544DC5287B025600613A4E /* CookiesManagerHandlers.m */; };
 		CC547FBB2835084D00E8490E /* MemoryHackerHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC547FBA2835084D00E8490E /* MemoryHackerHelper.mm */; };
 		CC547FC32835199500E8490E /* touch-prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = CC547FC22835199500E8490E /* touch-prefix.pch */; };
@@ -439,6 +410,45 @@
 		CCE047E428759B0700FB63C2 /* KxSMBLuaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCE047E328759B0700FB63C2 /* KxSMBLuaBridge.mm */; };
 		CCE4B02327B136010076B1D4 /* TMWeakUserContentControllerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE4B02227B136010076B1D4 /* TMWeakUserContentControllerWrapper.m */; };
 		CCE4B02627B24E580076B1D4 /* TMScriptMessageProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE4B02427B24E580076B1D4 /* TMScriptMessageProxy.m */; };
+		CCE528FA287E8A49002774B5 /* BinaryDataDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528E9287E8A01002774B5 /* BinaryDataDecoder.swift */; };
+		CCE528FB287E8A49002774B5 /* MiddleCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528EE287E8A01002774B5 /* MiddleCookieJar.swift */; };
+		CCE528FC287E8A49002774B5 /* BinaryDataEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528E7287E8A01002774B5 /* BinaryDataEncoder.swift */; };
+		CCE528FD287E8A49002774B5 /* ByteRepresentations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528E8287E8A01002774B5 /* ByteRepresentations.swift */; };
+		CCE528FE287E8A49002774B5 /* EditThisCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F4287E8A01002774B5 /* EditThisCookie.swift */; };
+		CCE528FF287E8A49002774B5 /* BinaryEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528EB287E8A01002774B5 /* BinaryEncodable.swift */; };
+		CCE52900287E8A49002774B5 /* BinaryDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528ED287E8A01002774B5 /* BinaryDecodable.swift */; };
+		CCE52901287E8A49002774B5 /* BinaryCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528EC287E8A01002774B5 /* BinaryCodable.swift */; };
+		CCE52902287E8A49002774B5 /* LWPCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528E4287E8A01002774B5 /* LWPCookieJar.swift */; };
+		CCE52903287E8A49002774B5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F2287E8A01002774B5 /* Extensions.swift */; };
+		CCE52904287E8A49002774B5 /* BufferedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528EA287E8A01002774B5 /* BufferedData.swift */; };
+		CCE52905287E8A49002774B5 /* HTTPCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F0287E8A01002774B5 /* HTTPCookieJar.swift */; };
+		CCE52906287E8A49002774B5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F5287E8A01002774B5 /* main.swift */; };
+		CCE52907287E8A49002774B5 /* CookiesToolObjectiveCBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528EF287E8A01002774B5 /* CookiesToolObjectiveCBridge.swift */; };
+		CCE52908287E8A49002774B5 /* NetscapeCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F1287E8A01002774B5 /* NetscapeCookieJar.swift */; };
+		CCE52909287E8A49002774B5 /* BinaryCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F6287E8A01002774B5 /* BinaryCookieJar.swift */; };
+		CCE52918287E8ACF002774B5 /* AppSupport.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B09D279CEC2B00F9EA50 /* AppSupport.tbd */; };
+		CCE52919287E8ACF002774B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6F57919251C6179009CC6A3 /* Foundation.framework */; };
+		CCE5291A287E8ACF002774B5 /* CorePhoneNumbers.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B09C279CEC2B00F9EA50 /* CorePhoneNumbers.tbd */; };
+		CCE52926287E8C12002774B5 /* ByteRepresentations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528E8287E8A01002774B5 /* ByteRepresentations.swift */; };
+		CCE52927287E8C12002774B5 /* EditThisCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F4287E8A01002774B5 /* EditThisCookie.swift */; };
+		CCE52928287E8C12002774B5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F5287E8A01002774B5 /* main.swift */; };
+		CCE52929287E8C12002774B5 /* CookiesToolObjectiveCBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528EF287E8A01002774B5 /* CookiesToolObjectiveCBridge.swift */; };
+		CCE5292A287E8C12002774B5 /* HTTPCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F0287E8A01002774B5 /* HTTPCookieJar.swift */; };
+		CCE5292B287E8C12002774B5 /* BinaryDataEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528E7287E8A01002774B5 /* BinaryDataEncoder.swift */; };
+		CCE5292C287E8C12002774B5 /* BinaryEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528EB287E8A01002774B5 /* BinaryEncodable.swift */; };
+		CCE5292D287E8C12002774B5 /* BinaryCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528EC287E8A01002774B5 /* BinaryCodable.swift */; };
+		CCE5292E287E8C12002774B5 /* BufferedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528EA287E8A01002774B5 /* BufferedData.swift */; };
+		CCE5292F287E8C12002774B5 /* NetscapeCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F1287E8A01002774B5 /* NetscapeCookieJar.swift */; };
+		CCE52930287E8C12002774B5 /* BinaryDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528ED287E8A01002774B5 /* BinaryDecodable.swift */; };
+		CCE52931287E8C12002774B5 /* TFCookiesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F8287E8A01002774B5 /* TFCookiesManager.m */; };
+		CCE52932287E8C12002774B5 /* BinaryCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F6287E8A01002774B5 /* BinaryCookieJar.swift */; };
+		CCE52933287E8C12002774B5 /* LWPCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528E4287E8A01002774B5 /* LWPCookieJar.swift */; };
+		CCE52934287E8C12002774B5 /* CookiesManagerLuaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCE528D6287E8A01002774B5 /* CookiesManagerLuaBridge.mm */; };
+		CCE52935287E8C12002774B5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528F2287E8A01002774B5 /* Extensions.swift */; };
+		CCE52936287E8C12002774B5 /* BinaryDataDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528E9287E8A01002774B5 /* BinaryDataDecoder.swift */; };
+		CCE52937287E8C12002774B5 /* MiddleCookieJar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE528EE287E8A01002774B5 /* MiddleCookieJar.swift */; };
+		CCE52938287E8C18002774B5 /* TFCookiesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CCE528D1287E8A01002774B5 /* TFCookiesManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CCE52939287E8C18002774B5 /* cookies-prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = CCE528D0287E8A01002774B5 /* cookies-prefix.pch */; };
 		CCE5C15128361D87002233DB /* ContainerManagerLuaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCE5C15028361D87002233DB /* ContainerManagerLuaBridge.mm */; };
 		CCE5C15A2836313E002233DB /* TFShell.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC6E46BA2834B6DE00691D26 /* TFShell.mm */; };
 		CCF1B052279BC37D00F9EA50 /* TFLuaBridge+Reveal.m in Sources */ = {isa = PBXBuildFile; fileRef = D61970042536EC92006747A2 /* TFLuaBridge+Reveal.m */; };
@@ -559,6 +569,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = CC0CAE2027C377B900F87FCD;
 			remoteInfo = SimulateTouch;
+		};
+		CC30C2D4287E8D7400ACE93B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6F5790D251C6179009CC6A3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC547FC628351B8C00E8490E;
+			remoteInfo = app;
+		};
+		CC30C2D7287E8D9F00ACE93B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6F5790D251C6179009CC6A3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCE5290C287E8ACF002774B5;
+			remoteInfo = cookies;
 		};
 		CC396FBE2862C2FD0079097A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -826,6 +850,27 @@
 			remoteGlobalIDString = CC9CA2C828436411008E1D5F;
 			remoteInfo = screen;
 		};
+		CCE52922287E8BA0002774B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6F5790D251C6179009CC6A3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCE5290C287E8ACF002774B5;
+			remoteInfo = cookies;
+		};
+		CCE52924287E8BD4002774B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6F5790D251C6179009CC6A3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC8C6334287D7E6A00EB36D3;
+			remoteInfo = entitleme;
+		};
+		CCE5293A287E8CCB002774B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6F5790D251C6179009CC6A3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CCF1B04E279BC37D00F9EA50;
+			remoteInfo = monkey;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1038,27 +1083,7 @@
 		CC500DC72879A01B00D896CC /* xxt32.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xxt32.h; sourceTree = "<group>"; };
 		CC500DC82879A01B00D896CC /* crc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = crc.c; sourceTree = "<group>"; };
 		CC500DC92879A01B00D896CC /* xxtea.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xxtea.h; sourceTree = "<group>"; };
-		CC544D77287AD0EC00613A4E /* CookiesTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CookiesTool-Bridging-Header.h"; sourceTree = "<group>"; };
-		CC544D78287AD0ED00613A4E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		CC544D79287AD0ED00613A4E /* EditThisCookie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditThisCookie.swift; sourceTree = "<group>"; };
-		CC544D7A287AD0ED00613A4E /* BinaryCookieJar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryCookieJar.swift; sourceTree = "<group>"; };
-		CC544D7B287AD0ED00613A4E /* HTTPCookieJar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPCookieJar.swift; sourceTree = "<group>"; };
-		CC544D7C287AD0ED00613A4E /* LWPCookieJar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LWPCookieJar.swift; sourceTree = "<group>"; };
-		CC544D7D287AD0ED00613A4E /* NetscapeCookieJar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetscapeCookieJar.swift; sourceTree = "<group>"; };
-		CC544D7E287AD0ED00613A4E /* MiddleCookieJar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleCookieJar.swift; sourceTree = "<group>"; };
-		CC544D86287AD10D00613A4E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		CC544D89287AD1BA00613A4E /* BinaryDataEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryDataEncoder.swift; sourceTree = "<group>"; };
-		CC544D8A287AD1BA00613A4E /* ByteRepresentations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteRepresentations.swift; sourceTree = "<group>"; };
-		CC544D8B287AD1BA00613A4E /* BinaryDataDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryDataDecoder.swift; sourceTree = "<group>"; };
-		CC544D8C287AD1BA00613A4E /* BufferedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferedData.swift; sourceTree = "<group>"; };
-		CC544D8D287AD1BA00613A4E /* BinaryEncodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryEncodable.swift; sourceTree = "<group>"; };
-		CC544D8E287AD1BA00613A4E /* BinaryCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryCodable.swift; sourceTree = "<group>"; };
-		CC544D8F287AD1BA00613A4E /* BinaryDecodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryDecodable.swift; sourceTree = "<group>"; };
 		CC544DA2287AD31400613A4E /* CookiesTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CookiesTool; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC544DBD287ADB1000613A4E /* CookiesToolObjectiveCBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookiesToolObjectiveCBridge.swift; sourceTree = "<group>"; };
-		CC544DBF287ADD7C00613A4E /* TFCookiesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFCookiesManager.h; sourceTree = "<group>"; };
-		CC544DC0287ADD7C00613A4E /* TFCookiesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFCookiesManager.m; sourceTree = "<group>"; };
-		CC544DC3287AE26B00613A4E /* CookiesManagerLuaBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CookiesManagerLuaBridge.mm; sourceTree = "<group>"; };
 		CC544DC5287B025600613A4E /* CookiesManagerHandlers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CookiesManagerHandlers.m; sourceTree = "<group>"; };
 		CC547FBA2835084D00E8490E /* MemoryHackerHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MemoryHackerHelper.mm; sourceTree = "<group>"; };
 		CC547FBF28350F5700E8490E /* simulatetouchd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = simulatetouchd.m; sourceTree = "<group>"; };
@@ -1094,7 +1119,7 @@
 		CC6E46B92834B6DE00691D26 /* TFShell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFShell.h; sourceTree = "<group>"; };
 		CC6E46BA2834B6DE00691D26 /* TFShell.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TFShell.mm; sourceTree = "<group>"; };
 		CC700060279FC848003A0B32 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
-		CC8C6354287D7E6A00EB36D3 /* EntitleMe.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = EntitleMe.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC8C6354287D7E6A00EB36D3 /* libentitleme.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libentitleme.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC8C6356287D7EBD00EB36D3 /* entitleme-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "entitleme-prefix.pch"; sourceTree = "<group>"; };
 		CC8C635A287D7EBD00EB36D3 /* EntitleMe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EntitleMe.m; sourceTree = "<group>"; };
 		CC8C635F287D7F7900EB36D3 /* EntitleMe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntitleMe.h; sourceTree = "<group>"; };
@@ -1220,13 +1245,37 @@
 		CCE4B02227B136010076B1D4 /* TMWeakUserContentControllerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMWeakUserContentControllerWrapper.m; sourceTree = "<group>"; };
 		CCE4B02427B24E580076B1D4 /* TMScriptMessageProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMScriptMessageProxy.m; sourceTree = "<group>"; };
 		CCE4B02527B24E580076B1D4 /* TMScriptMessageProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMScriptMessageProxy.h; sourceTree = "<group>"; };
+		CCE528D0287E8A01002774B5 /* cookies-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cookies-prefix.pch"; sourceTree = "<group>"; };
+		CCE528D1287E8A01002774B5 /* TFCookiesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFCookiesManager.h; sourceTree = "<group>"; };
+		CCE528D6287E8A01002774B5 /* CookiesManagerLuaBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CookiesManagerLuaBridge.mm; sourceTree = "<group>"; };
+		CCE528E4287E8A01002774B5 /* LWPCookieJar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LWPCookieJar.swift; sourceTree = "<group>"; };
+		CCE528E7287E8A01002774B5 /* BinaryDataEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryDataEncoder.swift; sourceTree = "<group>"; };
+		CCE528E8287E8A01002774B5 /* ByteRepresentations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteRepresentations.swift; sourceTree = "<group>"; };
+		CCE528E9287E8A01002774B5 /* BinaryDataDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryDataDecoder.swift; sourceTree = "<group>"; };
+		CCE528EA287E8A01002774B5 /* BufferedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferedData.swift; sourceTree = "<group>"; };
+		CCE528EB287E8A01002774B5 /* BinaryEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryEncodable.swift; sourceTree = "<group>"; };
+		CCE528EC287E8A01002774B5 /* BinaryCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryCodable.swift; sourceTree = "<group>"; };
+		CCE528ED287E8A01002774B5 /* BinaryDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryDecodable.swift; sourceTree = "<group>"; };
+		CCE528EE287E8A01002774B5 /* MiddleCookieJar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleCookieJar.swift; sourceTree = "<group>"; };
+		CCE528EF287E8A01002774B5 /* CookiesToolObjectiveCBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookiesToolObjectiveCBridge.swift; sourceTree = "<group>"; };
+		CCE528F0287E8A01002774B5 /* HTTPCookieJar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCookieJar.swift; sourceTree = "<group>"; };
+		CCE528F1287E8A01002774B5 /* NetscapeCookieJar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetscapeCookieJar.swift; sourceTree = "<group>"; };
+		CCE528F2287E8A01002774B5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CCE528F3287E8A01002774B5 /* CookiesTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CookiesTool-Bridging-Header.h"; sourceTree = "<group>"; };
+		CCE528F4287E8A01002774B5 /* EditThisCookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditThisCookie.swift; sourceTree = "<group>"; };
+		CCE528F5287E8A01002774B5 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		CCE528F6287E8A01002774B5 /* BinaryCookieJar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryCookieJar.swift; sourceTree = "<group>"; };
+		CCE528F8287E8A01002774B5 /* TFCookiesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFCookiesManager.m; sourceTree = "<group>"; };
+		CCE528F9287E8A14002774B5 /* layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = layout; sourceTree = "<group>"; };
+		CCE5290B287E8A97002774B5 /* ent.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ent.plist; sourceTree = "<group>"; };
+		CCE52921287E8ACF002774B5 /* libtfcookiesmanager.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libtfcookiesmanager.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE5C15028361D87002233DB /* ContainerManagerLuaBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContainerManagerLuaBridge.mm; sourceTree = "<group>"; };
 		CCE5C15228362053002233DB /* layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = layout; sourceTree = "<group>"; };
 		CCF1B045279BC35400F9EA50 /* RevealServer.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RevealServer.xcframework; path = "../../../../../../../zheng/Library/Application Support/Reveal/RevealServer/RevealServer.xcframework"; sourceTree = "<group>"; };
 		CCF1B04A279BC36500F9EA50 /* LogosTamperMonkey.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = LogosTamperMonkey.xm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		CCF1B04B279BC36500F9EA50 /* TamperMonkey.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TamperMonkey.m; sourceTree = "<group>"; };
 		CCF1B04D279BC36500F9EA50 /* monkey-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "monkey-prefix.pch"; sourceTree = "<group>"; };
-		CCF1B06B279BC37D00F9EA50 /* monkey.so */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = monkey.so; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCF1B06B279BC37D00F9EA50 /* libtampermonkey.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libtampermonkey.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCF1B07D279BDDA900F9EA50 /* TMWeakViewWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMWeakViewWrapper.h; sourceTree = "<group>"; };
 		CCF1B07E279BDDA900F9EA50 /* TMWeakViewWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMWeakViewWrapper.m; sourceTree = "<group>"; };
 		CCF1B085279BDFE400F9EA50 /* TFLuaBridge+Actions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFLuaBridge+Actions.h"; sourceTree = "<group>"; };
@@ -1239,7 +1288,7 @@
 		CCF36BF22844915C0039D7D2 /* JST_ORIENTATION.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JST_ORIENTATION.h; sourceTree = "<group>"; };
 		CCF36BF3284498140039D7D2 /* ScreenCaptureLuaBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ScreenCaptureLuaBridge.mm; sourceTree = "<group>"; };
 		CCF51E3127BB9B9400865BA9 /* alert-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "alert-prefix.pch"; sourceTree = "<group>"; };
-		CCF51E5A27BB9BB800865BA9 /* alert.so */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = alert.so; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCF51E5A27BB9BB800865BA9 /* libalerthelper.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libalerthelper.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCF51E5E27BB9C5000865BA9 /* AlertHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AlertHelper.mm; sourceTree = "<group>"; };
 		D6196FFD2536E954006747A2 /* TFLuaBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFLuaBridge.h; sourceTree = "<group>"; };
 		D6196FFE2536E954006747A2 /* TFLuaBridge+IMP+MiddleMan.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TFLuaBridge+IMP+MiddleMan.m"; sourceTree = "<group>"; };
@@ -1351,23 +1400,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC396FBC2862C2FD0079097A /* alert.so in Frameworks */,
 				CC0D6DBB285CD034002F1096 /* CFNetwork.framework in Frameworks */,
-				CC0D6DB8285CD009002F1096 /* libz.tbd in Frameworks */,
 				CC0D6D25285CAC08002F1096 /* Foundation.framework in Frameworks */,
-				CC4D748E285F3DF9001CFAF3 /* libtfcontainermanager.dylib in Frameworks */,
 				CC0D6DC1285CD056002F1096 /* CoreServices.framework in Frameworks */,
 				CC396FB02861F5ED0079097A /* Security.framework in Frameworks */,
-				CC4D7471285D7606001CFAF3 /* libprocqueue.dylib in Frameworks */,
-				CC4C7FFA2869D99D0016EAFC /* libhidrecorder.dylib in Frameworks */,
-				CC396FC12862C3060079097A /* monkey.so in Frameworks */,
-				CC4D7487285F376C001CFAF3 /* libdeviceconfigurator.dylib in Frameworks */,
-				CC4C7FFF2869D9A90016EAFC /* libsupervisor.dylib in Frameworks */,
-				CC4D7493285F522E001CFAF3 /* libscreencapture.dylib in Frameworks */,
 				CC0D6DB9285CD01D002F1096 /* UIKit.framework in Frameworks */,
-				CC4D74B628608B53001CFAF3 /* libxml2.tbd in Frameworks */,
 				CC4D7498285F7223001CFAF3 /* CoreGraphics.framework in Frameworks */,
 				CC4D748D285F3B01001CFAF3 /* libMobileGestalt.tbd in Frameworks */,
+				CC4D74B628608B53001CFAF3 /* libxml2.tbd in Frameworks */,
+				CC0D6DB8285CD009002F1096 /* libz.tbd in Frameworks */,
+				CC396FBC2862C2FD0079097A /* libalerthelper.dylib in Frameworks */,
+				CC4D7487285F376C001CFAF3 /* libdeviceconfigurator.dylib in Frameworks */,
+				CC4C7FFA2869D99D0016EAFC /* libhidrecorder.dylib in Frameworks */,
+				CC4D7471285D7606001CFAF3 /* libprocqueue.dylib in Frameworks */,
+				CC396FC12862C3060079097A /* libtampermonkey.dylib in Frameworks */,
+				CC30C2D9287E8EAE00ACE93B /* libtfcookiesmanager.dylib in Frameworks */,
+				CC4D748E285F3DF9001CFAF3 /* libtfcontainermanager.dylib in Frameworks */,
+				CC4D7493285F522E001CFAF3 /* libscreencapture.dylib in Frameworks */,
+				CC4C7FFF2869D9A90016EAFC /* libsupervisor.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1450,7 +1500,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC544D9D287AD31400613A4E /* Foundation.framework in Frameworks */,
-				CC544D9E287AD31400613A4E /* liblua.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1460,8 +1509,8 @@
 			files = (
 				CC0981E2283BEC8F00953B2B /* libapplist.tbd in Frameworks */,
 				CC8ED5F828544114006EE175 /* AppSupport.tbd in Frameworks */,
-				CC547FCE28351B8C00E8490E /* Foundation.framework in Frameworks */,
 				CC8ED63C28544201006EE175 /* CorePhoneNumbers.tbd in Frameworks */,
+				CC547FCE28351B8C00E8490E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1587,6 +1636,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCE047DD2874785100FB63C2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCE52916287E8ACF002774B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCE52918287E8ACF002774B5 /* AppSupport.tbd in Frameworks */,
+				CCE5291A287E8ACF002774B5 /* CorePhoneNumbers.tbd in Frameworks */,
+				CCE52919287E8ACF002774B5 /* Foundation.framework in Frameworks */,
+				CC30C2D6287E8D8500ACE93B /* libtfcontainermanager.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2052,46 +2112,6 @@
 			path = enc;
 			sourceTree = "<group>";
 		};
-		CC544D76287ACFEB00613A4E /* CookiesTool */ = {
-			isa = PBXGroup;
-			children = (
-				CC544D87287AD1BA00613A4E /* BinaryCodable */,
-				CC544D7A287AD0ED00613A4E /* BinaryCookieJar.swift */,
-				CC544D79287AD0ED00613A4E /* EditThisCookie.swift */,
-				CC544D78287AD0ED00613A4E /* Extensions.swift */,
-				CC544D7B287AD0ED00613A4E /* HTTPCookieJar.swift */,
-				CC544D7C287AD0ED00613A4E /* LWPCookieJar.swift */,
-				CC544D7E287AD0ED00613A4E /* MiddleCookieJar.swift */,
-				CC544D7D287AD0ED00613A4E /* NetscapeCookieJar.swift */,
-				CC544D77287AD0EC00613A4E /* CookiesTool-Bridging-Header.h */,
-				CC544D86287AD10D00613A4E /* main.swift */,
-				CC544DBD287ADB1000613A4E /* CookiesToolObjectiveCBridge.swift */,
-			);
-			path = CookiesTool;
-			sourceTree = "<group>";
-		};
-		CC544D87287AD1BA00613A4E /* BinaryCodable */ = {
-			isa = PBXGroup;
-			children = (
-				CC544D88287AD1BA00613A4E /* BinaryDataCoders */,
-				CC544D8D287AD1BA00613A4E /* BinaryEncodable.swift */,
-				CC544D8E287AD1BA00613A4E /* BinaryCodable.swift */,
-				CC544D8F287AD1BA00613A4E /* BinaryDecodable.swift */,
-			);
-			path = BinaryCodable;
-			sourceTree = "<group>";
-		};
-		CC544D88287AD1BA00613A4E /* BinaryDataCoders */ = {
-			isa = PBXGroup;
-			children = (
-				CC544D89287AD1BA00613A4E /* BinaryDataEncoder.swift */,
-				CC544D8A287AD1BA00613A4E /* ByteRepresentations.swift */,
-				CC544D8B287AD1BA00613A4E /* BinaryDataDecoder.swift */,
-				CC544D8C287AD1BA00613A4E /* BufferedData.swift */,
-			);
-			path = BinaryDataCoders;
-			sourceTree = "<group>";
-		};
 		CC547FBE28350F5700E8490E /* cli */ = {
 			isa = PBXGroup;
 			children = (
@@ -2104,7 +2124,6 @@
 		CC547FC428351B4000E8490E /* app */ = {
 			isa = PBXGroup;
 			children = (
-				CC544D76287ACFEB00613A4E /* CookiesTool */,
 				CCE5C15228362053002233DB /* layout */,
 				CCE5C14C28361D3C002233DB /* lib */,
 				CCE5C14F28361D87002233DB /* bridge */,
@@ -2113,8 +2132,6 @@
 				CC6E46B62834B49600691D26 /* TFContainerManager.h */,
 				CC6E46B72834B49600691D26 /* TFContainerManager.mm */,
 				CC547FC528351B6B00E8490E /* TFContainerManager.m */,
-				CC544DBF287ADD7C00613A4E /* TFCookiesManager.h */,
-				CC544DC0287ADD7C00613A4E /* TFCookiesManager.m */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -2372,6 +2389,68 @@
 			path = cli;
 			sourceTree = "<group>";
 		};
+		CCE528CF287E8A01002774B5 /* cookies */ = {
+			isa = PBXGroup;
+			children = (
+				CCE528F9287E8A14002774B5 /* layout */,
+				CCE528D5287E8A01002774B5 /* bridge */,
+				CCE528E3287E8A01002774B5 /* CookiesTool */,
+				CCE528D1287E8A01002774B5 /* TFCookiesManager.h */,
+				CCE528F8287E8A01002774B5 /* TFCookiesManager.m */,
+				CCE528D0287E8A01002774B5 /* cookies-prefix.pch */,
+			);
+			path = cookies;
+			sourceTree = "<group>";
+		};
+		CCE528D5287E8A01002774B5 /* bridge */ = {
+			isa = PBXGroup;
+			children = (
+				CCE528D6287E8A01002774B5 /* CookiesManagerLuaBridge.mm */,
+			);
+			path = bridge;
+			sourceTree = "<group>";
+		};
+		CCE528E3287E8A01002774B5 /* CookiesTool */ = {
+			isa = PBXGroup;
+			children = (
+				CCE5290B287E8A97002774B5 /* ent.plist */,
+				CCE528E5287E8A01002774B5 /* BinaryCodable */,
+				CCE528E4287E8A01002774B5 /* LWPCookieJar.swift */,
+				CCE528EE287E8A01002774B5 /* MiddleCookieJar.swift */,
+				CCE528EF287E8A01002774B5 /* CookiesToolObjectiveCBridge.swift */,
+				CCE528F0287E8A01002774B5 /* HTTPCookieJar.swift */,
+				CCE528F1287E8A01002774B5 /* NetscapeCookieJar.swift */,
+				CCE528F2287E8A01002774B5 /* Extensions.swift */,
+				CCE528F3287E8A01002774B5 /* CookiesTool-Bridging-Header.h */,
+				CCE528F4287E8A01002774B5 /* EditThisCookie.swift */,
+				CCE528F5287E8A01002774B5 /* main.swift */,
+				CCE528F6287E8A01002774B5 /* BinaryCookieJar.swift */,
+			);
+			path = CookiesTool;
+			sourceTree = "<group>";
+		};
+		CCE528E5287E8A01002774B5 /* BinaryCodable */ = {
+			isa = PBXGroup;
+			children = (
+				CCE528E6287E8A01002774B5 /* BinaryDataCoders */,
+				CCE528EB287E8A01002774B5 /* BinaryEncodable.swift */,
+				CCE528EC287E8A01002774B5 /* BinaryCodable.swift */,
+				CCE528ED287E8A01002774B5 /* BinaryDecodable.swift */,
+			);
+			path = BinaryCodable;
+			sourceTree = "<group>";
+		};
+		CCE528E6287E8A01002774B5 /* BinaryDataCoders */ = {
+			isa = PBXGroup;
+			children = (
+				CCE528E7287E8A01002774B5 /* BinaryDataEncoder.swift */,
+				CCE528E8287E8A01002774B5 /* ByteRepresentations.swift */,
+				CCE528E9287E8A01002774B5 /* BinaryDataDecoder.swift */,
+				CCE528EA287E8A01002774B5 /* BufferedData.swift */,
+			);
+			path = BinaryDataCoders;
+			sourceTree = "<group>";
+		};
 		CCE5C14C28361D3C002233DB /* lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -2384,7 +2463,6 @@
 			isa = PBXGroup;
 			children = (
 				CCE5C15028361D87002233DB /* ContainerManagerLuaBridge.mm */,
-				CC544DC3287AE26B00613A4E /* CookiesManagerLuaBridge.mm */,
 			);
 			path = bridge;
 			sourceTree = "<group>";
@@ -2548,6 +2626,7 @@
 				D6196FFC2536E909006747A2 /* shared */,
 				CCF51E2627BB9ACA00865BA9 /* alert */,
 				CC547FC428351B4000E8490E /* app */,
+				CCE528CF287E8A01002774B5 /* cookies */,
 				CC114C26283D3024002E91D8 /* core */,
 				CC9CA1FF2841DF26008E1D5F /* debug */,
 				CC8C6355287D7EBD00EB36D3 /* entitleme */,
@@ -2575,8 +2654,8 @@
 			isa = PBXGroup;
 			children = (
 				D6B89C9B251DC738006B4B56 /* Lua.framework */,
-				CCF1B06B279BC37D00F9EA50 /* monkey.so */,
-				CCF51E5A27BB9BB800865BA9 /* alert.so */,
+				CCF1B06B279BC37D00F9EA50 /* libtampermonkey.dylib */,
+				CCF51E5A27BB9BB800865BA9 /* libalerthelper.dylib */,
 				CC0CAE4127C377B900F87FCD /* libsimulatetouch.dylib */,
 				CC0876CA27CDF1C300513B5A /* memory.so */,
 				CC547FD928351B8C00E8490E /* libtfcontainermanager.dylib */,
@@ -2601,7 +2680,8 @@
 				CC161AE82869A08800CA26AD /* supervisord */,
 				CCE047E12874785100FB63C2 /* ohmyjetsam */,
 				CC544DA2287AD31400613A4E /* CookiesTool */,
-				CC8C6354287D7E6A00EB36D3 /* EntitleMe.dylib */,
+				CC8C6354287D7E6A00EB36D3 /* libentitleme.dylib */,
+				CCE52921287E8ACF002774B5 /* libtfcookiesmanager.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2741,7 +2821,6 @@
 			files = (
 				CC547FDA28351BEC00E8490E /* TFContainerManager.h in Headers */,
 				CC547FDF28351C6A00E8490E /* app-prefix.pch in Headers */,
-				CC544DC1287ADD7C00613A4E /* TFCookiesManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2828,6 +2907,15 @@
 				CC9CA30528447F51008E1D5F /* JSTPixelImage.h in Headers */,
 				CC8ED5BC284F4EB0006EE175 /* ScreenCaptureOpenCVWrapper.h in Headers */,
 				CC9CA30728447F51008E1D5F /* JST_POS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CCE5291B287E8ACF002774B5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCE52938287E8C18002774B5 /* TFCookiesManager.h in Headers */,
+				CCE52939287E8C18002774B5 /* cookies-prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2963,13 +3051,14 @@
 			buildRules = (
 			);
 			dependencies = (
-				CC4D7474285D7606001CFAF3 /* PBXTargetDependency */,
-				CC4D748A285F376C001CFAF3 /* PBXTargetDependency */,
-				CC4D7491285F3DF9001CFAF3 /* PBXTargetDependency */,
-				CC4D7496285F522E001CFAF3 /* PBXTargetDependency */,
 				CC396FBF2862C2FD0079097A /* PBXTargetDependency */,
-				CC396FC42862C3060079097A /* PBXTargetDependency */,
+				CC4D7491285F3DF9001CFAF3 /* PBXTargetDependency */,
+				CC30C2D8287E8D9F00ACE93B /* PBXTargetDependency */,
+				CC4D748A285F376C001CFAF3 /* PBXTargetDependency */,
 				CC4C7FFD2869D99D0016EAFC /* PBXTargetDependency */,
+				CC396FC42862C3060079097A /* PBXTargetDependency */,
+				CC4D7474285D7606001CFAF3 /* PBXTargetDependency */,
+				CC4D7496285F522E001CFAF3 /* PBXTargetDependency */,
 				CC4C80022869D9AA0016EAFC /* PBXTargetDependency */,
 			);
 			name = webserv;
@@ -3243,7 +3332,7 @@
 			);
 			name = entitleme;
 			productName = TextNow;
-			productReference = CC8C6354287D7E6A00EB36D3 /* EntitleMe.dylib */;
+			productReference = CC8C6354287D7E6A00EB36D3 /* libentitleme.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		CC8ED5D228544068006EE175 /* device */ = {
@@ -3347,6 +3436,24 @@
 			productReference = CCE047E12874785100FB63C2 /* ohmyjetsam */;
 			productType = "com.apple.product-type.tool";
 		};
+		CCE5290C287E8ACF002774B5 /* cookies */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CCE5291E287E8ACF002774B5 /* Build configuration list for PBXNativeTarget "cookies" */;
+			buildPhases = (
+				CCE5290D287E8ACF002774B5 /* Sources */,
+				CCE52916287E8ACF002774B5 /* Frameworks */,
+				CCE5291B287E8ACF002774B5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CC30C2D5287E8D7400ACE93B /* PBXTargetDependency */,
+			);
+			name = cookies;
+			productName = TextNow;
+			productReference = CCE52921287E8ACF002774B5 /* libtfcookiesmanager.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 		CCF1B04E279BC37D00F9EA50 /* monkey */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCF1B068279BC37D00F9EA50 /* Build configuration list for PBXNativeTarget "monkey" */;
@@ -3361,7 +3468,7 @@
 			);
 			name = monkey;
 			productName = TextNow;
-			productReference = CCF1B06B279BC37D00F9EA50 /* monkey.so */;
+			productReference = CCF1B06B279BC37D00F9EA50 /* libtampermonkey.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		CCF51E3227BB9BB800865BA9 /* alert */ = {
@@ -3378,7 +3485,7 @@
 			);
 			name = alert;
 			productName = TextNow;
-			productReference = CCF51E5A27BB9BB800865BA9 /* alert.so */;
+			productReference = CCF51E5A27BB9BB800865BA9 /* libalerthelper.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		D6B89C9A251DC738006B4B56 /* lua-dynamic */ = {
@@ -3438,31 +3545,32 @@
 				CC9CA25528426DC5008E1D5F /* ALL */,
 				CCF51E3227BB9BB800865BA9 /* alert */,
 				CC547FC628351B8C00E8490E /* app */,
-				CC547FE428351E0800E8490E /* tfcontainermanagerd */,
-				CC544D97287AD31400613A4E /* CookiesTool */,
+				CCE5290C287E8ACF002774B5 /* cookies */,
 				CC9CA27128426E9D008E1D5F /* debug */,
+				CC8ED5D228544068006EE175 /* device */,
 				CC8C6334287D7E6A00EB36D3 /* entitleme */,
 				CC3DC75528388A520080C926 /* exstring */,
 				CC58FA2D283F137100D47ED5 /* file */,
+				CC39700C28657EC00079097A /* hid */,
 				CC0876B327CDF1C300513B5A /* memory */,
 				CCF1B04E279BC37D00F9EA50 /* monkey */,
 				CC58F9E6283E91D500D47ED5 /* pasteboard */,
-				CC0CAE2027C377B900F87FCD /* touch */,
-				CC6DC8E927D7B55A00993505 /* simulatetouchd */,
-				CC9CA2C828436411008E1D5F /* screen */,
-				CC9CA2E12843C4DB008E1D5F /* screencaptureclient */,
-				CC8ED5D228544068006EE175 /* device */,
 				CC8ED735285851E2006EE175 /* proc */,
+				CC0CAE2027C377B900F87FCD /* touch */,
 				CC0D6D06285B9058002F1096 /* samba */,
+				CC9CA2C828436411008E1D5F /* screen */,
+				CC161AC428699FF200CA26AD /* supervisor */,
+				CC161A6A2869999D00CA26AD /* add1s */,
+				CC544D97287AD31400613A4E /* CookiesTool */,
+				CC3970462867247E0079097A /* hidrecorder */,
 				CC114D7D283D304D002E91D8 /* lua */,
 				CC58F9D6283D342700D47ED5 /* luac */,
-				CC161AC428699FF200CA26AD /* supervisor */,
-				CC161ADC2869A08800CA26AD /* supervisord */,
-				CC0D6D1B285CAC08002F1096 /* webserv */,
-				CC39700C28657EC00079097A /* hid */,
-				CC3970462867247E0079097A /* hidrecorder */,
-				CC161A6A2869999D00CA26AD /* add1s */,
 				CCE047D92874785100FB63C2 /* ohmyjetsam */,
+				CC9CA2E12843C4DB008E1D5F /* screencaptureclient */,
+				CC6DC8E927D7B55A00993505 /* simulatetouchd */,
+				CC161ADC2869A08800CA26AD /* supervisord */,
+				CC547FE428351E0800E8490E /* tfcontainermanagerd */,
+				CC0D6D1B285CAC08002F1096 /* webserv */,
 				D6B89C9A251DC738006B4B56 /* lua-dynamic */,
 				CC114D90283D31E4002E91D8 /* lua-static */,
 			);
@@ -3654,21 +3762,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC544DAC287AD42900613A4E /* BinaryEncodable.swift in Sources */,
-				CC544DA7287AD42400613A4E /* Extensions.swift in Sources */,
-				CC544DA3287AD34700613A4E /* main.swift in Sources */,
-				CC544DA4287AD42400613A4E /* EditThisCookie.swift in Sources */,
-				CC544DA9287AD42400613A4E /* HTTPCookieJar.swift in Sources */,
-				CC544DA5287AD42400613A4E /* NetscapeCookieJar.swift in Sources */,
-				CC544DAE287AD42D00613A4E /* BufferedData.swift in Sources */,
-				CC544DB0287AD42D00613A4E /* BinaryDataDecoder.swift in Sources */,
-				CC544DAD287AD42900613A4E /* BinaryCodable.swift in Sources */,
-				CC544DA8287AD42400613A4E /* BinaryCookieJar.swift in Sources */,
-				CC544DAA287AD42400613A4E /* MiddleCookieJar.swift in Sources */,
-				CC544DB1287AD42D00613A4E /* ByteRepresentations.swift in Sources */,
-				CC544DA6287AD42400613A4E /* LWPCookieJar.swift in Sources */,
-				CC544DAF287AD42D00613A4E /* BinaryDataEncoder.swift in Sources */,
-				CC544DAB287AD42900613A4E /* BinaryDecodable.swift in Sources */,
+				CCE528FB287E8A49002774B5 /* MiddleCookieJar.swift in Sources */,
+				CCE52906287E8A49002774B5 /* main.swift in Sources */,
+				CCE528FC287E8A49002774B5 /* BinaryDataEncoder.swift in Sources */,
+				CCE52900287E8A49002774B5 /* BinaryDecodable.swift in Sources */,
+				CCE52902287E8A49002774B5 /* LWPCookieJar.swift in Sources */,
+				CCE528FF287E8A49002774B5 /* BinaryEncodable.swift in Sources */,
+				CCE52905287E8A49002774B5 /* HTTPCookieJar.swift in Sources */,
+				CCE52903287E8A49002774B5 /* Extensions.swift in Sources */,
+				CCE52907287E8A49002774B5 /* CookiesToolObjectiveCBridge.swift in Sources */,
+				CCE528FE287E8A49002774B5 /* EditThisCookie.swift in Sources */,
+				CCE52901287E8A49002774B5 /* BinaryCodable.swift in Sources */,
+				CCE52908287E8A49002774B5 /* NetscapeCookieJar.swift in Sources */,
+				CCE52909287E8A49002774B5 /* BinaryCookieJar.swift in Sources */,
+				CCE52904287E8A49002774B5 /* BufferedData.swift in Sources */,
+				CCE528FD287E8A49002774B5 /* ByteRepresentations.swift in Sources */,
+				CCE528FA287E8A49002774B5 /* BinaryDataDecoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3677,29 +3786,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC4D74B82860A20B001CFAF3 /* TFLuaBridge+IMP+MiddleMan.m in Sources */,
-				CC544D95287AD1BA00613A4E /* BinaryCodable.swift in Sources */,
-				CC544D90287AD1BA00613A4E /* BinaryDataEncoder.swift in Sources */,
-				CC544D7F287AD0ED00613A4E /* Extensions.swift in Sources */,
-				CC544D96287AD1BA00613A4E /* BinaryDecodable.swift in Sources */,
-				CC544D92287AD1BA00613A4E /* BinaryDataDecoder.swift in Sources */,
 				CCE5C15A2836313E002233DB /* TFShell.mm in Sources */,
 				CC4D74BA2860A20B001CFAF3 /* TFLuaBridge+Reveal.m in Sources */,
 				CC547FDC28351C4F00E8490E /* TFContainerManager.mm in Sources */,
-				CC544D82287AD0ED00613A4E /* HTTPCookieJar.swift in Sources */,
 				CCE5C15128361D87002233DB /* ContainerManagerLuaBridge.mm in Sources */,
 				CC4D74B92860A20B001CFAF3 /* TFLuaBridge+Logging.m in Sources */,
-				CC544D94287AD1BA00613A4E /* BinaryEncodable.swift in Sources */,
-				CC544D84287AD0ED00613A4E /* NetscapeCookieJar.swift in Sources */,
-				CC544D81287AD0ED00613A4E /* BinaryCookieJar.swift in Sources */,
-				CC544DC2287ADD7C00613A4E /* TFCookiesManager.m in Sources */,
-				CC544D93287AD1BA00613A4E /* BufferedData.swift in Sources */,
-				CC544D91287AD1BA00613A4E /* ByteRepresentations.swift in Sources */,
-				CC544D85287AD0ED00613A4E /* MiddleCookieJar.swift in Sources */,
-				CC544DC4287AE26B00613A4E /* CookiesManagerLuaBridge.mm in Sources */,
-				CC544D80287AD0ED00613A4E /* EditThisCookie.swift in Sources */,
-				CC544DBE287ADB1000613A4E /* CookiesToolObjectiveCBridge.swift in Sources */,
 				CC547FDD28351C5600E8490E /* TFContainerManager.m in Sources */,
-				CC544D83287AD0ED00613A4E /* LWPCookieJar.swift in Sources */,
 				CC4D74B72860A20B001CFAF3 /* TFLuaBridge+Defaults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3831,6 +3923,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CCE5290D287E8ACF002774B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCE52926287E8C12002774B5 /* ByteRepresentations.swift in Sources */,
+				CCE52933287E8C12002774B5 /* LWPCookieJar.swift in Sources */,
+				CCE5292B287E8C12002774B5 /* BinaryDataEncoder.swift in Sources */,
+				CCE52932287E8C12002774B5 /* BinaryCookieJar.swift in Sources */,
+				CCE52927287E8C12002774B5 /* EditThisCookie.swift in Sources */,
+				CCE52934287E8C12002774B5 /* CookiesManagerLuaBridge.mm in Sources */,
+				CCE52931287E8C12002774B5 /* TFCookiesManager.m in Sources */,
+				CCE5292C287E8C12002774B5 /* BinaryEncodable.swift in Sources */,
+				CCE52930287E8C12002774B5 /* BinaryDecodable.swift in Sources */,
+				CCE5292A287E8C12002774B5 /* HTTPCookieJar.swift in Sources */,
+				CCE5292D287E8C12002774B5 /* BinaryCodable.swift in Sources */,
+				CCE52935287E8C12002774B5 /* Extensions.swift in Sources */,
+				CCE5292F287E8C12002774B5 /* NetscapeCookieJar.swift in Sources */,
+				CCE5292E287E8C12002774B5 /* BufferedData.swift in Sources */,
+				CCE52929287E8C12002774B5 /* CookiesToolObjectiveCBridge.swift in Sources */,
+				CCE52936287E8C12002774B5 /* BinaryDataDecoder.swift in Sources */,
+				CCE52937287E8C12002774B5 /* MiddleCookieJar.swift in Sources */,
+				CCE52928287E8C12002774B5 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CCF1B050279BC37D00F9EA50 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3932,6 +4049,16 @@
 			target = CC0CAE2027C377B900F87FCD /* touch */;
 			targetProxy = CC1E5C012830D5EE00CF20FB /* PBXContainerItemProxy */;
 		};
+		CC30C2D5287E8D7400ACE93B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC547FC628351B8C00E8490E /* app */;
+			targetProxy = CC30C2D4287E8D7400ACE93B /* PBXContainerItemProxy */;
+		};
+		CC30C2D8287E8D9F00ACE93B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCE5290C287E8ACF002774B5 /* cookies */;
+			targetProxy = CC30C2D7287E8D9F00ACE93B /* PBXContainerItemProxy */;
+		};
 		CC396FBF2862C2FD0079097A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CCF51E3227BB9BB800865BA9 /* alert */;
@@ -3965,13 +4092,11 @@
 		};
 		CC4C7FFD2869D99D0016EAFC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = CC39700C28657EC00079097A /* hid */;
 			targetProxy = CC4C7FFC2869D99D0016EAFC /* PBXContainerItemProxy */;
 		};
 		CC4C80022869D9AA0016EAFC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = CC161AC428699FF200CA26AD /* supervisor */;
 			targetProxy = CC4C80012869D9AA0016EAFC /* PBXContainerItemProxy */;
 		};
@@ -4125,13 +4250,27 @@
 			target = CC9CA2C828436411008E1D5F /* screen */;
 			targetProxy = CC9CA2EE2843C51D008E1D5F /* PBXContainerItemProxy */;
 		};
+		CCE52923287E8BA0002774B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCE5290C287E8ACF002774B5 /* cookies */;
+			targetProxy = CCE52922287E8BA0002774B5 /* PBXContainerItemProxy */;
+		};
+		CCE52925287E8BD4002774B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC8C6334287D7E6A00EB36D3 /* entitleme */;
+			targetProxy = CCE52924287E8BD4002774B5 /* PBXContainerItemProxy */;
+		};
+		CCE5293B287E8CCB002774B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CCF1B04E279BC37D00F9EA50 /* monkey */;
+			targetProxy = CCE5293A287E8CCB002774B5 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CC0876C827CDF1C300513B5A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4151,7 +4290,6 @@
 		CC0876C927CDF1C300513B5A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4171,7 +4309,6 @@
 		CC0CAE3F27C377B900F87FCD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -4191,7 +4328,6 @@
 		CC0CAE4027C377B900F87FCD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -4211,7 +4347,6 @@
 		CC0D6D0F285B9058002F1096 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4235,7 +4370,6 @@
 		CC0D6D10285B9058002F1096 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4338,7 +4472,7 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++1417";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -4374,7 +4508,7 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++1417";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -4407,7 +4541,6 @@
 		CC161A792869999D00CA26AD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = add1s/entitlements.plist;
 				GCC_PREFIX_HEADER = "";
@@ -4424,7 +4557,6 @@
 		CC161A7A2869999D00CA26AD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = add1s/entitlements.plist;
 				GCC_PREFIX_HEADER = "";
@@ -4441,7 +4573,6 @@
 		CC161AD528699FF200CA26AD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -4461,7 +4592,6 @@
 		CC161AD628699FF200CA26AD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -4511,7 +4641,6 @@
 		CC39702028657EC00079097A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -4536,7 +4665,6 @@
 		CC39702128657EC00079097A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -4599,7 +4727,6 @@
 		CC3DC76F28388A520080C926 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4619,7 +4746,6 @@
 		CC3DC77028388A520080C926 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4640,7 +4766,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = app/cli/ent.plist;
+				CODE_SIGN_ENTITLEMENTS = cookies/CookiesTool/ent.plist;
 				GCC_PREFIX_HEADER = "";
 				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"$(TARGET_NAME)\\\"\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.xxtou.$(TARGET_NAME)";
@@ -4649,7 +4775,6 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/app/include";
 			};
 			name = Release;
 		};
@@ -4657,7 +4782,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = app/cli/ent.plist;
+				CODE_SIGN_ENTITLEMENTS = cookies/CookiesTool/ent.plist;
 				GCC_PREFIX_HEADER = "";
 				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"$(TARGET_NAME)\\\"\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.xxtou.$(TARGET_NAME)";
@@ -4666,23 +4791,16 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/app/include";
 			};
 			name = Debug;
 		};
 		CC547FD728351B8C00E8490E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-undefined",
@@ -4692,9 +4810,6 @@
 				PRODUCT_NAME = tfcontainermanager;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "app/CookiesTool/CookiesTool-Bridging-Header.h";
-				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(EXECUTABLE_PREFIX)$(PRODUCT_NAME)-Swift.h";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -4702,16 +4817,10 @@
 		CC547FD828351B8C00E8490E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-undefined",
@@ -4721,10 +4830,6 @@
 				PRODUCT_NAME = tfcontainermanager;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "app/CookiesTool/CookiesTool-Bridging-Header.h";
-				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(EXECUTABLE_PREFIX)$(PRODUCT_NAME)-Swift.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -4813,7 +4918,6 @@
 		CC58F9F8283E91D500D47ED5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4833,7 +4937,6 @@
 		CC58F9F9283E91D500D47ED5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4853,7 +4956,6 @@
 		CC58FA35283F137100D47ED5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4873,7 +4975,6 @@
 		CC58FA36283F137100D47ED5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4933,7 +5034,7 @@
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EXECUTABLE_EXTENSION = dylib;
+				EXECUTABLE_PREFIX = lib;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-undefined",
@@ -4941,7 +5042,7 @@
 					"-lrocketbootstrap",
 					"-lsubstrate",
 				);
-				PRODUCT_NAME = EntitleMe;
+				PRODUCT_NAME = entitleme;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4953,7 +5054,7 @@
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EXECUTABLE_EXTENSION = dylib;
+				EXECUTABLE_PREFIX = lib;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-undefined",
@@ -4961,7 +5062,7 @@
 					"-lrocketbootstrap",
 					"-lsubstrate",
 				);
-				PRODUCT_NAME = EntitleMe;
+				PRODUCT_NAME = entitleme;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4971,7 +5072,6 @@
 		CC8ED5F228544068006EE175 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -5000,7 +5100,6 @@
 		CC8ED5F328544068006EE175 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -5029,7 +5128,6 @@
 		CC8ED746285851E2006EE175 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -5049,7 +5147,6 @@
 		CC8ED747285851E2006EE175 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -5087,7 +5184,6 @@
 		CC9CA28128426E9D008E1D5F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -5108,7 +5204,6 @@
 		CC9CA28228426E9D008E1D5F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -5129,7 +5224,6 @@
 		CC9CA2D728436411008E1D5F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -5158,7 +5252,6 @@
 		CC9CA2D828436411008E1D5F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -5225,7 +5318,6 @@
 		CCE047DF2874785100FB63C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = add1s/entitlements.plist;
 				GCC_PREFIX_HEADER = "";
@@ -5242,7 +5334,6 @@
 		CCE047E02874785100FB63C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = add1s/entitlements.plist;
 				GCC_PREFIX_HEADER = "";
@@ -5256,12 +5347,59 @@
 			};
 			name = Debug;
 		};
+		CCE5291F287E8ACF002774B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-undefined",
+					dynamic_lookup,
+					"-lrocketbootstrap",
+				);
+				PRODUCT_NAME = tfcookiesmanager;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "cookies/CookiesTool/CookiesTool-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(EXECUTABLE_PREFIX)$(PRODUCT_NAME)-Swift.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CCE52920287E8ACF002774B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-undefined",
+					dynamic_lookup,
+					"-lrocketbootstrap",
+				);
+				PRODUCT_NAME = tfcookiesmanager;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "cookies/CookiesTool/CookiesTool-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(EXECUTABLE_PREFIX)$(PRODUCT_NAME)-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		CCF1B069279BC37D00F9EA50 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"TF_MIDDLE_MAN=1",
@@ -5273,7 +5411,7 @@
 					"-lrocketbootstrap",
 					"-lsubstrate",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = tampermonkey;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5286,7 +5424,7 @@
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"TF_MIDDLE_MAN=1",
@@ -5298,7 +5436,7 @@
 					"-lrocketbootstrap",
 					"-lsubstrate",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = tampermonkey;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5311,7 +5449,7 @@
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"TF_MIDDLE_MAN=1",
@@ -5332,7 +5470,7 @@
 					"-lrocketbootstrap",
 					"-lsubstrate",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = alerthelper;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5344,7 +5482,7 @@
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"TF_MIDDLE_MAN=1",
@@ -5365,7 +5503,7 @@
 					"-lrocketbootstrap",
 					"-lsubstrate",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = alerthelper;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5377,7 +5515,7 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++1417";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -5450,7 +5588,7 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++1417";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -5522,6 +5660,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -5589,6 +5728,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -5901,6 +6041,15 @@
 			buildConfigurations = (
 				CCE047DF2874785100FB63C2 /* Release */,
 				CCE047E02874785100FB63C2 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CCE5291E287E8ACF002774B5 /* Build configuration list for PBXNativeTarget "cookies" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CCE5291F287E8ACF002774B5 /* Release */,
+				CCE52920287E8ACF002774B5 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

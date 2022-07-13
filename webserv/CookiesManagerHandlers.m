@@ -13,14 +13,19 @@ void register_cookies_manager_handlers(GCDWebServer *webServer)
         }
         dispatch_async(_serviceQueue, ^{
             @autoreleasepool {
+                NSString *anyId = request.query[@"id"];
                 NSString *appId = request.query[@"app"];
                 NSString *groupId = request.query[@"group"];
                 NSString *pluginId = request.query[@"plugin"];
                 
                 TFCookiesManager *cookiesManager = nil;
-                if (!appId.length)
+                if (!anyId.length && !appId.length)
                 {
                     cookiesManager = [TFCookiesManager sharedSafariManager];
+                }
+                else if (anyId.length)
+                {
+                    cookiesManager = [TFCookiesManager managerWithAnyIdentifier:anyId];
                 }
                 else
                 {
@@ -40,7 +45,7 @@ void register_cookies_manager_handlers(GCDWebServer *webServer)
                 
                 if (!cookiesManager)
                 {
-                    completionBlock(resp_bad_request(@"app"));
+                    completionBlock(resp_bad_request(@"id"));
                     return;
                 }
                 

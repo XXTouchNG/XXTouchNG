@@ -6,11 +6,17 @@ cydia=($CYDIA)
 ln -s /usr/local/xxtouch/bin/activate /usr/local/bin/xxtouch > /dev/null 2>&1
 ln -s cURL /usr/local/xxtouch/lib/curl > /dev/null 2>&1
 
+# use hard link to avoid sandbox restrictions
 rm -f /usr/lib/libalerthelper.dylib > /dev/null 2>&1
 ln /usr/local/lib/libalerthelper.dylib /usr/lib/libalerthelper.dylib > /dev/null 2>&1
 
+# use hard link to avoid sandbox restrictions
 rm -f /usr/lib/libtampermonkey.dylib > /dev/null 2>&1
 ln /usr/local/lib/libtampermonkey.dylib /usr/lib/libtampermonkey.dylib > /dev/null 2>&1
+
+# use hard link to avoid sandbox restrictions
+rm -f /usr/lib/libentitleme.dylib > /dev/null 2>&1
+ln /usr/local/lib/libentitleme.dylib /usr/lib/libentitleme.dylib > /dev/null 2>&1
 
 launchctl unload "/Library/LaunchDaemons/ch.xxtou.elfclient.plist" > /dev/null 2>&1
 launchctl remove com.xxtou.elfclient > /dev/null 2>&1

@@ -19,7 +19,7 @@ Dingtone_CFLAGS += -I../../shared/
 Dingtone_CFLAGS += -I../../liblua/
 Dingtone_CFLAGS += -include Dingtone-Prefix.pch
 Dingtone_CFLAGS += -DTF_MIDDLE_MAN
-Dingtone_CCFLAGS = -std=gnu++14
+Dingtone_CCFLAGS = -std=c++14
 Dingtone_LDFLAGS = $(LUA_MOD_LDFLAGS)
 Dingtone_LIBRARIES = substrate rocketbootstrap
 Dingtone_FRAMEWORKS = UIKit

@@ -21,7 +21,7 @@ libsupervisor_CFLAGS += -I../liblua/
 libsupervisor_CFLAGS += -I../proc/
 libsupervisor_CFLAGS += -I.
 libsupervisor_CFLAGS += -include supervisor-prefix.pch
-libsupervisor_CCFLAGS = -std=gnu++14
+libsupervisor_CCFLAGS = -std=c++14
 libsupervisor_LDFLAGS = -L$(THEOS_OBJ_DIR)
 libsupervisor_LDFLAGS += $(LUA_MOD_LDFLAGS)
 libsupervisor_PRIVATE_FRAMEWORKS = AppSupport

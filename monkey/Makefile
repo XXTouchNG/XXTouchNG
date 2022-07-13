@@ -22,7 +22,7 @@ libtampermonkey_CFLAGS += -Iscripts -Iinclude
 libtampermonkey_CFLAGS += -include monkey-prefix.pch
 libtampermonkey_CFLAGS += -Wno-deprecated-declarations -Wno-unused-variable
 libtampermonkey_CFLAGS += -DTF_MIDDLE_MAN
-libtampermonkey_CCFLAGS = -std=gnu++14
+libtampermonkey_CCFLAGS = -std=c++14
 libtampermonkey_LDFLAGS = -L../liblua
 libtampermonkey_LDFLAGS += $(LUA_MOD_LDFLAGS)
 libtampermonkey_LIBRARIES = substrate rocketbootstrap lua

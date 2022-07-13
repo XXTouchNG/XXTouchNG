@@ -23,7 +23,7 @@ libentitleme_LDFLAGS += $(LUA_MOD_LDFLAGS)
 libentitleme_LIBRARIES = substrate rocketbootstrap lua
 libentitleme_FRAMEWORKS = Foundation
 libentitleme_PRIVATE_FRAMEWORKS = AppSupport
-libentitleme_INSTALL_PATH = /usr/lib
+libentitleme_INSTALL_PATH = /usr/local/lib
 libentitleme_LIBRARY_EXTENSION = .dylib
 
 include $(THEOS_MAKE_PATH)/library.mk

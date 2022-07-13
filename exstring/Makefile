@@ -18,7 +18,7 @@ exstring_CFLAGS += -I../shared/include/
 exstring_CFLAGS += -I../shared/
 exstring_CFLAGS += -I../liblua/
 exstring_CFLAGS += -include exstring-prefix.pch
-exstring_CCFLAGS = -std=gnu++14
+exstring_CCFLAGS = -std=c++14
 exstring_LDFLAGS = $(LUA_MOD_LDFLAGS)
 exstring_INSTALL_PATH = /usr/local/xxtouch/lib/xxtouch
 exstring_LIBRARY_EXTENSION = .so

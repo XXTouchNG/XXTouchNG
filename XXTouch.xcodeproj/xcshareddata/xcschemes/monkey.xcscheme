@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CCF1B04E279BC37D00F9EA50"
-               BuildableName = "monkey.so"
+               BuildableName = "libtampermonkey.dylib"
                BlueprintName = "monkey"
                ReferencedContainer = "container:XXTouch.xcodeproj">
             </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CCF1B04E279BC37D00F9EA50"
-            BuildableName = "monkey.so"
+            BuildableName = "libtampermonkey.dylib"
             BlueprintName = "monkey"
             ReferencedContainer = "container:XXTouch.xcodeproj">
          </BuildableReference>

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CC8C6334287D7E6A00EB36D3"
-               BuildableName = "EntitleMe.dylib"
+               BuildableName = "libentitleme.dylib"
                BlueprintName = "entitleme"
                ReferencedContainer = "container:XXTouch.xcodeproj">
             </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CC8C6334287D7E6A00EB36D3"
-            BuildableName = "EntitleMe.dylib"
+            BuildableName = "libentitleme.dylib"
             BlueprintName = "entitleme"
             ReferencedContainer = "container:XXTouch.xcodeproj">
          </BuildableReference>

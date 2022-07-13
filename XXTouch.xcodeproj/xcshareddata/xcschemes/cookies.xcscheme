@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CCF51E3227BB9BB800865BA9"
-               BuildableName = "libalerthelper.dylib"
-               BlueprintName = "alert"
+               BlueprintIdentifier = "CCE5290C287E8ACF002774B5"
+               BuildableName = "libtfcookiesmanager.dylib"
+               BlueprintName = "cookies"
                ReferencedContainer = "container:XXTouch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CCF51E3227BB9BB800865BA9"
-            BuildableName = "libalerthelper.dylib"
-            BlueprintName = "alert"
+            BlueprintIdentifier = "CCE5290C287E8ACF002774B5"
+            BuildableName = "libtfcookiesmanager.dylib"
+            BlueprintName = "cookies"
             ReferencedContainer = "container:XXTouch.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

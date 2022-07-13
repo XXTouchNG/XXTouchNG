@@ -124,7 +124,7 @@
 
 @property(readonly, nonatomic) UIKeyboardTaskQueue *taskQueue;
 - (void)handleKeyWithString:(id)arg1 forKeyEvent:(id)arg2 executionContext:(id)arg3;
-- (void)setShift:(_Bool)arg1 autoshift:(_Bool)arg2;
+- (void)setShift:(BOOL)arg1 autoshift:(BOOL)arg2;
 - (void)removeCandidateList;
 
 @end

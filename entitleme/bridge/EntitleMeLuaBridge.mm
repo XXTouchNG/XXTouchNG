@@ -10,7 +10,7 @@
 
 #pragma mark -
 
-XXTouchF_CAPI int luaopen_xxtouch_entitleme(lua_State *);
+XXTouchF_CAPI int luaopen_xxtouch_entitleme(lua_State *L);
 
 
 #pragma mark -

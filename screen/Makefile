@@ -26,7 +26,7 @@ libscreencapture_CFLAGS += -Iinclude/
 libscreencapture_CFLAGS += -I.
 libscreencapture_CFLAGS += -include screen-prefix.pch
 libscreencapture_CFLAGS += -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16
-libscreencapture_CCFLAGS = -std=c++11
+libscreencapture_CCFLAGS = -std=c++14
 libscreencapture_LDFLAGS = -Llib -Flib -L../liblua
 libscreencapture_LDFLAGS += $(LUA_MOD_LDFLAGS)
 libscreencapture_FRAMEWORKS = opencv2

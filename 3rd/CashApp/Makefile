@@ -19,7 +19,7 @@ CashApp_CFLAGS += -I../../shared/
 CashApp_CFLAGS += -I../../liblua/
 CashApp_CFLAGS += -include CashApp-Prefix.pch
 CashApp_CFLAGS += -DTF_MIDDLE_MAN
-CashApp_CCFLAGS = -std=gnu++14
+CashApp_CCFLAGS = -std=c++14
 CashApp_LDFLAGS = $(LUA_MOD_LDFLAGS)
 CashApp_LIBRARIES = substrate rocketbootstrap
 CashApp_FRAMEWORKS = UIKit

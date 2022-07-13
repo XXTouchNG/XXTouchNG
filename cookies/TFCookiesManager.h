@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable instancetype)managerWithBundleIdentifier:(NSString *)bundleIdentifier;
 + (nullable instancetype)managerWithBundleIdentifier:(NSString *)bundleIdentifier groupIdentifier:(NSString *)groupIdentifier;
 + (nullable instancetype)managerWithBundleIdentifier:(NSString *)bundleIdentifier pluginIdentifier:(NSString *)pluginIdentifier;
++ (nullable instancetype)managerWithAnyIdentifier:(NSString *)anyIdentifier;
+
 - (instancetype)initWithBinaryCookiesPath:(NSString *)binaryCookiesPath;
 
 - (nullable NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *)readCookiesWithError:(NSError * _Nullable __autoreleasing * _Nullable)error;

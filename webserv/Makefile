@@ -7,7 +7,8 @@ include $(THEOS)/makefiles/common.mk
 TOOL_NAME = webserv
 
 webserv_FILES = WebServ.mm
-webserv_FILES += AlertHelperHandlers.m TamperMonkeyHandlers.m
+webserv_FILES += AlertHelperHandlers.m
+webserv_FILES += TamperMonkeyHandlers.m
 webserv_FILES += CookiesManagerHandlers.m
 webserv_FILES += $(wildcard GCDWebServer/*/*.m)
 webserv_FILES += $(wildcard GCDWebDAVServer/*.m)
@@ -23,6 +24,7 @@ webserv_CFLAGS += -IPocketSocket/
 webserv_CFLAGS += -Wno-unused-function # -Wno-unused-but-set-variable
 webserv_CFLAGS += -I../alert/
 webserv_CFLAGS += -I../app/
+webserv_CFLAGS += -I../cookies/
 webserv_CFLAGS += -I../debug/          # debug
 webserv_CFLAGS += -I../debug/include/  # debug
 webserv_CFLAGS += -I../device/
@@ -38,11 +40,18 @@ webserv_CFLAGS += -I../shared/
 webserv_CFLAGS += -I../liblua/
 webserv_CFLAGS += -Iinclude/
 webserv_CFLAGS += -include webserv-prefix.pch
-webserv_CCFLAGS = -std=gnu++14
+webserv_CCFLAGS = -std=c++14
 webserv_LDFLAGS = -L$(THEOS_OBJ_DIR)
 webserv_FRAMEWORKS = Security
 webserv_PRIVATE_FRAMEWORKS = AppSupport
-webserv_LIBRARIES = alerthelper deviceconfigurator procqueue screencapture supervisor tampermonkey tfcontainermanager
+webserv_LIBRARIES = alerthelper
+webserv_LIBRARIES += deviceconfigurator
+webserv_LIBRARIES += procqueue
+webserv_LIBRARIES += screencapture
+webserv_LIBRARIES += supervisor
+webserv_LIBRARIES += tampermonkey
+webserv_LIBRARIES += tfcontainermanager
+webserv_LIBRARIES += tfcookiesmanager
 webserv_LIBRARIES += MobileGestalt xml2
 webserv_WEAK_LIBRARIES = ../debug/libdebugwindow  # debug
 webserv_CODESIGN_FLAGS = -Sent.plist

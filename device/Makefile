@@ -31,7 +31,7 @@ libdeviceconfigurator_CFLAGS += -I.
 libdeviceconfigurator_CFLAGS += -I../debug/  # debug
 libdeviceconfigurator_CFLAGS += -I../debug/include/  # debug
 libdeviceconfigurator_CFLAGS += -include device-prefix.pch
-libdeviceconfigurator_CCFLAGS = -std=c++11
+libdeviceconfigurator_CCFLAGS = -std=c++14
 libdeviceconfigurator_LDFLAGS = -Llib -L../liblua
 libdeviceconfigurator_LDFLAGS += $(LUA_MOD_LDFLAGS)
 libdeviceconfigurator_PRIVATE_FRAMEWORKS = AppSupport IOKit MobileWiFi Preferences

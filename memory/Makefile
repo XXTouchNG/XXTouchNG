@@ -20,7 +20,7 @@ memory_CFLAGS += -I../liblua/
 memory_CFLAGS += -I.
 memory_CFLAGS += -Icommands/
 memory_CFLAGS += -include memory-prefix.pch
-memory_CCFLAGS = -std=gnu++14
+memory_CCFLAGS = -std=c++14
 memory_LDFLAGS = $(LUA_MOD_LDFLAGS)
 memory_INSTALL_PATH = /usr/local/xxtouch/lib
 memory_LIBRARY_EXTENSION = .so
