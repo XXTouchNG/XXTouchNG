@@ -3662,7 +3662,7 @@ static void register_static_website_handlers(GCDWebServer *webServer)
 {
     dispatch_async(_serviceQueue, ^{
         @autoreleasepool {
-            _remoteAccessEnabled = [[self objectForKey:@"ch.xxtou.defaults.remote-access"] boolValue];
+            _remoteAccessEnabled = [[self unsafeObjectForKey:@"ch.xxtou.defaults.remote-access"] boolValue];
             CHDebugLog(@"remote access: %@", (_remoteAccessEnabled ? @"enabled" : @"disabled"));
         }
     });
