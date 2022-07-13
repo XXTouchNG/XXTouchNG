@@ -13,6 +13,7 @@ libentitleme_FILES = EntitleMe.m
 libentitleme_FILES += bridge/EntitleMeLuaBridge.mm
 libentitleme_FILES += ../shared/luae/luae.mm
 libentitleme_CFLAGS = -fobjc-arc -fobjc-arc-exceptions
+libentitleme_CFLAGS += -Wno-unused-variable
 libentitleme_CFLAGS += -DXXT_VERSION=\"$(XXT_VERSION)\"
 libentitleme_CFLAGS += -I../shared/include/
 libentitleme_CFLAGS += -I../liblua/
