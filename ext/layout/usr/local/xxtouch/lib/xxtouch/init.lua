@@ -6,6 +6,8 @@ do
     alert = require("alert")
     accelerometer = require("accelerometer")
     app = require("app")
+    appstore = require("appstore")
+    cookies = require("cookies")
     file = require("file")
     ftp = require("ftp")  -- not yieldable
     http = require("http")  -- not yieldable

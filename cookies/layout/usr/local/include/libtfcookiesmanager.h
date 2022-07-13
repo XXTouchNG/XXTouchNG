@@ -17,20 +17,25 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithBinaryCookiesPath:(NSString *)binaryCookiesPath;
 
 - (nullable NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *)readCookiesWithError:(NSError * _Nullable __autoreleasing * _Nullable)error;
-- (nullable NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *)filterCookiesWithDomainSuffix:(nonnull NSString *)domainSuffix
-                                                                                        pathPrefix:(nullable NSString *)pathPrefix
-                                                                                             error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+- (nullable NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *)filterCookiesWithDomain:(NSString *)domain
+                                                                                        path:(NSString *)path
+                                                                                       error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
-- (nullable NSDictionary <NSHTTPCookiePropertyKey, id> *)getCookiesWithDomainSuffix:(nonnull NSString *)domainSuffix
-                                                                         pathPrefix:(nullable NSString *)pathPrefix
-                                                                               name:(nonnull NSString *)name
-                                                                              error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+- (nullable NSDictionary <NSHTTPCookiePropertyKey, id> *)getCookiesWithDomain:(NSString *)domain
+                                                                         path:(NSString *)path
+                                                                         name:(NSString *)name
+                                                                        error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
 - (BOOL)setCookies:(NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *)cookies
              error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
 - (BOOL)writeCookies:(NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *)cookies
                error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+
+- (BOOL)removeCookiesWithDomain:(NSString *)domain
+                           path:(NSString *)path
+                           name:(NSString *)name
+                          error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
 - (BOOL)removeCookiesExpiredBeforeDate:(NSDate *)date error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 

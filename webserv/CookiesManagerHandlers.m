@@ -58,7 +58,7 @@ void register_cookies_manager_handlers(GCDWebServer *webServer)
                     
                     if (domain.length && name.length)
                     {
-                        NSDictionary <NSHTTPCookiePropertyKey, id> *cookies = [cookiesManager getCookiesWithDomainSuffix:domain pathPrefix:path name:name error:&err];
+                        NSDictionary <NSHTTPCookiePropertyKey, id> *cookies = [cookiesManager getCookiesWithDomain:domain path:path name:name error:&err];
                         if (!cookies)
                         {
                             completionBlock(resp_operation_failed(err.code, [err localizedDescription]));
@@ -69,7 +69,7 @@ void register_cookies_manager_handlers(GCDWebServer *webServer)
                     }
                     else if (domain.length)
                     {
-                        NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *cookies = [cookiesManager filterCookiesWithDomainSuffix:domain pathPrefix:path error:&err];
+                        NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *cookies = [cookiesManager filterCookiesWithDomain:domain path:path error:&err];
                         if (!cookies)
                         {
                             completionBlock(resp_operation_failed(err.code, [err localizedDescription]));

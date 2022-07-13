@@ -161,7 +161,7 @@
     return cookies;
 }
 
-- (nullable NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *)filterCookiesWithDomainSuffix:(nonnull NSString *)domainSuffix pathPrefix:(nullable NSString *)pathPrefix error:(NSError *__autoreleasing _Nullable *)error
+- (nullable NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *)filterCookiesWithDomain:(NSString *)domain path:(NSString *)path error:(NSError *__autoreleasing _Nullable *)error
 {
     NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *allCookies = [self readCookiesWithError:error];
     if (!allCookies)
@@ -172,17 +172,17 @@
     NSMutableArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *cookies = [NSMutableArray arrayWithCapacity:allCookies.count];
     for (NSDictionary <NSHTTPCookiePropertyKey, id> *cookie in allCookies)
     {
-        if (domainSuffix.length)
+        if (domain.length)
         {
-            if (![cookie[NSHTTPCookieDomain] hasSuffix:domainSuffix])
+            if (![cookie[NSHTTPCookieDomain] isEqualToString:domain])
             {
                 continue;
             }
         }
         
-        if (pathPrefix.length)
+        if (path.length)
         {
-            if (![cookie[NSHTTPCookiePath] hasPrefix:pathPrefix])
+            if (![cookie[NSHTTPCookiePath] isEqualToString:path])
             {
                 continue;
             }
@@ -194,9 +194,9 @@
     return cookies;
 }
 
-- (nullable NSDictionary <NSHTTPCookiePropertyKey, id> *)getCookiesWithDomainSuffix:(nonnull NSString *)domainSuffix pathPrefix:(nullable NSString *)pathPrefix name:(nonnull NSString *)name error:(NSError *__autoreleasing _Nullable *)error
+- (nullable NSDictionary <NSHTTPCookiePropertyKey, id> *)getCookiesWithDomain:(NSString *)domain path:(NSString *)path name:(NSString *)name error:(NSError *__autoreleasing _Nullable *)error
 {
-    NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *allCookies = [self filterCookiesWithDomainSuffix:domainSuffix pathPrefix:pathPrefix error:error];
+    NSArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *allCookies = [self filterCookiesWithDomain:domain path:path error:error];
     if (!allCookies)
     {
         return nil;
@@ -286,6 +286,7 @@
                         parsedDate = [NSDate distantFuture];
                     }
                 }
+                
                 mCookie[NSHTTPCookieExpires] = parsedDate;
             }
             else if ([mCookie[NSHTTPCookieExpires] isKindOfClass:[NSNumber class]])
@@ -319,6 +320,52 @@
                                                     ofItemAtPath:_binaryCookiesPath
                                                            error:error];
     return succeed;
+}
+
+- (BOOL)removeCookiesWithDomain:(NSString *)domain path:(NSString *)path name:(NSString *)name error:(NSError *__autoreleasing  _Nullable *)error
+{
+    NSMutableArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *mCookies = [[self readCookiesWithError:error] mutableCopy];
+    if (!mCookies)
+    {
+        mCookies = [NSMutableArray array];
+    }
+    
+    NSMutableArray <NSDictionary <NSHTTPCookiePropertyKey, id> *> *mCookiesToDelete = [NSMutableArray arrayWithCapacity:mCookies.count];
+    for (NSDictionary <NSHTTPCookiePropertyKey, id> *mCookie in mCookies)
+    {
+        if (domain.length)
+        {
+            if (![mCookie[NSHTTPCookieDomain] isEqualToString:domain])
+            {
+                continue;
+            }
+        }
+        
+        if (path.length)
+        {
+            if (![mCookie[NSHTTPCookiePath] isEqualToString:path])
+            {
+                continue;
+            }
+        }
+        
+        if (name.length)
+        {
+            if (![mCookie[NSHTTPCookieName] isEqualToString:name])
+            {
+                continue;
+            }
+        }
+        
+        if (domain.length || path.length || name.length)
+        {
+            [mCookiesToDelete addObject:mCookie];
+        }
+    }
+    
+    [mCookies removeObjectsInArray:mCookiesToDelete];
+    
+    return [self writeCookies:mCookies error:error];
 }
 
 - (BOOL)removeCookiesExpiredBeforeDate:(NSDate *)date error:(NSError *__autoreleasing  _Nullable *)error
