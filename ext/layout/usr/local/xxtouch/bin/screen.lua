@@ -1,3 +1,5 @@
+#!/usr/bin/env lua
+
 if not touch then
     os.exit()
 end

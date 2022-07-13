@@ -3,7 +3,7 @@
 declare -a cydia
 cydia=($CYDIA)
 
-uicache -p /Applications/XXTExplorer.app
+nohup uicache -p /Applications/XXTExplorer.app &
 
 rm -rf /private/var/NSIRD_webserv_*
 rm -rf /private/var/mobile/Media/1ferver/caches/*
@@ -13,4 +13,3 @@ if [[ ${CYDIA+@} ]]; then
 fi
 
 exit 0
-

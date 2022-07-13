@@ -42,7 +42,7 @@ launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.webserv.plist" > /dev/null
 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.elfclient.plist" > /dev/null 2>&1
 
 chmod 6777 /usr/local/xxtouch/bin/add1s
-uicache -p /Applications/XXTExplorer.app > /dev/null 2>&1
+nohup uicache -p /Applications/XXTExplorer.app &
 
 rm -f "/private/var/tmp/1ferver_need_respring" > /dev/null 2>&1
 su mobile -c "touch /private/var/tmp/1ferver_need_respring" > /dev/null 2>&1

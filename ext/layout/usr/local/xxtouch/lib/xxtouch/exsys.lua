@@ -3,7 +3,9 @@ do
     if not _G.LOG then
         require "exlog"
     end
+    
     sys = require "sys"
+
     sys.input_text = function(text, press_enter)
         local pb = require "pasteboard"
         local key = require "key"
@@ -18,6 +20,7 @@ do
             key.press("ENTER")
         end
     end
+
     sys.log = function(...)
         LOG.info(...)
     end

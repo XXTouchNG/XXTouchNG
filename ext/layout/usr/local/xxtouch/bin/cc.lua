@@ -1,3 +1,5 @@
+#!/usr/bin/env lua
+
 local json = require "cjson.safe"
 local lfs = require "lfs"
 local socket = require("socket")

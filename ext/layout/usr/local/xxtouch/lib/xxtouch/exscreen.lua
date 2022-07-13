@@ -40,12 +40,30 @@ do
 
     screen.ocr_search = function (needle, level)
         if level == nil then
-            level = 1
+            level = 0
         end
         local bounding_box = nil
         local _, details = screen.ocr_text(level)
         for _, v in ipairs(details) do
             if string.lower(v["recognized_text"]) == string.lower(needle) then
+                bounding_box = v["bounding_box"]
+                break
+            end
+        end
+        if bounding_box == nil then
+            return -1, -1
+        end
+        return (bounding_box[1] + bounding_box[3]) / 2, (bounding_box[2] + bounding_box[4]) / 2
+    end
+
+    screen.ocr_match = function (pattern, level)
+        if level == nil then
+            level = 0
+        end
+        local bounding_box = nil
+        local _, details = screen.ocr_text(level)
+        for _, v in ipairs(details) do
+            if string.match(string.lower(v["recognized_text"]), string.lower(pattern)) then
                 bounding_box = v["bounding_box"]
                 break
             end

@@ -23,4 +23,3 @@ launchctl remove com.xxtou.tfcontainermanagerd > /dev/null 2>&1
 killall -9 akd webinspectord > /dev/null 2>&1
 
 exit 0
-
