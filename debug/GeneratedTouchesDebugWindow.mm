@@ -109,6 +109,25 @@ OBJC_EXTERN UILabel *_sharedDebugLabel;
     return colors;
 }
 
++ (NSString *)localizedString:(NSString *)string
+{
+    NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+    NSArray <NSString *> *languages = [defs objectForKey:@"AppleLanguages"];
+    NSString *dLanguage = [languages objectAtIndex:0];
+    
+    if ([dLanguage isEqualToString:@"zh-Hans"] || [dLanguage isEqualToString:@"zh-Hans-CN"]) {
+        if ([string isEqualToString:@"TASK_TERMINATED"]) {
+            return @"任务进程已终止";
+        }
+    }
+    
+    if ([string isEqualToString:@"TASK_TERMINATED"]) {
+        return @"Task Terminated";
+    }
+    
+    return string;
+}
+
 - (instancetype)initWithRole:(GeneratedTouchesDebugWindowRole)role {
     self = [super init];
     if (self) {
@@ -118,23 +137,25 @@ OBJC_EXTERN UILabel *_sharedDebugLabel;
         _shouldShowTouches = YES;
 #endif
         
-        int toastDismissalToken;
-        notify_register_dispatch(NOTIFY_DISMISSAL_SYS_TOAST, &toastDismissalToken, dispatch_get_main_queue(), ^(int token) {
-            [self.debugToastWindows[@(UIInterfaceOrientationPortrait)] hideToastActivity];
-        });
-        
-        int poseDismissalToken;
-        notify_register_dispatch(NOTIFY_DISMISSAL_TOUCH_POSE, &poseDismissalToken, dispatch_get_main_queue(), ^(int token) {
-            [self resetDebugIndicatorForTouches];
-        });
-        
-        int endHintToken;
-        notify_register_dispatch(NOTIFY_TASK_DID_END_HINT, &endHintToken, dispatch_get_main_queue(), ^(int token) {
-            [self makeToast:@"Task Terminated"
-                   duration:[XXTEToastManager defaultDuration]
-                   position:XXTEToastPositionBottom
-                orientation:UIInterfaceOrientationPortrait];
-        });
+        if (role == GeneratedTouchesDebugWindowRoleServer) {
+            int toastDismissalToken;
+            notify_register_dispatch(NOTIFY_DISMISSAL_SYS_TOAST, &toastDismissalToken, dispatch_get_main_queue(), ^(int token) {
+                [self.debugToastWindows[@(UIInterfaceOrientationPortrait)] hideToastActivity];
+            });
+            
+            int poseDismissalToken;
+            notify_register_dispatch(NOTIFY_DISMISSAL_TOUCH_POSE, &poseDismissalToken, dispatch_get_main_queue(), ^(int token) {
+                [self resetDebugIndicatorForTouches];
+            });
+            
+            int endHintToken;
+            notify_register_dispatch(NOTIFY_TASK_DID_END_HINT, &endHintToken, dispatch_get_main_queue(), ^(int token) {
+                [self makeToast:[GeneratedTouchesDebugWindow localizedString:@"TASK_TERMINATED"]
+                       duration:[XXTEToastManager defaultDuration]
+                       position:XXTEToastPositionBottom
+                    orientation:UIInterfaceOrientationPortrait];
+            });
+        }
     }
     return self;
 }

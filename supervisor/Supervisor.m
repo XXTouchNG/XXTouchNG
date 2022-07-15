@@ -1111,7 +1111,7 @@
                 if (!exists || isDir)
                 {
                     succeed = NO;
-                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to read script file at %@", path] }];
+                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to read script file at %@", path] }];
                     return;
                 }
                 
@@ -1119,7 +1119,7 @@
                 if (!readable)
                 {
                     succeed = NO;
-                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to read script file at %@", path] }];
+                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to read script file at %@", path] }];
                     return;
                 }
                 
@@ -1127,7 +1127,7 @@
                 if (checkSyntaxResult != nil && [checkSyntaxResult length] > 0)
                 {
                     succeed = NO;
-                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:2 userInfo:@{ NSLocalizedDescriptionKey: @"Syntax Error", NSLocalizedFailureReasonErrorKey: checkSyntaxResult }];
+                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:2 userInfo:@{ NSLocalizedDescriptionKey: @"SYNTAX_ERROR", NSLocalizedFailureReasonErrorKey: checkSyntaxResult }];
                     return;
                 }
                 
@@ -1136,13 +1136,13 @@
                     if (_globalState == SupervisorStateRunning || _globalState == SupervisorStateSuspend)
                     {
                         succeed = NO;
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:3 userInfo:@{ NSLocalizedDescriptionKey: @"Service Unavailable", NSLocalizedFailureReasonErrorKey: @"The system is currently running another script" }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:3 userInfo:@{ NSLocalizedDescriptionKey: @"SERVICE_UNAVAILABLE", NSLocalizedFailureReasonErrorKey: @"The system is currently running another script" }];
                         return;
                     }
                     else if (_globalState == SupervisorStateRecording)
                     {
                         succeed = NO;
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:3 userInfo:@{ NSLocalizedDescriptionKey: @"Service Unavailable", NSLocalizedFailureReasonErrorKey: @"The system is currently recording script events" }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:3 userInfo:@{ NSLocalizedDescriptionKey: @"SERVICE_UNAVAILABLE", NSLocalizedFailureReasonErrorKey: @"The system is currently recording script events" }];
                         return;
                     }
                 }
@@ -1153,7 +1153,7 @@
                                                          contents:[NSData data]
                                                        attributes:@{ NSFileOwnerAccountID: @(0), NSFileGroupOwnerAccountID: @(0) }];
                     if (!succeed) {
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create script output log file at %@", @LOG_LAUNCHER_OUTPUT] }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create script output log file at %@", @LOG_LAUNCHER_OUTPUT] }];
                     }
                 }
                 else
@@ -1163,7 +1163,7 @@
                                                   ofItemAtPath:@LOG_LAUNCHER_OUTPUT
                                                          error:&attrErr];
                     if (!succeed) {
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create script output log file: %@", [attrErr localizedDescription]] }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create script output log file: %@", [attrErr localizedDescription]] }];
                     }
                 }
                 
@@ -1176,7 +1176,7 @@
                                                          contents:[NSData data]
                                                        attributes:@{ NSFileOwnerAccountID: @(0), NSFileGroupOwnerAccountID: @(0) }];
                     if (!succeed) {
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:5 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create script error log file at %@", @LOG_LAUNCHER_ERROR] }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:5 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create script error log file at %@", @LOG_LAUNCHER_ERROR] }];
                     }
                 }
                 else
@@ -1186,7 +1186,7 @@
                                                   ofItemAtPath:@LOG_LAUNCHER_ERROR
                                                          error:&attrErr];
                     if (!succeed) {
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:5 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create script error log file: %@", [attrErr localizedDescription]] }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:5 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create script error log file: %@", [attrErr localizedDescription]] }];
                     }
                 }
                 
@@ -1199,13 +1199,13 @@
                     unsigned long long endOffset;
                     succeed = [outputHandle seekToEndReturningOffset:&endOffset error:&seekErr];
                     if (!succeed) {
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:6 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open script output log handle: %@", [seekErr localizedDescription]] }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:6 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open script output log handle: %@", [seekErr localizedDescription]] }];
                         [outputHandle closeFile];
                         outputHandle = nil;
                     }
                 } else {
                     succeed = NO;
-                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:6 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open script output log handle at %@", @LOG_LAUNCHER_OUTPUT] }];
+                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:6 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open script output log handle at %@", @LOG_LAUNCHER_OUTPUT] }];
                 }
                 
                 if (!succeed)
@@ -1217,7 +1217,7 @@
                     unsigned long long endOffset;
                     succeed = [errorHandle seekToEndReturningOffset:&endOffset error:&seekErr];
                     if (!succeed) {
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:7 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open script error log handle: %@", [seekErr localizedDescription]] }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:7 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open script error log handle: %@", [seekErr localizedDescription]] }];
                         [outputHandle closeFile];
                         outputHandle = nil;
                         [errorHandle closeFile];
@@ -1225,7 +1225,7 @@
                     }
                 } else {
                     succeed = NO;
-                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:7 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open script error log handle at %@", @LOG_LAUNCHER_ERROR] }];
+                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:7 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open script error log handle at %@", @LOG_LAUNCHER_ERROR] }];
                     [outputHandle closeFile];
                     outputHandle = nil;
                 }
@@ -1371,13 +1371,13 @@
                     if (_globalState == SupervisorStateRunning || _globalState == SupervisorStateSuspend)
                     {
                         succeed = NO;
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:3 userInfo:@{ NSLocalizedDescriptionKey: @"Service Unavailable", NSLocalizedFailureReasonErrorKey: @"The system is currently running another script." }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:3 userInfo:@{ NSLocalizedDescriptionKey: @"SERVICE_UNAVAILABLE", NSLocalizedFailureReasonErrorKey: @"The system is currently running another script." }];
                         return;
                     }
                     else if (_globalState == SupervisorStateRecording)
                     {
                         succeed = NO;
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:3 userInfo:@{ NSLocalizedDescriptionKey: @"Service Unavailable", NSLocalizedFailureReasonErrorKey: @"The system is currently recording script events." }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:3 userInfo:@{ NSLocalizedDescriptionKey: @"SERVICE_UNAVAILABLE", NSLocalizedFailureReasonErrorKey: @"The system is currently recording script events." }];
                         return;
                     }
                 }
@@ -1388,7 +1388,7 @@
                                                          contents:[NSData data]
                                                        attributes:@{ NSFileOwnerAccountID: @(501), NSFileGroupOwnerAccountID: @(501) }];
                     if (!succeed) {
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create record lua file at %@", path] }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create record lua file at %@", path] }];
                     }
                 }
                 else
@@ -1398,7 +1398,7 @@
                                                   ofItemAtPath:path
                                                          error:&attrErr];
                     if (!succeed) {
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create record lua file: %@", [attrErr localizedDescription]] }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:4 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to create record lua file: %@", [attrErr localizedDescription]] }];
                     }
                 }
                 
@@ -1411,13 +1411,13 @@
                     unsigned long long endOffset;
                     succeed = [outputHandle seekToEndReturningOffset:&endOffset error:&seekErr];
                     if (!succeed) {
-                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:6 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open record lua handle: %@", [seekErr localizedDescription]] }];
+                        strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:6 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open record lua handle: %@", [seekErr localizedDescription]] }];
                         [outputHandle closeFile];
                         outputHandle = nil;
                     }
                 } else {
                     succeed = NO;
-                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:6 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open record lua handle at %@", path] }];
+                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:6 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:@"Failed to open record lua handle at %@", path] }];
                 }
                 
                 if (!succeed)
@@ -1426,7 +1426,7 @@
                 NSFileHandle *errorHandle = [NSFileHandle fileHandleWithNullDevice];
                 if (!errorHandle) {
                     succeed = NO;
-                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:7 userInfo:@{ NSLocalizedDescriptionKey: @"Internal Server Error", NSLocalizedFailureReasonErrorKey: @"Failed to open record error handle at /dev/null" }];
+                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:7 userInfo:@{ NSLocalizedDescriptionKey: @"INTERNAL_SERVER_ERROR", NSLocalizedFailureReasonErrorKey: @"Failed to open record error handle at /dev/null" }];
                     [outputHandle closeFile];
                     outputHandle = nil;
                 }
@@ -1646,7 +1646,7 @@
                                 }
                                 
                                 self->_lastError = [NSError errorWithDomain:@SupervisorErrorDomain code:7 userInfo:@{
-                                    NSLocalizedDescriptionKey: @"Runtime Error",
+                                    NSLocalizedDescriptionKey: @"RUNTIME_ERROR",
                                     NSLocalizedFailureReasonErrorKey: errorLine,
                                 }];
                             }
@@ -1821,7 +1821,7 @@
                 if (checkSyntaxResult != nil && [checkSyntaxResult length] > 0)
                 {
                     succeed = NO;
-                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:2 userInfo:@{ NSLocalizedDescriptionKey: @"Syntax Error", NSLocalizedFailureReasonErrorKey: checkSyntaxResult }];
+                    strongError = [NSError errorWithDomain:@SupervisorErrorDomain code:2 userInfo:@{ NSLocalizedDescriptionKey: @"SYNTAX_ERROR", NSLocalizedFailureReasonErrorKey: checkSyntaxResult }];
                     return;
                 }
                 

@@ -2353,7 +2353,6 @@ OBJC_EXTERN void reinitializeHooks(void);
                 
                 NSString *languageCode = InternationalSettingsExtractLanguageCode(language);
                 [objc_getClass("InternationalSettingsController") setPreferredLanguages:@[languageCode]];
-                [objc_getClass("InternationalSettingsController") setCurrentLanguage:languageCode];
             }
         });
     }

@@ -29,6 +29,100 @@ static __weak UIWindow *_recorderPresentingWindow = nil;
 OBJC_EXTERN BOOL _recorderInsomniaModeEnabled = NO;
 
 
+#pragma mark - Localizations
+
+static NSString *HIDLocalizedString(NSString *string)
+{
+    NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+    NSArray <NSString *> *languages = [defs objectForKey:@"AppleLanguages"];
+    NSString *dLanguage = [languages objectAtIndex:0];
+    
+    if ([dLanguage isEqualToString:@"zh-Hans"] || [dLanguage isEqualToString:@"zh-Hans-CN"]) {
+        if ([string isEqualToString:@"STATUS_NOT_RUNNING"]) {
+            return @"状态：未运行任何任务\n";
+        } else if ([string isEqualToString:@"STATUS_RUNNING"]) {
+            return @"状态：运行脚本中…\n";
+        } else if ([string isEqualToString:@"STATUS_RECORDING"]) {
+            return @"状态：录制事件中…\n";
+        } else if ([string isEqualToString:@"STATUS_SUSPENDED"]) {
+            return @"状态：脚本暂停中…\n";
+        } else if ([string isEqualToString:@"CONFIRM_WILL_LAUNCH_SELECTED_SCRIPT"]) {
+            return @"即将运行选中的脚本：“%@”，是否继续？";
+        } else if ([string isEqualToString:@"CONFIRM_WILL_BEGIN_EVENT_RECORDING"]) {
+            return @"即将开始录制系统事件，是否继续？";
+        } else if ([string isEqualToString:@"CHOOSE_AN_OPTION_BELOW_TO_CONTINUE"]) {
+            return @"请选择一个选项以继续。";
+        } else if ([string isEqualToString:@"CANCEL"]) {
+            return @"取消";
+        } else if ([string isEqualToString:@"DISMISS"]) {
+            return @"忽略";
+        } else if ([string isEqualToString:@"BTN_LAUNCH"]) {
+            return @"▶️ 运行脚本";
+        } else if ([string isEqualToString:@"BTN_RECORD"]) {
+            return @"⏺ 开始录制";
+        } else if ([string isEqualToString:@"BTN_CONTINUE"]) {
+            return @"⏯ 继续运行";
+        } else if ([string isEqualToString:@"BTN_STOP"]) {
+            return @"⏹ 停止运行";
+        } else if ([string isEqualToString:@"BTN_PAUSE"]) {
+            return @"⏸ 暂停运行";
+        } else if ([string isEqualToString:@"SHOW_IN_XXT"]) {
+            return @"在 X.X.T. 中显示";
+        } else if ([string isEqualToString:@"RUNTIME_ERROR"]) {
+            return @"运行时错误";
+        } else if ([string isEqualToString:@"SYNTAX_ERROR"]) {
+            return @"语法错误";
+        } else if ([string isEqualToString:@"INTERNAL_SERVER_ERROR"]) {
+            return @"内部服务器错误";
+        } else if ([string isEqualToString:@"SERVICE_UNAVAILABLE"]) {
+            return @"服务不可用";
+        }
+    }
+    
+    if ([string isEqualToString:@"STATUS_NOT_RUNNING"]) {
+        return @"Status: Not Running\n";
+    } else if ([string isEqualToString:@"STATUS_RUNNING"]) {
+        return @"Status: Running…\n";
+    } else if ([string isEqualToString:@"STATUS_RECORDING"]) {
+        return @"Status: Recording…\n";
+    } else if ([string isEqualToString:@"STATUS_SUSPENDED"]) {
+        return @"Status: Suspended…\n";
+    } else if ([string isEqualToString:@"CONFIRM_WILL_LAUNCH_SELECTED_SCRIPT"]) {
+        return @"Will launch selected script: “%@”, continue?";
+    } else if ([string isEqualToString:@"CONFIRM_WILL_BEGIN_EVENT_RECORDING"]) {
+        return @"Will begin event recording, continue?";
+    } else if ([string isEqualToString:@"CHOOSE_AN_OPTION_BELOW_TO_CONTINUE"]) {
+        return @"Choose an option below to continue.";
+    } else if ([string isEqualToString:@"CANCEL"]) {
+        return @"Cancel";
+    } else if ([string isEqualToString:@"DISMISS"]) {
+        return @"Dismiss";
+    } else if ([string isEqualToString:@"BTN_LAUNCH"]) {
+        return @"▶️ Launch";
+    } else if ([string isEqualToString:@"BTN_RECORD"]) {
+        return @"⏺ Record";
+    } else if ([string isEqualToString:@"BTN_CONTINUE"]) {
+        return @"⏯ Continue";
+    } else if ([string isEqualToString:@"BTN_STOP"]) {
+        return @"⏹ Stop";
+    } else if ([string isEqualToString:@"BTN_PAUSE"]) {
+        return @"⏸ Pause";
+    } else if ([string isEqualToString:@"SHOW_IN_XXT"]) {
+        return @"Show in X.X.T.";
+    } else if ([string isEqualToString:@"RUNTIME_ERROR"]) {
+        return @"Runtime Error";
+    } else if ([string isEqualToString:@"SYNTAX_ERROR"]) {
+        return @"Syntax Error";
+    } else if ([string isEqualToString:@"INTERNAL_SERVER_ERROR"]) {
+        return @"Internal Server Error";
+    } else if ([string isEqualToString:@"SERVICE_UNAVAILABLE"]) {
+        return @"Service Unavailable";
+    }
+    
+    return string;
+}
+
+
 #pragma mark - C Interfaces
 
 OBJC_EXTERN
@@ -294,23 +388,23 @@ void __HIDRecorderPerformAlertConfirm(HIDRecorderOperation afterOperation, Super
                 
                 NSMutableString *alertMessage = [NSMutableString string];
                 if (runningState == SupervisorStateIdle) {
-                    [alertMessage appendFormat:@"Status: Not Running\n"];
+                    [alertMessage appendString:HIDLocalizedString(@"STATUS_NOT_RUNNING")];
                     if (afterOperation == HIDRecorderOperationPlay) {
-                        [alertMessage appendFormat:@"Will launch selected script: %@, continue?", selectedScript];
+                        [alertMessage appendFormat:HIDLocalizedString(@"CONFIRM_WILL_LAUNCH_SELECTED_SCRIPT"), selectedScript];
                     } else if (afterOperation == HIDRecorderOperationRecord) {
-                        [alertMessage appendString:@"Will begin event recording, continue?"];
+                        [alertMessage appendString:HIDLocalizedString(@"CONFIRM_WILL_BEGIN_EVENT_RECORDING")];
                     } else {
-                        [alertMessage appendString:@"Choose an option below to continue."];
+                        [alertMessage appendString:HIDLocalizedString(@"CHOOSE_AN_OPTION_BELOW_TO_CONTINUE")];
                     }
                 } else {
                     if (runningState == SupervisorStateRunning) {
-                        [alertMessage appendFormat:@"Status: Running…\n"];
+                        [alertMessage appendString:HIDLocalizedString(@"STATUS_RUNNING")];
                     } else if (runningState == SupervisorStateRecording) {
-                        [alertMessage appendFormat:@"Status: Recording…\n"];
+                        [alertMessage appendString:HIDLocalizedString(@"STATUS_RECORDING")];
                     } else if (runningState == SupervisorStateSuspend) {
-                        [alertMessage appendFormat:@"Status: Suspended…\n"];
+                        [alertMessage appendString:HIDLocalizedString(@"STATUS_SUSPENDED")];
                     }
-                    [alertMessage appendString:@"Choose an option below to continue."];
+                    [alertMessage appendString:HIDLocalizedString(@"CHOOSE_AN_OPTION_BELOW_TO_CONTINUE")];
                 }
                 
                 UIViewController *presentController = [[UIViewController alloc] init];
@@ -321,28 +415,28 @@ void __HIDRecorderPerformAlertConfirm(HIDRecorderOperation afterOperation, Super
                 
                 _recorderPresentingWindow = presentWindow;
                 
-                UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:@"XXTouch"
+                UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:HIDLocalizedString(@"XXTouch")
                                                                                    message:alertMessage
                                                                             preferredStyle:UIAlertControllerStyleAlert];
                 
-                [alertCtrl addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alertCtrl addAction:[UIAlertAction actionWithTitle:HIDLocalizedString(@"CANCEL") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                     CHDebugLogSource(@"Operation cancelled");
                     __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                 }]];
                 
                 if (runningState == SupervisorStateIdle) {
                     if (afterOperation == HIDRecorderOperationBoth) {
-                        [alertCtrl addAction:[UIAlertAction actionWithTitle:@"▶️ Launch" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [alertCtrl addAction:[UIAlertAction actionWithTitle:HIDLocalizedString(@"BTN_LAUNCH") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                             __HIDRecorderPerformAction(HIDRecorderActionLaunch);
                             __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                         }]];
                         
-                        [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏺ Record" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [alertCtrl addAction:[UIAlertAction actionWithTitle:HIDLocalizedString(@"BTN_RECORD") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                             __HIDRecorderPerformAction(HIDRecorderActionRecord);
                             __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                         }]];
                     } else {
-                        [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏯ Continue" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [alertCtrl addAction:[UIAlertAction actionWithTitle:HIDLocalizedString(@"BTN_CONTINUE") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                             
                             if (afterOperation == HIDRecorderOperationPlay) {
                                 __HIDRecorderPerformAction(HIDRecorderActionLaunch);
@@ -355,24 +449,24 @@ void __HIDRecorderPerformAlertConfirm(HIDRecorderOperation afterOperation, Super
                     }
                 } else {
                     if (runningState == SupervisorStateRecording) {
-                        [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏹ Stop" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [alertCtrl addAction:[UIAlertAction actionWithTitle:HIDLocalizedString(@"BTN_STOP") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                             __HIDRecorderPerformAction(HIDRecorderActionStop);
                             __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                         }]];
                     } else {
                         if (runningState == SupervisorStateRunning) {
-                            [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏸ Pause" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            [alertCtrl addAction:[UIAlertAction actionWithTitle:HIDLocalizedString(@"BTN_PAUSE") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                                 __HIDRecorderPerformAction(HIDRecorderActionPause);
                                 __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                             }]];
                         } else if (runningState == SupervisorStateSuspend) {
-                            [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏯ Continue" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            [alertCtrl addAction:[UIAlertAction actionWithTitle:HIDLocalizedString(@"BTN_CONTINUE") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                                 __HIDRecorderPerformAction(HIDRecorderActionContinue);
                                 __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                             }]];
                         }
                         
-                        [alertCtrl addAction:[UIAlertAction actionWithTitle:@"⏹ Stop" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [alertCtrl addAction:[UIAlertAction actionWithTitle:HIDLocalizedString(@"BTN_STOP") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                             __HIDRecorderPerformAction(HIDRecorderActionStop);
                             __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                         }]];
@@ -414,16 +508,16 @@ void __HIDRecorderDisplayAlertMessage(NSString *alertMessage, SupervisorState ru
                 
                 _recorderPresentingWindow = presentWindow;
                 
-                UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:@"XXTouch"
+                UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:HIDLocalizedString(@"XXTouch")
                                                                                    message:alertMessage
                                                                             preferredStyle:UIAlertControllerStyleAlert];
                 
-                [alertCtrl addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alertCtrl addAction:[UIAlertAction actionWithTitle:HIDLocalizedString(@"DISMISS") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                     __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                 }]];
                 
                 if (runningState != SupervisorStateIdle) {
-                    [alertCtrl addAction:[UIAlertAction actionWithTitle:@"Show in X.X.T." style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [alertCtrl addAction:[UIAlertAction actionWithTitle:HIDLocalizedString(@"SHOW_IN_XXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"xxt://"] options:@{} completionHandler:^(BOOL success) {
                             __HIDRecorderDismissAlertConfirmInternal(presentWindow, runningState);
                         }];
@@ -466,11 +560,11 @@ void __HIDRecorderDisplayErrorMessage(NSString *alertTitle, NSString *alertConte
                 
                 _recorderPresentingWindow = presentWindow;
                 
-                UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@", alertTitle]
-                                                                                   message:[NSString stringWithFormat:@"%@", alertContent]
+                UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@", HIDLocalizedString(alertTitle)]
+                                                                                   message:[NSString stringWithFormat:@"%@", HIDLocalizedString(alertContent)]
                                                                             preferredStyle:UIAlertControllerStyleAlert];
                 
-                [alertCtrl addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alertCtrl addAction:[UIAlertAction actionWithTitle:HIDLocalizedString(@"DISMISS") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                     __HIDRecorderDismissAlertConfirmInternal(presentWindow, SupervisorStateIdle);
                 }]];
                 
