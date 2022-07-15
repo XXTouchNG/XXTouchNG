@@ -261,6 +261,7 @@
 @interface InternationalSettingsController : NSObject
 + (void)setPreferredLanguages:(NSArray <NSString *> *)arg1;
 + (void)setLanguage:(NSString *)arg1;
++ (void)setCurrentLanguage:(NSString *)arg1;
 - (void)setLocaleOnly:(NSString *)arg1;
 + (void)syncPreferencesAndPostNotificationForLanguageChange;
 @end
@@ -2352,7 +2353,16 @@ OBJC_EXTERN void reinitializeHooks(void);
                 [DeviceConfigurator loadInternationalSettingsBundle];
                 
                 NSString *languageCode = InternationalSettingsExtractLanguageCode(language);
-                [objc_getClass("InternationalSettingsController") setPreferredLanguages:@[languageCode]];
+                Class i18nCls = objc_getClass("InternationalSettingsController");
+                [i18nCls setPreferredLanguages:@[languageCode]];
+                if ([i18nCls respondsToSelector:@selector(setCurrentLanguage:)])
+                {
+                    [i18nCls setCurrentLanguage:languageCode];
+                }
+                else if ([i18nCls respondsToSelector:@selector(setLanguage:)])
+                {
+                    [i18nCls setLanguage:languageCode];
+                }
             }
         });
     }
