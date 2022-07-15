@@ -1983,7 +1983,7 @@ OBJC_EXTERN void reinitializeHooks(void);
         }
         
         UIViewController *presentController = [[UIViewController alloc] init];
-        DCAlertWindow *presentWindow = [[DCAlertWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+        DCAlertWindow *presentWindow = [[DCAlertWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         [presentWindow setRootViewController:presentController];
         [presentWindow setWindowLevel:UIWindowLevelStatusBar + 1];
         [presentWindow setHidden:NO];

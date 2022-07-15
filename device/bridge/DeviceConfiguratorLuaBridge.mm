@@ -121,10 +121,10 @@ static int DeviceConfigurator_System_Toast(lua_State *L)
             systemOrientation = UIInterfaceOrientationPortrait;
             break;
         case DeviceConfiguratorToastOrientationHomeOnRight:
-            systemOrientation = UIInterfaceOrientationLandscapeLeft;
+            systemOrientation = UIInterfaceOrientationLandscapeRight;
             break;
         case DeviceConfiguratorToastOrientationHomeOnLeft:
-            systemOrientation = UIInterfaceOrientationLandscapeRight;
+            systemOrientation = UIInterfaceOrientationLandscapeLeft;
             break;
         case DeviceConfiguratorToastOrientationHomeOnTop:
             systemOrientation = UIInterfaceOrientationPortraitUpsideDown;
@@ -1047,10 +1047,10 @@ static int DeviceConfigurator_Device_FrontOrientation(lua_State *L)
                 lua_pushinteger(L, 3);
                 break;
             case UIInterfaceOrientationLandscapeLeft:
-                lua_pushinteger(L, 1);
+                lua_pushinteger(L, 2);
                 break;
             case UIInterfaceOrientationLandscapeRight:
-                lua_pushinteger(L, 2);
+                lua_pushinteger(L, 1);
                 break;
         }
         return 1;

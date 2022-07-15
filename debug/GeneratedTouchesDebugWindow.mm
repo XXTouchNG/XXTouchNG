@@ -234,11 +234,8 @@ OBJC_EXTERN UILabel *_sharedDebugLabel;
             PassWindow *touchWindow = [[PassWindow alloc] _initWithFrame:CGRectZero attached:NO];
             
             [touchWindow commonInit];
+            [touchWindow setupOrientation:UIInterfaceOrientationPortrait];
             [touchWindow setWindowLevel:UIWindowLevelStatusBar + 1];
-
-            UIApplicationRotationFollowingControllerNoTouches *viewController = [[UIApplicationRotationFollowingControllerNoTouches alloc] init];
-            
-            [touchWindow setRootViewController:viewController];
             [touchWindow setHidden:NO];
             [touchWindow setBackgroundColor:[UIColor clearColor]];
             [touchWindow setUserInteractionEnabled:NO];
@@ -260,7 +257,7 @@ OBJC_EXTERN UILabel *_sharedDebugLabel;
 
                 debugViews[i] = newView;
 
-                [[touchWindow rootViewController].view addSubview:debugViews[i]];
+                [touchWindow addSubview:debugViews[i]];
             }
 
             self.debugTouchViews = debugViews;
@@ -275,7 +272,7 @@ OBJC_EXTERN UILabel *_sharedDebugLabel;
                 PassWindow *toastWindow = [[PassWindow alloc] _initWithFrame:CGRectZero attached:NO];
                 
                 [toastWindow commonInit];
-                [toastWindow updateForOrientation:[debugDirection longLongValue]];
+                [toastWindow setupOrientation:(UIInterfaceOrientation)[debugDirection integerValue]];
                 [toastWindow setWindowLevel:UIWindowLevelStatusBar + 1];
                 
                 UIApplicationRotationFollowingControllerNoTouches *viewController = [[UIApplicationRotationFollowingControllerNoTouches alloc] init];
@@ -313,7 +310,16 @@ OBJC_EXTERN UILabel *_sharedDebugLabel;
     
     [self initDebugViewsIfNeeded];
 
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    static CGFloat screenScale;
+    static CGSize screenSize;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        screenScale = [[UIScreen mainScreen] scale];
+        screenSize = [[UIScreen mainScreen] nativeBounds].size;
+        screenSize.width /= screenScale;
+        screenSize.height /= screenScale;
+    });
+    
     NSUInteger cIndex = [index unsignedIntegerValue];
     if (cIndex < self.debugTouchViews.count) {
         self.debugTouchViews[cIndex].hidden = ![isTouching boolValue];

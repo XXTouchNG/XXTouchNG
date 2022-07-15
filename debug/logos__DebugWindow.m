@@ -26,17 +26,19 @@ UILabel *_sharedDebugLabel = nil;
 static AMR_ANSIEscapeHelper *_colorHelper = nil;
 static void _createDebugWindow() {
     if (!_sharedDebugWindow) {
-        _sharedDebugWindow = [[PassWindow alloc] _initWithFrame:CGRectZero attached:NO];
-        [_sharedDebugWindow commonInit];
 
         CGSize screenSize = [[UIScreen mainScreen] bounds].size;
         CGSize windowSize = CGSizeMake(screenSize.width, screenSize.height);
         CGRect windowFrame = CGRectMake(0, 0, windowSize.width, windowSize.height);
 
-        _sharedDebugWindow.frame = windowFrame;
-        _sharedDebugWindow.backgroundColor = [UIColor clearColor];
-        _sharedDebugWindow.windowLevel = UIWindowLevelStatusBar + 1;
-        _sharedDebugWindow.userInteractionEnabled = NO;
+        _sharedDebugWindow = [[PassWindow alloc] _initWithFrame:CGRectZero attached:NO];
+
+        [_sharedDebugWindow commonInit];
+        [_sharedDebugWindow setupOrientation:UIInterfaceOrientationPortrait];
+        [_sharedDebugWindow setWindowLevel:UIWindowLevelStatusBar + 1];
+        [_sharedDebugWindow setFrame:windowFrame];
+        [_sharedDebugWindow setBackgroundColor:[UIColor clearColor]];
+        [_sharedDebugWindow setUserInteractionEnabled:NO];
 
         CGFloat topMargin = MAX(_sharedDebugWindow.safeAreaInsets.top - 16.f, 0);
         CGRect firstLineRect = CGRectMake(0, topMargin, windowSize.width, CGFLOAT_MAX);
@@ -164,7 +166,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 @class SpringBoard; 
 
 
-#line 142 "DebugWindow.x"
+#line 144 "DebugWindow.x"
 static void (*_logos_orig$DebugWindow$SpringBoard$applicationDidFinishLaunching$)(_LOGOS_SELF_TYPE_NORMAL SpringBoard* _LOGOS_SELF_CONST, SEL, UIApplication *); static void _logos_method$DebugWindow$SpringBoard$applicationDidFinishLaunching$(_LOGOS_SELF_TYPE_NORMAL SpringBoard* _LOGOS_SELF_CONST, SEL, UIApplication *); 
 
 
@@ -180,7 +182,7 @@ static void _logos_method$DebugWindow$SpringBoard$applicationDidFinishLaunching$
 
 
 
-static __attribute__((constructor)) void _logosLocalCtor_7513fb95(int __unused argc, char __unused **argv, char __unused **envp) {
+static __attribute__((constructor)) void _logosLocalCtor_1aadaca9(int __unused argc, char __unused **argv, char __unused **envp) {
     @autoreleasepool {
         NSString *processName = [[NSProcessInfo processInfo] arguments][0];
         NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];

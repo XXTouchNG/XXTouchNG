@@ -3,7 +3,7 @@
 @interface UIApplicationRotationFollowingControllerNoTouches : UIApplicationRotationFollowingController
 
 - (void)loadView;
-- (void)_prepareForRotationToOrientation:(long long)arg1 duration:(double)arg2;
-- (void)_rotateToOrientation:(long long)arg1 duration:(double)arg2;
-- (void)_finishRotationFromInterfaceOrientation:(long long)arg1;
+- (void)_prepareForRotationToOrientation:(UIInterfaceOrientation)arg1 duration:(NSTimeInterval)arg2;
+- (void)_rotateToOrientation:(UIInterfaceOrientation)arg1 duration:(NSTimeInterval)arg2;
+- (void)_finishRotationFromInterfaceOrientation:(UIInterfaceOrientation)arg1;
 @end
