@@ -41,19 +41,13 @@ static BOOL (*_logos_orig$SpringBoard$SpringBoard$__handleHIDEvent$withUIEvent$)
 
 static BOOL _logos_method$SpringBoard$SpringBoard$__handleHIDEvent$withUIEvent$(_LOGOS_SELF_TYPE_NORMAL SpringBoard* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, IOHIDEventRef arg1, id arg2) {
     
-	BOOL handled = HIDRecorderHandleHIDEvent(arg1);
-	if (handled) {
-		return NO;
-	}
+    HIDRecorderHandleHIDEvent(arg1);
 	return _logos_orig$SpringBoard$SpringBoard$__handleHIDEvent$withUIEvent$(self, _cmd, arg1, arg2);
 }
 
 static BOOL _logos_method$SpringBoard$SpringBoard$__handleHIDEvent$(_LOGOS_SELF_TYPE_NORMAL SpringBoard* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, IOHIDEventRef arg1) {
     
-	BOOL handled = HIDRecorderHandleHIDEvent(arg1);
-	if (handled) {
-		return NO;
-	}
+    HIDRecorderHandleHIDEvent(arg1);
 	return _logos_orig$SpringBoard$SpringBoard$__handleHIDEvent$(self, _cmd, arg1);
 }
 
@@ -77,7 +71,7 @@ static void _logos_method$SpringBoard$SBBacklightController$preventIdleSleep(_LO
 
 
 
-static __attribute__((constructor)) void _logosLocalCtor_0ee48178(int __unused argc, char __unused **argv, char __unused **envp) {
+static __attribute__((constructor)) void _logosLocalCtor_44056092(int __unused argc, char __unused **argv, char __unused **envp) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 	{Class _logos_class$SpringBoard$SpringBoard = objc_getClass("SpringBoard"); { MSHookMessageEx(_logos_class$SpringBoard$SpringBoard, @selector(__handleHIDEvent:withUIEvent:), (IMP)&_logos_method$SpringBoard$SpringBoard$__handleHIDEvent$withUIEvent$, (IMP*)&_logos_orig$SpringBoard$SpringBoard$__handleHIDEvent$withUIEvent$);}{ MSHookMessageEx(_logos_class$SpringBoard$SpringBoard, @selector(__handleHIDEvent:), (IMP)&_logos_method$SpringBoard$SpringBoard$__handleHIDEvent$, (IMP*)&_logos_orig$SpringBoard$SpringBoard$__handleHIDEvent$);}Class _logos_class$SpringBoard$SBBacklightController = objc_getClass("SBBacklightController"); { MSHookMessageEx(_logos_class$SpringBoard$SBBacklightController, @selector(allowIdleSleep), (IMP)&_logos_method$SpringBoard$SBBacklightController$allowIdleSleep, (IMP*)&_logos_orig$SpringBoard$SBBacklightController$allowIdleSleep);}{ MSHookMessageEx(_logos_class$SpringBoard$SBBacklightController, @selector(preventIdleSleep), (IMP)&_logos_method$SpringBoard$SBBacklightController$preventIdleSleep, (IMP*)&_logos_orig$SpringBoard$SBBacklightController$preventIdleSleep);}}

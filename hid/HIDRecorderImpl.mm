@@ -76,6 +76,8 @@ static NSString *HIDLocalizedString(NSString *string)
             return @"内部服务器错误";
         } else if ([string isEqualToString:@"SERVICE_UNAVAILABLE"]) {
             return @"服务不可用";
+        } else if ([string isEqualToString:@"RECORDING_SAVED"]) {
+            return @"录制结果保存于：%@";
         }
     }
     
@@ -117,6 +119,8 @@ static NSString *HIDLocalizedString(NSString *string)
         return @"Internal Server Error";
     } else if ([string isEqualToString:@"SERVICE_UNAVAILABLE"]) {
         return @"Service Unavailable";
+    } else if ([string isEqualToString:@"RECORDING_SAVED"]) {
+        return @"Recording saved at: %@";
     }
     
     return string;
@@ -344,7 +348,7 @@ void __HIDRecorderPerformAction(HIDRecorderAction action)
                         if ([replyPath hasPrefix:@MEDIA_LUA_SCRIPTS_DIR "/"]) {
                             replyPath = [replyPath substringFromIndex:sizeof(MEDIA_LUA_SCRIPTS_DIR)];
                         }
-                        __HIDRecorderDisplayAlertMessage([NSString stringWithFormat:@"Recording saved at: %@", replyPath], runningState);
+                        __HIDRecorderDisplayAlertMessage([NSString stringWithFormat:HIDLocalizedString(@"RECORDING_SAVED"), replyPath], runningState);
                     }
                     break;
                 }
@@ -656,42 +660,6 @@ void __HIDRecorderPerformOperation(HIDRecorderOperation operation)
     }
 }
 
-static void _HIDRecorderClickVolumeIncrement(void)
-{
-    if (_recorderClickVolumeUpOperation == HIDRecorderOperationNone)
-        return;
-    
-    CHDebugLogSource(@"");
-    __HIDRecorderPerformOperation(_recorderClickVolumeUpOperation);
-}
-
-static void _HIDRecorderClickVolumeDecrement(void)
-{
-    if (_recorderClickVolumeDownOperation == HIDRecorderOperationNone)
-        return;
-    
-    CHDebugLogSource(@"");
-    __HIDRecorderPerformOperation(_recorderClickVolumeDownOperation);
-}
-
-static void _HIDRecorderHoldVolumeIncrement(void)
-{
-    if (_recorderHoldVolumeUpOperation == HIDRecorderOperationNone)
-        return;
-    
-    CHDebugLogSource(@"");
-    __HIDRecorderPerformOperation(_recorderHoldVolumeUpOperation);
-}
-
-static void _HIDRecorderHoldVolumeDecrement(void)
-{
-    if (_recorderHoldVolumeDownOperation == HIDRecorderOperationNone)
-        return;
-    
-    CHDebugLogSource(@"");
-    __HIDRecorderPerformOperation(_recorderHoldVolumeDownOperation);
-}
-
 
 #pragma mark -
 
@@ -711,25 +679,30 @@ static boolean_t _recorderVolumeDecrementButtonIsDown = false;
 static boolean_t _recorderPowerButtonIsDown = false;
 static boolean_t _recorderPowerButtonWasDown = false;
 
+static boolean_t _recorderAlertModeIsOn = false;
+
 BOOL HIDRecorderHandleHIDEvent(IOHIDEventRef event)
 {
+    /* Only keyboard events will be handled */
     if (IOHIDEventGetType(event) != kIOHIDEventTypeKeyboard)
     {
-        return NO;
+        return NO;  /* Default */
     }
     
+    /* Only events in consumer usage page will be handled */
     CFIndex keyboardUsagePage = IOHIDEventGetIntegerValue(event, kIOHIDEventFieldKeyboardUsagePage);
     if (keyboardUsagePage != kHIDPage_Consumer)
     {
-        return NO;
+        return NO;  /* Default */
     }
     
+    /* Only volume or power button events will be handled */
     CFIndex keyboardUsage = IOHIDEventGetIntegerValue(event, kIOHIDEventFieldKeyboardUsage);
     if (keyboardUsage != kHIDUsage_Csmr_VolumeIncrement &&
         keyboardUsage != kHIDUsage_Csmr_VolumeDecrement &&
         keyboardUsage != kHIDUsage_Csmr_Power)
     {
-        return NO;
+        return NO;  /* Default */
     }
     
     boolean_t keyboardIsLongPress = false;
@@ -742,7 +715,7 @@ BOOL HIDRecorderHandleHIDEvent(IOHIDEventRef event)
             _recorderVolumeIncrementLastTimeStamp = IOHIDEventGetTimeStamp(event);
         }
         else
-        {
+        {   /* To check if it is a long press of volume increment button */
             uint64_t delta = IOHIDEventGetTimeStamp(event) - _recorderVolumeIncrementLastTimeStamp;
             NSTimeInterval uDelta = IOHIDAbsoluteTimeToTimeInterval(delta);
             if (uDelta > 0.6)
@@ -759,7 +732,7 @@ BOOL HIDRecorderHandleHIDEvent(IOHIDEventRef event)
             _recorderVolumeDecrementLastTimeStamp = IOHIDEventGetTimeStamp(event);
         }
         else
-        {
+        {   /* To check if it is a long press of volume decrement button */
             uint64_t delta = IOHIDEventGetTimeStamp(event) - _recorderVolumeDecrementLastTimeStamp;
             NSTimeInterval uDelta = IOHIDAbsoluteTimeToTimeInterval(delta);
             if (uDelta > 0.6)
@@ -775,47 +748,107 @@ BOOL HIDRecorderHandleHIDEvent(IOHIDEventRef event)
         {
             _recorderPowerButtonWasDown = true;
         }
-        return NO;
     }
     
-    if (keyboardIsDown)
+    /* To check if there is no button pressed down */
+    boolean_t didAllButtonReleased = false;
+    boolean_t didPowerInterruptionRecovered = false;
+    if (!_recorderVolumeIncrementButtonIsDown &&
+        !_recorderVolumeDecrementButtonIsDown &&
+        !_recorderPowerButtonIsDown)
+    {
+        /* Reset Power Button State */
+        if (_recorderPowerButtonWasDown) {
+            _recorderPowerButtonWasDown = false;
+            didPowerInterruptionRecovered = true;
+        }
+        
+        didAllButtonReleased = true;
+    }
+    
+    if (__HIDRecorderIsPresentingAlert)
+    {
+        /* Enter Alert Mode:
+           If a hardware button event is triggered during alert presentation,
+           all following events will be redirected to it original handler until
+           no hardware button is pressed down.
+         */
+        _recorderAlertModeIsOn = true;
+        return NO;  /* Default */
+    }
+    else if (_recorderAlertModeIsOn)
+    {
+        /* To check if there is no button pressed down */
+        if (didAllButtonReleased)
+        {   /* Exit Alert Mode */
+            _recorderAlertModeIsOn = false;
+        }
+        
+        return NO;  /* Default */
+    }
+    
+    /* Power Button Interruption:
+       If any power button event is triggered before or after volume button events,
+       these volume events will be ignored until no hardware button is pressed down.
+     */
+    if (keyboardUsage == kHIDUsage_Csmr_Power)
     {
         return NO;
+    }
+    else if (keyboardIsDown || didPowerInterruptionRecovered || _recorderPowerButtonIsDown || _recorderPowerButtonWasDown)
+    {   /* FIXME: Snapshot will not work as expected */
+        return YES;  /* Block */
+    }
+    
+    /* Perform Real Operations */
+    if (keyboardIsLongPress)
+    {
+        if (keyboardUsage == kHIDUsage_Csmr_VolumeIncrement)
+        {
+            if (_recorderHoldVolumeUpOperation != HIDRecorderOperationNone)
+            {
+                CHDebugLogSource(@"");
+                __HIDRecorderPerformOperation(_recorderHoldVolumeUpOperation);
+            }
+        }
+        else if (keyboardUsage == kHIDUsage_Csmr_VolumeDecrement)
+        {
+            if (_recorderHoldVolumeDownOperation != HIDRecorderOperationNone)
+            {
+                CHDebugLogSource(@"");
+                __HIDRecorderPerformOperation(_recorderHoldVolumeDownOperation);
+            }
+        }
     }
     else
     {
-        if (!_recorderVolumeIncrementButtonIsDown &&
-            !_recorderVolumeDecrementButtonIsDown &&
-            !_recorderPowerButtonIsDown)
+        if (keyboardUsage == kHIDUsage_Csmr_VolumeIncrement)
         {
-            if (_recorderPowerButtonWasDown) {
-                _recorderPowerButtonWasDown = false;
-                return NO;
+            if (_recorderClickVolumeUpOperation != HIDRecorderOperationNone)
+            {
+                CHDebugLogSource(@"");
+                __HIDRecorderPerformOperation(_recorderClickVolumeUpOperation);
+            }
+            else
+            {
+                /* FIXME: User actually wants to increase the volume */
+            }
+        }
+        else if (keyboardUsage == kHIDUsage_Csmr_VolumeDecrement)
+        {
+            if (_recorderClickVolumeDownOperation != HIDRecorderOperationNone)
+            {
+                CHDebugLogSource(@"");
+                __HIDRecorderPerformOperation(_recorderClickVolumeDownOperation);
+            }
+            else
+            {
+                /* FIXME: User actually wants to decrease the volume */
             }
         }
     }
     
-    if (_recorderPowerButtonIsDown || _recorderPowerButtonWasDown)
-    {
-        return NO;
-    }
-    
-    if (keyboardIsLongPress)
-    {
-        if (keyboardUsage == kHIDUsage_Csmr_VolumeIncrement)
-            _HIDRecorderHoldVolumeIncrement();
-        else if (keyboardUsage == kHIDUsage_Csmr_VolumeDecrement)
-            _HIDRecorderHoldVolumeDecrement();
-    }
-    else
-    {
-        if (keyboardUsage == kHIDUsage_Csmr_VolumeIncrement)
-            _HIDRecorderClickVolumeIncrement();
-        else if (keyboardUsage == kHIDUsage_Csmr_VolumeDecrement)
-            _HIDRecorderClickVolumeDecrement();
-    }
-    
-    return YES;
+    return YES;  /* Block */
 }
 
 

@@ -15,19 +15,13 @@ OBJC_EXTERN BOOL _recorderInsomniaModeEnabled;
 - (BOOL)__handleHIDEvent:(IOHIDEventRef)arg1 withUIEvent:(id)arg2
 {
     // %log;
-	BOOL handled = HIDRecorderHandleHIDEvent(arg1);
-	if (handled) {
-		return NO;
-	}
+    HIDRecorderHandleHIDEvent(arg1);
 	return %orig;
 }
 - (BOOL)__handleHIDEvent:(IOHIDEventRef)arg1
 {
     // %log;
-	BOOL handled = HIDRecorderHandleHIDEvent(arg1);
-	if (handled) {
-		return NO;
-	}
+    HIDRecorderHandleHIDEvent(arg1);
 	return %orig;
 }
 %end
