@@ -3,14 +3,14 @@
 #endif
 
 #define XPC_MODULE_PREFIX "ch.xxtou."
-#define XPC_MODULE_NAME AlertHelper
-#define LUA_MODULE_NAME alert
+#define XPC_MODULE_NAME AuthPolicy
+#define LUA_MODULE_NAME auth
 #define LUA_MODULE_VERSION "0.3"
 #define CHAppName CHStringify(XPC_MODULE_NAME)
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-
+    #import <Foundation/Foundation.h>
+    
     #import <CaptainHook/CaptainHook.h>
     #import "MyCHHook.h"
 
@@ -23,6 +23,5 @@
 #error Do not support the simulator, please use the real iPhone Device.
 #endif
 
-#define TFLuaBridge AlertHelper_TFLuaBridge
-#define AlertHelper __$NoConflict$AlertHelper
-#define AHWeakObjectWrapper __$NoConflict$AHWeakObjectWrapper
+#define TFLuaBridge AuthPolicy_TFLuaBridge
+#define AuthPolicy __$NoConflict$AuthPolicy

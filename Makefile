@@ -6,27 +6,28 @@ include $(THEOS)/makefiles/common.mk
 
 # Targets                    # Archs              # Dependencies
 SUBPROJECTS = liblua         # arm64, arm64e      #
+SUBPROJECTS += auth          # arm64, arm64e      # liblua, rocketbootstrap
 SUBPROJECTS += debug         # arm64, arm64e      # substrate, rocketbootstrap
-SUBPROJECTS += core          # arm64              # lua
-SUBPROJECTS += ext           # arm64              # lua
-SUBPROJECTS += exstring      # arm64              # lua
-SUBPROJECTS += alert         # arm64, arm64e      # lua, substrate, rocketbootstrap
-SUBPROJECTS += app           # arm64              # lua, ext, alert, rocketbootstrap
-SUBPROJECTS += cookies       # arm64			  # lua, app, rocketbootstrap
-SUBPROJECTS += file          # arm64              # lua
-SUBPROJECTS += memory        # arm64              # lua
-SUBPROJECTS += monkey        # arm64, arm64e      # lua, substrate, rocketbootstrap
-SUBPROJECTS += pasteboard    # arm64              # lua
-SUBPROJECTS += touch         # arm64              # lua, debug, rocketbootstrap
-SUBPROJECTS += samba         # arm64              # lua
-SUBPROJECTS += screen        # arm64, arm64e      # lua, ext, substrate, rocketbootstrap
-SUBPROJECTS += device        # arm64, arm64e      # lua, debug, ext, substrate, rocketbootstrap
-SUBPROJECTS += proc          # arm64, arm64e      # lua, ext, rocketbootstrap
-SUBPROJECTS += supervisor    # arm64, arm64e      # lua, core, proc, rocketbootstrap
-SUBPROJECTS += hid           # arm64, arm64e      # proc, supervisor, substrate, rocketbootstrap
-SUBPROJECTS += webserv       # arm64              # lua, debug, rocketbootstrap, alert, device, proc, screen, supervisor, monkey, app
-SUBPROJECTS += add1s         # arm64
-SUBPROJECTS += entitleme     # arm64, arm64e
+SUBPROJECTS += core          # arm64              # liblua
+SUBPROJECTS += ext           # arm64              # liblua
+SUBPROJECTS += exstring      # arm64              # liblua
+SUBPROJECTS += alert         # arm64, arm64e      # liblua, rocketbootstrap, substrate, auth
+SUBPROJECTS += app           # arm64              # liblua, rocketbootstrap, ext, alert
+SUBPROJECTS += cookies       # arm64			  # liblua, rocketbootstrap, app
+SUBPROJECTS += file          # arm64              # liblua
+SUBPROJECTS += memory        # arm64              # liblua
+SUBPROJECTS += monkey        # arm64, arm64e      # liblua, rocketbootstrap, substrate, auth
+SUBPROJECTS += pasteboard    # arm64              # liblua
+SUBPROJECTS += touch         # arm64              # liblua, rocketbootstrap, debug
+SUBPROJECTS += samba         # arm64              # liblua
+SUBPROJECTS += screen        # arm64, arm64e      # liblua, rocketbootstrap, substrate, ext 
+SUBPROJECTS += device        # arm64, arm64e      # liblua, rocketbootstrap, substrate, debug, ext
+SUBPROJECTS += proc          # arm64, arm64e      # liblua, rocketbootstrap, ext
+SUBPROJECTS += supervisor    # arm64, arm64e      # liblua, rocketbootstrap, core, proc
+SUBPROJECTS += hid           # arm64, arm64e      # liblua, rocketbootstrap, substrate, proc, supervisor
+SUBPROJECTS += webserv       # arm64              # liblua, rocketbootstrap, debug, alert, device, proc, screen, supervisor, monkey, app
+SUBPROJECTS += add1s         # arm64              #
+SUBPROJECTS += entitleme     # arm64, arm64e      # liblua, substrate, rocketbootstrap
 
 include $(THEOS_MAKE_PATH)/aggregate.mk
 

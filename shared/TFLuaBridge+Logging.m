@@ -25,7 +25,7 @@ OBJC_EXTERN NSString *kLuaBridgeInstanceName;
     static dispatch_queue_t _sharedLoggingQueue;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *queueName = [NSString stringWithFormat:@"%@.DefaultsQueue", kLuaBridgeInstanceName];
+        NSString *queueName = [NSString stringWithFormat:@"%@.queue.logging", kLuaBridgeInstanceName];
         _sharedLoggingQueue = dispatch_queue_create([queueName UTF8String], DISPATCH_QUEUE_SERIAL);
     });
     return _sharedLoggingQueue;

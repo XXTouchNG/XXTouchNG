@@ -151,7 +151,7 @@ OBJC_EXTERN NSString *const kMessageNameServerWriteDefaults;
     static dispatch_queue_t _sharedDefaultsQueue;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *queueName = [NSString stringWithFormat:@"%@.DefaultsQueue", kLuaBridgeInstanceName];
+        NSString *queueName = [NSString stringWithFormat:@"%@.queue.defaults", kLuaBridgeInstanceName];
         _sharedDefaultsQueue = dispatch_queue_create([queueName UTF8String], DISPATCH_QUEUE_SERIAL);
     });
     return _sharedDefaultsQueue;

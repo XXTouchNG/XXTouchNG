@@ -24,3 +24,9 @@
 #endif
 
 #define TFLuaBridge TamperMonkey_TFLuaBridge
+#define TamperMonkey __$NoConflict$TamperMonkey
+#define TMWeakObjectWrapper __$NoConflict$TMWeakObjectWrapper
+#define TMWeakViewWrapper __$NoConflict$TMWeakViewWrapper
+#define TMWeakUserContentControllerWrapper __$NoConflict$TMWeakUserContentControllerWrapper
+#define TMScriptMessageProxy __$NoConflict$TMScriptMessageProxy
+#define TMScriptNetworkingProxy __$NoConflict$TMScriptNetworkingProxy

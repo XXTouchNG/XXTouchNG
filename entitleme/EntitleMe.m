@@ -87,7 +87,7 @@
     self = [super init];
     if (self) {
         _role = role;
-        _eventQueue = dispatch_queue_create([[NSString stringWithFormat:@"%@.EventQueue", @XPC_INSTANCE_NAME] UTF8String], DISPATCH_QUEUE_SERIAL);
+        _eventQueue = dispatch_queue_create([[NSString stringWithFormat:@"%@.queue.events", @XPC_INSTANCE_NAME] UTF8String], DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }

@@ -7,6 +7,10 @@ ln -s /usr/local/xxtouch/bin/activate /usr/local/bin/xxtouch > /dev/null 2>&1
 ln -s cURL /usr/local/xxtouch/lib/curl > /dev/null 2>&1
 
 # use hard link to avoid sandbox restrictions
+rm -f /usr/lib/libauthpolicy.dylib > /dev/null 2>&1
+ln /usr/local/lib/libauthpolicy.dylib /usr/lib/libauthpolicy.dylib > /dev/null 2>&1
+
+# use hard link to avoid sandbox restrictions
 rm -f /usr/lib/libalerthelper.dylib > /dev/null 2>&1
 ln /usr/local/lib/libalerthelper.dylib /usr/lib/libalerthelper.dylib > /dev/null 2>&1
 
@@ -36,22 +40,26 @@ launchctl remove com.xxtou.simulatetouchd > /dev/null 2>&1
 launchctl unload "/Library/LaunchDaemons/ch.xxtou.tfcontainermanagerd.plist" > /dev/null 2>&1
 launchctl remove com.xxtou.tfcontainermanagerd > /dev/null 2>&1
 
+launchctl unload "/Library/LaunchDaemons/ch.xxtou.authpolicyd.plist" > /dev/null 2>&1
+launchctl remove com.xxtou.authpolicyd > /dev/null 2>&1
+
 /usr/local/xxtouch/bin/ohmyjetsam > /dev/null 2>&1
 killall -9 akd webinspectord > /dev/null 2>&1
 
 sleep 1
-launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.tfcontainermanagerd.plist" > /dev/null 2>&1
-launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.simulatetouchd.plist" > /dev/null 2>&1
-launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.procqueued.plist" > /dev/null 2>&1
-launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.supervisord.plist" > /dev/null 2>&1
-launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.webserv.plist" > /dev/null 2>&1
-launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.elfclient.plist" > /dev/null 2>&1
+timeout -k 2 5 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.authpolicyd.plist" > /dev/null 2>&1
+timeout -k 2 5 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.tfcontainermanagerd.plist" > /dev/null 2>&1
+timeout -k 2 5 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.simulatetouchd.plist" > /dev/null 2>&1
+timeout -k 2 5 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.procqueued.plist" > /dev/null 2>&1
+timeout -k 2 5 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.supervisord.plist" > /dev/null 2>&1
+timeout -k 2 5 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.webserv.plist" > /dev/null 2>&1
+timeout -k 2 5 launchctl load -w -F "/Library/LaunchDaemons/ch.xxtou.elfclient.plist" > /dev/null 2>&1
 
 chmod 6777 /usr/local/xxtouch/bin/add1s
 nohup uicache -p /Applications/XXTExplorer.app &
 
 rm -f "/private/var/tmp/1ferver_need_respring" > /dev/null 2>&1
-su mobile -c "touch /private/var/tmp/1ferver_need_respring" > /dev/null 2>&1
+timeout -k 2 5 su mobile -c "touch /private/var/tmp/1ferver_need_respring" > /dev/null 2>&1
 
 if [[ ${CYDIA+@} ]]; then
     eval "echo 'finish:restart' >&${cydia[0]}"

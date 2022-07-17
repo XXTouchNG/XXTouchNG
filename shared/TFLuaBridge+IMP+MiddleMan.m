@@ -295,7 +295,7 @@ static void LocalClientDidPutArguments(CFNotificationCenterRef center, void *obs
             if ([bundleId isEqualToString:@"com.apple.springboard"]) {
                 
                 // monitor queue
-                _remoteMonitorQueue = dispatch_queue_create([[NSString stringWithFormat:@"%@.MonitorQueue", kLuaBridgeInstanceName] UTF8String], DISPATCH_QUEUE_SERIAL);
+                _remoteMonitorQueue = dispatch_queue_create([[NSString stringWithFormat:@"%@.queue.monitor", kLuaBridgeInstanceName] UTF8String], DISPATCH_QUEUE_SERIAL);
                 
                 // unblocker
                 rocketbootstrap_unlock(kLuaBridgeMessagingCenterName.UTF8String);

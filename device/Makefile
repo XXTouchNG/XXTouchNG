@@ -4,7 +4,7 @@ INSTALL_TARGET_PROCESSES = SpringBoard
 
 include $(THEOS)/makefiles/common.mk
 
-LUA_MOD_MAKEFILE := $(shell git rev-parse --show-toplevel)/liblualua/liblua.mk
+LUA_MOD_MAKEFILE := $(shell git rev-parse --show-toplevel)/liblua/liblua.mk
 include $(LUA_MOD_MAKEFILE)
 
 LIBRARY_NAME = libdeviceconfigurator

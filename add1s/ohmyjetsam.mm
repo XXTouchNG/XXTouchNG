@@ -22,6 +22,14 @@ int main(int argc, char *argv[]) {
                 @"InactiveHardMemoryLimit": @(36),
                 @"ThreadLimit": @(32),
             },
+            @"ch.xxtou.authpolicyd": @{
+                @"ExecuteAllowed": @(YES),
+                @"EnablePressuredExit": @(NO),
+                @"JetsamPriority": @(14),
+                @"ActiveSoftMemoryLimit": @(36),
+                @"InactiveHardMemoryLimit": @(36),
+                @"ThreadLimit": @(32),
+            },
             @"ch.xxtou.simulatetouchd": @{
                 @"ExecuteAllowed": @(YES),
                 @"EnablePressuredExit": @(NO),

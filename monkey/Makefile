@@ -24,8 +24,9 @@ libtampermonkey_CFLAGS += -Wno-deprecated-declarations -Wno-unused-variable
 libtampermonkey_CFLAGS += -DTF_MIDDLE_MAN
 libtampermonkey_CCFLAGS = -std=c++14
 libtampermonkey_LDFLAGS = -L../liblua
+libtampermonkey_LDFLAGS += -L$(THEOS_OBJ_DIR)
 libtampermonkey_LDFLAGS += $(LUA_MOD_LDFLAGS)
-libtampermonkey_LIBRARIES = substrate rocketbootstrap lua
+libtampermonkey_LIBRARIES = substrate rocketbootstrap lua authpolicy
 libtampermonkey_FRAMEWORKS = UIKit
 libtampermonkey_PRIVATE_FRAMEWORKS = AppSupport SpringBoardServices
 libtampermonkey_INSTALL_PATH = /usr/local/lib

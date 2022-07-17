@@ -286,6 +286,16 @@
 		CC6B5AD9283BD9E50038AB6E /* NSString+Random.m in Sources */ = {isa = PBXBuildFile; fileRef = CC6B5AD7283BD9E50038AB6E /* NSString+Random.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CC6B5ADA283BD9E50038AB6E /* NSString+Random.h in Headers */ = {isa = PBXBuildFile; fileRef = CC6B5AD8283BD9E50038AB6E /* NSString+Random.h */; };
 		CC6DC8EA27D7B55A00993505 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6F57919251C6179009CC6A3 /* Foundation.framework */; };
+		CC7422C728842DB9000BB790 /* AppSupport.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B09D279CEC2B00F9EA50 /* AppSupport.tbd */; };
+		CC7422C828842DB9000BB790 /* CorePhoneNumbers.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B09C279CEC2B00F9EA50 /* CorePhoneNumbers.tbd */; };
+		CC7422C928842DB9000BB790 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6F57919251C6179009CC6A3 /* Foundation.framework */; };
+		CC7422D128842DDC000BB790 /* AuthPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = CC7422B928842D87000BB790 /* AuthPolicy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CC7422D228842DDC000BB790 /* auth-prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = CC7422B428842D87000BB790 /* auth-prefix.pch */; };
+		CC7422D328842DE4000BB790 /* AuthPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7422A228842D87000BB790 /* AuthPolicy.m */; };
+		CC7422D428842DEA000BB790 /* AuthPolicyLuaBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = CC7422A528842D87000BB790 /* AuthPolicyLuaBridge.mm */; };
+		CC7422DB28842F20000BB790 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6F57919251C6179009CC6A3 /* Foundation.framework */; };
+		CC7422DC28842F20000BB790 /* liblua.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9CA295284272B5008E1D5F /* liblua.tbd */; };
+		CC7422E328842FED000BB790 /* authpolicyd.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7422B628842D87000BB790 /* authpolicyd.m */; };
 		CC8C6343287D7E6A00EB36D3 /* AppSupport.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B09D279CEC2B00F9EA50 /* AppSupport.tbd */; };
 		CC8C6344287D7E6A00EB36D3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65092BB2521C433000D4208 /* UIKit.framework */; };
 		CC8C6345287D7E6A00EB36D3 /* CorePhoneNumbers.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF1B09C279CEC2B00F9EA50 /* CorePhoneNumbers.tbd */; };
@@ -401,6 +411,10 @@
 		CCB318F027C3BCE800A7BDB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65092BB2521C433000D4208 /* UIKit.framework */; };
 		CCB318F227C3CAB500A7BDB9 /* SimulateTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = CCB318F127C3CAB500A7BDB9 /* SimulateTouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CCC5C37E284A4F1300C99C7D /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC5C37D284A4F1300C99C7D /* Vision.framework */; };
+		CCC5EA29288472C000A55EF5 /* cs_blobs.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC5EA28288472C000A55EF5 /* cs_blobs.h */; };
+		CCC5EA2C288483EC00A55EF5 /* SecCode.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC5EA2B288483EC00A55EF5 /* SecCode.h */; };
+		CCC5EA2D288483F100A55EF5 /* SecTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC5EA2728844CEE00A55EF5 /* SecTask.h */; };
+		CCC5EA2E288483F500A55EF5 /* CSCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC5EA2A288482D600A55EF5 /* CSCommon.h */; };
 		CCCB8DFD27BDFA7600BBBEAC /* AHWeakObjectWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB8DFC27BDFA7600BBBEAC /* AHWeakObjectWrapper.m */; };
 		CCCDD26B2844868F0098849F /* JSTPixelImage+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = CCCDD26A2844867C0098849F /* JSTPixelImage+Private.h */; };
 		CCD1F44827B39A7100A9EB78 /* TMScriptNetworkingProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1F44727B39A7100A9EB78 /* TMScriptNetworkingProxy.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
@@ -723,6 +737,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = CC114D90283D31E4002E91D8;
 			remoteInfo = "lua-static";
+		};
+		CC7422E128842FE5000BB790 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6F5790D251C6179009CC6A3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC7422BB28842DB9000BB790;
+			remoteInfo = auth;
 		};
 		CC8ED75028587ABF006EE175 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1119,6 +1140,15 @@
 		CC6E46B92834B6DE00691D26 /* TFShell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFShell.h; sourceTree = "<group>"; };
 		CC6E46BA2834B6DE00691D26 /* TFShell.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TFShell.mm; sourceTree = "<group>"; };
 		CC700060279FC848003A0B32 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
+		CC7422A228842D87000BB790 /* AuthPolicy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthPolicy.m; sourceTree = "<group>"; };
+		CC7422A528842D87000BB790 /* AuthPolicyLuaBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AuthPolicyLuaBridge.mm; sourceTree = "<group>"; };
+		CC7422B428842D87000BB790 /* auth-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "auth-prefix.pch"; sourceTree = "<group>"; };
+		CC7422B628842D87000BB790 /* authpolicyd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = authpolicyd.m; sourceTree = "<group>"; };
+		CC7422B728842D87000BB790 /* ent.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ent.plist; sourceTree = "<group>"; };
+		CC7422B928842D87000BB790 /* AuthPolicy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthPolicy.h; sourceTree = "<group>"; };
+		CC7422BA28842D9A000BB790 /* layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = layout; sourceTree = "<group>"; };
+		CC7422D028842DB9000BB790 /* libauthpolicy.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libauthpolicy.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC7422E028842F20000BB790 /* authpolicyd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = authpolicyd; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC8C6354287D7E6A00EB36D3 /* libentitleme.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libentitleme.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC8C6356287D7EBD00EB36D3 /* entitleme-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "entitleme-prefix.pch"; sourceTree = "<group>"; };
 		CC8C635A287D7EBD00EB36D3 /* EntitleMe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EntitleMe.m; sourceTree = "<group>"; };
@@ -1231,6 +1261,10 @@
 		CCB318F727C6084800A7BDB9 /* layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = layout; sourceTree = "<group>"; };
 		CCB318F827C6084800A7BDB9 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
 		CCC5C37D284A4F1300C99C7D /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
+		CCC5EA2728844CEE00A55EF5 /* SecTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecTask.h; sourceTree = "<group>"; };
+		CCC5EA28288472C000A55EF5 /* cs_blobs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cs_blobs.h; sourceTree = "<group>"; };
+		CCC5EA2A288482D600A55EF5 /* CSCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSCommon.h; sourceTree = "<group>"; };
+		CCC5EA2B288483EC00A55EF5 /* SecCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecCode.h; sourceTree = "<group>"; };
 		CCCB8DFB27BDFA7600BBBEAC /* AHWeakObjectWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AHWeakObjectWrapper.h; sourceTree = "<group>"; };
 		CCCB8DFC27BDFA7600BBBEAC /* AHWeakObjectWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AHWeakObjectWrapper.m; sourceTree = "<group>"; };
 		CCCDD26A2844867C0098849F /* JSTPixelImage+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSTPixelImage+Private.h"; sourceTree = "<group>"; };
@@ -1555,6 +1589,25 @@
 				CC1E5C032830D5F500CF20FB /* libsimulatetouch.dylib in Frameworks */,
 				CC6DC8EA27D7B55A00993505 /* Foundation.framework in Frameworks */,
 				CC9CA298284272F0008E1D5F /* liblua.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC7422C528842DB9000BB790 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC7422C728842DB9000BB790 /* AppSupport.tbd in Frameworks */,
+				CC7422C828842DB9000BB790 /* CorePhoneNumbers.tbd in Frameworks */,
+				CC7422C928842DB9000BB790 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC7422DA28842F20000BB790 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC7422DB28842F20000BB790 /* Foundation.framework in Frameworks */,
+				CC7422DC28842F20000BB790 /* liblua.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2167,6 +2220,37 @@
 			path = file;
 			sourceTree = "<group>";
 		};
+		CC7422A128842D87000BB790 /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				CCC5EA2628844CE500A55EF5 /* include */,
+				CC7422BA28842D9A000BB790 /* layout */,
+				CC7422A428842D87000BB790 /* bridge */,
+				CC7422B528842D87000BB790 /* cli */,
+				CC7422B928842D87000BB790 /* AuthPolicy.h */,
+				CC7422A228842D87000BB790 /* AuthPolicy.m */,
+				CC7422B428842D87000BB790 /* auth-prefix.pch */,
+			);
+			path = auth;
+			sourceTree = "<group>";
+		};
+		CC7422A428842D87000BB790 /* bridge */ = {
+			isa = PBXGroup;
+			children = (
+				CC7422A528842D87000BB790 /* AuthPolicyLuaBridge.mm */,
+			);
+			path = bridge;
+			sourceTree = "<group>";
+		};
+		CC7422B528842D87000BB790 /* cli */ = {
+			isa = PBXGroup;
+			children = (
+				CC7422B628842D87000BB790 /* authpolicyd.m */,
+				CC7422B728842D87000BB790 /* ent.plist */,
+			);
+			path = cli;
+			sourceTree = "<group>";
+		};
 		CC8C6355287D7EBD00EB36D3 /* entitleme */ = {
 			isa = PBXGroup;
 			children = (
@@ -2387,6 +2471,17 @@
 				CC9CA2DF2843C4AD008E1D5F /* screencaptureclient.m */,
 			);
 			path = cli;
+			sourceTree = "<group>";
+		};
+		CCC5EA2628844CE500A55EF5 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				CCC5EA2B288483EC00A55EF5 /* SecCode.h */,
+				CCC5EA2728844CEE00A55EF5 /* SecTask.h */,
+				CCC5EA28288472C000A55EF5 /* cs_blobs.h */,
+				CCC5EA2A288482D600A55EF5 /* CSCommon.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		CCE528CF287E8A01002774B5 /* cookies */ = {
@@ -2626,6 +2721,7 @@
 				D6196FFC2536E909006747A2 /* shared */,
 				CCF51E2627BB9ACA00865BA9 /* alert */,
 				CC547FC428351B4000E8490E /* app */,
+				CC7422A128842D87000BB790 /* auth */,
 				CCE528CF287E8A01002774B5 /* cookies */,
 				CC114C26283D3024002E91D8 /* core */,
 				CC9CA1FF2841DF26008E1D5F /* debug */,
@@ -2682,6 +2778,8 @@
 				CC544DA2287AD31400613A4E /* CookiesTool */,
 				CC8C6354287D7E6A00EB36D3 /* libentitleme.dylib */,
 				CCE52921287E8ACF002774B5 /* libtfcookiesmanager.dylib */,
+				CC7422D028842DB9000BB790 /* libauthpolicy.dylib */,
+				CC7422E028842F20000BB790 /* authpolicyd */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2821,6 +2919,19 @@
 			files = (
 				CC547FDA28351BEC00E8490E /* TFContainerManager.h in Headers */,
 				CC547FDF28351C6A00E8490E /* app-prefix.pch in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC7422CA28842DB9000BB790 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC7422D128842DDC000BB790 /* AuthPolicy.h in Headers */,
+				CCC5EA2C288483EC00A55EF5 /* SecCode.h in Headers */,
+				CCC5EA2D288483F100A55EF5 /* SecTask.h in Headers */,
+				CCC5EA29288472C000A55EF5 /* cs_blobs.h in Headers */,
+				CC7422D228842DDC000BB790 /* auth-prefix.pch in Headers */,
+				CCC5EA2E288483F500A55EF5 /* CSCommon.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3318,6 +3429,40 @@
 			productName = simulatetouchd;
 			productType = "com.apple.product-type.tool";
 		};
+		CC7422BB28842DB9000BB790 /* auth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC7422CD28842DB9000BB790 /* Build configuration list for PBXNativeTarget "auth" */;
+			buildPhases = (
+				CC7422BC28842DB9000BB790 /* Sources */,
+				CC7422C528842DB9000BB790 /* Frameworks */,
+				CC7422CA28842DB9000BB790 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = auth;
+			productName = TextNow;
+			productReference = CC7422D028842DB9000BB790 /* libauthpolicy.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		CC7422D528842F20000BB790 /* authpolicyd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC7422DD28842F20000BB790 /* Build configuration list for PBXNativeTarget "authpolicyd" */;
+			buildPhases = (
+				CC7422D828842F20000BB790 /* Sources */,
+				CC7422DA28842F20000BB790 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CC7422E228842FE5000BB790 /* PBXTargetDependency */,
+			);
+			name = authpolicyd;
+			productName = simulatetouchd;
+			productReference = CC7422E028842F20000BB790 /* authpolicyd */;
+			productType = "com.apple.product-type.tool";
+		};
 		CC8C6334287D7E6A00EB36D3 /* entitleme */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC8C6351287D7E6A00EB36D3 /* Build configuration list for PBXNativeTarget "entitleme" */;
@@ -3545,6 +3690,7 @@
 				CC9CA25528426DC5008E1D5F /* ALL */,
 				CCF51E3227BB9BB800865BA9 /* alert */,
 				CC547FC628351B8C00E8490E /* app */,
+				CC7422BB28842DB9000BB790 /* auth */,
 				CCE5290C287E8ACF002774B5 /* cookies */,
 				CC9CA27128426E9D008E1D5F /* debug */,
 				CC8ED5D228544068006EE175 /* device */,
@@ -3561,6 +3707,7 @@
 				CC9CA2C828436411008E1D5F /* screen */,
 				CC161AC428699FF200CA26AD /* supervisor */,
 				CC161A6A2869999D00CA26AD /* add1s */,
+				CC7422D528842F20000BB790 /* authpolicyd */,
 				CC544D97287AD31400613A4E /* CookiesTool */,
 				CC3970462867247E0079097A /* hidrecorder */,
 				CC114D7D283D304D002E91D8 /* lua */,
@@ -3836,6 +3983,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC547FDB28351C1300E8490E /* simulatetouchd.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC7422BC28842DB9000BB790 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC7422D328842DE4000BB790 /* AuthPolicy.m in Sources */,
+				CC7422D428842DEA000BB790 /* AuthPolicyLuaBridge.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC7422D828842F20000BB790 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC7422E328842FED000BB790 /* authpolicyd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4159,6 +4323,11 @@
 			isa = PBXTargetDependency;
 			target = CC114D90283D31E4002E91D8 /* lua-static */;
 			targetProxy = CC58F9D8283D342700D47ED5 /* PBXContainerItemProxy */;
+		};
+		CC7422E228842FE5000BB790 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC7422BB28842DB9000BB790 /* auth */;
+			targetProxy = CC7422E128842FE5000BB790 /* PBXContainerItemProxy */;
 		};
 		CC8ED75128587ABF006EE175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5020,6 +5189,76 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/touch/lib",
 				);
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"$(TARGET_NAME)\\\"\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.xxtou.$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CC7422CE28842DB9000BB790 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-undefined",
+					dynamic_lookup,
+					"-lrocketbootstrap",
+				);
+				PRODUCT_NAME = authpolicy;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CC7422CF28842DB9000BB790 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-undefined",
+					dynamic_lookup,
+					"-lrocketbootstrap",
+				);
+				PRODUCT_NAME = authpolicy;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CC7422DE28842F20000BB790 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = auth/cli/ent.plist;
+				GCC_PREFIX_HEADER = "";
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"$(TARGET_NAME)\\\"\"";
+				PRODUCT_BUNDLE_IDENTIFIER = ch.xxtou.authpolicyd;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CC7422DF28842F20000BB790 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = auth/cli/ent.plist;
+				GCC_PREFIX_HEADER = "";
 				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"$(TARGET_NAME)\\\"\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.xxtou.$(TARGET_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5969,6 +6208,24 @@
 			buildConfigurations = (
 				CC6DC8F827D7B55A00993505 /* Release */,
 				CC6DC8F927D7B55A00993505 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC7422CD28842DB9000BB790 /* Build configuration list for PBXNativeTarget "auth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC7422CE28842DB9000BB790 /* Release */,
+				CC7422CF28842DB9000BB790 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC7422DD28842F20000BB790 /* Build configuration list for PBXNativeTarget "authpolicyd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC7422DE28842F20000BB790 /* Release */,
+				CC7422DF28842F20000BB790 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

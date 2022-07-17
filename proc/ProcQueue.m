@@ -53,8 +53,8 @@
     self = [super init];
     if (self) {
         _role = role;
-        _eventQueue = dispatch_queue_create([[NSString stringWithFormat:@"%@.EventQueue", @XPC_INSTANCE_NAME] UTF8String], DISPATCH_QUEUE_SERIAL);
-        _defaultsQueue = dispatch_queue_create([[NSString stringWithFormat:@"%@.DefaultsQueue", @XPC_INSTANCE_NAME] UTF8String], DISPATCH_QUEUE_SERIAL);
+        _eventQueue = dispatch_queue_create([[NSString stringWithFormat:@"%@.queue.events", @XPC_INSTANCE_NAME] UTF8String], DISPATCH_QUEUE_SERIAL);
+        _defaultsQueue = dispatch_queue_create([[NSString stringWithFormat:@"%@.queue.defaults", @XPC_INSTANCE_NAME] UTF8String], DISPATCH_QUEUE_SERIAL);
         _dictionary = [[MutableOrderedDictionary alloc] init];
         _queueDictionary = [[MutableOrderedDictionary alloc] init];
         _defaultsDictionary = [[NSMutableDictionary alloc] init];
