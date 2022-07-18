@@ -39,7 +39,11 @@ supervisord_CFLAGS += -I../shared/include/
 supervisord_LDFLAGS = -L$(THEOS_OBJ_DIR)
 supervisord_LDFLAGS += -L../liblua
 supervisord_LIBRARIES = supervisor lua
+ifeq ($(TARGET_CODESIGN),ldid)
 supervisord_CODESIGN_FLAGS = -Scli/ent.plist
+else
+supervisord_CODESIGN_FLAGS = --entitlements cli/ent.plist $(TARGET_CODESIGN_FLAGS)
+endif
 supervisord_INSTALL_PATH = /usr/local/xxtouch/bin
 include $(THEOS_MAKE_PATH)/tool.mk
 

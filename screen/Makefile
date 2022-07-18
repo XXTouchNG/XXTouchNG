@@ -46,7 +46,11 @@ screencaptureclient_CFLAGS += -I../shared/include/
 screencaptureclient_LDFLAGS = -L$(THEOS_OBJ_DIR)
 screencaptureclient_LDFLAGS += -L../liblua
 screencaptureclient_LIBRARIES = screencapture lua
+ifeq ($(TARGET_CODESIGN),ldid)
 screencaptureclient_CODESIGN_FLAGS = -Scli/ent.plist
+else
+screencaptureclient_CODESIGN_FLAGS = --entitlements cli/ent.plist $(TARGET_CODESIGN_FLAGS)
+endif
 screencaptureclient_INSTALL_PATH = /usr/local/xxtouch/bin
 include $(THEOS_MAKE_PATH)/tool.mk
 

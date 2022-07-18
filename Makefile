@@ -1,6 +1,11 @@
 TARGET := iphone:clang:14.5:13.0
 ARCHS = arm64 arm64e
 
+ifeq ($(FINALPACKAGE),1)
+TARGET_CODESIGN := codesign
+TARGET_CODESIGN_FLAGS := -f -s 'Developer ID Application: Lucas Joseph (MB269FV75D)'
+endif
+
 export XXT_VERSION = 3.0.1
 include $(THEOS)/makefiles/common.mk
 

@@ -21,7 +21,11 @@ lua_CFLAGS += -Iinclude
 lua_CCFLAGS += -std=gnu++14
 lua_LDFLAGS = -L../liblua
 lua_LIBRARIES = readline lua
+ifeq ($(TARGET_CODESIGN),ldid)
 lua_CODESIGN_FLAGS = -Scli/lua.plist
+else
+lua_CODESIGN_FLAGS = --entitlements cli/lua.plist $(TARGET_CODESIGN_FLAGS)
+endif
 lua_INSTALL_PATH = /usr/local/xxtouch/bin
 
 luac_FILES = cli/luac.c
@@ -36,7 +40,11 @@ luac_CFLAGS += -Iinclude
 luac_CCFLAGS += -std=gnu++14
 luac_LDFLAGS = -L../liblua
 luac_LIBRARIES = readline lua
+ifeq ($(TARGET_CODESIGN),ldid)
 luac_CODESIGN_FLAGS = -Scli/luac.plist
+else
+luac_CODESIGN_FLAGS = --entitlements cli/luac.plist $(TARGET_CODESIGN_FLAGS)
+endif
 luac_INSTALL_PATH = /usr/local/xxtouch/bin
 
 include $(THEOS_MAKE_PATH)/tool.mk

@@ -38,7 +38,11 @@ authpolicyd_CFLAGS += -I../shared/include/
 authpolicyd_LDFLAGS = -L$(THEOS_OBJ_DIR)
 authpolicyd_LDFLAGS += -L../liblua
 authpolicyd_LIBRARIES = authpolicy lua
+ifeq ($(TARGET_CODESIGN),ldid)
 authpolicyd_CODESIGN_FLAGS = -Scli/ent.plist
+else
+authpolicyd_CODESIGN_FLAGS = --entitlements cli/ent.plist $(TARGET_CODESIGN_FLAGS)
+endif
 authpolicyd_INSTALL_PATH = /usr/local/xxtouch/bin
 include $(THEOS_MAKE_PATH)/tool.mk
 

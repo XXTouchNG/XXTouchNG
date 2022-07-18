@@ -54,7 +54,11 @@ webserv_LIBRARIES += tfcontainermanager
 webserv_LIBRARIES += tfcookiesmanager
 webserv_LIBRARIES += MobileGestalt xml2
 webserv_WEAK_LIBRARIES = ../debug/libdebugwindow  # debug
+ifeq ($(TARGET_CODESIGN),ldid)
 webserv_CODESIGN_FLAGS = -Sent.plist
+else
+webserv_CODESIGN_FLAGS = --entitlements ent.plist $(TARGET_CODESIGN_FLAGS)
+endif
 webserv_INSTALL_PATH = /usr/local/xxtouch/bin
 
 include $(THEOS_MAKE_PATH)/tool.mk

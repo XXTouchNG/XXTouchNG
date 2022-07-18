@@ -335,16 +335,6 @@ int audit_token_for_pid(pid_t pid, audit_token_t *tokenp)
     }
 }
 
-- (void)verifyCodeSignatureAndExitIfNotQualifiedForCodeInjection
-{
-    @autoreleasepool {
-        NSDictionary *replyObject = [self _copyCodeSignature:@(getpid())];
-        replyObject = replyObject[@"reply"];
-        NSArray <NSDictionary *> *certList = replyObject[(__bridge NSString *)kSecCodeInfoCertificates];
-        CHDebugLogSource(@"%@", certList);
-    }
-}
-
 - (NSDictionary *)copyCodeSignature
 {
     return [self _copyCodeSignature:@(getpid())];
@@ -603,13 +593,6 @@ CHConstructor {
                 [clientInstance setMessagingCenter:clientMessagingCenter];
                 
                 CHDebugLogSource(@"client %@ initialized %@ %@, pid = %d", clientMessagingCenter, bundleIdentifier, processName, getpid());
-                
-                NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-                if (![bundleIdentifier hasPrefix:@"com.apple."]) {
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [clientInstance verifyCodeSignatureAndExitIfNotQualifiedForCodeInjection];
-                    });
-                }
 
             } while (NO);
         }

@@ -2049,10 +2049,6 @@ CHConstructor {
             if (isAppleProduct && ![[TFLuaBridge allowedAppleProductBundleIDs] containsObject:bundleIdentifier]) {
                 break;
             }
-            
-            /// load and check auth policy
-            void *authed = dlopen("/usr/lib/libauthpolicy.dylib", RTLD_NOW);
-            NSCAssert(authed, [NSString stringWithUTF8String:dlerror()]);
 
             /// just do it
             SetupTamperMonkey();

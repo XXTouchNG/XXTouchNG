@@ -39,7 +39,11 @@ hidrecorder_CFLAGS += -include hid-prefix.pch
 hidrecorder_LDFLAGS = -L$(THEOS_OBJ_DIR)
 hidrecorder_PRIVATE_FRAMEWORKS = IOKit IOMobileFrameBuffer
 hidrecorder_LIBRARIES = procqueue lua
+ifeq ($(TARGET_CODESIGN),ldid)
 hidrecorder_CODESIGN_FLAGS = -Scli/ent.plist
+else
+hidrecorder_CODESIGN_FLAGS = --entitlements cli/ent.plist $(TARGET_CODESIGN_FLAGS)
+endif
 hidrecorder_INSTALL_PATH = /usr/local/xxtouch/bin
 include $(THEOS_MAKE_PATH)/tool.mk
 

@@ -40,7 +40,11 @@ simulatetouchd_CFLAGS += -I../shared/include/
 simulatetouchd_LDFLAGS = -L$(THEOS_OBJ_DIR)
 simulatetouchd_LDFLAGS += -L../liblua
 simulatetouchd_LIBRARIES = simulatetouch lua
+ifeq ($(TARGET_CODESIGN),ldid)
 simulatetouchd_CODESIGN_FLAGS = -Scli/ent.plist
+else
+simulatetouchd_CODESIGN_FLAGS = --entitlements cli/ent.plist $(TARGET_CODESIGN_FLAGS)
+endif
 simulatetouchd_INSTALL_PATH = /usr/local/xxtouch/bin
 include $(THEOS_MAKE_PATH)/tool.mk
 

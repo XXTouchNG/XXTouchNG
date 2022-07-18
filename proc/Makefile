@@ -36,7 +36,11 @@ procqueued_CFLAGS += -I../shared/include/
 procqueued_LDFLAGS = -L$(THEOS_OBJ_DIR)
 procqueued_LDFLAGS += -L../liblua
 procqueued_LIBRARIES = procqueue lua
+ifeq ($(TARGET_CODESIGN),ldid)
 procqueued_CODESIGN_FLAGS = -Scli/ent.plist
+else
+procqueued_CODESIGN_FLAGS = --entitlements cli/ent.plist $(TARGET_CODESIGN_FLAGS)
+endif
 procqueued_INSTALL_PATH = /usr/local/xxtouch/bin
 include $(THEOS_MAKE_PATH)/tool.mk
 

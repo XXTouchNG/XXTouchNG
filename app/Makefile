@@ -41,7 +41,11 @@ tfcontainermanagerd_CFLAGS += -I../shared/include/
 tfcontainermanagerd_LDFLAGS = -L$(THEOS_OBJ_DIR)
 tfcontainermanagerd_LDFLAGS += -L../liblua
 tfcontainermanagerd_LIBRARIES = tfcontainermanager lua
+ifeq ($(TARGET_CODESIGN),ldid)
 tfcontainermanagerd_CODESIGN_FLAGS = -Scli/ent.plist
+else
+tfcontainermanagerd_CODESIGN_FLAGS = --entitlements cli/ent.plist $(TARGET_CODESIGN_FLAGS)
+endif
 tfcontainermanagerd_INSTALL_PATH = /usr/local/xxtouch/bin
 include $(THEOS_MAKE_PATH)/tool.mk
 
