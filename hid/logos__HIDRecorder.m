@@ -31,7 +31,7 @@ OBJC_EXTERN BOOL _recorderInsomniaModeEnabled;
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class SpringBoard; @class SBBacklightController; 
+@class SBBacklightController; @class SpringBoard; 
 
 
 #line 12 "HIDRecorder.x"

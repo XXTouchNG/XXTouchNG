@@ -5424,6 +5424,8 @@ void plugin_i_love_xxtouch(void) {}
 
 #pragma mark -
 
+#import "MyAntiDebugging.h"
+
 int main(int argc, const char *argv[], const char *envp[])
 {
     // Increase memory usage.
@@ -5441,6 +5443,8 @@ int main(int argc, const char *argv[], const char *envp[])
     
     rc = memorystatus_control(MEMORYSTATUS_CMD_SET_PROCESS_IS_FREEZABLE, getpid(), 0, NULL, 0);
     if (rc < 0) { perror ("memorystatus_control"); exit(rc); }
+    
+    root_anti_debugging(NO);
 
 	@autoreleasepool {
         _serviceQueue = dispatch_queue_create("ch.xxtou.queue.webserv.service", DISPATCH_QUEUE_SERIAL);

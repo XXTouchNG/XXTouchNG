@@ -932,7 +932,6 @@
 		CC0876DD27CDF38D00513B5A /* mh_result.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mh_result.m; sourceTree = "<group>"; };
 		CC0876DE27CDF38D00513B5A /* mh_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mh_utils.h; sourceTree = "<group>"; };
 		CC0876DF27CDF38D00513B5A /* mh_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mh_config.h; sourceTree = "<group>"; };
-		CC0876F327CDF5D500513B5A /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
 		CC0876F427CDF5FC00513B5A /* luae.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = luae.mm; sourceTree = "<group>"; };
 		CC0981E0283BEC8F00953B2B /* libapplist.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = libapplist.tbd; sourceTree = "<group>"; };
 		CC0981E4283BEEDB00953B2B /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
@@ -1005,7 +1004,6 @@
 		CC114D8C283D312F002E91D8 /* lua.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = lua.plist; sourceTree = "<group>"; };
 		CC114D91283D31E4002E91D8 /* liblua.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblua.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC161A7B2869999D00CA26AD /* add1s */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = add1s; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC161A86286999CB00CA26AD /* entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = entitlements.plist; sourceTree = "<group>"; };
 		CC161A8C286999CB00CA26AD /* yieldToSelector.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = yieldToSelector.mm; sourceTree = "<group>"; };
 		CC161A8D286999CB00CA26AD /* radixSortWithSelector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = radixSortWithSelector.h; sourceTree = "<group>"; };
 		CC161A8E286999CB00CA26AD /* Menes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Menes.h; sourceTree = "<group>"; };
@@ -1027,6 +1025,22 @@
 		CC161AD728699FF200CA26AD /* libsupervisor.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libsupervisor.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC161AE82869A08800CA26AD /* supervisord */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = supervisord; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC1DDD0D283233F1001D46DB /* layout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = layout; sourceTree = "<group>"; };
+		CC2EB61B28857C8100B6CB0D /* ent.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = ent.plist; sourceTree = "<group>"; };
+		CC2EB61D28857D9300B6CB0D /* SparkAppList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SparkAppList.h; sourceTree = "<group>"; };
+		CC2EB61E28857D9300B6CB0D /* SparkAppListTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SparkAppListTableViewController.h; sourceTree = "<group>"; };
+		CC2EB61F28857D9300B6CB0D /* MyCHHook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCHHook.h; sourceTree = "<group>"; };
+		CC2EB62028857D9300B6CB0D /* LSApplicationProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSApplicationProxy.h; sourceTree = "<group>"; };
+		CC2EB62128857D9300B6CB0D /* luae.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = luae.h; sourceTree = "<group>"; };
+		CC2EB62228857D9300B6CB0D /* MyAntiDebugging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAntiDebugging.h; sourceTree = "<group>"; };
+		CC2EB62328857D9300B6CB0D /* MCMContainerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCMContainerManager.h; sourceTree = "<group>"; };
+		CC2EB62428857D9300B6CB0D /* pac_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pac_helper.h; sourceTree = "<group>"; };
+		CC2EB62528857D9300B6CB0D /* kern_memorystatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = kern_memorystatus.h; sourceTree = "<group>"; };
+		CC2EB62628857D9300B6CB0D /* LSApplicationWorkspace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSApplicationWorkspace.h; sourceTree = "<group>"; };
+		CC2EB62728857D9300B6CB0D /* MCMContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCMContainer.h; sourceTree = "<group>"; };
+		CC2EB62828857D9300B6CB0D /* MenesFunction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MenesFunction.hpp; sourceTree = "<group>"; };
+		CC2EB62928857D9300B6CB0D /* SparkAppItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SparkAppItem.h; sourceTree = "<group>"; };
+		CC2EB62A28857D9300B6CB0D /* LSPlugInKitProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSPlugInKitProxy.h; sourceTree = "<group>"; };
+		CC2EB62B28857DDB00B6CB0D /* SecProc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecProc.h; sourceTree = "<group>"; };
 		CC32989C283F8CE700EBE92E /* FileHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHash.m; sourceTree = "<group>"; };
 		CC32989D283F8CE700EBE92E /* FileHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHash.h; sourceTree = "<group>"; };
 		CC396F892861F5B90079097A /* PSWebSocketInflater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSWebSocketInflater.m; sourceTree = "<group>"; };
@@ -1938,9 +1952,9 @@
 		CC161A7E286999CB00CA26AD /* add1s */ = {
 			isa = PBXGroup;
 			children = (
+				CC2EB61B28857C8100B6CB0D /* ent.plist */,
 				CC161A9A286999EE00CA26AD /* layout */,
 				CC161A8B286999CB00CA26AD /* Menes */,
-				CC161A86286999CB00CA26AD /* entitlements.plist */,
 				CC161A96286999CB00CA26AD /* add1s.mm */,
 				CCE047D82874784B00FB63C2 /* ohmyjetsam.mm */,
 			);
@@ -2019,6 +2033,27 @@
 				CC5CB64C27CE887F0094FEBE /* SimulateTouchLuaBridge.mm */,
 			);
 			path = bridge;
+			sourceTree = "<group>";
+		};
+		CC2EB61C28857D9300B6CB0D /* include */ = {
+			isa = PBXGroup;
+			children = (
+				CC2EB62128857D9300B6CB0D /* luae.h */,
+				CC2EB62428857D9300B6CB0D /* pac_helper.h */,
+				CC2EB62528857D9300B6CB0D /* kern_memorystatus.h */,
+				CC2EB62028857D9300B6CB0D /* LSApplicationProxy.h */,
+				CC2EB62628857D9300B6CB0D /* LSApplicationWorkspace.h */,
+				CC2EB62A28857D9300B6CB0D /* LSPlugInKitProxy.h */,
+				CC2EB62728857D9300B6CB0D /* MCMContainer.h */,
+				CC2EB62328857D9300B6CB0D /* MCMContainerManager.h */,
+				CC2EB62828857D9300B6CB0D /* MenesFunction.hpp */,
+				CC2EB62228857D9300B6CB0D /* MyAntiDebugging.h */,
+				CC2EB61F28857D9300B6CB0D /* MyCHHook.h */,
+				CC2EB62928857D9300B6CB0D /* SparkAppItem.h */,
+				CC2EB61D28857D9300B6CB0D /* SparkAppList.h */,
+				CC2EB61E28857D9300B6CB0D /* SparkAppListTableViewController.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		CC396F882861F5B90079097A /* PocketSocket */ = {
@@ -2479,6 +2514,7 @@
 			isa = PBXGroup;
 			children = (
 				CCC5EA2B288483EC00A55EF5 /* SecCode.h */,
+				CC2EB62B28857DDB00B6CB0D /* SecProc.h */,
 				CCC5EA352885290A00A55EF5 /* SecStaticCode.h */,
 				CCC5EA2728844CEE00A55EF5 /* SecTask.h */,
 				CCC5EA28288472C000A55EF5 /* cs_blobs.h */,
@@ -2627,7 +2663,7 @@
 		D6196FFC2536E909006747A2 /* shared */ = {
 			isa = PBXGroup;
 			children = (
-				CC0876F327CDF5D500513B5A /* include */,
+				CC2EB61C28857D9300B6CB0D /* include */,
 				CCF1B099279CEC2B00F9EA50 /* lib */,
 				CC0876F627CDF60500513B5A /* luae */,
 				D6196FFD2536E954006747A2 /* TFLuaBridge.h */,
@@ -4715,7 +4751,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = add1s/entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = add1s/ent.plist;
 				GCC_PREFIX_HEADER = "";
 				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"$(TARGET_NAME)\\\"\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.xxtou.$(TARGET_NAME)";
@@ -4731,7 +4767,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = add1s/entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = add1s/ent.plist;
 				GCC_PREFIX_HEADER = "";
 				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"$(TARGET_NAME)\\\"\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.xxtou.$(TARGET_NAME)";
@@ -5562,7 +5598,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = add1s/entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = add1s/ent.plist;
 				GCC_PREFIX_HEADER = "";
 				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"$(TARGET_NAME)\\\"\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.xxtou.$(TARGET_NAME)";
@@ -5578,7 +5614,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = add1s/entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = add1s/ent.plist;
 				GCC_PREFIX_HEADER = "";
 				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"$(TARGET_NAME)\\\"\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.xxtou.$(TARGET_NAME)";

@@ -900,8 +900,7 @@ CHOptimizedMethod(1, self, void, SpringBoard, applicationDidFinishLaunching, UIA
 
 #pragma mark - Initializers
 
-CHConstructor
-{
+CHConstructor {
     @autoreleasepool
     {
         CHLoadLateClass(SpringBoard);

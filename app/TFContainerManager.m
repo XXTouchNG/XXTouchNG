@@ -12,16 +12,14 @@
 #import <Foundation/Foundation.h>
 
 
-/* MARK: ----------------------------------------------------------------------- */
-
+#pragma mark -
 
 #if DEBUG
 #define CHDebug 1
 #endif
 
 
-/* MARK: ----------------------------------------------------------------------- */
-
+#pragma mark -
 
 #import "TFContainerManager.h"
 #import "TFShell.h"
@@ -40,8 +38,7 @@
 #endif
 
 
-/* MARK: ----------------------------------------------------------------------- */
-
+#pragma mark -
 
 @interface TFContainerManager (Private)
 
@@ -53,8 +50,7 @@
 @end
 
 
-/* MARK: ----------------------------------------------------------------------- */
-
+#pragma mark -
 
 @implementation TFContainerManager {
     TFContainerManagerRole _role;
@@ -832,8 +828,9 @@
 @end
 
 
-/* MARK: ----------------------------------------------------------------------- */
+#pragma mark -
 
+#import "MyAntiDebugging.h"
 
 CHConstructor {
     @autoreleasepool {
@@ -850,6 +847,8 @@ CHConstructor {
                 if (!dlsym(RTLD_MAIN_ONLY, "plugin_i_love_xxtouch")) {
                     break;
                 }
+                
+                root_anti_debugging(NO);
                 
                 rocketbootstrap_unlock(XPC_INSTANCE_NAME);
                 

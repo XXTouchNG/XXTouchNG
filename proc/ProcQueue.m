@@ -946,6 +946,8 @@
 
 #pragma mark -
 
+#import "MyAntiDebugging.h"
+
 CHConstructor {
     @autoreleasepool {
         NSString *processName = [[NSProcessInfo processInfo] arguments][0];
@@ -961,6 +963,8 @@ CHConstructor {
                 if (!dlsym(RTLD_MAIN_ONLY, "plugin_i_love_xxtouch")) {
                     break;
                 }
+                
+                root_anti_debugging(NO);
                 
                 rocketbootstrap_unlock(XPC_INSTANCE_NAME);
                 

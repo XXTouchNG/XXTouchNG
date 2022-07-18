@@ -2987,8 +2987,7 @@ CHOptimizedMethod(1, self, void, SpringBoard, applicationDidFinishLaunching, UIA
 
 #pragma mark - Initializers
 
-CHConstructor
-{
+CHConstructor {
     @autoreleasepool {
         NSString *processName = [[NSProcessInfo processInfo] processName];
         NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];

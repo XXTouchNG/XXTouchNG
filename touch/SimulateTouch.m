@@ -30,8 +30,7 @@
 @end
 
 
-/* MARK: ----------------------------------------------------------------------- */
-
+#pragma mark -
 
 @implementation SimulateTouch {
     SimulateTouchRole _role;
@@ -1049,8 +1048,9 @@
 @end
 
 
-/* MARK: ----------------------------------------------------------------------- */
+#pragma mark -
 
+#import "MyAntiDebugging.h"
 
 CHConstructor {
     @autoreleasepool {
@@ -1067,6 +1067,8 @@ CHConstructor {
                 if (!dlsym(RTLD_MAIN_ONLY, "plugin_i_love_xxtouch")) {
                     break;
                 }
+                
+                root_anti_debugging(NO);
                 
                 rocketbootstrap_unlock(XPC_INSTANCE_NAME);
                 

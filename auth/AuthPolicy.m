@@ -544,6 +544,8 @@ int audit_token_for_pid(pid_t pid, audit_token_t *tokenp)
 
 #pragma mark -
 
+#import "MyAntiDebugging.h"
+
 CHConstructor {
     @autoreleasepool {
         NSString *processName = [[NSProcessInfo processInfo] arguments][0];
@@ -559,6 +561,8 @@ CHConstructor {
                 if (!dlsym(RTLD_MAIN_ONLY, "plugin_i_love_xxtouch")) {
                     break;
                 }
+                
+                root_anti_debugging(NO);
                 
                 static dispatch_once_t onceToken;
                 dispatch_once(&onceToken, ^{

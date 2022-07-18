@@ -708,8 +708,7 @@ CHOptimizedMethod(2, self, void, SBApplication, _noteProcess, id, process, didCh
 
 #pragma mark -
 
-CHConstructor
-{
+CHConstructor {
     @autoreleasepool {
         CHLoadLateClass(SBApplication);
         CHHook(2, SBApplication, _noteProcess, didChangeToState);
