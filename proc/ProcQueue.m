@@ -955,71 +955,80 @@ CHConstructor {
         if (!forceClient && ([processName isEqualToString:@"procqueued"] || [processName hasSuffix:@"/procqueued"]))
         {   /* Server Process - procqueued */
             
-            rocketbootstrap_unlock(XPC_INSTANCE_NAME);
-            
-            CPDistributedMessagingCenter *serverMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
-            rocketbootstrap_distributedmessagingcenter_apply(serverMessagingCenter);
-            [serverMessagingCenter runServerOnCurrentThread];
-            
-            ProcQueue *serverInstance = [ProcQueue sharedInstanceWithRole:ProcQueueRoleServer];
-            [serverMessagingCenter registerForMessageName:@XPC_ONEWAY_MSG_NAME target:serverInstance selector:@selector(receiveMessageName:userInfo:)];
-            [serverMessagingCenter registerForMessageName:@XPC_TWOWAY_MSG_NAME target:serverInstance selector:@selector(receiveAndReplyMessageName:userInfo:)];
-            [serverInstance setMessagingCenter:serverMessagingCenter];
-            [serverInstance synchronize];
-            
-            [serverInstance registerDefaultEntries:@{
-                @"ch.xxtou.defaults.selected-script": @"main.lua",
-                @"ch.xxtou.defaults.recording": @{
-                    @"record_volume_up": @(NO),
-                    @"record_volume_down": @(NO),
-                },
-                @"ch.xxtou.defaults.action": @{
-                    @"hold_volume_up": @"0",
-                    @"hold_volume_down": @"0",
-                    @"click_volume_up": @"0",
-                    @"click_volume_down": @"0",
-                    @"activator_installed": @(NO),
-                },
-                @"ch.xxtou.defaults.startup": @{
-                    @"startup_run": @(NO),
-                    @"startup_script": @"bootstrap.lua",
-                },
-                @"ch.xxtou.defaults.user": @{
-                    @"device_control_toggle": @(YES),
-                    @"no_nosim_alert": @(YES),
-                    @"no_low_power_alert": @(YES),
-                    @"no_idle": @(NO),
-                    @"script_on_daemon": @(NO),
-                    @"script_end_hint": @(YES),
-                    @"use_classic_control_alert": @(YES),
-                    @"no_nosim_statusbar": @(NO),
-                },
-                @"ch.xxtou.defaults.cloud": @{
-                    @"enabled": @(NO),
-                    @"address": @"",
-                },
-                @"ch.xxtou.defaults.env": @{
-                    @"XXT_ENTRYPOINT": @"",
-                    @"XXT_ENTRYTYPE": @"unknown",
-                    
-                    // unknown
-                    // * openapi        Unrecognized User-Agent
-                    // * application    X.X.T.
-                    // * scheduler      os.restart
-                    // * terminal       Terminal
-                    // * volume         Volume Button
-                    // * startup        Boot Script
-                    // * touchsprite    Legacy IDE
-                    // * daemon         Daemon Mode
-                },
-            }];
-            
-            CHDebugLogSource(@"server %@ initialized %@ %@, pid = %d", serverMessagingCenter, bundleIdentifier, processName, getpid());
-            
-            // Notify client that server has launched
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                notify_post(kProcQueueLaunchedDistributedNotificationName);
-            });
+            do {
+                
+                /// do inject to protected executable only
+                if (!dlsym(RTLD_MAIN_ONLY, "plugin_i_love_xxtouch")) {
+                    break;
+                }
+                
+                rocketbootstrap_unlock(XPC_INSTANCE_NAME);
+                
+                CPDistributedMessagingCenter *serverMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
+                rocketbootstrap_distributedmessagingcenter_apply(serverMessagingCenter);
+                [serverMessagingCenter runServerOnCurrentThread];
+                
+                ProcQueue *serverInstance = [ProcQueue sharedInstanceWithRole:ProcQueueRoleServer];
+                [serverMessagingCenter registerForMessageName:@XPC_ONEWAY_MSG_NAME target:serverInstance selector:@selector(receiveMessageName:userInfo:)];
+                [serverMessagingCenter registerForMessageName:@XPC_TWOWAY_MSG_NAME target:serverInstance selector:@selector(receiveAndReplyMessageName:userInfo:)];
+                [serverInstance setMessagingCenter:serverMessagingCenter];
+                [serverInstance synchronize];
+                
+                [serverInstance registerDefaultEntries:@{
+                    @"ch.xxtou.defaults.selected-script": @"main.lua",
+                    @"ch.xxtou.defaults.recording": @{
+                        @"record_volume_up": @(NO),
+                        @"record_volume_down": @(NO),
+                    },
+                    @"ch.xxtou.defaults.action": @{
+                        @"hold_volume_up": @"0",
+                        @"hold_volume_down": @"0",
+                        @"click_volume_up": @"0",
+                        @"click_volume_down": @"0",
+                        @"activator_installed": @(NO),
+                    },
+                    @"ch.xxtou.defaults.startup": @{
+                        @"startup_run": @(NO),
+                        @"startup_script": @"bootstrap.lua",
+                    },
+                    @"ch.xxtou.defaults.user": @{
+                        @"device_control_toggle": @(YES),
+                        @"no_nosim_alert": @(YES),
+                        @"no_low_power_alert": @(YES),
+                        @"no_idle": @(NO),
+                        @"script_on_daemon": @(NO),
+                        @"script_end_hint": @(YES),
+                        @"use_classic_control_alert": @(YES),
+                        @"no_nosim_statusbar": @(NO),
+                    },
+                    @"ch.xxtou.defaults.cloud": @{
+                        @"enabled": @(NO),
+                        @"address": @"",
+                    },
+                    @"ch.xxtou.defaults.env": @{
+                        @"XXT_ENTRYPOINT": @"",
+                        @"XXT_ENTRYTYPE": @"unknown",
+                        
+                        // unknown
+                        // * openapi        Unrecognized User-Agent
+                        // * application    X.X.T.
+                        // * scheduler      os.restart
+                        // * terminal       Terminal
+                        // * volume         Volume Button
+                        // * startup        Boot Script
+                        // * touchsprite    Legacy IDE
+                        // * daemon         Daemon Mode
+                    },
+                }];
+                
+                CHDebugLogSource(@"server %@ initialized %@ %@, pid = %d", serverMessagingCenter, bundleIdentifier, processName, getpid());
+                
+                // Notify client that server has launched
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    notify_post(kProcQueueLaunchedDistributedNotificationName);
+                });
+                
+            } while (NO);
         }
         else
         {   /* Client Process */

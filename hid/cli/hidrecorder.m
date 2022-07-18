@@ -517,6 +517,8 @@ static void sigcont_handler(int signal)
 
 OBJC_EXTERN
 void plugin_i_love_xxtouch(void);
+
+__attribute__((used)) __attribute__ ((visibility("default")))
 void plugin_i_love_xxtouch(void) {}
 
 

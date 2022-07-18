@@ -25,7 +25,7 @@ libalerthelper_CCFLAGS = -std=c++14
 libalerthelper_LDFLAGS = -L../liblua
 libalerthelper_LDFLAGS += -L$(THEOS_OBJ_DIR)
 libalerthelper_LDFLAGS += $(LUA_MOD_LDFLAGS)
-libalerthelper_LIBRARIES = substrate rocketbootstrap lua authpolicy
+libalerthelper_LIBRARIES = substrate rocketbootstrap lua
 libalerthelper_FRAMEWORKS = UIKit
 libalerthelper_PRIVATE_FRAMEWORKS = AppSupport SpringBoardServices
 libalerthelper_INSTALL_PATH = /usr/local/lib

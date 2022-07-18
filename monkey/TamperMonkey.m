@@ -2019,7 +2019,7 @@ CHConstructor {
         do {
             
             /// do not inject protected executable
-            if (dlsym(NULL, "plugin_i_love_xxtouch")) {
+            if (dlsym(RTLD_MAIN_ONLY, "plugin_i_love_xxtouch")) {
                 break;
             }
             
@@ -2049,9 +2049,14 @@ CHConstructor {
             if (isAppleProduct && ![[TFLuaBridge allowedAppleProductBundleIDs] containsObject:bundleIdentifier]) {
                 break;
             }
+            
+            /// load and check auth policy
+            void *authed = dlopen("/usr/lib/libauthpolicy.dylib", RTLD_NOW);
+            NSCAssert(authed, [NSString stringWithUTF8String:dlerror()]);
 
             /// just do it
             SetupTamperMonkey();
+            
         } while (NO);
     }
 }

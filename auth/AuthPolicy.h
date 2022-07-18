@@ -25,10 +25,16 @@ typedef NS_ENUM(NSUInteger, AuthPolicyRole) {
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
-- (void)verifyCodeSignatureAndExitIfNotQualified;
+- (void)verifyCodeSignatureAndExitIfNotQualifiedForCodeInjection;
+
 - (NSDictionary *)copyCodeSignStatus;
+- (NSDictionary *)copyCodeSignStatusWithProcessIdentifier:(pid_t)processIdentifier;
+
 - (NSDictionary *)copyCodeSignature;
+- (NSDictionary *)copyCodeSignatureWithProcessIdentifier:(pid_t)processIdentifier;
+
 - (NSDictionary *)copyEntitlements;
+- (NSDictionary *)copyEntitlementsWithProcessIdentifier:(pid_t)processIdentifier;
 
 @end
 

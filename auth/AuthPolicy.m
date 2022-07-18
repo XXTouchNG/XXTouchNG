@@ -1,15 +1,17 @@
-#if ! __has_feature(objc_arc)
+#if !__has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag.
 #endif
 
 #import "AuthPolicy.h"
 #import "pac_helper.h"
 #import "SecCode.h"
+#import "SecStaticCode.h"
 #import "SecTask.h"
 #import "CSCommon.h"
 #import "cs_blobs.h"
 #import <rocketbootstrap/rocketbootstrap.h>
 #import <Security/Security.h>
+#import <sys/sysctl.h>
 
 typedef struct __CFRuntimeBase {
     uintptr_t _cfisa;
@@ -56,9 +58,6 @@ int audit_token_for_pid(pid_t pid, audit_token_t *tokenp)
     
     return KERN_SUCCESS;
 }
-
-/* Not available on iOS */
-static OSStatus (*SecCodeCopyGuestWithAttributes)(SecCodeRef __nullable host, CFDictionaryRef __nullable attributes, SecCSFlags flags, SecCodeRef * __nonnull CF_RETURNS_RETAINED guest) = NULL;
 
 
 #pragma mark -
@@ -212,10 +211,138 @@ static OSStatus (*SecCodeCopyGuestWithAttributes)(SecCodeRef __nullable host, CF
 
 #pragma mark -
 
-- (void)verifyCodeSignatureAndExitIfNotQualified
-{
-//    NSDictionary *replyObject = [self _copyCodeSignature:@(getpid())];
++ (nullable NSString *)binaryPathOfProcessIdentifier:(pid_t)pid {
     
+    // First ask the system how big a buffer we should allocate
+    int mib[3] = {CTL_KERN, KERN_ARGMAX, 0};
+    
+    size_t argmaxsize = sizeof(size_t);
+    size_t size = 0;
+    
+    int ret = sysctl(mib, 2, &size, &argmaxsize, NULL, 0);
+    if (ret != 0) {
+        CHDebugLogSource(@"Error '%s' (%d) getting KERN_ARGMAX", strerror(errno), errno);
+        return nil;
+    }
+    
+    // Then we can get the path information we actually want
+    mib[1] = KERN_PROCARGS2;
+    mib[2] = (int)pid;
+    
+    char *procargv = malloc(size);
+    bzero(procargv, size);
+    
+    ret = sysctl(mib, 3, procargv, &size, NULL, 0);
+    
+    if (ret != 0) {
+        CHDebugLogSource(@"Error '%s' (%d) for pid %d", strerror(errno), errno, pid);
+        free(procargv);
+        return nil;
+    }
+    
+    // procargv is actually a data structure.
+    // The path is at procargv + sizeof(int)
+    NSString *path = [NSString stringWithUTF8String:(procargv + sizeof(int))];
+    free(procargv);
+    return path;
+}
+
++ (id)mutableCopyOfConvertedObject:(id)object
+{
+    return [self mutableCopyOfConvertedObject:object depth:0 parent:nil];
+}
+
++ (id)mutableCopyOfConvertedObject:(id)object depth:(int)depth parent:(id)parent
+{
+    NSAssert(depth < 15, @"max depth reached");
+    if ([object isKindOfClass:[NSDictionary class]])
+    {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:[object count]];
+        for (id key in [object allKeys])
+        {
+            id child = [object objectForKey:key];
+            id val = [self mutableCopyOfConvertedObject:child depth:(depth + 1) parent:object];
+            id strKey = key;
+            if (![key isKindOfClass:[NSString class]])
+                strKey = [NSString stringWithFormat:@"%@", key];
+            if (val) [dict setObject:val forKey:strKey];
+        }
+        return dict;
+    }
+    else if ([object isKindOfClass:[NSArray class]])
+    {
+        NSMutableArray *arr = [NSMutableArray arrayWithCapacity:[object count]];
+        for (id child in object)
+        {
+            id val = [self mutableCopyOfConvertedObject:child depth:(depth + 1) parent:object];
+            if (val) [arr addObject:val];
+        }
+        return arr;
+    }
+    else
+    {
+        if ([object isKindOfClass:[NSData class]]) { return [object copy]; }
+        else if ([object isKindOfClass:[NSString class]]) { return [object copy]; }
+        else if ([object isKindOfClass:[NSDate class]]) { return [object copy]; }
+        else if ([object isKindOfClass:[NSNumber class]]) { return [object copy]; }
+        else if ([object isKindOfClass:[NSURL class]]) {
+            return [object isFileURL] ? [object path] : [object absoluteString];
+        }
+        else {
+            CFTypeID typeID = CFGetTypeID((__bridge CFTypeRef)(object));
+            if (typeID == SecCertificateGetTypeID())
+            {
+                NSMutableDictionary *secCertificateDict = [NSMutableDictionary dictionaryWithCapacity:4];
+                SecCertificateRef secCertificateObject = (__bridge SecCertificateRef)(object);
+                
+                OSStatus osStatus;
+                CFStringRef commonName;
+                osStatus = SecCertificateCopyCommonName(secCertificateObject, &commonName);
+                if (osStatus == errSecSuccess)
+                {
+                    [secCertificateDict setObject:(NSString *)CFBridgingRelease(commonName) forKey:@"CommonName"];
+                }
+                
+                CFArrayRef emailAddresses;
+                osStatus = SecCertificateCopyEmailAddresses(secCertificateObject, &emailAddresses);
+                if (osStatus == errSecSuccess)
+                {
+                    [secCertificateDict setObject:(NSArray <NSString *> *)CFBridgingRelease(emailAddresses) forKey:@"EmailAddresses"];
+                }
+                
+                CFStringRef subjectSummary = SecCertificateCopySubjectSummary(secCertificateObject);
+                if (subjectSummary)
+                {
+                    [secCertificateDict setObject:(NSString *)CFBridgingRelease(subjectSummary) forKey:@"SubjectSummary"];
+                }
+                
+                CFErrorRef error = NULL;
+                CFDataRef serialNumberData = SecCertificateCopySerialNumberData(secCertificateObject, &error);
+                if (serialNumberData)
+                {
+                    [secCertificateDict setObject:(NSData *)CFBridgingRelease(serialNumberData) forKey:@"SerialNumberData"];
+                }
+                
+                if (error)
+                {
+                    CFRelease(error);
+                }
+                
+                return secCertificateDict;
+            }
+            return nil;
+        }
+    }
+}
+
+- (void)verifyCodeSignatureAndExitIfNotQualifiedForCodeInjection
+{
+    @autoreleasepool {
+        NSDictionary *replyObject = [self _copyCodeSignature:@(getpid())];
+        replyObject = replyObject[@"reply"];
+        NSArray <NSDictionary *> *certList = replyObject[(__bridge NSString *)kSecCodeInfoCertificates];
+        CHDebugLogSource(@"%@", certList);
+    }
 }
 
 - (NSDictionary *)copyCodeSignature
@@ -223,80 +350,64 @@ static OSStatus (*SecCodeCopyGuestWithAttributes)(SecCodeRef __nullable host, CF
     return [self _copyCodeSignature:@(getpid())];
 }
 
+- (NSDictionary *)copyCodeSignatureWithProcessIdentifier:(pid_t)processIdentifier
+{
+    return [self _copyCodeSignature:@(processIdentifier)];
+}
+
 - (NSDictionary *)_copyCodeSignature:(NSNumber /* pid_t */ *)processIdentifier
 {
     if (_role == AuthPolicyRoleClient)
     {
-        NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
-            @"selector": NSStringFromSelector(@selector(_copyCodeSignature:)),
-            @"arguments": [NSArray arrayWithObjects:processIdentifier, nil],
-        }];
-        
-        CHDebugLogSource(@"_copyCodeSignature: %@ -> %@", processIdentifier, replyObject);
-        
-        NSDictionary *replyState = replyObject[@"reply"];
-        NSAssert([replyState isKindOfClass:[NSDictionary class]], @"invalid xpc response");
-        
-        return replyObject;
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_copyCodeSignature:)),
+                @"arguments": [NSArray arrayWithObjects:processIdentifier, nil],
+            }];
+            
+            CHDebugLogSource(@"_copyCodeSignature: %@ -> %@", processIdentifier, replyObject);
+            
+            NSDictionary *replyState = replyObject[@"reply"];
+            NSAssert([replyState isKindOfClass:[NSDictionary class]], @"invalid xpc response");
+            
+            return replyObject;
+        }
     }
     
     @autoreleasepool {
         
-        audit_token_t autoken = { 0 };
-        int kr = audit_token_for_pid((pid_t)[processIdentifier intValue], &autoken);
-        if (kr != KERN_SUCCESS)
+        NSString *binaryPath = [AuthPolicy binaryPathOfProcessIdentifier:[processIdentifier intValue]];
+        if (!binaryPath)
         {
-            return @{ @"reply": @{} };
+            return @{ @"reply": @{}, @"error": @"sysctl" };
         }
+        
+        CFURLRef binaryURL = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (__bridge CFStringRef)binaryPath, kCFURLPOSIXPathStyle, false);
         
         OSStatus osStatus;
-        SecCodeRef secCodeGuest;
-        CFDataRef auditData = CFDataCreate(kCFAllocatorDefault, (const UInt8 *)&autoken, sizeof(audit_token_t));
-        osStatus = SecCodeCopyGuestWithAttributes(NULL, (__bridge CFDictionaryRef)@{
-            (__bridge NSString *)kSecGuestAttributeAudit: CFBridgingRelease(auditData),
-        }, kSecCSDefaultFlags, &secCodeGuest);  // FIXME
-        
-        if (osStatus != errSecSuccess) {
-            return @{ @"reply": @{}, @"error": [NSString stringWithFormat:@"SecCodeCopyGuestWithAttributes (%d): %@", osStatus, (NSString *)CFBridgingRelease(SecCopyErrorMessageString(osStatus, NULL))] };
-        }
-        
-        // Check Client Path
-        CFURLRef cfClientPath = NULL;
-        osStatus = SecCodeCopyPath(secCodeGuest, kSecCSDefaultFlags, &cfClientPath);
-        
-        if (osStatus != errSecSuccess) {
-            CFRelease(secCodeGuest);
-            return @{ @"reply": @{}, @"error": [NSString stringWithFormat:@"SecCodeCopyPath (%d): %@", osStatus, (NSString *)CFBridgingRelease(SecCopyErrorMessageString(osStatus, NULL))] };
-        }
-
-        // Copy POSIX Client Path
-        CFStringRef cfClientPOSIXPath = CFURLCopyFileSystemPath(cfClientPath, kCFURLPOSIXPathStyle);
-        CFRelease(cfClientPath);
-        
-        if (cfClientPOSIXPath == NULL) {
-            CFRelease(secCodeGuest);
-            return @{ @"reply": @{}, @"error": @"CFURLCopyFileSystemPath" };
-        }
-        
-        NSString *clientPOSIXPath = (NSString *)CFBridgingRelease(cfClientPOSIXPath);
-        CHDebugLogSource(@"clientPOSIXPath = %@", clientPOSIXPath);
-        
         SecStaticCodeRef secStaticCodeGuest;
-        osStatus = SecCodeCopyStaticCode(secCodeGuest, kSecCSDefaultFlags, &secStaticCodeGuest);
+        osStatus = SecStaticCodeCreateWithPath(binaryURL, kSecCSDefaultFlags, &secStaticCodeGuest);
+        CFRelease(binaryURL);
+        
         if (osStatus != errSecSuccess) {
-            CFRelease(secCodeGuest);
             return @{ @"reply": @{}, @"error": [NSString stringWithFormat:@"SecCodeCopyStaticCode (%d): %@", osStatus, (NSString *)CFBridgingRelease(SecCopyErrorMessageString(osStatus, NULL))] };
         }
         
+        SecCSFlags flags =
+        (
+         kSecCSDefaultFlags |
+         kSecCSSigningInformation |  // This is what we actually want.
+         kSecCSSkipResourceDirectory
+         );
+        
         CFDictionaryRef codeSigningInformation;
-        osStatus = SecCodeCopySigningInformation(secStaticCodeGuest, kSecCSDefaultFlags, &codeSigningInformation);
-        CFRelease(secCodeGuest);
+        osStatus = SecCodeCopySigningInformation(secStaticCodeGuest, flags, &codeSigningInformation);
         
         if (osStatus != errSecSuccess) {
             return @{ @"reply": @{}, @"error": [NSString stringWithFormat:@"SecCodeCopySigningInformation (%d): %@", osStatus, (NSString *)CFBridgingRelease(SecCopyErrorMessageString(osStatus, NULL))] };
         }
         
-        return @{ @"reply": (NSDictionary *)CFBridgingRelease(codeSigningInformation), @"error": @"" };
+        return @{ @"reply": (NSDictionary *)[AuthPolicy mutableCopyOfConvertedObject:CFBridgingRelease(codeSigningInformation)], @"error": @"" };
     }
 }
 
@@ -305,21 +416,28 @@ static OSStatus (*SecCodeCopyGuestWithAttributes)(SecCodeRef __nullable host, CF
     return [self _copyCodeSignStatus:@(getpid())];
 }
 
+- (NSDictionary *)copyCodeSignStatusWithProcessIdentifier:(pid_t)processIdentifier
+{
+    return [self _copyCodeSignStatus:@(processIdentifier)];
+}
+
 - (NSDictionary *)_copyCodeSignStatus:(NSNumber /* pid_t */ *)processIdentifier
 {
     if (_role == AuthPolicyRoleClient)
     {
-        NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
-            @"selector": NSStringFromSelector(@selector(_copyCodeSignStatus:)),
-            @"arguments": [NSArray arrayWithObjects:processIdentifier, nil],
-        }];
-        
-        CHDebugLogSource(@"_copyCodeSignature: %@ -> %@", processIdentifier, replyObject);
-        
-        NSNumber *replyState = replyObject[@"status"];
-        NSAssert([replyState isKindOfClass:[NSNumber class]], @"invalid xpc response");
-        
-        return replyObject;
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_copyCodeSignStatus:)),
+                @"arguments": [NSArray arrayWithObjects:processIdentifier, nil],
+            }];
+            
+            CHDebugLogSource(@"_copyCodeSignature: %@ -> %@", processIdentifier, replyObject);
+            
+            NSNumber *replyState = replyObject[@"status"];
+            NSAssert([replyState isKindOfClass:[NSNumber class]], @"invalid xpc response");
+            
+            return replyObject;
+        }
     }
     
     @autoreleasepool {
@@ -371,19 +489,26 @@ static OSStatus (*SecCodeCopyGuestWithAttributes)(SecCodeRef __nullable host, CF
     return [self _copyEntitlements:@(getpid())][@"reply"];
 }
 
+- (NSDictionary *)copyEntitlementsWithProcessIdentifier:(pid_t)processIdentifier
+{
+    return [self _copyEntitlements:@(processIdentifier)][@"reply"];
+}
+
 - (NSDictionary *)_copyEntitlements:(NSNumber /* pid_t */ *)processIdentifier
 {
     if (_role == AuthPolicyRoleClient)
     {
-        NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
-            @"selector": NSStringFromSelector(@selector(_copyEntitlements:)),
-            @"arguments": [NSArray arrayWithObjects:processIdentifier, nil],
-        }];
-        
-        CHDebugLogSource(@"_copyEntitlements: %@ -> %@", processIdentifier, replyObject);
-        NSAssert([replyObject[@"reply"] isKindOfClass:[NSDictionary class]], @"invalid xpc response");
-        
-        return replyObject;
+        @autoreleasepool {
+            NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
+                @"selector": NSStringFromSelector(@selector(_copyEntitlements:)),
+                @"arguments": [NSArray arrayWithObjects:processIdentifier, nil],
+            }];
+            
+            CHDebugLogSource(@"_copyEntitlements: %@ -> %@", processIdentifier, replyObject);
+            NSAssert([replyObject[@"reply"] isKindOfClass:[NSDictionary class]], @"invalid xpc response");
+            
+            return replyObject;
+        }
     }
     
     @autoreleasepool {
@@ -419,7 +544,7 @@ static OSStatus (*SecCodeCopyGuestWithAttributes)(SecCodeRef __nullable host, CF
         
         return @{
             @"reply": entitlements ?: @{},
-            @"error": error != NULL ? [(NSError *)CFBridgingRelease(error) localizedDescription] : @"",
+            @"error": error != NULL ? [(NSError *)CFBridgingRelease (error) localizedDescription] : @"",
         };
     }
 }
@@ -438,35 +563,55 @@ CHConstructor {
         if (!forceClient && ([processName isEqualToString:@"authpolicyd"] || [processName hasSuffix:@"/authpolicyd"]))
         {   /* Server Process - authpolicyd */
             
-            static dispatch_once_t onceToken;
-            dispatch_once(&onceToken, ^{
-                void *SecurityBinary = dlopen("/System/Library/Frameworks/Security.framework/Security", RTLD_LAZY);
-                NSCAssert(SecurityBinary, [NSString stringWithUTF8String:dlerror()]);
-            });
-
-            rocketbootstrap_unlock(XPC_INSTANCE_NAME);
-            
-            CPDistributedMessagingCenter *serverMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
-            rocketbootstrap_distributedmessagingcenter_apply(serverMessagingCenter);
-            [serverMessagingCenter runServerOnCurrentThread];
-            
-            AuthPolicy *serverInstance = [AuthPolicy sharedInstanceWithRole:AuthPolicyRoleServer];
-            [serverMessagingCenter registerForMessageName:@XPC_ONEWAY_MSG_NAME target:serverInstance selector:@selector(receiveMessageName:userInfo:)];
-            [serverMessagingCenter registerForMessageName:@XPC_TWOWAY_MSG_NAME target:serverInstance selector:@selector(receiveAndReplyMessageName:userInfo:)];
-            [serverInstance setMessagingCenter:serverMessagingCenter];
-            
-            CHDebugLogSource(@"server %@ initialized %@ %@, pid = %d", serverMessagingCenter, bundleIdentifier, processName, getpid());
+            do {
+                
+                /// do inject to protected executable only
+                if (!dlsym(RTLD_MAIN_ONLY, "plugin_i_love_xxtouch")) {
+                    break;
+                }
+                
+                static dispatch_once_t onceToken;
+                dispatch_once(&onceToken, ^{
+                    void *SecurityBinary = dlopen("/System/Library/Frameworks/Security.framework/Security", RTLD_LAZY);
+                    NSCAssert(SecurityBinary, [NSString stringWithUTF8String:dlerror()]);
+                });
+                
+                rocketbootstrap_unlock(XPC_INSTANCE_NAME);
+                
+                CPDistributedMessagingCenter *serverMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
+                rocketbootstrap_distributedmessagingcenter_apply(serverMessagingCenter);
+                [serverMessagingCenter runServerOnCurrentThread];
+                
+                AuthPolicy *serverInstance = [AuthPolicy sharedInstanceWithRole:AuthPolicyRoleServer];
+                [serverMessagingCenter registerForMessageName:@XPC_ONEWAY_MSG_NAME target:serverInstance selector:@selector(receiveMessageName:userInfo:)];
+                [serverMessagingCenter registerForMessageName:@XPC_TWOWAY_MSG_NAME target:serverInstance selector:@selector(receiveAndReplyMessageName:userInfo:)];
+                [serverInstance setMessagingCenter:serverMessagingCenter];
+                
+                CHDebugLogSource(@"server %@ initialized %@ %@, pid = %d", serverMessagingCenter, bundleIdentifier, processName, getpid());
+                
+            } while (NO);
         }
         else
         {   /* Client Process */
             
-            CPDistributedMessagingCenter *clientMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
-            rocketbootstrap_distributedmessagingcenter_apply(clientMessagingCenter);
-            
-            AuthPolicy *clientInstance = [AuthPolicy sharedInstanceWithRole:AuthPolicyRoleClient];
-            [clientInstance setMessagingCenter:clientMessagingCenter];
-            
-            CHDebugLogSource(@"client %@ initialized %@ %@, pid = %d", clientMessagingCenter, bundleIdentifier, processName, getpid());
+            do {
+                
+                CPDistributedMessagingCenter *clientMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
+                rocketbootstrap_distributedmessagingcenter_apply(clientMessagingCenter);
+                
+                AuthPolicy *clientInstance = [AuthPolicy sharedInstanceWithRole:AuthPolicyRoleClient];
+                [clientInstance setMessagingCenter:clientMessagingCenter];
+                
+                CHDebugLogSource(@"client %@ initialized %@ %@, pid = %d", clientMessagingCenter, bundleIdentifier, processName, getpid());
+                
+                NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+                if (![bundleIdentifier hasPrefix:@"com.apple."]) {
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [clientInstance verifyCodeSignatureAndExitIfNotQualifiedForCodeInjection];
+                    });
+                }
+
+            } while (NO);
         }
     }
 }

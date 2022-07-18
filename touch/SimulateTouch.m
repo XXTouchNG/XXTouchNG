@@ -1061,28 +1061,41 @@ CHConstructor {
         if (!forceClient && ([processName isEqualToString:@"simulatetouchd"] || [processName hasSuffix:@"/simulatetouchd"]))
         {   /* Server Process - simulatetouchd */
             
-            rocketbootstrap_unlock(XPC_INSTANCE_NAME);
-            
-            CPDistributedMessagingCenter *serverMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
-            rocketbootstrap_distributedmessagingcenter_apply(serverMessagingCenter);
-            [serverMessagingCenter runServerOnCurrentThread];
-            
-            SimulateTouch *serverInstance = [SimulateTouch sharedInstanceWithRole:SimulateTouchRoleServer];
-            [serverMessagingCenter registerForMessageName:@XPC_ONEWAY_MSG_NAME target:serverInstance selector:@selector(receiveMessageName:userInfo:)];
-            [serverInstance setMessagingCenter:serverMessagingCenter];
-            
-            CHDebugLogSource(@"server %@ initialized %@ %@, pid = %d", serverMessagingCenter, bundleIdentifier, processName, getpid());
+            do {
+                
+                /// do inject to protected executable only
+                if (!dlsym(RTLD_MAIN_ONLY, "plugin_i_love_xxtouch")) {
+                    break;
+                }
+                
+                rocketbootstrap_unlock(XPC_INSTANCE_NAME);
+                
+                CPDistributedMessagingCenter *serverMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
+                rocketbootstrap_distributedmessagingcenter_apply(serverMessagingCenter);
+                [serverMessagingCenter runServerOnCurrentThread];
+                
+                SimulateTouch *serverInstance = [SimulateTouch sharedInstanceWithRole:SimulateTouchRoleServer];
+                [serverMessagingCenter registerForMessageName:@XPC_ONEWAY_MSG_NAME target:serverInstance selector:@selector(receiveMessageName:userInfo:)];
+                [serverInstance setMessagingCenter:serverMessagingCenter];
+                
+                CHDebugLogSource(@"server %@ initialized %@ %@, pid = %d", serverMessagingCenter, bundleIdentifier, processName, getpid());
+                
+            } while (NO);
         }
         else
         {   /* Client Process */
             
-            CPDistributedMessagingCenter *clientMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
-            rocketbootstrap_distributedmessagingcenter_apply(clientMessagingCenter);
-            
-            SimulateTouch *clientInstance = [SimulateTouch sharedInstanceWithRole:SimulateTouchRoleClient];
-            [clientInstance setMessagingCenter:clientMessagingCenter];
-            
-            CHDebugLogSource(@"client %@ initialized %@ %@, pid = %d", clientMessagingCenter, bundleIdentifier, processName, getpid());
+            do {
+                
+                CPDistributedMessagingCenter *clientMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
+                rocketbootstrap_distributedmessagingcenter_apply(clientMessagingCenter);
+                
+                SimulateTouch *clientInstance = [SimulateTouch sharedInstanceWithRole:SimulateTouchRoleClient];
+                [clientInstance setMessagingCenter:clientMessagingCenter];
+                
+                CHDebugLogSource(@"client %@ initialized %@ %@, pid = %d", clientMessagingCenter, bundleIdentifier, processName, getpid());
+                
+            } while (NO);
         }
     }
 }

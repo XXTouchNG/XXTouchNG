@@ -601,7 +601,10 @@ static int pmain (lua_State *L) {
     return 1;
 }
 
+extern
 void plugin_i_love_xxtouch(void);
+
+__attribute__((used)) __attribute__ ((visibility("default")))
 void plugin_i_love_xxtouch(void) {}
 
 int main (int argc, char **argv) {

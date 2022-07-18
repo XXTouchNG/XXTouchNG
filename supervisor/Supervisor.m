@@ -1889,29 +1889,42 @@ CHConstructor {
         if (!forceClient && ([processName isEqualToString:@"supervisord"] || [processName hasSuffix:@"/supervisord"]))
         {   /* Server Process - supervisord */
             
-            rocketbootstrap_unlock(XPC_INSTANCE_NAME);
-            
-            CPDistributedMessagingCenter *serverMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
-            rocketbootstrap_distributedmessagingcenter_apply(serverMessagingCenter);
-            [serverMessagingCenter runServerOnCurrentThread];
-            
-            Supervisor *serverInstance = [Supervisor sharedInstanceWithRole:SupervisorRoleServer];
-            [serverMessagingCenter registerForMessageName:@XPC_ONEWAY_MSG_NAME target:serverInstance selector:@selector(receiveMessageName:userInfo:)];
-            [serverMessagingCenter registerForMessageName:@XPC_TWOWAY_MSG_NAME target:serverInstance selector:@selector(receiveAndReplyMessageName:userInfo:)];
-            [serverInstance setMessagingCenter:serverMessagingCenter];
-            
-            CHDebugLogSource(@"server %@ initialized %@ %@, pid = %d", serverMessagingCenter, bundleIdentifier, processName, getpid());
+            do {
+                
+                /// do inject to protected executable only
+                if (!dlsym(RTLD_MAIN_ONLY, "plugin_i_love_xxtouch")) {
+                    break;
+                }
+                
+                rocketbootstrap_unlock(XPC_INSTANCE_NAME);
+                
+                CPDistributedMessagingCenter *serverMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
+                rocketbootstrap_distributedmessagingcenter_apply(serverMessagingCenter);
+                [serverMessagingCenter runServerOnCurrentThread];
+                
+                Supervisor *serverInstance = [Supervisor sharedInstanceWithRole:SupervisorRoleServer];
+                [serverMessagingCenter registerForMessageName:@XPC_ONEWAY_MSG_NAME target:serverInstance selector:@selector(receiveMessageName:userInfo:)];
+                [serverMessagingCenter registerForMessageName:@XPC_TWOWAY_MSG_NAME target:serverInstance selector:@selector(receiveAndReplyMessageName:userInfo:)];
+                [serverInstance setMessagingCenter:serverMessagingCenter];
+                
+                CHDebugLogSource(@"server %@ initialized %@ %@, pid = %d", serverMessagingCenter, bundleIdentifier, processName, getpid());
+                
+            } while (NO);
         }
         else
         {   /* Client Process */
             
-            CPDistributedMessagingCenter *clientMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
-            rocketbootstrap_distributedmessagingcenter_apply(clientMessagingCenter);
-            
-            Supervisor *clientInstance = [Supervisor sharedInstanceWithRole:SupervisorRoleClient];
-            [clientInstance setMessagingCenter:clientMessagingCenter];
-            
-            CHDebugLogSource(@"client %@ initialized %@ %@, pid = %d", clientMessagingCenter, bundleIdentifier, processName, getpid());
+            do {
+                
+                CPDistributedMessagingCenter *clientMessagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
+                rocketbootstrap_distributedmessagingcenter_apply(clientMessagingCenter);
+                
+                Supervisor *clientInstance = [Supervisor sharedInstanceWithRole:SupervisorRoleClient];
+                [clientInstance setMessagingCenter:clientMessagingCenter];
+                
+                CHDebugLogSource(@"client %@ initialized %@ %@, pid = %d", clientMessagingCenter, bundleIdentifier, processName, getpid());
+                
+            } while (NO);
         }
     }
 }

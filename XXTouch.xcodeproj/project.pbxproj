@@ -415,6 +415,7 @@
 		CCC5EA2C288483EC00A55EF5 /* SecCode.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC5EA2B288483EC00A55EF5 /* SecCode.h */; };
 		CCC5EA2D288483F100A55EF5 /* SecTask.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC5EA2728844CEE00A55EF5 /* SecTask.h */; };
 		CCC5EA2E288483F500A55EF5 /* CSCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC5EA2A288482D600A55EF5 /* CSCommon.h */; };
+		CCC5EA362885290A00A55EF5 /* SecStaticCode.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC5EA352885290A00A55EF5 /* SecStaticCode.h */; };
 		CCCB8DFD27BDFA7600BBBEAC /* AHWeakObjectWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB8DFC27BDFA7600BBBEAC /* AHWeakObjectWrapper.m */; };
 		CCCDD26B2844868F0098849F /* JSTPixelImage+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = CCCDD26A2844867C0098849F /* JSTPixelImage+Private.h */; };
 		CCD1F44827B39A7100A9EB78 /* TMScriptNetworkingProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD1F44727B39A7100A9EB78 /* TMScriptNetworkingProxy.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
@@ -1265,6 +1266,7 @@
 		CCC5EA28288472C000A55EF5 /* cs_blobs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cs_blobs.h; sourceTree = "<group>"; };
 		CCC5EA2A288482D600A55EF5 /* CSCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSCommon.h; sourceTree = "<group>"; };
 		CCC5EA2B288483EC00A55EF5 /* SecCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecCode.h; sourceTree = "<group>"; };
+		CCC5EA352885290A00A55EF5 /* SecStaticCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecStaticCode.h; sourceTree = "<group>"; };
 		CCCB8DFB27BDFA7600BBBEAC /* AHWeakObjectWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AHWeakObjectWrapper.h; sourceTree = "<group>"; };
 		CCCB8DFC27BDFA7600BBBEAC /* AHWeakObjectWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AHWeakObjectWrapper.m; sourceTree = "<group>"; };
 		CCCDD26A2844867C0098849F /* JSTPixelImage+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSTPixelImage+Private.h"; sourceTree = "<group>"; };
@@ -2477,6 +2479,7 @@
 			isa = PBXGroup;
 			children = (
 				CCC5EA2B288483EC00A55EF5 /* SecCode.h */,
+				CCC5EA352885290A00A55EF5 /* SecStaticCode.h */,
 				CCC5EA2728844CEE00A55EF5 /* SecTask.h */,
 				CCC5EA28288472C000A55EF5 /* cs_blobs.h */,
 				CCC5EA2A288482D600A55EF5 /* CSCommon.h */,
@@ -2929,6 +2932,7 @@
 				CC7422D128842DDC000BB790 /* AuthPolicy.h in Headers */,
 				CCC5EA2C288483EC00A55EF5 /* SecCode.h in Headers */,
 				CCC5EA2D288483F100A55EF5 /* SecTask.h in Headers */,
+				CCC5EA362885290A00A55EF5 /* SecStaticCode.h in Headers */,
 				CCC5EA29288472C000A55EF5 /* cs_blobs.h in Headers */,
 				CC7422D228842DDC000BB790 /* auth-prefix.pch in Headers */,
 				CCC5EA2E288483F500A55EF5 /* CSCommon.h in Headers */,

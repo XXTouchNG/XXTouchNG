@@ -20,6 +20,9 @@ launchctl remove com.xxtou.simulatetouchd > /dev/null 2>&1
 launchctl unload "/Library/LaunchDaemons/ch.xxtou.tfcontainermanagerd.plist" > /dev/null 2>&1
 launchctl remove com.xxtou.tfcontainermanagerd > /dev/null 2>&1
 
+launchctl unload "/Library/LaunchDaemons/ch.xxtou.authpolicyd.plist" > /dev/null 2>&1
+launchctl remove ch.xxtou.authpolicyd > /dev/null 2>&1
+
 killall -9 akd webinspectord > /dev/null 2>&1
 
 exit 0

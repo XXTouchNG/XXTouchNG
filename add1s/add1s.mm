@@ -43,6 +43,8 @@ static void launch_data_dict_iterate(launch_data_t data, LaunchDataIterator code
 
 OBJC_EXTERN
 void plugin_i_love_xxtouch(void);
+
+__attribute__((used)) __attribute__ ((visibility("default")))
 void plugin_i_love_xxtouch(void) {}
 
 

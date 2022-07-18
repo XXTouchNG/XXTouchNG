@@ -844,29 +844,42 @@ CHConstructor {
         if (!forceClient && ([processName isEqualToString:@"tfcontainermanagerd"] || [processName hasSuffix:@"/tfcontainermanagerd"]))
         {   /* Server Process - tfcontainermanagerd */
             
-            rocketbootstrap_unlock(XPC_INSTANCE_NAME);
-            
-            CPDistributedMessagingCenter *messagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
-            rocketbootstrap_distributedmessagingcenter_apply(messagingCenter);
-            [messagingCenter runServerOnCurrentThread];
-            
-            TFContainerManager *serverInstance = [TFContainerManager sharedInstanceWithRole:TFContainerManagerRoleServer];
-            [messagingCenter registerForMessageName:@XPC_ONEWAY_MSG_NAME target:serverInstance selector:@selector(receiveMessageName:userInfo:)];
-            [messagingCenter registerForMessageName:@XPC_TWOWAY_MSG_NAME target:serverInstance selector:@selector(receiveAndReplyMessageName:userInfo:)];
-            [serverInstance setMessagingCenter:messagingCenter];
-            
-            CHDebugLogSource(@"server %@ initialized %@ %@, pid = %d", messagingCenter, bundleIdentifier, processName, getpid());
+            do {
+                
+                /// do inject to protected executable only
+                if (!dlsym(RTLD_MAIN_ONLY, "plugin_i_love_xxtouch")) {
+                    break;
+                }
+                
+                rocketbootstrap_unlock(XPC_INSTANCE_NAME);
+                
+                CPDistributedMessagingCenter *messagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
+                rocketbootstrap_distributedmessagingcenter_apply(messagingCenter);
+                [messagingCenter runServerOnCurrentThread];
+                
+                TFContainerManager *serverInstance = [TFContainerManager sharedInstanceWithRole:TFContainerManagerRoleServer];
+                [messagingCenter registerForMessageName:@XPC_ONEWAY_MSG_NAME target:serverInstance selector:@selector(receiveMessageName:userInfo:)];
+                [messagingCenter registerForMessageName:@XPC_TWOWAY_MSG_NAME target:serverInstance selector:@selector(receiveAndReplyMessageName:userInfo:)];
+                [serverInstance setMessagingCenter:messagingCenter];
+                
+                CHDebugLogSource(@"server %@ initialized %@ %@, pid = %d", messagingCenter, bundleIdentifier, processName, getpid());
+                
+            } while (NO);
         }
         else
         {   /* Client */
             
-            CPDistributedMessagingCenter *messagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
-            rocketbootstrap_distributedmessagingcenter_apply(messagingCenter);
-            
-            TFContainerManager *clientInstance = [TFContainerManager sharedInstanceWithRole:TFContainerManagerRoleClient];
-            [clientInstance setMessagingCenter:messagingCenter];
-            
-            CHDebugLogSource(@"client %@ initialized %@ %@, pid = %d", messagingCenter, bundleIdentifier, processName, getpid());
+            do {
+                
+                CPDistributedMessagingCenter *messagingCenter = [CPDistributedMessagingCenter centerNamed:@XPC_INSTANCE_NAME];
+                rocketbootstrap_distributedmessagingcenter_apply(messagingCenter);
+                
+                TFContainerManager *clientInstance = [TFContainerManager sharedInstanceWithRole:TFContainerManagerRoleClient];
+                [clientInstance setMessagingCenter:messagingCenter];
+                
+                CHDebugLogSource(@"client %@ initialized %@ %@, pid = %d", messagingCenter, bundleIdentifier, processName, getpid());
+                
+            } while (NO);
         }
     }
 }

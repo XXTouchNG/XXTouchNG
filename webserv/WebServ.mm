@@ -5355,7 +5355,7 @@ int __elf_cloud_client_main(int argc, const char *argv[], const char *envp[])
         }
         else if (argc < 2)
         {
-            NSDictionary *cloudConf = [[ProcQueue sharedInstance] objectForKey:@"ch.xxtou.defaults.cloud"];
+            NSDictionary *cloudConf = [[ProcQueue sharedInstance] unsafeObjectForKey:@"ch.xxtou.defaults.cloud"];
             if ([cloudConf isKindOfClass:[NSDictionary class]])
             {
                 BOOL enabled = NO;
@@ -5379,6 +5379,11 @@ int __elf_cloud_client_main(int argc, const char *argv[], const char *envp[])
                     fprintf(stderr, "elfclient: disabled\n");
                     return EXIT_SUCCESS;
                 }
+            }
+            else
+            {
+                fprintf(stderr, "elfclient: no configuration\n");
+                return EXIT_SUCCESS;
             }
         }
         else
@@ -5412,6 +5417,8 @@ int __elf_cloud_client_main(int argc, const char *argv[], const char *envp[])
 
 OBJC_EXTERN
 void plugin_i_love_xxtouch(void);
+
+__attribute__((used)) __attribute__ ((visibility("default")))
 void plugin_i_love_xxtouch(void) {}
 
 
