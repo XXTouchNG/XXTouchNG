@@ -335,14 +335,38 @@ int audit_token_for_pid(pid_t pid, audit_token_t *tokenp)
     }
 }
 
-- (NSDictionary *)copyCodeSignature
+- (NSDictionary *)copyCodeSignatureWithError:(NSError *__autoreleasing  _Nullable *)error
 {
-    return [self _copyCodeSignature:@(getpid())];
+    NSDictionary *replyObject = [self _copyCodeSignature:@(getpid())];
+    if ([replyObject[@"error"] isKindOfClass:[NSString class]] && [replyObject[@"error"] length])
+    {
+        if (error)
+        {
+            *error = [NSError errorWithDomain:@AuthPolicyErrorDomain code:500 userInfo:@{ NSLocalizedDescriptionKey: replyObject[@"error"] }];
+        }
+    }
+    if (![replyObject[@"reply"] count])
+    {
+        return nil;
+    }
+    return replyObject[@"reply"];
 }
 
-- (NSDictionary *)copyCodeSignatureWithProcessIdentifier:(pid_t)processIdentifier
+- (NSDictionary *)copyCodeSignatureWithProcessIdentifier:(pid_t)processIdentifier error:(NSError *__autoreleasing  _Nullable * _Nullable)error
 {
-    return [self _copyCodeSignature:@(processIdentifier)];
+    NSDictionary *replyObject = [self _copyCodeSignature:@(processIdentifier)];
+    if ([replyObject[@"error"] isKindOfClass:[NSString class]] && [replyObject[@"error"] length])
+    {
+        if (error)
+        {
+            *error = [NSError errorWithDomain:@AuthPolicyErrorDomain code:500 userInfo:@{ NSLocalizedDescriptionKey: replyObject[@"error"] }];
+        }
+    }
+    if (![replyObject[@"reply"] count])
+    {
+        return nil;
+    }
+    return replyObject[@"reply"];
 }
 
 - (NSDictionary *)_copyCodeSignature:(NSNumber /* pid_t */ *)processIdentifier
@@ -401,14 +425,38 @@ int audit_token_for_pid(pid_t pid, audit_token_t *tokenp)
     }
 }
 
-- (NSDictionary *)copyCodeSignStatus
+- (NSDictionary *)copyCodeSignStatusWithError:(NSError *__autoreleasing  _Nullable *)error
 {
-    return [self _copyCodeSignStatus:@(getpid())];
+    NSDictionary *replyObject = [self _copyCodeSignStatus:@(getpid())];
+    if ([replyObject[@"error"] isKindOfClass:[NSString class]] && [replyObject[@"error"] length])
+    {
+        if (error)
+        {
+            *error = [NSError errorWithDomain:@AuthPolicyErrorDomain code:500 userInfo:@{ NSLocalizedDescriptionKey: replyObject[@"error"] }];
+        }
+    }
+    if (![replyObject[@"reply"] count])
+    {
+        return nil;
+    }
+    return replyObject[@"reply"];
 }
 
-- (NSDictionary *)copyCodeSignStatusWithProcessIdentifier:(pid_t)processIdentifier
+- (NSDictionary *)copyCodeSignStatusWithProcessIdentifier:(pid_t)processIdentifier error:(NSError *__autoreleasing  _Nullable * _Nullable)error
 {
-    return [self _copyCodeSignStatus:@(processIdentifier)];
+    NSDictionary *replyObject = [self _copyCodeSignStatus:@(processIdentifier)];
+    if ([replyObject[@"error"] isKindOfClass:[NSString class]] && [replyObject[@"error"] length])
+    {
+        if (error)
+        {
+            *error = [NSError errorWithDomain:@AuthPolicyErrorDomain code:500 userInfo:@{ NSLocalizedDescriptionKey: replyObject[@"error"] }];
+        }
+    }
+    if (![replyObject[@"reply"] count])
+    {
+        return nil;
+    }
+    return replyObject[@"reply"];
 }
 
 - (NSDictionary *)_copyCodeSignStatus:(NSNumber /* pid_t */ *)processIdentifier
@@ -474,14 +522,38 @@ int audit_token_for_pid(pid_t pid, audit_token_t *tokenp)
     }
 }
 
-- (NSDictionary *)copyEntitlements
+- (NSDictionary *)copyEntitlementsWithError:(NSError *__autoreleasing  _Nullable *)error
 {
-    return [self _copyEntitlements:@(getpid())][@"reply"];
+    NSDictionary *replyObject = [self _copyEntitlements:@(getpid())];
+    if ([replyObject[@"error"] isKindOfClass:[NSString class]] && [replyObject[@"error"] length])
+    {
+        if (error)
+        {
+            *error = [NSError errorWithDomain:@AuthPolicyErrorDomain code:500 userInfo:@{ NSLocalizedDescriptionKey: replyObject[@"error"] }];
+        }
+    }
+    if (![replyObject[@"reply"] count])
+    {
+        return nil;
+    }
+    return replyObject[@"reply"];
 }
 
-- (NSDictionary *)copyEntitlementsWithProcessIdentifier:(pid_t)processIdentifier
+- (NSDictionary *)copyEntitlementsWithProcessIdentifier:(pid_t)processIdentifier error:(NSError *__autoreleasing  _Nullable * _Nullable)error
 {
-    return [self _copyEntitlements:@(processIdentifier)][@"reply"];
+    NSDictionary *replyObject = [self _copyEntitlements:@(processIdentifier)];
+    if ([replyObject[@"error"] isKindOfClass:[NSString class]] && [replyObject[@"error"] length])
+    {
+        if (error)
+        {
+            *error = [NSError errorWithDomain:@AuthPolicyErrorDomain code:500 userInfo:@{ NSLocalizedDescriptionKey: replyObject[@"error"] }];
+        }
+    }
+    if (![replyObject[@"reply"] count])
+    {
+        return nil;
+    }
+    return replyObject[@"reply"];
 }
 
 - (NSDictionary *)_copyEntitlements:(NSNumber /* pid_t */ *)processIdentifier

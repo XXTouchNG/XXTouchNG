@@ -6,6 +6,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define AuthPolicyErrorDomain   "ch.xxtou.error.authpolicy"
+
 typedef NS_ENUM(NSUInteger, AuthPolicyRole) {
     AuthPolicyRoleClient = 0,
     AuthPolicyRoleServer,
@@ -25,14 +27,14 @@ typedef NS_ENUM(NSUInteger, AuthPolicyRole) {
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
-- (NSDictionary *)copyCodeSignStatus;
-- (NSDictionary *)copyCodeSignStatusWithProcessIdentifier:(pid_t)processIdentifier;
+- (NSDictionary *)copyCodeSignStatusWithError:(NSError *__autoreleasing  _Nullable * _Nullable)error;
+- (NSDictionary *)copyCodeSignStatusWithProcessIdentifier:(pid_t)processIdentifier error:(NSError *__autoreleasing  _Nullable * _Nullable)error;
 
-- (NSDictionary *)copyCodeSignature;
-- (NSDictionary *)copyCodeSignatureWithProcessIdentifier:(pid_t)processIdentifier;
+- (NSDictionary *)copyCodeSignatureWithError:(NSError *__autoreleasing  _Nullable * _Nullable)error;
+- (NSDictionary *)copyCodeSignatureWithProcessIdentifier:(pid_t)processIdentifier error:(NSError *__autoreleasing  _Nullable * _Nullable)error;
 
-- (NSDictionary *)copyEntitlements;
-- (NSDictionary *)copyEntitlementsWithProcessIdentifier:(pid_t)processIdentifier;
+- (NSDictionary *)copyEntitlementsWithError:(NSError *__autoreleasing  _Nullable * _Nullable)error;
+- (NSDictionary *)copyEntitlementsWithProcessIdentifier:(pid_t)processIdentifier error:(NSError *__autoreleasing  _Nullable * _Nullable)error;
 
 @end
 
