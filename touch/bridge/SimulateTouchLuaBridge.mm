@@ -1828,7 +1828,11 @@ XXTouchF_CAPI int luaopen_touch(lua_State *L)
     });
     
     lua_createtable(L, 0, (sizeof(SimulateTouch_AuxLib) / sizeof((SimulateTouch_AuxLib)[0]) - 1) + 6);
+#if DEBUG
+    lua_pushliteral(L, LUA_MODULE_VERSION "+debug");
+#else
     lua_pushliteral(L, LUA_MODULE_VERSION);
+#endif
     lua_setfield(L, -2, "_VERSION");
     lua_pushinteger(L, 0);
     lua_setfield(L, -2, "ORIENTATION_HOME_ON_BOTTOM");
@@ -1851,7 +1855,11 @@ XXTouchF_CAPI int luaopen_extouch(lua_State *L)
 XXTouchF_CAPI int luaopen_key(lua_State *L)
 {
     lua_createtable(L, 0, (sizeof(SimulateTouchKey_AuxLib) / sizeof((SimulateTouchKey_AuxLib)[0]) - 1) + 2);
+#if DEBUG
+    lua_pushliteral(L, LUA_MODULE_VERSION "+debug");
+#else
     lua_pushliteral(L, LUA_MODULE_VERSION);
+#endif
     lua_setfield(L, -2, "_VERSION");
     luaL_setfuncs(L, SimulateTouchKey_AuxLib, 0);
     

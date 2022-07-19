@@ -369,17 +369,34 @@ int audit_token_for_pid(pid_t pid, audit_token_t *tokenp)
     return replyObject[@"reply"];
 }
 
-- (NSDictionary *)_copyCodeSignature:(NSNumber /* pid_t */ *)processIdentifier
+- (NSDictionary *)copyCodeSignatureWithProcessPath:(NSString *)processPath error:(NSError *__autoreleasing  _Nullable * _Nullable)error
+{
+    NSDictionary *replyObject = [self _copyCodeSignature:processPath];
+    if ([replyObject[@"error"] isKindOfClass:[NSString class]] && [replyObject[@"error"] length])
+    {
+        if (error)
+        {
+            *error = [NSError errorWithDomain:@AuthPolicyErrorDomain code:500 userInfo:@{ NSLocalizedDescriptionKey: replyObject[@"error"] }];
+        }
+    }
+    if (![replyObject[@"reply"] count])
+    {
+        return nil;
+    }
+    return replyObject[@"reply"];
+}
+
+- (NSDictionary *)_copyCodeSignature:(id)processIdentifierOrPath
 {
     if (_role == AuthPolicyRoleClient)
     {
         @autoreleasepool {
             NSDictionary *replyObject = [self sendMessageAndReceiveReplyName:@XPC_TWOWAY_MSG_NAME userInfo:@{
                 @"selector": NSStringFromSelector(@selector(_copyCodeSignature:)),
-                @"arguments": [NSArray arrayWithObjects:processIdentifier, nil],
+                @"arguments": [NSArray arrayWithObjects:processIdentifierOrPath, nil],
             }];
             
-            CHDebugLogSource(@"_copyCodeSignature: %@ -> %@", processIdentifier, replyObject);
+            CHDebugLogSource(@"_copyCodeSignature: %@ -> %@", processIdentifierOrPath, replyObject);
             
             NSDictionary *replyState = replyObject[@"reply"];
             NSAssert([replyState isKindOfClass:[NSDictionary class]], @"invalid xpc response");
@@ -390,7 +407,16 @@ int audit_token_for_pid(pid_t pid, audit_token_t *tokenp)
     
     @autoreleasepool {
         
-        NSString *binaryPath = [AuthPolicy binaryPathOfProcessIdentifier:[processIdentifier intValue]];
+        NSString *binaryPath = nil;
+        if ([processIdentifierOrPath isKindOfClass:[NSNumber class]])
+        {
+            binaryPath = [AuthPolicy binaryPathOfProcessIdentifier:[processIdentifierOrPath intValue]];
+        }
+        else if ([processIdentifierOrPath isKindOfClass:[NSString class]])
+        {
+            binaryPath = [processIdentifierOrPath copy];
+        }
+        
         if (!binaryPath)
         {
             return @{ @"reply": @{}, @"error": @"sysctl" };
@@ -411,6 +437,7 @@ int audit_token_for_pid(pid_t pid, audit_token_t *tokenp)
         (
          kSecCSDefaultFlags |
          kSecCSSigningInformation |  // This is what we actually want.
+         kSecCSRequirementInformation |
          kSecCSSkipResourceDirectory
          );
         

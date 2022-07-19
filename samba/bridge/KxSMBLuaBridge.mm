@@ -788,7 +788,11 @@ XXTouchF_CAPI int luaopen_samba(lua_State *L)
     });
     
     lua_createtable(L, 0, (sizeof(Samba_AuxLib) / sizeof((Samba_AuxLib)[0]) - 1) + 2);
+#if DEBUG
+    lua_pushliteral(L, LUA_MODULE_VERSION "+debug");
+#else
     lua_pushliteral(L, LUA_MODULE_VERSION);
+#endif
     lua_setfield(L, -2, "_VERSION");
     luaL_setfuncs(L, Samba_AuxLib, 0);
     

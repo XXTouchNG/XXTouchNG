@@ -1,0 +1,10 @@
+Package: ch.xxtou.xxtouch
+Name: XXTouch
+Version: @XXT_VERSION@
+Section: Tweaks
+Depends: firmware (>= 13.0), mobilesubstrate (>= 0.9.7000), com.rpetrich.rocketbootstrap (>= 1.0.9), preferenceloader (>= 2.2.3), zip, libzip, libarchive
+Architecture: iphoneos-arm
+Author: XXTouch Team.
+Maintainer: XXTouch Team.
+Description: Next generation XXTouch for iOS 13 and above.
+

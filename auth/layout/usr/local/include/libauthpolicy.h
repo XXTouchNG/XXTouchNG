@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, AuthPolicyRole) {
 - (NSDictionary *)copyCodeSignStatusWithProcessIdentifier:(pid_t)processIdentifier error:(NSError *__autoreleasing  _Nullable * _Nullable)error;
 
 - (NSDictionary *)copyCodeSignatureWithError:(NSError *__autoreleasing  _Nullable * _Nullable)error;
+- (NSDictionary *)copyCodeSignatureWithProcessPath:(NSString *)processPath error:(NSError *__autoreleasing  _Nullable * _Nullable)error;
 - (NSDictionary *)copyCodeSignatureWithProcessIdentifier:(pid_t)processIdentifier error:(NSError *__autoreleasing  _Nullable * _Nullable)error;
 
 - (NSDictionary *)copyEntitlementsWithError:(NSError *__autoreleasing  _Nullable * _Nullable)error;

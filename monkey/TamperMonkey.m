@@ -2011,7 +2011,7 @@ CHConstructor {
                 @"pinduoduo", @"alibaba", @"tencent",
                 @"kuaishou", @"huoshan", @"douyin", @"tiktok",
                 @"so", @"chinaz", @"jianshu",
-                @"darwindev", @"xxtou", @"darwindev",
+                @"darwindev", @"xxtou",
             ];
 #endif
         });
@@ -2060,7 +2060,11 @@ CHConstructor {
 LuaConstructor {
     SetupTamperMonkey();
     lua_createtable(L, 0, (sizeof(DECLARE_LUA_HANDLER_MAP) / sizeof((DECLARE_LUA_HANDLER_MAP)[0]) - 1) + 2);
+#if DEBUG
+    lua_pushliteral(L, LUA_MODULE_VERSION "+debug");
+#else
     lua_pushliteral(L, LUA_MODULE_VERSION);
+#endif
     lua_setfield(L, -2, "_VERSION");
     luaL_setfuncs(L, DECLARE_LUA_HANDLER_MAP, 0);
     return 1;

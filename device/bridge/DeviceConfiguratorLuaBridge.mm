@@ -1862,7 +1862,11 @@ static const luaL_Reg DeviceConfigurator_Device_AuxLib[] = {
 XXTouchF_CAPI int luaopen_sys(lua_State *L)
 {
     lua_createtable(L, 0, (sizeof(DeviceConfigurator_System_AuxLib) / sizeof((DeviceConfigurator_System_AuxLib)[0]) - 1) + 2);
+#if DEBUG
+    lua_pushliteral(L, LUA_MODULE_VERSION "+debug");
+#else
     lua_pushliteral(L, LUA_MODULE_VERSION);
+#endif
     lua_setfield(L, -2, "_VERSION");
     luaL_setfuncs(L, DeviceConfigurator_System_AuxLib, 0);
     
@@ -1872,7 +1876,11 @@ XXTouchF_CAPI int luaopen_sys(lua_State *L)
 XXTouchF_CAPI int luaopen_device(lua_State *L)
 {
     lua_createtable(L, 0, (sizeof(DeviceConfigurator_Device_AuxLib) / sizeof((DeviceConfigurator_Device_AuxLib)[0]) - 1) + 2);
+#if DEBUG
+    lua_pushliteral(L, LUA_MODULE_VERSION "+debug");
+#else
     lua_pushliteral(L, LUA_MODULE_VERSION);
+#endif
     lua_setfield(L, -2, "_VERSION");
     luaL_setfuncs(L, DeviceConfigurator_Device_AuxLib, 0);
     

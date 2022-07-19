@@ -38,4 +38,10 @@ include $(THEOS_MAKE_PATH)/aggregate.mk
 
 
 before-all::
+	sed 's/@XXT_VERSION@/$(XXT_VERSION)/g' 'layout/DEBIAN/control.in' > 'layout/DEBIAN/control'
 	touch layout/Applications/XXTExplorer.app/XXTExplorer
+
+explorer::
+	sed 's/@XXT_VERSION@/$(XXT_VERSION)/g' 'explorer/XXTExplorer/Defines/XXTEAppDefines.plist.in' > 'explorer/XXTExplorer/Defines/XXTEAppDefines.plist'
+	sed 's/@XXT_VERSION@/$(XXT_VERSION)/g' 'explorer/XXTExplorer/Supporting Files/Base.lproj/Archive-Info.plist.in' > 'explorer/XXTExplorer/Supporting Files/Base.lproj/Archive-Info.plist'
+	sed 's/@XXT_VERSION@/$(XXT_VERSION)/g' 'explorer/XXTExplorer/Supporting Files/Base.lproj/Info.plist.in' > 'explorer/XXTExplorer/Supporting Files/Base.lproj/Info.plist'

@@ -2063,7 +2063,7 @@ CHConstructor {
                       @"pinduoduo", @"alibaba", @"tencent",
                       @"kuaishou", @"huoshan", @"douyin", @"tiktok",
                       @"so", @"chinaz", @"jianshu",
-                      @"darwindev", @"xxtou", @"darwindev",
+                      @"darwindev", @"xxtou",
                 ];
             NSArray <NSString *> *bundleIdentifierComponents = [bundleIdentifier componentsSeparatedByString:@"."];
             BOOL isInBlacklist = NO;
@@ -2096,7 +2096,11 @@ CHConstructor {
 LuaConstructor {
     SetupAlertHelper();
     lua_createtable(L, 0, (sizeof(DECLARE_LUA_HANDLER_MAP) / sizeof((DECLARE_LUA_HANDLER_MAP)[0]) - 1) + 6);
+#if DEBUG
+    lua_pushliteral(L, LUA_MODULE_VERSION "+debug");
+#else
     lua_pushliteral(L, LUA_MODULE_VERSION);
+#endif
     lua_setfield(L, -2, "_VERSION");
     lua_pushinteger(L, 0);
     lua_setfield(L, -2, "ORIENTATION_HOME_ON_BOTTOM");

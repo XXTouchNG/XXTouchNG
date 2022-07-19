@@ -60,10 +60,11 @@ _注意，本应用程序基于 AGPLv3 协议发布，仅用于学习和交流�
 
 #### Lua Modules
 
-- [x] alert
-- [x] monkey
-- [x] cookies
-- [x] samba
+- [x] `alert`, Automation module for `UIAlertViewController`.
+- [x] `appstore`, Automation module for `AuthKit`.
+- [x] `monkey`, Automation module for `WKWebView`.
+- [x] `cookies`
+- [x] `samba`
 
 
 #### App Features
@@ -73,8 +74,8 @@ _注意，本应用程序基于 AGPLv3 协议发布，仅用于学习和交流�
 - [x] [OpenAPI](https://www.zybuluo.com/xxtouch/note/386268)
 - [x] Startup Script
 - [x] Daemon Mode
-- [x] OCR Support (Provided by Apple’s Vision.framework)
-- [x] Template Matching (Provided by OpenCV)
+- [x] OCR Support (Provided by Apple’s `Vision.framework`)
+- [x] Template Matching (Provided by `OpenCV`)
 - [x] Activator Support
 
 

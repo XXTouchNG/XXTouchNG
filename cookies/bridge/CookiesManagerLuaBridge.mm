@@ -472,7 +472,11 @@ static const luaL_Reg CookiesManager_AuxLib[] = {
 XXTouchF_CAPI int luaopen_cookies(lua_State *L)
 {
     lua_createtable(L, 0, (sizeof(CookiesManager_AuxLib) / sizeof((CookiesManager_AuxLib)[0]) - 1) + 2);
+#if DEBUG
+    lua_pushliteral(L, LUA_MODULE_VERSION "+debug");
+#else
     lua_pushliteral(L, LUA_MODULE_VERSION);
+#endif
     lua_setfield(L, -2, "_VERSION");
     luaL_setfuncs(L, CookiesManager_AuxLib, 0);
     

@@ -307,10 +307,6 @@ static void l_signal_cont(int signal)
 
 #pragma mark - Library Import
 
-#ifndef XXT_VERSION
-#define XXT_VERSION "3.0.1"
-#endif
-
 OBJC_EXTERN
 int xxtouch_extends(lua_State *L);
 

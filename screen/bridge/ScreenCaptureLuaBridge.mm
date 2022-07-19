@@ -2567,7 +2567,11 @@ XXTouchF_CAPI int luaopen_image(lua_State *L)
     });
     
     lua_createtable(L, 0, (sizeof(ScreenCapture_Image_AuxLib) / sizeof((ScreenCapture_Image_AuxLib)[0]) - 1) + 2);
+#if DEBUG
+    lua_pushliteral(L, LUA_MODULE_VERSION "+debug");
+#else
     lua_pushliteral(L, LUA_MODULE_VERSION);
+#endif
     lua_setfield(L, -2, "_VERSION");
     luaL_setfuncs(L, ScreenCapture_Image_AuxLib, 0);
     
@@ -2580,7 +2584,11 @@ XXTouchF_CAPI int luaopen_screen(lua_State *L)
     lua_pop(L, 1);
     
     lua_createtable(L, 0, (sizeof(ScreenCapture_AuxLib) / sizeof((ScreenCapture_AuxLib)[0]) - 1) + 6);
+#if DEBUG
+    lua_pushliteral(L, LUA_MODULE_VERSION "+debug");
+#else
     lua_pushliteral(L, LUA_MODULE_VERSION);
+#endif
     lua_setfield(L, -2, "_VERSION");
     lua_pushinteger(L, 0);
     lua_setfield(L, -2, "ORIENTATION_HOME_ON_BOTTOM");

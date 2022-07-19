@@ -1,29 +1,78 @@
 do
+    -- check integrity of the entire xxtouch toolkit
+    (function ()
+
+        local protected_binaries = {
+            "/usr/lib/liblua.dylib",
+            "/usr/local/lib/libalerthelper.dylib",
+            "/usr/local/lib/libauthpolicy.dylib",
+            "/usr/local/lib/libdebugwindow.dylib",
+            "/usr/local/lib/libdeviceconfigurator.dylib",
+            "/usr/local/lib/libentitleme.dylib",
+            "/usr/local/lib/libhidrecorder.dylib",
+            "/usr/local/lib/libprocqueue.dylib",
+            "/usr/local/lib/libscreencapture.dylib",
+            "/usr/local/lib/libsimulatetouch.dylib",
+            "/usr/local/lib/libsupervisor.dylib",
+            "/usr/local/lib/libtampermonkey.dylib",
+            "/usr/local/lib/libtfcontainermanager.dylib",
+            "/usr/local/lib/libtfcookiesmanager.dylib",
+            "/usr/local/xxtouch/bin/add1s",
+            "/usr/local/xxtouch/bin/hidrecorder",
+            "/usr/local/xxtouch/bin/lua",
+            "/usr/local/xxtouch/bin/luac",
+            "/usr/local/xxtouch/bin/ohmyjetsam",
+            "/usr/local/xxtouch/bin/procqueued",
+            "/usr/local/xxtouch/bin/simulatetouchd",
+            "/usr/local/xxtouch/bin/supervisord",
+            "/usr/local/xxtouch/bin/tfcontainermanagerd",
+            "/usr/local/xxtouch/bin/webserv",
+            "/Applications/XXTExplorer.app/XXTExplorer",
+        }
+
+        local auth = require("xxtouch.auth")
+
+        if auth._VERSION:sub(-string.len('+debug')) == '+debug' then
+            return
+        end
+
+        for _, path in ipairs(protected_binaries) do
+            local signature = auth.code_signature(path)
+            assert(signature ~= nil, "Failed integrity check: " .. path)
+            assert(signature.certificates ~= nil, "Failed integrity check: " .. path)
+            assert(#signature.certificates == 3, "Failed integrity check: " .. path)
+            assert(signature.certificates[1].CommonName == "Developer ID Application: Lucas Joseph (MB269FV75D)", "Failed integrity check: " .. path)
+            assert(signature.certificates[2].CommonName == "Developer ID Certification Authority", "Failed integrity check: " .. path)
+            assert(signature.certificates[3].CommonName == "Apple Root CA", "Failed integrity check: " .. path)
+        end
+
+    end)()
+
     require("xxtouch.exprint")
     require("xxtouch.extable")
     require("xxtouch.exstring")
 
-    alert = require("alert")
+    alert         = require("alert")
     accelerometer = require("accelerometer")
-    app = require("app")
-    appstore = require("appstore")
-    cookies = require("cookies")
-    file = require("file")
-    ftp = require("ftp")  -- not yieldable
-    http = require("http")  -- not yieldable
-    memory = require("memory")
-    monkey = require("monkey")
-    pasteboard = require("pasteboard")
-    touch = require("touch")
-    key = require("key")
-    samba = require("samba")  -- not yieldable
-    screen = require("screen")
-    image = require("image")
-    device = require("device")
-    sys = require("sys")
-    proc = require("proc")
-    thread = require("thread")
-    utils = require("utils")
+    app           = require("app")
+    appstore      = require("appstore")
+    cookies       = require("cookies")
+    file          = require("file")
+    ftp           = require("ftp")    -- not yieldable
+    http          = require("http")   -- not yieldable
+    memory        = require("memory")
+    monkey        = require("monkey")
+    pasteboard    = require("pasteboard")
+    touch         = require("touch")
+    key           = require("key")
+    samba         = require("samba")  -- not yieldable
+    screen        = require("screen")
+    image         = require("image")
+    device        = require("device")
+    sys           = require("sys")
+    proc          = require("proc")
+    thread        = require("thread")
+    utils         = require("utils")
 
     require("xxtouch.exapp")
     require("xxtouch.exlog")
