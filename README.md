@@ -86,7 +86,7 @@ $ ls /usr/local/include/lib*
 libdeviceconfigurator.h  libsupervisor.h
 libprocqueue.h           libtfcontainermanager.h
 libscreencapture.h       libtfcookiesmanager.h
-libsimulatetouch.h
+libsimulatetouch.h       libauthpolicy.h
 ```
 
 
@@ -149,7 +149,7 @@ $ ls ~/theos/vendor/include | wc -l
 ```
 
 - **IMPORTANT**: Remove `~/theos/vendor/include/openssl` because we shipped another version of OpenSSL in this repo
-- **IMPORTANT**: Edit `~/theos/makefiles/common.mk`, then append line `export THEOS_OBJ_DIR` to a good place
+- **IMPORTANT**: Edit `~/theos/makefiles/common.mk`, then **append a new line** `export THEOS_OBJ_DIR` at the top of that file
 - Edit your `~/.zshrc` and ensure `THEOS_DEVICE_IP` is set
 
 ```bash
@@ -160,6 +160,9 @@ THEOS_DEVICE_IP=192.168.2.151
 
 
 ## Build
+
+You need to `git clone` this repo instead of download a zipped archive of it!
+
 
 #### Build Only
 
