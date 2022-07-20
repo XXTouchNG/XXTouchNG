@@ -34,12 +34,12 @@ _EFUNC(CMGetBundlePath) {
             return 1;
         }
         
-        if (!appItem.bundleContainer.length) {
+        if (![[appItem bundlePath] length]) {
             lua_pushnil(L);
             return 1;
         }
         
-        lua_pushstring(L, [[appItem bundleContainer] UTF8String]);
+        lua_pushstring(L, [[appItem bundlePath] UTF8String]);
         return 1;
     }
     _EEND(app)

@@ -29,10 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy)   NSString                                *name;
 @property (nullable, nonatomic, strong) NSData                                  *iconData;
 @property (nullable, nonatomic, copy)   NSString                                *appleId;
+@property (nullable, nonatomic, copy)   NSString                                *bundlePath;
 @property (nullable, nonatomic, copy)   NSString                                *bundleContainer;
 @property (nullable, nonatomic, copy)   NSString                                *dataContainer;
 @property (nullable, nonatomic, strong) NSDictionary <NSString *, NSString *>   *groupContainers;
 @property (nullable, nonatomic, strong) NSDictionary <NSString *, NSString *>   *pluginDataContainers;
+@property (nullable, nonatomic, copy)   NSURL                                   *bundleURL;
 @property (nullable, nonatomic, copy)   NSURL                                   *bundleContainerURL;
 @property (nullable, nonatomic, copy)   NSURL                                   *dataContainerURL;
 @property (nullable, nonatomic, strong) NSDictionary <NSString *, NSURL *>      *groupContainerURLs;

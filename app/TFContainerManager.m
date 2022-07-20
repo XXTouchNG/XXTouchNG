@@ -736,7 +736,7 @@
             return;
         }
         
-        BOOL installed = TFPackBundleContainerAtPath(appItem.bundleContainer, ipaPath, &internalErr);
+        BOOL installed = TFPackBundleContainerAtPath([appItem bundleContainer], ipaPath, &internalErr);
         if (!installed) {
             replyObject = @{
                 @"error": [internalErr localizedDescription] ?: @"unknown error",

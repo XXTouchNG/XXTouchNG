@@ -70,15 +70,15 @@ static void *TFGetSpringBoardServices() {
         SpringBoardServices = dlopen("/System/Library/PrivateFrameworks/SpringBoardServices.framework/SpringBoardServices", RTLD_LAZY);
         if (SpringBoardServices) {
             TFCopyIconImagePNGDataForDisplayIdentifier = (SBSCopyIconImagePNGDataForDisplayIdentifier)dlsym(SpringBoardServices, "SBSCopyIconImagePNGDataForDisplayIdentifier");
-            assert(TFCopyIconImagePNGDataForDisplayIdentifier);
+            NSCAssert(TFCopyIconImagePNGDataForDisplayIdentifier, @"SBSCopyIconImagePNGDataForDisplayIdentifier");
             TFLaunchApplicationWithIdentifier = (SBSLaunchApplicationWithIdentifier)dlsym(SpringBoardServices, "SBSLaunchApplicationWithIdentifier");
-            assert(TFLaunchApplicationWithIdentifier);
+            NSCAssert(TFLaunchApplicationWithIdentifier, @"SBSLaunchApplicationWithIdentifier");
             TFApplicationLaunchingErrorString = (SBSApplicationLaunchingErrorString)dlsym(SpringBoardServices, "SBSApplicationLaunchingErrorString");
-            assert(TFApplicationLaunchingErrorString);
+            NSCAssert(TFApplicationLaunchingErrorString, @"SBSApplicationLaunchingErrorString");
             TFFrontmostApplicationDisplayIdentifier = (SBFrontmostApplicationDisplayIdentifier)dlsym(SpringBoardServices, "SBFrontmostApplicationDisplayIdentifier");
-            assert(TFFrontmostApplicationDisplayIdentifier);
+            NSCAssert(TFFrontmostApplicationDisplayIdentifier, @"SBFrontmostApplicationDisplayIdentifier");
             TFSpringBoardServerPort = (SBSSpringBoardServerPort)dlsym(SpringBoardServices, "SBSSpringBoardServerPort");
-            assert(TFSpringBoardServerPort);
+            NSCAssert(TFSpringBoardServerPort, @"TFSpringBoardServerPort");
         }
     });
     assert(SpringBoardServices);
@@ -90,9 +90,15 @@ static void *TFGetSpringBoardServices() {
 
 @implementation TFAppItem
 
+@synthesize bundlePath = _bundlePath;
+@synthesize bundleURL = _bundleURL;
+@synthesize bundleContainer = _bundleContainer;
 @synthesize bundleContainerURL = _bundleContainerURL;
+@synthesize dataContainer = _dataContainer;
 @synthesize dataContainerURL = _dataContainerURL;
+@synthesize groupContainers = _groupContainers;
 @synthesize groupContainerURLs = _groupContainerURLs;
+@synthesize pluginDataContainers = _pluginDataContainers;
 @synthesize pluginDataContainerURLs = _pluginDataContainerURLs;
 @synthesize entitlements = _entitlements;
 @synthesize processIdentifier = _processIdentifier;
@@ -128,11 +134,8 @@ static void *TFGetSpringBoardServices() {
     }
     
     if (self.bundleContainer) {
-        if (needsLegacyFields) {
-            mDict[@"bundle_path"] = self.bundleContainer;
-        } else {
-            mDict[@"bundle_container"] = self.bundleContainer;
-        }
+        mDict[@"bundle_path"] = self.bundlePath;
+        mDict[@"bundle_container"] = self.bundleContainer;
     }
     
     if (self.dataContainer) {
@@ -193,10 +196,15 @@ static void *TFGetSpringBoardServices() {
         }
         
         self.appleId = otherDictionary[@"apple_id"];
+        self.bundlePath = otherDictionary[@"bundle_path"];
         self.bundleContainer = otherDictionary[@"bundle_container"];
         self.dataContainer = otherDictionary[@"data_container"];
         self.groupContainers = otherDictionary[@"group_containers"];
         self.pluginDataContainers = otherDictionary[@"plugin_containers"];
+        
+        if ([otherDictionary[@"bundle_path"] isKindOfClass:[NSString class]]) {
+            self.bundleURL = [NSURL fileURLWithPath:otherDictionary[@"bundle_path"]];
+        }
         
         if ([otherDictionary[@"bundle_container"] isKindOfClass:[NSString class]]) {
             self.bundleContainerURL = [NSURL fileURLWithPath:otherDictionary[@"bundle_container"]];
@@ -424,6 +432,19 @@ TFAppItem *TFAppItemForProxy(LSApplicationProxy *application, TFContainerManager
         bundleContainerPath = [application.bundleContainerURL path];
     }
     
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray <NSString *> *bundleItems = [fileManager contentsOfDirectoryAtPath:bundleContainerPath error:error];
+    NSString *bundleAppItem = nil;
+    for (NSString *bundleItem in bundleItems) {
+        if ([[bundleItem pathExtension] isEqualToString:@"app"]) {
+            bundleAppItem = bundleItem;
+            break;
+        }
+    }
+    
+    NSString *bundlePath = [bundleContainerPath stringByAppendingPathComponent:bundleAppItem];
+    NSURL *bundleURL = [NSURL fileURLWithPath:bundlePath];
+    
     NSURL *dataContainerURL     = nil;
     NSString *dataContainerPath = nil;
     if (useMCM) {
@@ -437,16 +458,18 @@ TFAppItem *TFAppItemForProxy(LSApplicationProxy *application, TFContainerManager
         dataContainerPath = [application.dataContainerURL path];
     }
     
-    TFAppItem *appItem               = [[TFAppItem alloc] init];
+    TFAppItem *appItem                = [[TFAppItem alloc] init];
     appItem.identifier                = application.applicationIdentifier;
     appItem.name                      = application.localizedName;
     appItem.version                   = application.shortVersionString;
     appItem.type                      = application.applicationType;
     appItem.bundleContainer           = bundleContainerPath;
+    appItem.bundlePath                = bundlePath;
     appItem.dataContainer             = dataContainerPath;
     appItem.groupContainers           = [groupContainerPaths copy];
     appItem.pluginDataContainers      = [pluginDataContainerPaths copy];
     appItem.bundleContainerURL        = bundleContainerURL;
+    appItem.bundleURL                 = bundleURL;
     appItem.dataContainerURL          = dataContainerURL;
     appItem.groupContainerURLs        = [groupContainerURLs copy];
     appItem.pluginDataContainerURLs   = [pluginDataContainerURLs copy];
@@ -492,7 +515,6 @@ TFAppItem *TFAppItemForProxy(LSApplicationProxy *application, TFContainerManager
         static dispatch_once_t onceToken2;
         dispatch_once(&onceToken2, ^{
             NSMutableDictionary <NSString *, NSString *> *mappings = [NSMutableDictionary dictionary];
-            NSFileManager *fileManager = [NSFileManager defaultManager];
             NSString *sysAppDir = @"/Applications";
             NSArray <NSString *> *sysAppBundleNames = [fileManager contentsOfDirectoryAtPath:sysAppDir error:nil];
             for (NSString *sysAppBundleName in sysAppBundleNames) {
@@ -513,30 +535,8 @@ TFAppItem *TFAppItemForProxy(LSApplicationProxy *application, TFContainerManager
         
         do {
             
-            if (!applicationIconImageData) {
-                NSFileManager *fileManager = [NSFileManager defaultManager];
-                
-                NSString *appPath = nil;
-                NSString *bundlePath = appItem.bundleContainer;
-                if (bundlePath) {
-                    NSArray <NSString *> *bundleContents = [fileManager contentsOfDirectoryAtPath:bundlePath error:nil];
-                    if (!bundleContents) {
-                        break;
-                    }
-                    for (NSString *bundleItem in bundleContents) {
-                        if ([[bundleItem pathExtension] isEqualToString:@"app"]) {
-                            appPath = [bundlePath stringByAppendingPathComponent:bundleItem];
-                            break;
-                        }
-                    }
-                } else {
-                    appPath = systemBundlePathMappings[application.applicationIdentifier];
-                }
-                if (!appPath) {
-                    break;
-                }
-                
-                NSString *infoPlist = [appPath stringByAppendingPathComponent:@"Info.plist"];
+            if (!applicationIconImageData && bundlePath.length) {
+                NSString *infoPlist = [bundlePath stringByAppendingPathComponent:@"Info.plist"];
                 NSDictionary *infoDict = [NSDictionary dictionaryWithContentsOfFile:infoPlist];
                 NSArray *iconFiles = nil;
                 if (infoDict[@"CFBundleIcons"] && infoDict[@"CFBundleIcons"][@"CFBundlePrimaryIcon"] && infoDict[@"CFBundleIcons"][@"CFBundlePrimaryIcon"][@"CFBundleIconFiles"]) {
@@ -553,12 +553,12 @@ TFAppItem *TFAppItemForProxy(LSApplicationProxy *application, TFContainerManager
                     NSMutableArray <NSString *> *possibleIconFiles = [iconFiles mutableCopy];
                     while ([possibleIconFiles count] > 0) {
                         NSString *iconFileName = [possibleIconFiles lastObject];
-                        iconPath = [NSString stringWithFormat:@"%@/%@@2x.png", appPath, iconFileName];
+                        iconPath = [NSString stringWithFormat:@"%@/%@@2x.png", bundlePath, iconFileName];
                         if (![fileManager fileExistsAtPath:iconPath]) {
-                            iconPath = [NSString stringWithFormat:@"%@/%@@3x.png", appPath, iconFileName];
+                            iconPath = [NSString stringWithFormat:@"%@/%@@3x.png", bundlePath, iconFileName];
                         }
                         if (![fileManager fileExistsAtPath:iconPath]) {
-                            iconPath = [NSString stringWithFormat:@"%@/%@.png", appPath, iconFileName];
+                            iconPath = [NSString stringWithFormat:@"%@/%@.png", bundlePath, iconFileName];
                         }
                         if (![fileManager fileExistsAtPath:iconPath]) {
                             iconPath = nil;
