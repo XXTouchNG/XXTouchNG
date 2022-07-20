@@ -1,5 +1,6 @@
 .theos/
 packages/
+/3rd/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,xcode
