@@ -222,17 +222,10 @@ $ make package FINALPACKAGE=1
 
 ## Usage
 
-#### User Manual (Chinese Only)
-
-- [XXTouch iOS 使用入门](https://www.zybuluo.com/xxtouch/note/378784)
-- [XXTouch 常见问题答疑](https://www.zybuluo.com/xxtouch/note/712055)
-
-
-#### Documentation (Chinese Only)
+#### User Manual & Documentation (Chinese Only)
 
 - [Lua 5.3 Manual](https://cloudwu.github.io/lua53doc/manual.html)
-- [XXTouch iOS 开发手册](https://www.zybuluo.com/xxtouch/note/370734)
-- [XXTouchBook](https://github.com/XXTouchNG/XXTouchBook)
+- [XXTouchBook](https://xxtouchng.github.io/)
 
 
 ## Credits
