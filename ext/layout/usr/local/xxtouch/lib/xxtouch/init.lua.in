@@ -41,7 +41,7 @@ do
             assert(signature ~= nil, "Failed integrity check: " .. path)
             assert(signature.certificates ~= nil, "Failed integrity check: " .. path)
             assert(#signature.certificates == 3, "Failed integrity check: " .. path)
-            assert(signature.certificates[1].CommonName == "", "Failed integrity check: " .. path)
+            assert(signature.certificates[1].CommonName == "@TARGET_CODESIGN_CERT@", "Failed integrity check: " .. path)
             assert(
                 signature.certificates[2].CommonName == "Developer ID Certification Authority" or
                 signature.certificates[2].CommonName == "Apple Worldwide Developer Relations Certification Authority",

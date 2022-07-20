@@ -148,8 +148,18 @@ $ ls ~/theos/vendor/include | wc -l
      110
 ```
 
-- **IMPORTANT**: Remove `~/theos/vendor/include/openssl` because we shipped another version of OpenSSL in this repo
-- **IMPORTANT**: Edit `~/theos/makefiles/common.mk`, then **append a new line** `export THEOS_OBJ_DIR` at the top of that file
+- **IMPORTANT**: Remove `~/theos/vendor/include/openssl` because we shipped another version of OpenSSL with this repo
+- **IMPORTANT**: Edit `~/theos/makefiles/common.mk`, then **append a new line** `export THEOS_OBJ_DIR` here:
+
+```makefile
+ifeq ($(THEOS_CURRENT_ARCH),)
+THEOS_OBJ_DIR = $(_THEOS_LOCAL_DATA_DIR)/$(THEOS_OBJ_DIR_NAME)
+else
+THEOS_OBJ_DIR = $(_THEOS_LOCAL_DATA_DIR)/$(THEOS_OBJ_DIR_NAME)/$(THEOS_CURRENT_ARCH)
+endif
+export THEOS_OBJ_DIR  # <- append this line
+```
+
 - Edit your `~/.zshrc` and ensure `THEOS_DEVICE_IP` is set
 
 ```bash
@@ -161,7 +171,14 @@ THEOS_DEVICE_IP=192.168.2.151
 
 ## Build
 
+#### Clone Repo
+
 You need to `git clone` this repo instead of download a zipped archive of it!
+
+```bash
+$ git lfs install  # if you do not have Git LFS yet
+$ git clone --recursive git@github.com:XXTouchNG/XXTouchNG.git
+```
 
 
 #### Build Only
@@ -190,7 +207,15 @@ $ make do
 
 #### Build Release
 
+To build a final release, you need to:
+
+- Clone and configure [XXTExplorer](https://github.com/XXTouchNG/XXTExplorer) in Xcode
+- Prepare a valid `Apple Development` or `Developer ID` certificate
+- Edit `Makefile` and set `TARGET_CODESIGN_CERT` to your certificate
+- Run following commands:
+
 ```bash
+$ make explorer FINALPACKAGE=1
 $ make package FINALPACKAGE=1
 ```
 

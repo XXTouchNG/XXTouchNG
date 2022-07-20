@@ -2,8 +2,9 @@ TARGET := iphone:clang:14.5:13.0
 ARCHS = arm64 arm64e
 
 ifeq ($(FINALPACKAGE),1)
-TARGET_CODESIGN := codesign
-TARGET_CODESIGN_FLAGS := -f -s 'Developer ID Application: Lucas Joseph (MB269FV75D)'
+export TARGET_CODESIGN := codesign
+export TARGET_CODESIGN_CERT := Developer ID Application: Lucas Joseph (MB269FV75D)
+export TARGET_CODESIGN_FLAGS := --force --sign '$(TARGET_CODESIGN_CERT)'
 endif
 
 export XXT_VERSION = 3.0.1
@@ -38,6 +39,7 @@ include $(THEOS_MAKE_PATH)/aggregate.mk
 
 
 before-all::
+	sed 's/@TARGET_CODESIGN_CERT@/$(TARGET_CODESIGN_CERT)/g' 'ext/layout/usr/local/xxtouch/lib/xxtouch/init.lua.in' > 'ext/layout/usr/local/xxtouch/lib/xxtouch/init.lua'
 	sed 's/@XXT_VERSION@/$(XXT_VERSION)/g' 'layout/DEBIAN/control.in' > 'layout/DEBIAN/control'
 	touch layout/Applications/XXTExplorer.app/XXTExplorer
 
@@ -45,3 +47,5 @@ explorer::
 	sed 's/@XXT_VERSION@/$(XXT_VERSION)/g' 'explorer/XXTExplorer/Defines/XXTEAppDefines.plist.in' > 'explorer/XXTExplorer/Defines/XXTEAppDefines.plist'
 	sed 's/@XXT_VERSION@/$(XXT_VERSION)/g' 'explorer/XXTExplorer/Supporting Files/Base.lproj/Archive-Info.plist.in' > 'explorer/XXTExplorer/Supporting Files/Base.lproj/Archive-Info.plist'
 	sed 's/@XXT_VERSION@/$(XXT_VERSION)/g' 'explorer/XXTExplorer/Supporting Files/Base.lproj/Info.plist.in' > 'explorer/XXTExplorer/Supporting Files/Base.lproj/Info.plist'
+	cd 'explorer'; ./build.sh; cd -
+	cp -rp 'explorer/Releases/XXTExplorer.xcarchive/Products/Applications/XXTExplorer.app' 'layout/Applications'
