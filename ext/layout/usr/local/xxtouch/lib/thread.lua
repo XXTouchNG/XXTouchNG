@@ -64,6 +64,7 @@ _M.wait = function (ttid, timeout)
                 end
             end
         end
+        sys.msleep(50)
     end
 end
 

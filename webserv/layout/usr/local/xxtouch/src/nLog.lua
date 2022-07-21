@@ -31,3 +31,6 @@ do
         SYSLOG.KERN.info(...)
     end
 end
+
+-- use `websocat ws://{DEVICE_IP}:46957` to see the log output
+nLog("test")
