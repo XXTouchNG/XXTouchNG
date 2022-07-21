@@ -2264,9 +2264,9 @@
 				CC7422BA28842D9A000BB790 /* layout */,
 				CC7422A428842D87000BB790 /* bridge */,
 				CC7422B528842D87000BB790 /* cli */,
+				CC7422B428842D87000BB790 /* auth-prefix.pch */,
 				CC7422B928842D87000BB790 /* AuthPolicy.h */,
 				CC7422A228842D87000BB790 /* AuthPolicy.m */,
-				CC7422B428842D87000BB790 /* auth-prefix.pch */,
 			);
 			path = auth;
 			sourceTree = "<group>";
@@ -2608,6 +2608,7 @@
 				CCB318F827C6084800A7BDB9 /* include */,
 				CC700060279FC848003A0B32 /* scripts */,
 				CCF1B044279BC35300F9EA50 /* lib */,
+				CCF1B04D279BC36500F9EA50 /* monkey-prefix.pch */,
 				CCD1F44A27B39E2F00A9EB78 /* TMWeakObjectWrapper.h */,
 				CCD1F44927B39E2F00A9EB78 /* TMWeakObjectWrapper.m */,
 				CCF1B07D279BDDA900F9EA50 /* TMWeakViewWrapper.h */,
@@ -2622,7 +2623,6 @@
 				CCF1B04B279BC36500F9EA50 /* TamperMonkey.m */,
 				CCF1B04A279BC36500F9EA50 /* LogosTamperMonkey.xm */,
 				CC9CA25328426D15008E1D5F /* logos__LogosTamperMonkey.mm */,
-				CCF1B04D279BC36500F9EA50 /* monkey-prefix.pch */,
 			);
 			path = monkey;
 			sourceTree = "<group>";

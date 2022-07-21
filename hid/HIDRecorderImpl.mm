@@ -37,7 +37,7 @@ static NSString *HIDLocalizedString(NSString *string)
     NSArray <NSString *> *languages = [defs objectForKey:@"AppleLanguages"];
     NSString *dLanguage = [languages objectAtIndex:0];
     
-    if ([dLanguage isEqualToString:@"zh-Hans"] || [dLanguage isEqualToString:@"zh-Hans-CN"]) {
+    if ([dLanguage isEqualToString:@"zh-Hans"] || [dLanguage hasPrefix:@"zh-Hans-"]) {
         if ([string isEqualToString:@"STATUS_NOT_RUNNING"]) {
             return @"状态：未运行任何任务\n";
         } else if ([string isEqualToString:@"STATUS_RUNNING"]) {

@@ -142,5 +142,7 @@ static BOOL MyHookClassMessage(Class cls, SEL sel, IMP repl_imp, IMP *orig_imp_e
 #define NOTIFY_RECORD_DID_BEGIN         "ch.xxtou.notification.record.begin"
 #define NOTIFY_RECORD_DID_END           "ch.xxtou.notification.record.end"
 
+#define NOTIFY_INELIGIBLE_INJECTION     "ch.xxtou.notification.dmca.block"
+
 
 #endif  /* MY_CHHOOK_H */

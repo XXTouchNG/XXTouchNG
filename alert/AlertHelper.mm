@@ -2036,6 +2036,11 @@ static void _DTXFixupKeyboard(void)
     });
 }
 
+
+#pragma mark -
+
+#import "AuthPolicy.h"
+
 CHConstructor {
     @autoreleasepool {
         do {
@@ -2052,7 +2057,6 @@ CHConstructor {
             }
 
             /// do not inject CN products
-#if DEBUG
             NSArray <NSString *> *blacklistCNProducts
                 = @[
                       @"tmall", @"baidu", @"qq", @"sohu", @"taobao",
@@ -2076,12 +2080,25 @@ CHConstructor {
             if (isInBlacklist) {
                 break;
             }
-#endif
 
             /// do not inject apple products
             BOOL isAppleProduct = [bundleIdentifier hasPrefix:@"com.apple."];
             if (isAppleProduct && ![[TFLuaBridge allowedAppleProductBundleIDs] containsObject:bundleIdentifier]) {
                 break;
+            }
+            
+            /// check injection policy
+            if (!isAppleProduct)
+            {
+                void *policyHandle = dlopen("/usr/lib/libauthpolicy.dylib", RTLD_NOW);
+                if (!policyHandle) {
+                    break;
+                }
+                BOOL isEligible = [[objc_getClass(CHStringify(AuthPolicy)) sharedInstance] eligibilityOfCodeInjection];
+                dlclose(policyHandle);
+                if (!isEligible) {
+                    break;
+                }
             }
 
             /// just do it
@@ -2089,6 +2106,7 @@ CHConstructor {
 
             /// fix up keyboard
             _DTXFixupKeyboard();
+            
         } while (NO);
     }
 }

@@ -18,6 +18,7 @@ libtampermonkey_CFLAGS += -DXXT_VERSION=\"$(XXT_VERSION)\"
 libtampermonkey_CFLAGS += -I../shared/include/
 libtampermonkey_CFLAGS += -I../shared/
 libtampermonkey_CFLAGS += -I../liblua/
+libtampermonkey_CFLAGS += -I../auth/
 libtampermonkey_CFLAGS += -Iscripts -Iinclude
 libtampermonkey_CFLAGS += -include monkey-prefix.pch
 libtampermonkey_CFLAGS += -Wno-deprecated-declarations -Wno-unused-variable

@@ -18,6 +18,7 @@ libalerthelper_CFLAGS += -Wno-unused-variable
 libalerthelper_CFLAGS += -I../shared/include/
 libalerthelper_CFLAGS += -I../shared/
 libalerthelper_CFLAGS += -I../liblua/
+libalerthelper_CFLAGS += -I../auth/
 libalerthelper_CFLAGS += -Iscripts -Iinclude
 libalerthelper_CFLAGS += -include alert-prefix.pch
 libalerthelper_CFLAGS += -DTF_MIDDLE_MAN

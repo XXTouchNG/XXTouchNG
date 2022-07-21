@@ -13,6 +13,8 @@
 #import "luae.h"
 #import "mh_app.h"
 #import "mh_commands.h"
+#import "AuthPolicy.h"
+#import <dlfcn.h>
 
 
 /* MARK: ----------------------------------------------------------------------- */
@@ -149,6 +151,21 @@ static void *mh_fetch_data_with_type(lua_Number value, const char *dataType)
     else { assert(false); }
 }
 
+static int mh_cmd_auth_open(MHContext *context, pid_t pid)
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dlopen("/usr/lib/libauthpolicy.dylib", RTLD_NOW);
+    });
+    
+    BOOL isEligible = [[objc_getClass(CHStringify(AuthPolicy)) sharedInstance] eligibilityOfCodeInjectionWithProcessIdentifier:pid];
+    if (!isEligible) {
+        return -1;
+    }
+    
+    return mh_cmd_open(context, pid);
+}
+
 
 _EFUNC(MHRead) {
     _EBEGIN
@@ -164,9 +181,9 @@ _EFUNC(MHRead) {
         }
         _ECHK {
             MHContext *context = MH_new();
-            int flag = mh_cmd_open(context, (pid_t)pid);
+            int flag = mh_cmd_auth_open(context, (pid_t)pid);
             if (flag != 0)
-            { // failed to open process
+            {   // failed to open process
                 lua_pushboolean(L, false);
                 lua_pushstring(L, ([[NSString stringWithFormat:@"cannot open process %d", (pid_t) pid] UTF8String]));
                 MH_free(context);
@@ -210,9 +227,9 @@ _EFUNC(MHWrite) {
         }
         _ECHK {
             MHContext *context = MH_new();
-            int flag = mh_cmd_open(context, (pid_t)pid);
+            int flag = mh_cmd_auth_open(context, (pid_t)pid);
             if (flag != 0)
-            { // failed to open process
+            {   // failed to open process
                 lua_pushboolean(L, false);
                 lua_pushstring(L, ([[NSString stringWithFormat:@"cannot open process %d", (pid_t) pid] UTF8String]));
                 MH_free(context);
@@ -224,7 +241,7 @@ _EFUNC(MHWrite) {
             int result = mh_write_memory(&context->process, address, data, size);
             free(data);
             if (result != KERN_SUCCESS)
-            { // failed to write
+            {   // failed to write
                 lua_pushboolean(L, false);
                 lua_pushstring(L, ([[NSString stringWithFormat:@"mach_vm_write failed"] UTF8String]));
                 mh_cmd_close(context);
@@ -248,9 +265,9 @@ _EFUNC(MHGetBaseAddress) {
         lua_Integer pid = luaL_checkinteger(L, 1);
         _ECHK {
             MHContext *context = MH_new();
-            int flag = mh_cmd_open(context, (pid_t)pid);
+            int flag = mh_cmd_auth_open(context, (pid_t)pid);
             if (flag != 0)
-            { // failed to open process
+            {   // failed to open process
                 lua_pushboolean(L, false);
                 lua_pushstring(L, ([[NSString stringWithFormat:@"cannot open process %d", (pid_t) pid] UTF8String]));
                 MH_free(context);
@@ -393,7 +410,7 @@ _EFUNC(MHSearch) {
                 
                 // create new context
                 MHContext *context = MH_new();
-                int flag = mh_cmd_open(context, (pid_t)pid);
+                int flag = mh_cmd_auth_open(context, (pid_t)pid);
                 if (flag != 0)
                 {
                     lua_pushboolean(L, false);

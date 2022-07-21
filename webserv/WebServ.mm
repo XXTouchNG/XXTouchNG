@@ -39,7 +39,20 @@ NSFileManager *_serviceFileManager = nil;
 #pragma mark -
 
 @interface ELFCloudClient : NSObject <PSWebSocketDelegate>
-+ (nonnull GCDWebServerResponse *)responseByHandleMessageWithType:(NSString *)msgType body:(nullable id)msgBody;
++ (nonnull GCDWebServerResponse *)responseByHandleMessageWithRemoteURL:(NSURL *)requestURL type:(NSString *)msgType body:(nullable id)msgBody;
+@end
+
+@interface GCDWebServerRequest (RemoteAddress)
+- (NSURL *)remoteAddressURL;
+@end
+
+@implementation GCDWebServerRequest (RemoteAddress)
+
+- (NSURL *)remoteAddressURL
+{
+    return [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", self.remoteAddressString]];
+}
+
 @end
 
 
@@ -1118,7 +1131,7 @@ static void register_screen_capture_handlers(GCDWebServer *webServer)
         }
         dispatch_async(_serviceQueue, ^{
             @autoreleasepool {
-                completionBlock([ELFCloudClient responseByHandleMessageWithType:@"screen/snapshot" body:request.query]);
+                completionBlock([ELFCloudClient responseByHandleMessageWithRemoteURL:request.remoteAddressURL type:@"screen/snapshot" body:request.query]);
             }
         });
     });
@@ -2328,7 +2341,7 @@ static void register_touchelf_handlers(GCDWebServer *webServer)
         }
         dispatch_async(_serviceQueue, ^{
             @autoreleasepool {
-                completionBlock([ELFCloudClient responseByHandleMessageWithType:@"app/state" body:nil]);
+                completionBlock([ELFCloudClient responseByHandleMessageWithRemoteURL:request.remoteAddressURL type:@"app/state" body:nil]);
             }
         });
     });
@@ -2395,7 +2408,7 @@ static void register_touchelf_handlers(GCDWebServer *webServer)
         }
         dispatch_async(_serviceQueue, ^{
             @autoreleasepool {
-                completionBlock([ELFCloudClient responseByHandleMessageWithType:@"script/stop" body:nil]);
+                completionBlock([ELFCloudClient responseByHandleMessageWithRemoteURL:request.remoteAddressURL type:@"script/stop" body:nil]);
             }
         });
     });
@@ -2407,7 +2420,7 @@ static void register_touchelf_handlers(GCDWebServer *webServer)
         }
         dispatch_async(_serviceQueue, ^{
             @autoreleasepool {
-                completionBlock([ELFCloudClient responseByHandleMessageWithType:@"script/list" body:nil]);
+                completionBlock([ELFCloudClient responseByHandleMessageWithRemoteURL:request.remoteAddressURL type:@"script/list" body:nil]);
             }
         });
     });
@@ -2463,7 +2476,7 @@ static void register_touchelf_handlers(GCDWebServer *webServer)
                     
                     NSString *msgType = [actionType isEqualToString:@"debug"] ? @"script/debug" : @"script/run";
                     
-                    completionBlock([ELFCloudClient responseByHandleMessageWithType:msgType body:@{
+                    completionBlock([ELFCloudClient responseByHandleMessageWithRemoteURL:request.remoteAddressURL type:msgType body:@{
                         @"name": scriptName,
                     }]);
                 }
@@ -2506,7 +2519,7 @@ static void register_touchelf_handlers(GCDWebServer *webServer)
                         return;
                     }
                     
-                    completionBlock([ELFCloudClient responseByHandleMessageWithType:@"script/encrypt" body:@{
+                    completionBlock([ELFCloudClient responseByHandleMessageWithRemoteURL:request.remoteAddressURL type:@"script/encrypt" body:@{
                         @"name": scriptName,
                     }]);
                 }
@@ -2641,7 +2654,7 @@ static void register_touchelf_handlers(GCDWebServer *webServer)
                 
                 if ([[request.method uppercaseString] isEqualToString:@"DELETE"])
                 {
-                    completionBlock([ELFCloudClient responseByHandleMessageWithType:@"system/log/delete" body:nil]);
+                    completionBlock([ELFCloudClient responseByHandleMessageWithRemoteURL:request.remoteAddressURL type:@"system/log/delete" body:nil]);
                     return;
                 }
                 
@@ -2933,7 +2946,7 @@ static void register_touchelf_handlers(GCDWebServer *webServer)
         }
         dispatch_async(_serviceQueue, ^{
             @autoreleasepool {
-                completionBlock([ELFCloudClient responseByHandleMessageWithType:@"screen/snapshot" body:request.query]);
+                completionBlock([ELFCloudClient responseByHandleMessageWithRemoteURL:request.remoteAddressURL type:@"screen/snapshot" body:request.query]);
             }
         });
     });
@@ -4424,11 +4437,11 @@ static void register_udp_logging_handlers(WSUdpLoggingServer *loggingServer)
     });
 }
 
-+ (nonnull GCDWebServerResponse *)responseByHandleMessageWithType:(NSString *)msgType body:(nullable id)msgBody
++ (nonnull GCDWebServerResponse *)responseByHandleMessageWithRemoteURL:(NSURL *)requestURL type:(NSString *)msgType body:(nullable id)msgBody
 {
     @autoreleasepool {
         GCDWebServerDataResponse *response = nil;
-        NSDictionary *replyObject = [self handleMessageWithSourceURL:nil type:msgType body:msgBody];
+        NSDictionary *replyObject = [self handleMessageWithSourceURL:requestURL type:msgType body:msgBody];
         
         NSString *replyError = replyObject[@"error"];
         if (replyError.length) {
@@ -4669,8 +4682,9 @@ static void register_udp_logging_handlers(WSUdpLoggingServer *loggingServer)
                     NSString *remoteAddr = [sourceURL host];
                     if (!remoteAddr.length)
                     {
-                        [replyObject setObject:[NSString stringWithFormat:@"not found: %@", scriptURL.path] forKey:@"error"];
+                        [replyObject setObject:[NSString stringWithFormat:@"bad debugger server url: %@", sourceURL] forKey:@"error"];
                         [replyObject setObject:@(kGCDWebServerHTTPStatusCode_BadRequest) forKey:@"code"];
+                        
                         break;
                     }
                     

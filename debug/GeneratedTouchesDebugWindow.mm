@@ -115,14 +115,32 @@ OBJC_EXTERN UILabel *_sharedDebugLabel;
     NSArray <NSString *> *languages = [defs objectForKey:@"AppleLanguages"];
     NSString *dLanguage = [languages objectAtIndex:0];
     
-    if ([dLanguage isEqualToString:@"zh-Hans"] || [dLanguage isEqualToString:@"zh-Hans-CN"]) {
+    if ([dLanguage isEqualToString:@"zh-Hans"] || [dLanguage hasPrefix:@"zh-Hans-"]) {
         if ([string isEqualToString:@"TASK_TERMINATED"]) {
             return @"任务进程已终止";
+        }
+        else if ([string isEqualToString:@"RECORD_DID_BEGIN"]) {
+            return @"即将开始录制";
+        }
+        else if ([string isEqualToString:@"RECORD_DID_END"]) {
+            return @"即将结束录制";
+        }
+        else if ([string isEqualToString:@"DMCA_BLOCK"]) {
+            return @"目标应用受著作权保护\nXXTouch 部分功能不可用";
         }
     }
     
     if ([string isEqualToString:@"TASK_TERMINATED"]) {
         return @"Task Terminated";
+    }
+    else if ([string isEqualToString:@"RECORD_DID_BEGIN"]) {
+        return @"Now Recording";
+    }
+    else if ([string isEqualToString:@"RECORD_DID_END"]) {
+        return @"Record Completed";
+    }
+    else if ([string isEqualToString:@"DMCA_BLOCK"]) {
+        return @"Target application is protected by copyright, some features of XXTouch are not available.";
     }
     
     return string;
@@ -148,11 +166,35 @@ OBJC_EXTERN UILabel *_sharedDebugLabel;
                 [self resetDebugIndicatorForTouches];
             });
             
-            int endHintToken;
-            notify_register_dispatch(NOTIFY_TASK_DID_END_HINT, &endHintToken, dispatch_get_main_queue(), ^(int token) {
+            int taskDidEndHintToken;
+            notify_register_dispatch(NOTIFY_TASK_DID_END_HINT, &taskDidEndHintToken, dispatch_get_main_queue(), ^(int token) {
                 [self makeToast:[GeneratedTouchesDebugWindow localizedString:@"TASK_TERMINATED"]
                        duration:[XXTEToastManager defaultDuration]
                        position:XXTEToastPositionBottom
+                    orientation:UIInterfaceOrientationPortrait];
+            });
+            
+            int recordDidBeginToken;
+            notify_register_dispatch(NOTIFY_RECORD_DID_BEGIN, &recordDidBeginToken, dispatch_get_main_queue(), ^(int token) {
+                [self makeToast:[GeneratedTouchesDebugWindow localizedString:@"RECORD_DID_BEGIN"]
+                       duration:[XXTEToastManager defaultDuration]
+                       position:XXTEToastPositionBottom
+                    orientation:UIInterfaceOrientationPortrait];
+            });
+            
+            int recordDidEndToken;
+            notify_register_dispatch(NOTIFY_RECORD_DID_END, &recordDidEndToken, dispatch_get_main_queue(), ^(int token) {
+                [self makeToast:[GeneratedTouchesDebugWindow localizedString:@"RECORD_DID_END"]
+                       duration:[XXTEToastManager defaultDuration]
+                       position:XXTEToastPositionBottom
+                    orientation:UIInterfaceOrientationPortrait];
+            });
+            
+            int dmcaBlockToken;
+            notify_register_dispatch(NOTIFY_INELIGIBLE_INJECTION, &dmcaBlockToken, dispatch_get_main_queue(), ^(int token) {
+                [self makeToast:[GeneratedTouchesDebugWindow localizedString:@"DMCA_BLOCK"]
+                       duration:[XXTEToastManager defaultDuration]
+                       position:XXTEToastPositionTop
                     orientation:UIInterfaceOrientationPortrait];
             });
         }

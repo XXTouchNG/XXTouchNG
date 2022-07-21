@@ -443,7 +443,7 @@ TFAppItem *TFAppItemForProxy(LSApplicationProxy *application, TFContainerManager
     }
     
     NSString *bundlePath = [bundleContainerPath stringByAppendingPathComponent:bundleAppItem];
-    NSURL *bundleURL = [NSURL fileURLWithPath:bundlePath];
+    NSURL *bundleURL = bundlePath.length > 0 ? [NSURL fileURLWithPath:bundlePath] : nil;
     
     NSURL *dataContainerURL     = nil;
     NSString *dataContainerPath = nil;

@@ -30,3 +30,4 @@
 #define TMWeakUserContentControllerWrapper __$NoConflict$TMWeakUserContentControllerWrapper
 #define TMScriptMessageProxy __$NoConflict$TMScriptMessageProxy
 #define TMScriptNetworkingProxy __$NoConflict$TMScriptNetworkingProxy
+#define AuthPolicy __$NoConflict$AuthPolicy

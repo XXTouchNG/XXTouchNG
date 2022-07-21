@@ -26,3 +26,4 @@
 #define TFLuaBridge AlertHelper_TFLuaBridge
 #define AlertHelper __$NoConflict$AlertHelper
 #define AHWeakObjectWrapper __$NoConflict$AHWeakObjectWrapper
+#define AuthPolicy __$NoConflict$AuthPolicy

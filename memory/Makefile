@@ -17,6 +17,7 @@ memory_CFLAGS += -DXXT_VERSION=\"$(XXT_VERSION)\"
 memory_CFLAGS += -I../shared/include/
 memory_CFLAGS += -I../shared/
 memory_CFLAGS += -I../liblua/
+memory_CFLAGS += -I../auth/
 memory_CFLAGS += -I.
 memory_CFLAGS += -Icommands/
 memory_CFLAGS += -include memory-prefix.pch

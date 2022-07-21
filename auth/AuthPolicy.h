@@ -37,6 +37,9 @@ typedef NS_ENUM(NSUInteger, AuthPolicyRole) {
 - (NSDictionary *)copyEntitlementsWithError:(NSError *__autoreleasing  _Nullable * _Nullable)error;
 - (NSDictionary *)copyEntitlementsWithProcessIdentifier:(pid_t)processIdentifier error:(NSError *__autoreleasing  _Nullable * _Nullable)error;
 
+- (BOOL)eligibilityOfCodeInjection;
+- (BOOL)eligibilityOfCodeInjectionWithProcessIdentifier:(pid_t)processIdentifier;
+
 @end
 
 NS_ASSUME_NONNULL_END

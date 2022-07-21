@@ -1994,6 +1994,11 @@ void SetupTamperMonkey() {
     }
 }
 
+
+#pragma mark -
+
+#import "AuthPolicy.h"
+
 CHConstructor {
     @autoreleasepool {
         static dispatch_once_t onceToken;
@@ -2001,7 +2006,6 @@ CHConstructor {
             pthread_mutex_init(&__localViewCacheLock, NULL);
             pthread_rwlock_init(&__localRegisteredWrappersLock, NULL);
             
-#if DEBUG
             __localBlackURLComponents = @[
                 @"tmall", @"baidu", @"qq", @"sohu", @"taobao",
                 @"360", @"jd", @"weibo", @"sina", @"alipay",
@@ -2013,7 +2017,6 @@ CHConstructor {
                 @"so", @"chinaz", @"jianshu",
                 @"darwindev", @"xxtou",
             ];
-#endif
         });
         
         do {
@@ -2030,7 +2033,6 @@ CHConstructor {
             }
             
             /// do not inject CN products
-#if DEBUG
             NSArray <NSString *> *bundleIdentifierComponents = [bundleIdentifier componentsSeparatedByString:@"."];
             BOOL isInBlacklist = NO;
             for (NSString *bundleIdentifierComponent in bundleIdentifierComponents) {
@@ -2042,12 +2044,34 @@ CHConstructor {
             if (isInBlacklist) {
                 break;
             }
-#endif
             
             /// do not inject apple products
             BOOL isAppleProduct = [bundleIdentifier hasPrefix:@"com.apple."];
             if (isAppleProduct && ![[TFLuaBridge allowedAppleProductBundleIDs] containsObject:bundleIdentifier]) {
                 break;
+            }
+            
+            /// check injection policy
+            if (!isAppleProduct)
+            {
+                NSArray <NSString *> *otherBrowserIdentifiers = @[
+                    @"com.google.chrome.ios",
+                    @"org.mozilla.ios.firefox",
+                    @"com.microsoft.msedge",
+                    @"com.opera.operatouch",
+                ];
+                if (![otherBrowserIdentifiers containsObject:[bundleIdentifier lowercaseString]])
+                {
+                    void *policyHandle = dlopen("/usr/lib/libauthpolicy.dylib", RTLD_NOW);
+                    if (!policyHandle) {
+                        break;
+                    }
+                    BOOL isEligible = [[objc_getClass(CHStringify(AuthPolicy)) sharedInstance] eligibilityOfCodeInjection];
+                    dlclose(policyHandle);
+                    if (!isEligible) {
+                        break;
+                    }
+                }
             }
 
             /// just do it
@@ -2069,7 +2093,4 @@ LuaConstructor {
     luaL_setfuncs(L, DECLARE_LUA_HANDLER_MAP, 0);
     return 1;
 }
-
-
-/* MARK: ----------------------------------------------------------------------- */
 

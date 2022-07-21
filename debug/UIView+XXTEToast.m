@@ -412,7 +412,7 @@ static const NSTimeInterval XXTEToastFadeDuration     = 0.2;
     
     if ([point isKindOfClass:[NSString class]]) {
         if ([point caseInsensitiveCompare:XXTEToastPositionTop] == NSOrderedSame) {
-            return CGPointMake(self.bounds.size.width / 2, (toast.frame.size.height / 2) + style.verticalPadding + style.verticalMargin);
+            return CGPointMake(self.bounds.size.width / 2, (toast.frame.size.height / 2) + self.safeAreaInsets.top + style.verticalPadding + style.verticalMargin);
         } else if ([point caseInsensitiveCompare:XXTEToastPositionCenter] == NSOrderedSame) {
             return CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2);
         }

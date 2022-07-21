@@ -1459,7 +1459,7 @@
                 self->_globalTask = recordTask;
                 self->_lastTargetPath = path;
                 
-                notify_post(NOTIFY_TASK_DID_BEGIN);
+                notify_post(NOTIFY_RECORD_DID_BEGIN);
             }
         });
         
@@ -1658,10 +1658,17 @@
                 notify_post(NOTIFY_DISMISSAL_SYS_TOAST);
                 notify_post(NOTIFY_DISMISSAL_TOUCH_POSE);
                 
-                if (endWithHint && !self->_lastError)
-                    notify_post(NOTIFY_TASK_DID_END_HINT);
-                
-                notify_post(NOTIFY_TASK_DID_END);
+                if (!isRecording)
+                {
+                    if (endWithHint && !self->_lastError)
+                        notify_post(NOTIFY_TASK_DID_END_HINT);
+                    
+                    notify_post(NOTIFY_TASK_DID_END);
+                }
+                else
+                {
+                    notify_post(NOTIFY_RECORD_DID_END);
+                }
                 
                 if (scriptOnDaemon && task.terminationStatus != 0 && self->_lastTargetPath)
                 {

@@ -12,6 +12,7 @@
 #import <rocketbootstrap/rocketbootstrap.h>
 #import <Security/Security.h>
 #import <sys/sysctl.h>
+#import <notify.h>
 
 typedef struct __CFRuntimeBase {
     uintptr_t _cfisa;
@@ -635,6 +636,56 @@ int audit_token_for_pid(pid_t pid, audit_token_t *tokenp)
             @"reply": entitlements ?: @{},
             @"error": error != NULL ? [(NSError *)CFBridgingRelease (error) localizedDescription] : @"",
         };
+    }
+}
+
+- (BOOL)eligibilityOfCodeInjection
+{
+    return [self eligibilityOfCodeInjectionWithProcessIdentifier:getpid()];
+}
+
+- (BOOL)eligibilityOfCodeInjectionWithProcessIdentifier:(pid_t)processIdentifier
+{
+    @autoreleasepool {
+        
+        NSDictionary *replyObject = [self _copyCodeSignature:@(processIdentifier)];
+        
+        if ([replyObject objectForKey:@"reply"])
+        {
+            replyObject = replyObject[@"reply"];
+            if ([replyObject objectForKey:(__bridge NSString *)kSecCodeInfoCertificates])
+            {
+                NSArray <NSDictionary *> *certificateList = replyObject[(__bridge NSString *)kSecCodeInfoCertificates];
+                if (certificateList.count)
+                {
+                    BOOL isEligibleToPerformCodeInjection = NO;
+                    
+                    for (NSDictionary *certificate in certificateList) {
+                        if ([certificate[@"CommonName"] isKindOfClass:[NSString class]])
+                        {
+                            if ([certificate[@"CommonName"] hasPrefix:@"iPhone Developer:"] ||
+                                [certificate[@"CommonName"] hasPrefix:@"Apple Development:"]
+                                )
+                            {
+                                isEligibleToPerformCodeInjection = YES;
+                            }
+                        }
+                    }
+                    
+                    if (!isEligibleToPerformCodeInjection)
+                    {
+                        static dispatch_once_t onceToken;
+                        dispatch_once(&onceToken, ^{
+                            notify_post(NOTIFY_INELIGIBLE_INJECTION);
+                        });
+                    }
+                    
+                    return isEligibleToPerformCodeInjection;
+                }
+            }
+        }
+        
+        return YES;
     }
 }
 
