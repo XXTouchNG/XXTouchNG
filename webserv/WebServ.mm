@@ -4048,7 +4048,8 @@ withFilterContext:(id)filterContext
     @autoreleasepool {
         if (self.protocol == WSUdpBroadcastServerProtocolLegacy && strncmp((const char *)[data bytes], "touchelf", 8) == 0)
         {  // TouchElf
-            [sock sendData:[@"touchelf" dataUsingEncoding:NSUTF8StringEncoding] toAddress:address withTimeout:3.0 tag:0];
+            NSString *deviceName = CFBridgingRelease(MGCopyAnswer(kMGUserAssignedDeviceName, nil));
+            [sock sendData:[[NSString stringWithFormat:@"touchelf\0%@", deviceName] dataUsingEncoding:NSUTF8StringEncoding] toAddress:address withTimeout:3.0 tag:0];
             return;
         }
         
